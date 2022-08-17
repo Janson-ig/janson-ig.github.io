@@ -15,7 +15,11 @@
         <description>&lt;img src="http://www.jansonblog.com/p/spring/1.jpg" alt="Featured image of post Spring学习之路（一）" /&gt;&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
 &lt;p&gt; 学习路程是按照&lt;a class=&#34;link&#34; href=&#34;https://zh.jp1lib.org/book/18238678/2d772e&#34;  title=&#34;Spring实战（第五版）&#34;
      target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;Spring实战（第五版）&lt;/a&gt;进行，本系列只针对笔者自己进行内容总结，用于加深学习以及日后回顾使用。如感兴趣，推荐阅读参考图书进行学习&lt;/p&gt;
+    &gt;Spring实战（第五版）&lt;/a&gt;进行，本系列只针对笔者自己进行内容总结，用于加深学习以及日后回顾使用。如感兴趣，推荐阅读参考图书进行学习
+ 书中有较多地方描述比较不清楚，在实际跟着动手操作时，存在很多问题。
+ &lt;a class=&#34;link&#34; href=&#34;https://github.com/habuma/spring-in-action-5-samples&#34;  title=&#34;spring-in-action-5-samples&#34;
+     target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;spring-in-action-5-samples&lt;/a&gt;对书中每一章项目进行了汇总，对照此仓库学习更容易理解&lt;/p&gt;
 &lt;h2 id=&#34;spring项目结构&#34;&gt;Spring项目结构&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;mvnw和mvnw.cmd：这是Maven包装器（wrapper）脚本，借助脚本，即使没有安装Maven也可以构建项目&lt;/li&gt;
