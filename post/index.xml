@@ -55,7 +55,7 @@
 &lt;h2 id=&#34;模板缓存&#34;&gt;模板缓存&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;默认情况下，模板只有在&lt;strong&gt;第⼀次使用的时候解析⼀次&lt;/strong&gt;，解析的结果会被后续的请求所使⽤。开发期缓存存在时，想要看到变更效果，必须重新启动应用，非常不方便&lt;/li&gt;
-&lt;li&gt;禁用模板缓存：将相关缓存属性设成false:在applicatin.properties中添加：
+&lt;li&gt;禁用模板缓存：将相关缓存属性设成false:在application.properties中添加：
 &lt;code&gt;spring.thymeleaf.cache=false&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;table&gt;
@@ -80,7 +80,7 @@
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td style=&#34;text-align:center&#34;&gt;Thymeleaf&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;spring.themeleaf.cache&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;spring.thymeleaf.cache&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
