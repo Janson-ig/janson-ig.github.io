@@ -6,7 +6,110 @@
         <description>Recent content in 学习笔记 on Janson&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Sat, 13 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://www.jansonblog.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 15 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://www.jansonblog.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Spring学习之路（二）</title>
+        <link>http://www.jansonblog.com/p/spring/</link>
+        <pubDate>Mon, 15 Aug 2022 00:00:00 +0000</pubDate>
+        
+        <guid>http://www.jansonblog.com/p/spring/</guid>
+        <description>&lt;img src="http://www.jansonblog.com/p/spring/1.jpg" alt="Featured image of post Spring学习之路（二）" /&gt;&lt;h2 id=&#34;模板引擎&#34;&gt;模板引擎&lt;/h2&gt;
+&lt;p&gt;书中总结了以下模板：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;模板&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;Spring Boot starter依赖&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;JavaServer Pages(JSP)&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;无(由Tomcat或Jetty提供)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;FreeMarker&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;spring-boot-starter-freemarker&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Groovy Templates&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;spring-boot-starter-groovy-templates&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Mustache&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;spring-boot-starter-mustache&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Thymeleaf&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;spring-boot-starter-thymeleaf&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;其中，JSP不需要依赖的原因:&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;ul&gt;
+&lt;li&gt;是因为Servlet容器本身（默认是Tomcat）会实现JSP，因此不需要额外的依赖。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;使用JSP问题：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Java Servlet容器包括嵌入式的Tomcat和Jetty容器，通常会在“/WEB-INF”目录下寻找JSP。如果将应用构建成一个可执行的JAR文件，就无法满足这种需求；&lt;strong&gt;只有在将应用构建成WAR文件并部署到Servlet容器中时&lt;/strong&gt;，才能选择JSP方案。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;模板缓存&#34;&gt;模板缓存&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;默认情况下，模板只有在&lt;strong&gt;第⼀次使用的时候解析⼀次&lt;/strong&gt;，解析的结果会被后续的请求所使⽤。开发期缓存存在时，想要看到变更效果，必须重新启动应用，非常不方便&lt;/li&gt;
+&lt;li&gt;禁用模板缓存：将相关缓存属性设成false:在applicatin.properties中添加：
+&lt;code&gt;spring.thymeleaf.cache=false&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;模板&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;启用缓存的属性&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;FreeMarker&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;spring.freemarker.cache&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Groovy Templates&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;spring.groovy.template.cache&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Mustache&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;spring.mustache.cache&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Thymeleaf&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;spring.themeleaf.cache&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;thymeleaf模板&#34;&gt;Thymeleaf模板&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Thymeleaf 模板只是 HTML 与一些额外的元素属性，指导模板在渲染请求数据。&lt;/p&gt;
+&lt;p&gt; &lt;em&gt;例如，如果有一个请求属性，它的键是 “message”，你希望它被Thymeleaf渲染成一个&lt;code&gt;HTML&amp;lt;p&amp;gt;&lt;/code&gt;标签，你可以在你的Thymeleaf模板中写以下内容：&lt;/em&gt;&lt;br&gt;
+&lt;code&gt;&amp;lt;p th:text=&amp;quot;${message}&amp;quot;&amp;gt;placeholder message&amp;lt;/p&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Thymeleaf 提供了一个内置的field.hasErrors方法，该方法根据给定字段是否存在任何错误返回一个布尔值。&lt;/p&gt;
+&lt;p&gt; 例如要在一个信用卡号字段上显示验证错误：&lt;br&gt;
+&lt;code&gt;&amp;lt;label for=&amp;quot;ccNumber&amp;quot;&amp;gt;Credit Card #: &amp;lt;/label&amp;gt;&lt;/code&gt;&lt;br&gt;
+&lt;code&gt;&amp;lt;input type=&amp;quot;text&amp;quot; th:field=&amp;quot;*{ccNumber}&amp;quot;/&amp;gt;&lt;/code&gt;&lt;br&gt;
+&lt;code&gt;&amp;lt;span class=&amp;quot;validationError&amp;quot;&lt;/code&gt;&lt;br&gt;
+&lt;code&gt;th:if=&amp;quot;${#fields.hasErrors(&#39;ccNumber&#39;)}&amp;quot;&lt;/code&gt;&lt;br&gt;
+&lt;code&gt;th:errors=&amp;quot;*{ccNumber}&amp;quot;&amp;gt;CC Num Error&amp;lt;/span&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;如有遗漏或错误，欢迎补充纠正&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
         <title>Spring学习之路（一）</title>
         <link>http://www.jansonblog.com/p/spring/</link>
         <pubDate>Sat, 13 Aug 2022 00:00:00 +0000</pubDate>
