@@ -8,11 +8,11 @@
         <language>en-us</language>
         <lastBuildDate>Mon, 15 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://www.jansonblog.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Spring学习之路（二）</title>
-        <link>http://www.jansonblog.com/p/spring/</link>
+        <link>http://www.jansonblog.com/p/spring2/</link>
         <pubDate>Mon, 15 Aug 2022 00:00:00 +0000</pubDate>
         
-        <guid>http://www.jansonblog.com/p/spring/</guid>
-        <description>&lt;img src="http://www.jansonblog.com/p/spring/1.jpg" alt="Featured image of post Spring学习之路（二）" /&gt;&lt;h2 id=&#34;模板引擎&#34;&gt;模板引擎&lt;/h2&gt;
+        <guid>http://www.jansonblog.com/p/spring2/</guid>
+        <description>&lt;img src="http://www.jansonblog.com/p/spring2/1.jpg" alt="Featured image of post Spring学习之路（二）" /&gt;&lt;h2 id=&#34;模板引擎&#34;&gt;模板引擎&lt;/h2&gt;
 &lt;p&gt;书中总结了以下模板：&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -104,11 +104,11 @@
         </item>
         <item>
         <title>Spring学习之路（一）</title>
-        <link>http://www.jansonblog.com/p/spring/</link>
+        <link>http://www.jansonblog.com/p/spring1/</link>
         <pubDate>Sat, 13 Aug 2022 00:00:00 +0000</pubDate>
         
-        <guid>http://www.jansonblog.com/p/spring/</guid>
-        <description>&lt;img src="http://www.jansonblog.com/p/spring/1.jpg" alt="Featured image of post Spring学习之路（一）" /&gt;&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
+        <guid>http://www.jansonblog.com/p/spring1/</guid>
+        <description>&lt;img src="http://www.jansonblog.com/p/spring1/1.jpg" alt="Featured image of post Spring学习之路（一）" /&gt;&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
 &lt;p&gt; 学习路程是按照&lt;a class=&#34;link&#34; href=&#34;https://zh.jp1lib.org/book/18238678/2d772e&#34;  title=&#34;Spring实战（第五版）&#34;
      target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Spring实战（第五版）&lt;/a&gt;进行，本系列只针对笔者自己进行内容总结，用于加深学习以及日后回顾使用。如感兴趣，推荐阅读参考图书进行学习。&lt;/p&gt;
