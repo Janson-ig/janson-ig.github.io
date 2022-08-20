@@ -42,12 +42,9 @@
 &lt;td style=&#34;text-align:center&#34;&gt;Thymeleaf&lt;/td&gt;
 &lt;td style=&#34;text-align:center&#34;&gt;spring-boot-starter-thymeleaf&lt;/td&gt;
 &lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;其中，JSP不需要依赖的原因:&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
+&lt;p&gt;其中，JSP不需要依赖的原因:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;是因为Servlet容器本身（默认是Tomcat）会实现JSP，因此不需要额外的依赖。&lt;/li&gt;
 &lt;/ul&gt;
