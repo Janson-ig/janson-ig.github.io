@@ -411,11 +411,7 @@
 <li>
 <p>Thymeleaf 提供了一个内置的field.hasErrors方法，该方法根据给定字段是否存在任何错误返回一个布尔值。</p>
 <p> 例如要在一个信用卡号字段上显示验证错误：<br>
-<code>&lt;label for=&quot;ccNumber&quot;&gt;Credit Card #: &lt;/label&gt;</code><br>
-<code>&lt;input type=&quot;text&quot; th:field=&quot;*{ccNumber}&quot;/&gt;</code><br>
-<code>&lt;span class=&quot;validationError&quot;</code><br>
-<code>th:if=&quot;${#fields.hasErrors('ccNumber')}&quot;</code><br>
-<code>th:errors=&quot;*{ccNumber}&quot;&gt;CC Num Error&lt;/span&gt;</code></p>
+<code>&lt;label for=&quot;ccNumber&quot;&gt;Credit Card #: &lt;/label&gt;   &lt;input type=&quot;text&quot; th:field=&quot;*{ccNumber}&quot;/&gt;   &lt;span class=&quot;validationError&quot;   th:if=&quot;${#fields.hasErrors('ccNumber')}&quot;   th:errors=&quot;*{ccNumber}&quot;&gt;CC Num Error&lt;/span&gt;</code></p>
 </li>
 </ul>
 <blockquote>
