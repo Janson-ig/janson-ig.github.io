@@ -92,9 +92,13 @@
 &lt;code&gt;&amp;lt;p th:text=&amp;quot;${message}&amp;quot;&amp;gt;placeholder message&amp;lt;/p&amp;gt;&lt;/code&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Thymeleaf 提供了一个内置的field.hasErrors方法，该方法根据给定字段是否存在任何错误返回一个布尔值。&lt;/p&gt;
-&lt;p&gt; 例如要在一个信用卡号字段上显示验证错误：&lt;br&gt;
-&lt;code&gt;&amp;lt;label for=&amp;quot;ccNumber&amp;quot;&amp;gt;Credit Card #: &amp;lt;/label&amp;gt;   &amp;lt;input type=&amp;quot;text&amp;quot; th:field=&amp;quot;*{ccNumber}&amp;quot;/&amp;gt;   &amp;lt;span class=&amp;quot;validationError&amp;quot;   th:if=&amp;quot;${#fields.hasErrors(&#39;ccNumber&#39;)}&amp;quot;   th:errors=&amp;quot;*{ccNumber}&amp;quot;&amp;gt;CC Num Error&amp;lt;/span&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Thymeleaf 提供了一个内置的field.hasErrors方法，该方法根据给定字段是否存在任何错误返回一个布尔值。&lt;br&gt;
+ 例如要在一个信用卡号字段上显示验证错误：&lt;br&gt;
+&lt;code&gt;&amp;lt;label for=&amp;quot;ccNumber&amp;quot;&amp;gt;Credit Card #: &amp;lt;/label&amp;gt;·&lt;/code&gt;&lt;br&gt;
+&lt;code&gt;&amp;lt;input type=&amp;quot;text&amp;quot; th:field=&amp;quot;*{ccNumber}&amp;quot;/&amp;gt;&lt;/code&gt;&lt;br&gt;
+&lt;code&gt;&amp;lt;span class=&amp;quot;validationError&amp;quot;&lt;/code&gt; &lt;br&gt;
+&lt;code&gt;th:if=&amp;quot;${#fields.hasErrors(&#39;ccNumber&#39;)}&amp;quot;&lt;/code&gt; &lt;br&gt;
+&lt;code&gt;th:errors=&amp;quot;*{ccNumber}&amp;quot;&amp;gt;CC Num Error&amp;lt;/span&amp;gt;&lt;/code&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;blockquote&gt;
