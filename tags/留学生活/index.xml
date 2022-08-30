@@ -292,7 +292,8 @@
 		data-flex-grow=&#34;133&#34;
 		data-flex-basis=&#34;320px&#34;
 	
-&gt;  &lt;img src=&#34;http://www.jansonblog.com/p/202208/16.jpg&#34;
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.jansonblog.com/p/202208/16.jpg&#34;
 	width=&#34;4032&#34;
 	height=&#34;3024&#34;
 	srcset=&#34;http://www.jansonblog.com/p/202208/16_hu090750d7244ecac1e54c60e656a6ccae_7516370_480x0_resize_q75_box.jpg 480w, http://www.jansonblog.com/p/202208/16_hu090750d7244ecac1e54c60e656a6ccae_7516370_1024x0_resize_q75_box.jpg 1024w&#34;
