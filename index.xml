@@ -6,7 +6,292 @@
         <description>Recent content on Janson&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Thu, 20 Oct 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://www.jansonblog.com/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 02 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://www.jansonblog.com/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Spring学习之路（三）</title>
+        <link>http://www.jansonblog.com/p/spring3/</link>
+        <pubDate>Wed, 02 Nov 2022 00:00:00 +0000</pubDate>
+        
+        <guid>http://www.jansonblog.com/p/spring3/</guid>
+        <description>&lt;img src="http://www.jansonblog.com/p/spring3/1.jpg" alt="Featured image of post Spring学习之路（三）" /&gt;&lt;ul&gt;
+&lt;li&gt;Spring实战第五版中使用的WebSecurityConfigurerAdapter已被弃用 （还没学过就被弃用了&amp;hellip;）&lt;/li&gt;
+&lt;li&gt;第五章开始，使用最新的Spring实战第六版进行学习&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;spring-security的密码编译器&#34;&gt;Spring Security的密码编译器&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;密码编译器&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;加密方法&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;BCryptPasswordEncoder&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;应用 bcrypt 加强哈希加密&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;NoOpPasswordEncoder&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;不应用任何编码&lt;!-- raw HTML omitted --&gt;（对测试有用，不适合生产使用）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Pbkdf2PasswordEncoder&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;应用 PBKDF2 加密&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;SCryptPasswordEncoder&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;应用 scrypt 哈希加密&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;StandardPasswordEncoder&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;应用 SHA-256 哈希加密&lt;!-- raw HTML omitted --&gt;（被认为不够安全，已经被弃用）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt; 数据库中密码被加密；&lt;br&gt;
+ 用户在login输入的密码使用相同的算法进行编码，在数据库使用PasswordEncoder的matches()方法进行比较。&lt;/p&gt;
+&lt;h2 id=&#34;userdetailsservice实现&#34;&gt;UserDetailsService实现：&lt;/h2&gt;
+&lt;p&gt;Spring Security提供了几个开箱即用的UserDetailsService实现：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;基于内存的用户存储&lt;/li&gt;
+&lt;li&gt;基于JDBC的用户存储&lt;/li&gt;
+&lt;li&gt;由LDAP支持的用户存储&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;9
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/*
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;*loadUserByUsername()方法接受用户名并使用它查找UserDetails对象。
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;*如果找不到给定用户名的用户，则抛出UsernameNotFoundException异常。
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;*/
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;public interface UserDetailsService {
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    UserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;securing-web-requests&#34;&gt;Securing web requests&lt;/h2&gt;
+&lt;p&gt;  authorizeRequests()返回(ExpressionUrlAuthorizationConfigurer.ExpressionInterceptUrlRegistry)对象，允许指定URL路径和模式，以及路径对应的安全要求：&lt;br&gt;
+书中项目的代码实现如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/*
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; *保证对于/design 和 /orders路径的请求只对认证的用户有效；
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; *其他路径对于所有的用户有效；
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; */
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;@Bean
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    return http
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	    .authorizeRequests()
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	    .antMatchers(&amp;#34;/design&amp;#34;, &amp;#34;/orders&amp;#34;).hasRole(&amp;#34;USER&amp;#34;)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	    .antMatchers(&amp;#34;/&amp;#34;, &amp;#34;/**&amp;#34;).permitAll()
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	    .and()
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	    .build();
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Spring web requests的配置方法，以及如何保护路径&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;方法&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;作用&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;access(String)&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;如果给定的Spring Expression Language(SpEL)表达式求值为true，允许访问&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;anonymous()&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;允许匿名用户访问&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;authenticated()&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;允许通过验证的用户访问&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;denyAll()&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;无条件拒绝所有访问&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;fullyAuthenticated()&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;允许通过完全身份验证的用户访问（不推荐）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;hasAnyAuthority(String&amp;hellip;)&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;如果用户具有任何一个给定的权限，则允许访问（可代替hasAnyRole(String)方法）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;hasAnyRole(String…)&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;如果用户具有任何给定的角色，则允许访问&lt;!-- raw HTML omitted --&gt; （自动加 ROLE_ 的前缀）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;hasAuthority(String)&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;如果用户具有指定的权限，则允许访问&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;hasRole(String)&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;如果用户具有指定的角色，则允许访问&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;hasIpAddress(String)&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;如果用户具有指定的IP地址，则允许访问&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;not()&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;否定任何其他认证方法的效果&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;permitAll()&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;无条件允许访问&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;rememberMe()&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;允许通过 remember-me 进行身份验证的用户访问&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;ul&gt;
+&lt;li&gt;这其中值得注意的事，hasRole()方法可以被hasAuthority()代替：hasRole()方法自动补足ROLE_的前缀。&lt;/li&gt;
+&lt;li&gt;设计上来看，一个是权限，一个是角色，角色是权限的集合体。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;spring-security对于spel表达式的扩展&#34;&gt;Spring Security对于SpEL表达式的扩展&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;Security expression&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;SpEL的计算结果&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;authentication&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;用户的认证对象&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;denyAll&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;恒为false&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;hasAnyAuthority(String&amp;hellip;authorities)&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;如果用户被授予所有权限中的某一个，则为true&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;hasAnyRole(String&amp;hellip;roles)&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;如果用户有给定的roles中的某一个，则为true&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;hasAnyAuthority(String authority)&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;如果用户被授予指定的权限，则为true&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;hasPermission(Object target, Object permission)&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;如果用户能以给定的权限访问指定的目标对象，则为true&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;hasRole(String role)&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;如果用户有给定的role，则为true&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;hasIpAddress(String ipAddress)&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;如果请求来自指定ip，则为true&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;isAnnoymous()&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;如果用户是匿名的，则为true&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;isAuthenticated()&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;如果用户已认证，则为true&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;isFullyAuthenticated()&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;如果用户经过完全身份验证(没有使用remember-me进行身份验证)，则为true&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;isRememberMe()&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;如果用户使用remeber-me进行身份验证，则为true&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;permitAll()&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;恒为true&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;principal&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;用户的主要对象&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;ul&gt;
+&lt;li&gt;remember-me（记住我）认证，就是常见的记住我：下次登录时，使用cookie导致自动登录发生。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/*
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;*所以上面一节中的方法，可以用access()方法+security表达式的方式来实现；
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;*/
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;@Bean
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    return http
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        .authorizeRequests()
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        .antMatchers(&amp;#34;/design&amp;#34;, &amp;#34;/orders&amp;#34;).access(&amp;#34;hasRole(&amp;#39;USER&amp;#39;)&amp;#34;)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        .antMatchers(&amp;#34;/&amp;#34;, &amp;#34;/**&amp;#34;).access(&amp;#34;permitAll()&amp;#34;)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	    .and()
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	    .build();
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;如有遗漏或错误，欢迎补充纠正&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
         <title>2022年10月20日</title>
         <link>http://www.jansonblog.com/p/202210/</link>
         <pubDate>Thu, 20 Oct 2022 00:00:00 +0000</pubDate>

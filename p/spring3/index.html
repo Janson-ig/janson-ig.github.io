@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
-    <head>
-	<meta name="generator" content="Hugo 0.105.0"><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='You forget a thousand things every day, How about you make sure this is one of them …'><title>Janson&#39;s Blog</title>
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='Spring Security(一)：密码编译器 &amp; Securing web requests'><title>Spring学习之路（三）</title>
 
-<link rel='canonical' href='http://www.jansonblog.com/'>
+<link rel='canonical' href='http://www.jansonblog.com/p/spring3/'>
 
-<link rel="stylesheet" href="/scss/style.min.ac77dcf8b111b51da39a92990f431923f210f3876d85798a2125667f96dc33a4.css"><meta property='og:title' content='Janson&#39;s Blog'>
-<meta property='og:description' content='You forget a thousand things every day, How about you make sure this is one of them …'>
-<meta property='og:url' content='http://www.jansonblog.com/'>
+<link rel="stylesheet" href="/scss/style.min.ac77dcf8b111b51da39a92990f431923f210f3876d85798a2125667f96dc33a4.css"><meta property='og:title' content='Spring学习之路（三）'>
+<meta property='og:description' content='Spring Security(一)：密码编译器 &amp; Securing web requests'>
+<meta property='og:url' content='http://www.jansonblog.com/p/spring3/'>
 <meta property='og:site_name' content='Janson&#39;s Blog'>
-<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2022-11-02T00:00:00&#43;00:00 '/>
-<meta name="twitter:title" content="Janson&#39;s Blog">
-<meta name="twitter:description" content="You forget a thousand things every day, How about you make sure this is one of them …"><link rel="alternate" type="application/rss&#43;xml" href="http://www.jansonblog.com/index.xml">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='框架' /><meta property='article:published_time' content='2022-11-02T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2022-11-02T00:00:00&#43;00:00'/><meta property='og:image' content='http://www.jansonblog.com/p/spring3/1.jpg' />
+<meta name="twitter:title" content="Spring学习之路（三）">
+<meta name="twitter:description" content="Spring Security(一)：密码编译器 &amp; Securing web requests"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='http://www.jansonblog.com/p/spring3/1.jpg' />
     </head>
-    <body class="">
+    <body class="
+    article-page
+    ">
     <script>
         (function() {
             const colorSchemeKey = 'StackColorScheme';
@@ -135,7 +137,7 @@
         
         
 
-        <li  class='current' >
+        <li >
             <a href='/' >
                 
                 
@@ -243,15 +245,7 @@
     </ol>
 </aside>
 <main class="main full-width">
-    
-    
-    
-    
-
-    <section class="article-list">
-        
-            
-<article class="has-image">
+    <article class="has-image main-article">
     <header class="article-header">
         <div class="article-image">
             <a href="/p/spring3/">
@@ -331,349 +325,449 @@
     
 </div>
 </header>
-</article>
-        
-            
-<article class="has-image">
-    <header class="article-header">
-        <div class="article-image">
-            <a href="/p/202210/">
-                <img src="/p/202210/1_hud19e336ace294e14e66119b0592b486d_120198_800x0_resize_q75_box.jpg"
-                        srcset="/p/202210/1_hud19e336ace294e14e66119b0592b486d_120198_800x0_resize_q75_box.jpg 800w, /p/202210/1_hud19e336ace294e14e66119b0592b486d_120198_1600x0_resize_q75_box.jpg 1600w"
-                        width="800" 
-                        height="1731" 
-                        loading="lazy"
-                        alt="Featured image of post 2022年10月20日" />
-                
-            </a>
-        </div>
+
+    <section class="article-content">
     
-
-    <div class="article-details">
     
-    <header class="article-category">
-        
-            <a href="/categories/%E7%95%99%E5%AD%A6%E7%94%9F%E6%B4%BB/" style="background-color: #2a9d8f; color: #fff;">
-                留学
-            </a>
-        
-    </header>
-    
-
-    <div class="article-title-wrapper">
-        <h2 class="article-title">
-            <a href="/p/202210/">2022年10月20日</a>
-        </h2>
-    
-        
-        <h3 class="article-subtitle">
-            内心独白
-        </h3>
-        
-    </div>
-
-    
-    <footer class="article-time">
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
-  <circle cx="18" cy="18" r="4" />
-  <path d="M15 3v4" />
-  <path d="M7 3v4" />
-  <path d="M3 11h16" />
-  <path d="M18 16.496v1.504l1 1" />
-</svg>
-                <time class="article-time--published">Oct 20, 2022</time>
-            </div>
-        
-
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="12" r="9" />
-  <polyline points="12 7 12 12 15 15" />
-</svg>
-
-
-
-                <time class="article-time--reading">
-                    阅读时长: 3 分钟
-                </time>
-            </div>
-        
-    </footer>
-    
-
-    
+    <ul>
+<li>Spring实战第五版中使用的WebSecurityConfigurerAdapter已被弃用 （还没学过就被弃用了&hellip;）</li>
+<li>第五章开始，使用最新的Spring实战第六版进行学习</li>
+</ul>
+<h2 id="spring-security的密码编译器">Spring Security的密码编译器</h2>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th style="text-align:center">密码编译器</th>
+<th style="text-align:center">加密方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">BCryptPasswordEncoder</td>
+<td style="text-align:center">应用 bcrypt 加强哈希加密</td>
+</tr>
+<tr>
+<td style="text-align:center">NoOpPasswordEncoder</td>
+<td style="text-align:center">不应用任何编码<!-- raw HTML omitted -->（对测试有用，不适合生产使用）</td>
+</tr>
+<tr>
+<td style="text-align:center">Pbkdf2PasswordEncoder</td>
+<td style="text-align:center">应用 PBKDF2 加密</td>
+</tr>
+<tr>
+<td style="text-align:center">SCryptPasswordEncoder</td>
+<td style="text-align:center">应用 scrypt 哈希加密</td>
+</tr>
+<tr>
+<td style="text-align:center">StandardPasswordEncoder</td>
+<td style="text-align:center">应用 SHA-256 哈希加密<!-- raw HTML omitted -->（被认为不够安全，已经被弃用）</td>
+</tr>
+</tbody>
+</table></div>
+<p> 数据库中密码被加密；<br>
+ 用户在login输入的密码使用相同的算法进行编码，在数据库使用PasswordEncoder的matches()方法进行比较。</p>
+<h2 id="userdetailsservice实现">UserDetailsService实现：</h2>
+<p>Spring Security提供了几个开箱即用的UserDetailsService实现：</p>
+<ol>
+<li>基于内存的用户存储</li>
+<li>基于JDBC的用户存储</li>
+<li>由LDAP支持的用户存储</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">/*
+</span></span><span class="line"><span class="cl">*loadUserByUsername()方法接受用户名并使用它查找UserDetails对象。
+</span></span><span class="line"><span class="cl">*如果找不到给定用户名的用户，则抛出UsernameNotFoundException异常。
+</span></span><span class="line"><span class="cl">*/
+</span></span><span class="line"><span class="cl">public interface UserDetailsService {
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">    UserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
 </div>
-</header>
-</article>
-        
-            
-<article class="has-image">
-    <header class="article-header">
-        <div class="article-image">
-            <a href="/p/202208/">
-                <img src="/p/202208/title_hu54cfe3eacd95e31739f6cf6e42583caf_177612_800x0_resize_q75_box.jpg"
-                        srcset="/p/202208/title_hu54cfe3eacd95e31739f6cf6e42583caf_177612_800x0_resize_q75_box.jpg 800w, /p/202208/title_hu54cfe3eacd95e31739f6cf6e42583caf_177612_1600x0_resize_q75_box.jpg 1600w"
-                        width="800" 
-                        height="600" 
-                        loading="lazy"
-                        alt="Featured image of post 2022年8月生活日记" />
-                
-            </a>
-        </div>
-    
-
-    <div class="article-details">
-    
-    <header class="article-category">
-        
-            <a href="/categories/%E7%95%99%E5%AD%A6%E7%94%9F%E6%B4%BB/" style="background-color: #2a9d8f; color: #fff;">
-                留学
-            </a>
-        
-    </header>
-    
-
-    <div class="article-title-wrapper">
-        <h2 class="article-title">
-            <a href="/p/202208/">2022年8月生活日记</a>
-        </h2>
-    
-        
-        <h3 class="article-subtitle">
-            我的暑假&amp;学长的毕业季
-        </h3>
-        
-    </div>
-
-    
-    <footer class="article-time">
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
-  <circle cx="18" cy="18" r="4" />
-  <path d="M15 3v4" />
-  <path d="M7 3v4" />
-  <path d="M3 11h16" />
-  <path d="M18 16.496v1.504l1 1" />
-</svg>
-                <time class="article-time--published">Aug 25, 2022</time>
-            </div>
-        
-
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="12" r="9" />
-  <polyline points="12 7 12 12 15 15" />
-</svg>
-
-
-
-                <time class="article-time--reading">
-                    阅读时长: 2 分钟
-                </time>
-            </div>
-        
-    </footer>
-    
-
-    
+</div><h2 id="securing-web-requests">Securing web requests</h2>
+<p>  authorizeRequests()返回(ExpressionUrlAuthorizationConfigurer.ExpressionInterceptUrlRegistry)对象，允许指定URL路径和模式，以及路径对应的安全要求：<br>
+书中项目的代码实现如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">/*
+</span></span><span class="line"><span class="cl"> *保证对于/design 和 /orders路径的请求只对认证的用户有效；
+</span></span><span class="line"><span class="cl"> *其他路径对于所有的用户有效；
+</span></span><span class="line"><span class="cl"> */
+</span></span><span class="line"><span class="cl">@Bean
+</span></span><span class="line"><span class="cl">public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+</span></span><span class="line"><span class="cl">    return http
+</span></span><span class="line"><span class="cl">	    .authorizeRequests()
+</span></span><span class="line"><span class="cl">	    .antMatchers(&#34;/design&#34;, &#34;/orders&#34;).hasRole(&#34;USER&#34;)
+</span></span><span class="line"><span class="cl">	    .antMatchers(&#34;/&#34;, &#34;/**&#34;).permitAll()
+</span></span><span class="line"><span class="cl">	 
+</span></span><span class="line"><span class="cl">	    .and()
+</span></span><span class="line"><span class="cl">	    .build();
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
 </div>
-</header>
-</article>
-        
-            
-<article class="has-image">
-    <header class="article-header">
-        <div class="article-image">
-            <a href="/p/spring2/">
-                <img src="/p/spring2/1_huc955137a63590f4561b0a715bdaca55f_11288_800x0_resize_q75_box.jpg"
-                        srcset="/p/spring2/1_huc955137a63590f4561b0a715bdaca55f_11288_800x0_resize_q75_box.jpg 800w, /p/spring2/1_huc955137a63590f4561b0a715bdaca55f_11288_1600x0_resize_q75_box.jpg 1600w"
-                        width="800" 
-                        height="374" 
-                        loading="lazy"
-                        alt="Featured image of post Spring学习之路（二）" />
-                
-            </a>
-        </div>
-    
-
-    <div class="article-details">
-    
-    <header class="article-category">
-        
-            <a href="/categories/spring/" style="background-color: #2a9d8f; color: #fff;">
-                Spring
-            </a>
-        
-            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="background-color: #2a9d8f; color: #fff;">
-                学习笔记
-            </a>
-        
-    </header>
-    
-
-    <div class="article-title-wrapper">
-        <h2 class="article-title">
-            <a href="/p/spring2/">Spring学习之路（二）</a>
-        </h2>
-    
-        
-        <h3 class="article-subtitle">
-            几个模板引擎及模板缓存
-        </h3>
-        
-    </div>
-
-    
-    <footer class="article-time">
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
-  <circle cx="18" cy="18" r="4" />
-  <path d="M15 3v4" />
-  <path d="M7 3v4" />
-  <path d="M3 11h16" />
-  <path d="M18 16.496v1.504l1 1" />
-</svg>
-                <time class="article-time--published">Aug 15, 2022</time>
-            </div>
-        
-
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="12" r="9" />
-  <polyline points="12 7 12 12 15 15" />
-</svg>
-
-
-
-                <time class="article-time--reading">
-                    阅读时长: 2 分钟
-                </time>
-            </div>
-        
-    </footer>
-    
-
-    
+</div><p>Spring web requests的配置方法，以及如何保护路径</p>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th style="text-align:center">方法</th>
+<th style="text-align:center">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">access(String)</td>
+<td style="text-align:center">如果给定的Spring Expression Language(SpEL)表达式求值为true，允许访问</td>
+</tr>
+<tr>
+<td style="text-align:center">anonymous()</td>
+<td style="text-align:center">允许匿名用户访问</td>
+</tr>
+<tr>
+<td style="text-align:center">authenticated()</td>
+<td style="text-align:center">允许通过验证的用户访问</td>
+</tr>
+<tr>
+<td style="text-align:center">denyAll()</td>
+<td style="text-align:center">无条件拒绝所有访问</td>
+</tr>
+<tr>
+<td style="text-align:center">fullyAuthenticated()</td>
+<td style="text-align:center">允许通过完全身份验证的用户访问（不推荐）</td>
+</tr>
+<tr>
+<td style="text-align:center">hasAnyAuthority(String&hellip;)</td>
+<td style="text-align:center">如果用户具有任何一个给定的权限，则允许访问（可代替hasAnyRole(String)方法）</td>
+</tr>
+<tr>
+<td style="text-align:center">hasAnyRole(String…)</td>
+<td style="text-align:center">如果用户具有任何给定的角色，则允许访问<!-- raw HTML omitted --> （自动加 ROLE_ 的前缀）</td>
+</tr>
+<tr>
+<td style="text-align:center">hasAuthority(String)</td>
+<td style="text-align:center">如果用户具有指定的权限，则允许访问</td>
+</tr>
+<tr>
+<td style="text-align:center">hasRole(String)</td>
+<td style="text-align:center">如果用户具有指定的角色，则允许访问</td>
+</tr>
+<tr>
+<td style="text-align:center">hasIpAddress(String)</td>
+<td style="text-align:center">如果用户具有指定的IP地址，则允许访问</td>
+</tr>
+<tr>
+<td style="text-align:center">not()</td>
+<td style="text-align:center">否定任何其他认证方法的效果</td>
+</tr>
+<tr>
+<td style="text-align:center">permitAll()</td>
+<td style="text-align:center">无条件允许访问</td>
+</tr>
+<tr>
+<td style="text-align:center">rememberMe()</td>
+<td style="text-align:center">允许通过 remember-me 进行身份验证的用户访问</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>这其中值得注意的事，hasRole()方法可以被hasAuthority()代替：hasRole()方法自动补足ROLE_的前缀。</li>
+<li>设计上来看，一个是权限，一个是角色，角色是权限的集合体。</li>
+</ul>
+<h2 id="spring-security对于spel表达式的扩展">Spring Security对于SpEL表达式的扩展</h2>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th style="text-align:center">Security expression</th>
+<th style="text-align:center">SpEL的计算结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">authentication</td>
+<td style="text-align:center">用户的认证对象</td>
+</tr>
+<tr>
+<td style="text-align:center">denyAll</td>
+<td style="text-align:center">恒为false</td>
+</tr>
+<tr>
+<td style="text-align:center">hasAnyAuthority(String&hellip;authorities)</td>
+<td style="text-align:center">如果用户被授予所有权限中的某一个，则为true</td>
+</tr>
+<tr>
+<td style="text-align:center">hasAnyRole(String&hellip;roles)</td>
+<td style="text-align:center">如果用户有给定的roles中的某一个，则为true</td>
+</tr>
+<tr>
+<td style="text-align:center">hasAnyAuthority(String authority)</td>
+<td style="text-align:center">如果用户被授予指定的权限，则为true</td>
+</tr>
+<tr>
+<td style="text-align:center">hasPermission(Object target, Object permission)</td>
+<td style="text-align:center">如果用户能以给定的权限访问指定的目标对象，则为true</td>
+</tr>
+<tr>
+<td style="text-align:center">hasRole(String role)</td>
+<td style="text-align:center">如果用户有给定的role，则为true</td>
+</tr>
+<tr>
+<td style="text-align:center">hasIpAddress(String ipAddress)</td>
+<td style="text-align:center">如果请求来自指定ip，则为true</td>
+</tr>
+<tr>
+<td style="text-align:center">isAnnoymous()</td>
+<td style="text-align:center">如果用户是匿名的，则为true</td>
+</tr>
+<tr>
+<td style="text-align:center">isAuthenticated()</td>
+<td style="text-align:center">如果用户已认证，则为true</td>
+</tr>
+<tr>
+<td style="text-align:center">isFullyAuthenticated()</td>
+<td style="text-align:center">如果用户经过完全身份验证(没有使用remember-me进行身份验证)，则为true</td>
+</tr>
+<tr>
+<td style="text-align:center">isRememberMe()</td>
+<td style="text-align:center">如果用户使用remeber-me进行身份验证，则为true</td>
+</tr>
+<tr>
+<td style="text-align:center">permitAll()</td>
+<td style="text-align:center">恒为true</td>
+</tr>
+<tr>
+<td style="text-align:center">principal</td>
+<td style="text-align:center">用户的主要对象</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>remember-me（记住我）认证，就是常见的记住我：下次登录时，使用cookie导致自动登录发生。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">/*
+</span></span><span class="line"><span class="cl">*所以上面一节中的方法，可以用access()方法+security表达式的方式来实现；
+</span></span><span class="line"><span class="cl">*/
+</span></span><span class="line"><span class="cl">@Bean
+</span></span><span class="line"><span class="cl">public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+</span></span><span class="line"><span class="cl">    return http
+</span></span><span class="line"><span class="cl">        .authorizeRequests()
+</span></span><span class="line"><span class="cl">        .antMatchers(&#34;/design&#34;, &#34;/orders&#34;).access(&#34;hasRole(&#39;USER&#39;)&#34;)
+</span></span><span class="line"><span class="cl">        .antMatchers(&#34;/&#34;, &#34;/**&#34;).access(&#34;permitAll()&#34;)
+</span></span><span class="line"><span class="cl">	 
+</span></span><span class="line"><span class="cl">	    .and()
+</span></span><span class="line"><span class="cl">	    .build();
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
 </div>
-</header>
-</article>
-        
-            
-<article class="has-image">
-    <header class="article-header">
-        <div class="article-image">
-            <a href="/p/spring1/">
-                <img src="/p/spring1/1_huc955137a63590f4561b0a715bdaca55f_11288_800x0_resize_q75_box.jpg"
-                        srcset="/p/spring1/1_huc955137a63590f4561b0a715bdaca55f_11288_800x0_resize_q75_box.jpg 800w, /p/spring1/1_huc955137a63590f4561b0a715bdaca55f_11288_1600x0_resize_q75_box.jpg 1600w"
-                        width="800" 
-                        height="374" 
-                        loading="lazy"
-                        alt="Featured image of post Spring学习之路（一）" />
-                
-            </a>
-        </div>
+</div><blockquote>
+<p>如有遗漏或错误，欢迎补充纠正</p>
+</blockquote>
+
+</section>
+
+
+    <footer class="article-footer">
     
-
-    <div class="article-details">
-    
-    <header class="article-category">
+    <section class="article-tags">
         
-            <a href="/categories/spring/" style="background-color: #2a9d8f; color: #fff;">
-                Spring
-            </a>
-        
-            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="background-color: #2a9d8f; color: #fff;">
-                学习笔记
-            </a>
-        
-    </header>
-    
-
-    <div class="article-title-wrapper">
-        <h2 class="article-title">
-            <a href="/p/spring1/">Spring学习之路（一）</a>
-        </h2>
-    
-        
-        <h3 class="article-subtitle">
-            Spring项目结构，@SpringBootApplication组合注解，Spring的重点项目汇总
-        </h3>
-        
-    </div>
-
-    
-    <footer class="article-time">
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
-  <circle cx="18" cy="18" r="4" />
-  <path d="M15 3v4" />
-  <path d="M7 3v4" />
-  <path d="M3 11h16" />
-  <path d="M18 16.496v1.504l1 1" />
-</svg>
-                <time class="article-time--published">Aug 13, 2022</time>
-            </div>
-        
-
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="12" r="9" />
-  <polyline points="12 7 12 12 15 15" />
-</svg>
-
-
-
-                <time class="article-time--reading">
-                    阅读时长: 3 分钟
-                </time>
-            </div>
-        
-    </footer>
-    
-
-    
-</div>
-</header>
-</article>
+            <a href="/tags/%E6%A1%86%E6%9E%B6/">框架</a>
         
     </section>
-    <nav class='pagination'>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/spring2/">
         
+        
+            <div class="article-image">
+                <img src="/p/spring2/1.4c54a7f78b9d6dbb7956c2a066ad5346_huc955137a63590f4561b0a715bdaca55f_11288_250x150_fill_q75_box_smart1.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Spring学习之路（二）"
+                        data-key="spring2" 
+                        data-hash="md5-TFSn94udbbt5VsKgZq1TRg==">
+                
+            </div>
         
 
-        
-            
-                <span class='page-link current'>1</span>
-                
-            
-            
-                    <a class='page-link' href='/page/2/'>2</a>
-                
-            
-    </nav>
+        <div class="article-details">
+            <h2 class="article-title">Spring学习之路（二）</h2>
+        </div>
+    </a>
+</article>
 
-<footer class="site-footer">
+            
+                
+<article class="has-image">
+    <a href="/p/spring1/">
+        
+        
+            <div class="article-image">
+                <img src="/p/spring1/1.4c54a7f78b9d6dbb7956c2a066ad5346_huc955137a63590f4561b0a715bdaca55f_11288_250x150_fill_q75_box_smart1.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Spring学习之路（一）"
+                        data-key="spring1" 
+                        data-hash="md5-TFSn94udbbt5VsKgZq1TRg==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Spring学习之路（一）</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/post1/">
+        
+        
+            <div class="article-image">
+                <img src="/p/post1/_huc8c4888000c54215c84e1fbac83f0f75_66078_494789b441e84a79f2c8cccd1dcd4c3a.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 动态规划(Dynamic programming)问题解法"
+                        data-key="post1" 
+                        data-hash="md5-0ns3xVT67HqK7xbcbuvehw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">动态规划(Dynamic programming)问题解法</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="Janson-ig/hugoblogtalks"
+        issue-term="pathname"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
     <section class="copyright">
         &copy; 
         
@@ -686,65 +780,93 @@
     </section>
 </footer>
 
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
             </main>
     <aside class="sidebar right-sidebar sticky">
         
             
-                <form action="/search/" class="search-form widget" >
-        <p>
-            <label>搜索</label>
-            <input name="keyword" required placeholder="输入关键词..." />
-        
-            <button title="搜索">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="10" cy="10" r="7" />
-  <line x1="21" y1="21" x2="15" y2="15" />
-</svg>
-
-
-
-            </button>
-        </p>
-    </form>
-            
-        
-            
-                <section class="widget archives">
+                
+    <section class="widget archives">
         <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-infinity" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M9.828 9.172a4 4 0 1 0 0 5.656 a10 10 0 0 0 2.172 -2.828a10 10 0 0 1 2.172 -2.828 a4 4 0 1 1 0 5.656a10 10 0 0 1 -2.172 -2.828a10 10 0 0 0 -2.172 -2.828" />
-</svg>
-
-
-
-        </div>
-        <h2 class="widget-title section-title">归档</h2>
-
-        
-        
-        
-        
-        
-        <div class="widget-archive--list">
-            <div class="archives-year">
-                    <a href="/archives/#2022">
-                        
-                            <span class="year">2022</span>
-                            <span class="count">8</span>
-                        
-                    </a> 
-                </div>
-            
-        </div>
-    </section>
-            
-        
-            
-                <section class="widget tagCloud">
-    <div class="widget-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <line x1="5" y1="9" x2="19" y2="9" />
   <line x1="5" y1="15" x2="19" y2="15" />
@@ -754,70 +876,21 @@
 
 
 
-    </div>
-    <h2 class="widget-title section-title">分类</h2>
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#spring-security的密码编译器">Spring Security的密码编译器</a></li>
+    <li><a href="#userdetailsservice实现">UserDetailsService实现：</a></li>
+    <li><a href="#securing-web-requests">Securing web requests</a></li>
+    <li><a href="#spring-security对于spel表达式的扩展">Spring Security对于SpEL表达式的扩展</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
 
-    <div class="tagCloud-tags">
-        
-            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="font_size_4">
-                学习笔记
-            </a>
-        
-            <a href="/categories/spring/" class="font_size_3">
-                Spring
-            </a>
-        
-            <a href="/categories/%E7%95%99%E5%AD%A6%E7%94%9F%E6%B4%BB/" class="font_size_3">
-                留学
-            </a>
-        
-            <a href="/categories/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/" class="font_size_1">
-                常用工具
-            </a>
-        
-            <a href="/categories/%E7%AE%97%E6%B3%95/" class="font_size_1">
-                算法
-            </a>
-        
-    </div>
-</section>
-
-            
-        
-            
-                <section class="widget tagCloud">
-    <div class="widget-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-tag" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M11 3L20 12a1.5 1.5 0 0 1 0 2L14 20a1.5 1.5 0 0 1 -2 0L3 11v-4a4 4 0 0 1 4 -4h4" />
-  <circle cx="9" cy="9" r="2" />
-</svg>
-
-
-
-    </div>
-    <h2 class="widget-title section-title">标签云</h2>
-
-    <div class="tagCloud-tags">
-        
-            <a href="/tags/%E6%A1%86%E6%9E%B6/" class="font_size_3">
-                框架
-            </a>
-        
-            <a href="/tags/%E7%95%99%E5%AD%A6%E7%94%9F%E6%B4%BB/" class="font_size_3">
-                留学生活
-            </a>
-        
-            <a href="/tags/git/" class="font_size_1">
-                Git
-            </a>
-        
-            <a href="/tags/%E7%AE%97%E6%B3%95/" class="font_size_1">
-                算法
-            </a>
-        
-    </div>
-</section>
             
         
     </aside>
