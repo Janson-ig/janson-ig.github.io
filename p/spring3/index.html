@@ -398,8 +398,8 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="securing-web-requests">Securing web requests</h2>
-<p>  authorizeRequests()返回(ExpressionUrlAuthorizationConfigurer.ExpressionInterceptUrlRegistry)对象，允许指定URL路径和模式，以及路径对应的安全要求：<br>
-书中项目的代码实现如下：</p>
+<p> authorizeRequests()返回(ExpressionUrlAuthorizationConfigurer.ExpressionInterceptUrlRegistry)对象，允许指定URL路径和模式，以及路径对应的安全要求：<br>
+ 书中项目的代码实现如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -434,7 +434,7 @@
 </span></span><span class="line"><span class="cl">}
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>Spring web requests的配置方法，以及如何保护路径</p>
+</div><p> Spring web requests的配置方法，以及如何保护路径如下：</p>
 <div class="table-wrapper"><table>
 <thead>
 <tr>
@@ -498,7 +498,7 @@
 </tbody>
 </table></div>
 <ul>
-<li>这其中值得注意的事，hasRole()方法可以被hasAuthority()代替：hasRole()方法自动补足ROLE_的前缀。</li>
+<li>这其中值得注意的事，hasRole()方法可以被hasAuthority()代替：hasRole()方法自动补足 <strong>ROLE_</strong> 的前缀。</li>
 <li>设计上来看，一个是权限，一个是角色，角色是权限的集合体。</li>
 </ul>
 <h2 id="spring-security对于spel表达式的扩展">Spring Security对于SpEL表达式的扩展</h2>

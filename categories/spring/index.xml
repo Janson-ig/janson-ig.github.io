@@ -81,8 +81,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h2 id=&#34;securing-web-requests&#34;&gt;Securing web requests&lt;/h2&gt;
-&lt;p&gt;  authorizeRequests()返回(ExpressionUrlAuthorizationConfigurer.ExpressionInterceptUrlRegistry)对象，允许指定URL路径和模式，以及路径对应的安全要求：&lt;br&gt;
-书中项目的代码实现如下：&lt;/p&gt;
+&lt;p&gt; authorizeRequests()返回(ExpressionUrlAuthorizationConfigurer.ExpressionInterceptUrlRegistry)对象，允许指定URL路径和模式，以及路径对应的安全要求：&lt;br&gt;
+ 书中项目的代码实现如下：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -117,7 +117,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;Spring web requests的配置方法，以及如何保护路径&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt; Spring web requests的配置方法，以及如何保护路径如下：&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -181,7 +181,7 @@
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;ul&gt;
-&lt;li&gt;这其中值得注意的事，hasRole()方法可以被hasAuthority()代替：hasRole()方法自动补足ROLE_的前缀。&lt;/li&gt;
+&lt;li&gt;这其中值得注意的事，hasRole()方法可以被hasAuthority()代替：hasRole()方法自动补足 &lt;strong&gt;ROLE_&lt;/strong&gt; 的前缀。&lt;/li&gt;
 &lt;li&gt;设计上来看，一个是权限，一个是角色，角色是权限的集合体。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;spring-security对于spel表达式的扩展&#34;&gt;Spring Security对于SpEL表达式的扩展&lt;/h2&gt;
