@@ -8,11 +8,11 @@
         <language>en-us</language>
         <lastBuildDate>Thu, 03 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://www.jansonblog.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>KMP算法（字符串匹配算法）</title>
-        <link>http://www.jansonblog.com/p/post1/</link>
+        <link>http://www.jansonblog.com/p/kmp/</link>
         <pubDate>Thu, 03 Nov 2022 00:00:00 +0000</pubDate>
         
-        <guid>http://www.jansonblog.com/p/post1/</guid>
-        <description>&lt;img src="http://www.jansonblog.com/p/post1/1.png" alt="Featured image of post KMP算法（字符串匹配算法）" /&gt;&lt;p&gt;KMP(Knuth-Morris-Pratt)算法：&lt;/p&gt;
+        <guid>http://www.jansonblog.com/p/kmp/</guid>
+        <description>&lt;img src="http://www.jansonblog.com/p/kmp/1.png" alt="Featured image of post KMP算法（字符串匹配算法）" /&gt;&lt;h2 id=&#34;kmpknuth-morris-pratt算法&#34;&gt;KMP(Knuth-Morris-Pratt)算法：&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt; 字符串查找算法（简称为KMP算法）可在一个字符串S内查找一个词W的出现位置。一个词在不匹配时本身就包含足够的信息来确定下一个匹配可能的开始位置，此算法利用这一特性以避免重重复查找之前出现的字符。&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -34,31 +34,38 @@
 &lt;/ul&gt;
 &lt;p&gt;为例说明查找过程：&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;S:&lt;!-- raw HTML omitted --&gt;ABC&lt;!-- raw HTML omitted --&gt; ABCDAB ABCDABCDABDE&lt;br&gt;
-W:&lt;!-- raw HTML omitted --&gt;ABC&lt;!-- raw HTML omitted --&gt;DABD&lt;/p&gt;
+&lt;p&gt;S: &lt;strong&gt;ABC&lt;/strong&gt; ABCDAB ABCDABCDABDE&lt;br&gt;
+W: &lt;strong&gt;ABC&lt;/strong&gt;DABD&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;ul&gt;
 &lt;li&gt;S[3]（=&amp;rsquo; &amp;rsquo;)与W[3]（=&amp;lsquo;D&amp;rsquo;）不匹配，所以跳过；从S[4]开始，与W[0]进行比较。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;blockquote&gt;
-&lt;p&gt;S:ABC &lt;!-- raw HTML omitted --&gt;ABCDAB&lt;!-- raw HTML omitted --&gt; ABCDABCDABDE&lt;br&gt;
-W:&lt;!-- raw HTML omitted --&gt;ABCDAB&lt;!-- raw HTML omitted --&gt;D&lt;/p&gt;
+&lt;p&gt;S:ABC &lt;strong&gt;ABCDAB&lt;/strong&gt; ABCDABCDABDE&lt;br&gt;
+W:&lt;strong&gt;ABCDAB&lt;/strong&gt;D&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;ul&gt;
-&lt;li&gt;从S[4]开始比较，当位于S[10]（=&amp;rsquo; &amp;rsquo;）时，与W对应的字符不匹配；但是此时可以注意到，&amp;quot;&lt;!-- raw HTML omitted --&gt; AB&lt;!-- raw HTML omitted --&gt;&amp;ldquo;在“ABCD&lt;!-- raw HTML omitted --&gt;AB&lt;!-- raw HTML omitted --&gt;&amp;ldquo;的头尾处均有出现——这意味着，尾部的“AB”可以作为下一次比较的起点。&lt;/li&gt;
+&lt;li&gt;从S[4]开始比较，当位于S[10]（=&amp;rsquo; &amp;rsquo;）时，与W对应的字符不匹配；但是此时可以注意到，&amp;quot;&lt;strong&gt;AB&lt;/strong&gt;&amp;ldquo;在“ABCD&lt;strong&gt;AB&lt;/strong&gt;&amp;ldquo;的头尾处均有出现——这意味着，尾部的“AB”可以作为下一次比较的起点。&lt;/li&gt;
 &lt;li&gt;所以下次从index = 8的位置：&lt;/li&gt;
 &lt;/ul&gt;
 &lt;blockquote&gt;
-&lt;p&gt;S:ABC ABCD&lt;!-- raw HTML omitted --&gt;A&lt;!-- raw HTML omitted --&gt;B ABCDABCDABDE&lt;br&gt;
-W:ABCD&lt;!-- raw HTML omitted --&gt;A&lt;!-- raw HTML omitted --&gt;BD&lt;/p&gt;
+&lt;p&gt;S:ABC ABCD&lt;strong&gt;A&lt;/strong&gt;B ABCDABCDABDE&lt;br&gt;
+W:ABCD&lt;strong&gt;A&lt;/strong&gt;BD&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;ul&gt;
-&lt;li&gt;即绿色的‘A’开始进行匹配。&lt;/li&gt;
+&lt;li&gt;即&lt;strong&gt;A&lt;/strong&gt;开始进行匹配。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;学习资料如下:&lt;/p&gt;
-&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://leetcode.com/explore/learn/card/dynamic-programming/630/an-introduction-to-dynamic-programming/4035/&#34;  title=&#34;Explore - LeetCode&#34;
+&lt;h2 id=&#34;应用题目实战&#34;&gt;应用题目实战:&lt;/h2&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/&#34;  title=&#34;LeetCode 28. Find the Index of the First Occurrence in a String&#34;
      target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;Explore - LeetCode&lt;/a&gt;&lt;/p&gt;
+    &gt;LeetCode 28. Find the Index of the First Occurrence in a String&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;项目实战日后补充说明&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;同时推荐一个算法可视化工具：&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://algorithm-visualizer.org/dynamic-programming/knuth-morris-pratts-string-search&#34;  title=&#34;algorithm-visualizer_KMP&#34;
+     target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;algorithm-visualizer_KMP&lt;/a&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;如有遗漏或错误，欢迎补充纠正&lt;/p&gt;
 &lt;/blockquote&gt;
