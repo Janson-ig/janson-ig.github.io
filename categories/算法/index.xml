@@ -6,7 +6,65 @@
         <description>Recent content in 算法 on Janson&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Fri, 27 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://www.jansonblog.com/categories/%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 03 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://www.jansonblog.com/categories/%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>KMP算法（字符串匹配算法）</title>
+        <link>http://www.jansonblog.com/p/post1/</link>
+        <pubDate>Thu, 03 Nov 2022 00:00:00 +0000</pubDate>
+        
+        <guid>http://www.jansonblog.com/p/post1/</guid>
+        <description>&lt;img src="http://www.jansonblog.com/p/post1/1.png" alt="Featured image of post KMP算法（字符串匹配算法）" /&gt;&lt;p&gt;KMP(Knuth-Morris-Pratt)算法：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt; 字符串查找算法（简称为KMP算法）可在一个字符串S内查找一个词W的出现位置。一个词在不匹配时本身就包含足够的信息来确定下一个匹配可能的开始位置，此算法利用这一特性以避免重重复查找之前出现的字符。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt; 我对MKP的认识：其归属于DP问题，核心的思想在于对要查找的字符串进行处理——寻找最长的前缀。然后通过记忆化数组的方式，跳过不可能成功匹配的字符串位置，从下一个可能的位置进行搜索。利用要查找字符串的特性，利用其前缀和后缀的共同部分来简化搜索过程。&lt;/p&gt;
+&lt;h2 id=&#34;算法原理&#34;&gt;算法原理：&lt;/h2&gt;
+&lt;p&gt; 简单的暴力搜索无非就是从每个可能的index开始，与要查找的字符串进行比较。
+ 而KMP则会跳过已经匹配的部分，以维基百科的说明为例，简单概括过程：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;blockquote&gt;
+&lt;p&gt;要查找的字符串W=&amp;ldquo;ABCDABD&amp;rdquo;，&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;blockquote&gt;
+&lt;p&gt;给定字符串S=&amp;ldquo;ABC ABCDAB ABCDABCDABDE&amp;rdquo;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;为例说明查找过程：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;S:&lt;!-- raw HTML omitted --&gt;ABC&lt;!-- raw HTML omitted --&gt; ABCDAB ABCDABCDABDE&lt;br&gt;
+W:&lt;!-- raw HTML omitted --&gt;ABC&lt;!-- raw HTML omitted --&gt;DABD&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;S[3]（=&amp;rsquo; &amp;rsquo;)与W[3]（=&amp;lsquo;D&amp;rsquo;）不匹配，所以跳过；从S[4]开始，与W[0]进行比较。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;S:ABC &lt;!-- raw HTML omitted --&gt;ABCDAB&lt;!-- raw HTML omitted --&gt; ABCDABCDABDE&lt;br&gt;
+W:&lt;!-- raw HTML omitted --&gt;ABCDAB&lt;!-- raw HTML omitted --&gt;D&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;从S[4]开始比较，当位于S[10]（=&amp;rsquo; &amp;rsquo;）时，与W对应的字符不匹配；但是此时可以注意到，&amp;quot;&lt;!-- raw HTML omitted --&gt; AB&lt;!-- raw HTML omitted --&gt;&amp;ldquo;在“ABCD&lt;!-- raw HTML omitted --&gt;AB&lt;!-- raw HTML omitted --&gt;&amp;ldquo;的头尾处均有出现——这意味着，尾部的“AB”可以作为下一次比较的起点。&lt;/li&gt;
+&lt;li&gt;所以下次从index = 8的位置：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;S:ABC ABCD&lt;!-- raw HTML omitted --&gt;A&lt;!-- raw HTML omitted --&gt;B ABCDABCDABDE&lt;br&gt;
+W:ABCD&lt;!-- raw HTML omitted --&gt;A&lt;!-- raw HTML omitted --&gt;BD&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;即绿色的‘A’开始进行匹配。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;学习资料如下:&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://leetcode.com/explore/learn/card/dynamic-programming/630/an-introduction-to-dynamic-programming/4035/&#34;  title=&#34;Explore - LeetCode&#34;
+     target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Explore - LeetCode&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;如有遗漏或错误，欢迎补充纠正&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
         <title>动态规划(Dynamic programming)问题解法</title>
         <link>http://www.jansonblog.com/p/post1/</link>
         <pubDate>Fri, 27 May 2022 00:00:00 +0000</pubDate>

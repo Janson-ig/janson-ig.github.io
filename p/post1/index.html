@@ -9,7 +9,7 @@
 <meta property='og:description' content='方法：「自下而上」或「自上而下」'>
 <meta property='og:url' content='http://www.jansonblog.com/p/post1/'>
 <meta property='og:site_name' content='Janson&#39;s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='算法' /><meta property='article:published_time' content='2022-05-27T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2022-05-27T00:00:00&#43;00:00'/><meta property='og:image' content='http://www.jansonblog.com/p/post1/PascalTriangleFibanacci.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='算法' /><meta property='article:published_time' content='2022-11-03T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2022-11-03T00:00:00&#43;00:00'/><meta property='og:image' content='http://www.jansonblog.com/p/post1/PascalTriangleFibanacci.jpg' />
 <meta name="twitter:title" content="动态规划(Dynamic programming)问题解法">
 <meta name="twitter:description" content="方法：「自下而上」或「自上而下」"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='http://www.jansonblog.com/p/post1/PascalTriangleFibanacci.jpg' />
@@ -254,7 +254,7 @@
                         width="800" 
                         height="400" 
                         loading="lazy"
-                        alt="Featured image of post 动态规划(Dynamic programming)问题解法" />
+                        alt="Featured image of post KMP算法（字符串匹配算法）" />
                 
             </a>
         </div>
@@ -329,75 +329,49 @@
     <section class="article-content">
     
     
-    <p>动态规划实现有两种方法：</p>
-<ol>
-<li>自下而上        (制表)</li>
-<li>自上而下        (记忆化)</li>
-</ol>
-<h2 id="自下而上">自下而上</h2>
-<p>自下而上是通过 <em>迭代</em>  实现的</p>
-<p>以<strong>斐波那契数列</strong>为例，F(0)=0, F(1)=1。通过F(0)和F(1)计算F(2)，然后使用计算结果计算F(3)…</p>
-<p>以此类推，一直计算F(n)</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">// 伪代码如下:
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">F = array of length (n + 1)
-</span></span><span class="line"><span class="cl">F[0] = 0
-</span></span><span class="line"><span class="cl">F[1] = 1
-</span></span><span class="line"><span class="cl">for i from 2 to n:
-</span></span><span class="line"><span class="cl">    F[i] = F[i - 1] + F[i - 2]
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="自上而下">自上而下</h2>
-<p>自上而下通过 <em>递归</em> 实现，并且通过 <em>记忆化</em> 提高效率(之后解释记忆化概念)</p>
-<p>如果我们想知道斐波那契数列F(n)，需要找到F(n-1)和F(n-2)…通过递归求出F(0)和F(1)</p>
-<p>缺点也很明显，在计算中存在大量的 重复计算 ，导致效率不高</p>
-<p>而解决方法也很简单，用空间换时间，也就是 <em>记忆化</em> ：将函数调用的结果存储在哈希图或数组中，这样当再次进行相同的函数调用时，我们可以简单地返回记忆的结果，而不是重新计算结果。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">//伪代码如下:
-</span></span><span class="line"><span class="cl"> 
-</span></span><span class="line"><span class="cl">memo = hashmap
-</span></span><span class="line"><span class="cl">Function F(integer i):
-</span></span><span class="line"><span class="cl">    if i is 0 or 1: 
-</span></span><span class="line"><span class="cl">        return i
-</span></span><span class="line"><span class="cl">    if i doesn&#39;t exist in memo:
-</span></span><span class="line"><span class="cl">        memo[i] = F(i - 1) + F(i - 2)
-</span></span><span class="line"><span class="cl">    return memo[i]
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="总结">总结</h2>
-<p><strong>所以，这两个算法哪个更好呢？</strong></p>
-<p>DP(动态规划问题)可以用任意一种方法实现</p>
-<p>每个方法都有一个突出的优点:</p>
+    <p>KMP(Knuth-Morris-Pratt)算法：</p>
+<blockquote>
+<p> 字符串查找算法（简称为KMP算法）可在一个字符串S内查找一个词W的出现位置。一个词在不匹配时本身就包含足够的信息来确定下一个匹配可能的开始位置，此算法利用这一特性以避免重重复查找之前出现的字符。</p>
+</blockquote>
+<p> 我对MKP的认识：其归属于DP问题，核心的思想在于对要查找的字符串进行处理——寻找最长的前缀。然后通过记忆化数组的方式，跳过不可能成功匹配的字符串位置，从下一个可能的位置进行搜索。利用要查找字符串的特性，利用其前缀和后缀的共同部分来简化搜索过程。</p>
+<h2 id="算法原理">算法原理：</h2>
+<p> 简单的暴力搜索无非就是从每个可能的index开始，与要查找的字符串进行比较。
+ 而KMP则会跳过已经匹配的部分，以维基百科的说明为例，简单概括过程：</p>
 <ul>
-<li>自下而上的运行速度更快    (递归效率低)</li>
-<li>自上而下的实现更简单        (因为对于递归来说，我们不用在意子问题的逻辑顺序，而对于自下而上的方法来说，我们需要解决子问题的逻辑顺序)</li>
+<li>
+<blockquote>
+<p>要查找的字符串W=&ldquo;ABCDABD&rdquo;，</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>给定字符串S=&ldquo;ABC ABCDAB ABCDABCDABDE&rdquo;</p>
+</blockquote>
+</li>
 </ul>
-<p><strong>比较简单而且经典的题目：<a class="link" href="https://leetcode.cn/problems/unique-paths/"  title="《力扣 62.不同路径》"
-     target="_blank" rel="noopener"
-    >《力扣 62.不同路径》</a></strong></p>
+<p>为例说明查找过程：</p>
+<blockquote>
+<p>S:<!-- raw HTML omitted -->ABC<!-- raw HTML omitted --> ABCDAB ABCDABCDABDE<br>
+W:<!-- raw HTML omitted -->ABC<!-- raw HTML omitted -->DABD</p>
+</blockquote>
+<ul>
+<li>S[3]（=&rsquo; &rsquo;)与W[3]（=&lsquo;D&rsquo;）不匹配，所以跳过；从S[4]开始，与W[0]进行比较。</li>
+</ul>
+<blockquote>
+<p>S:ABC <!-- raw HTML omitted -->ABCDAB<!-- raw HTML omitted --> ABCDABCDABDE<br>
+W:<!-- raw HTML omitted -->ABCDAB<!-- raw HTML omitted -->D</p>
+</blockquote>
+<ul>
+<li>从S[4]开始比较，当位于S[10]（=&rsquo; &rsquo;）时，与W对应的字符不匹配；但是此时可以注意到，&quot;<!-- raw HTML omitted --> AB<!-- raw HTML omitted -->&ldquo;在“ABCD<!-- raw HTML omitted -->AB<!-- raw HTML omitted -->&ldquo;的头尾处均有出现——这意味着，尾部的“AB”可以作为下一次比较的起点。</li>
+<li>所以下次从index = 8的位置：</li>
+</ul>
+<blockquote>
+<p>S:ABC ABCD<!-- raw HTML omitted -->A<!-- raw HTML omitted -->B ABCDABCDABDE<br>
+W:ABCD<!-- raw HTML omitted -->A<!-- raw HTML omitted -->BD</p>
+</blockquote>
+<ul>
+<li>即绿色的‘A’开始进行匹配。</li>
+</ul>
 <p>学习资料如下:</p>
 <p><a class="link" href="https://leetcode.com/explore/learn/card/dynamic-programming/630/an-introduction-to-dynamic-programming/4035/"  title="Explore - LeetCode"
      target="_blank" rel="noopener"
@@ -444,6 +418,30 @@
     <h2 class="section-title">相关文章</h2>
     <div class="related-content">
         <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/post1/">
+        
+        
+            <div class="article-image">
+                <img src="/p/post1/1.8383100951ae42fa4f0b99684a1c020a_hufc32a0c50659798267d43cbe27d64943_54921_250x150_fill_box_smart1_3.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 动态规划(Dynamic programming)问题解法"
+                        data-key="post1" 
+                        data-hash="md5-g4MQCVGuQvpPC5loShwCCg==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">动态规划(Dynamic programming)问题解法</h2>
+        </div>
+    </a>
+</article>
+
             
                 
 <article class="has-image">
@@ -681,9 +679,7 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#自下而上">自下而上</a></li>
-    <li><a href="#自上而下">自上而下</a></li>
-    <li><a href="#总结">总结</a></li>
+    <li><a href="#算法原理">算法原理：</a></li>
   </ol>
 </nav>
         </div>
