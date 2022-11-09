@@ -49,6 +49,12 @@
 &lt;/table&gt;
 &lt;p&gt; 数据库中密码被加密；&lt;br&gt;
  用户在login输入的密码使用相同的算法进行编码，在数据库使用PasswordEncoder的matches()方法进行比较。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt; ps：关于为什么认为StandardPasswordEncoder是不安全的：&lt;br&gt;
+ 目前有说法是认为SHA-256不够安全，因为SHA-256算法本身效率高，速度快，所以暴力破解门槛低。&lt;br&gt;
+而bcrypt算法可以通过参数调节计算速度，计算速度慢，所以大幅提高了暴力破解的门槛，安全性也就高了&lt;br&gt;
+（但是目前SHA-256还未被成功破解过……？&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;userdetailsservice实现&#34;&gt;UserDetailsService实现：&lt;/h2&gt;
 &lt;p&gt;Spring Security提供了几个开箱即用的UserDetailsService实现：&lt;/p&gt;
 &lt;ol&gt;
