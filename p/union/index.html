@@ -249,10 +249,10 @@
     <header class="article-header">
         <div class="article-image">
             <a href="/p/union/">
-                <img src="/p/union/1_hu7b12e25d81d044324379bfd0414320ec_31038_800x0_resize_q75_box.jpg"
-                        srcset="/p/union/1_hu7b12e25d81d044324379bfd0414320ec_31038_800x0_resize_q75_box.jpg 800w, /p/union/1_hu7b12e25d81d044324379bfd0414320ec_31038_1600x0_resize_q75_box.jpg 1600w"
+                <img src="/p/union/1_huff7584040f7709fa0959c9cfdffd0492_49343_800x0_resize_q75_box.jpg"
+                        srcset="/p/union/1_huff7584040f7709fa0959c9cfdffd0492_49343_800x0_resize_q75_box.jpg 800w, /p/union/1_huff7584040f7709fa0959c9cfdffd0492_49343_1600x0_resize_q75_box.jpg 1600w"
                         width="800" 
-                        height="73" 
+                        height="450" 
                         loading="lazy"
                         alt="Featured image of post 并查集（Union-find）[Java]" />
                 
@@ -438,6 +438,7 @@
 </span><span class="lnt">28
 </span><span class="lnt">29
 </span><span class="lnt">30
+</span><span class="lnt">31
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
@@ -453,7 +454,8 @@
 </span></span><span class="line"><span class="cl">                <span class="n">uf</span><span class="o">[</span><span class="n">find</span><span class="o">(</span><span class="n">s</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">0</span><span class="o">)</span> <span class="o">-</span> <span class="sc">&#39;a&#39;</span><span class="o">)]</span> <span class="o">=</span> <span class="n">find</span><span class="o">(</span><span class="n">s</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">3</span><span class="o">)</span> <span class="o">-</span> <span class="sc">&#39;a&#39;</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">            <span class="o">}</span>
 </span></span><span class="line"><span class="cl">        <span class="o">}</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">//遍历并查集，使用find()方法找到每个集合最尾端的字母，判断最尾端字母是否相同来判断“!=”两边的字母是否位于一个集合内
+</span></span><span class="line"><span class="cl">        <span class="c1">//遍历并查集，使用find()方法找到每个集合最尾端的字母，
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">//判断最尾端字母是否相同来判断“!=”两边的字母是否位于一个集合内
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">for</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span> <span class="o">:</span> <span class="n">equations</span><span class="o">){</span>
 </span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="o">(</span><span class="n">s</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">1</span><span class="o">)</span> <span class="o">==</span> <span class="sc">&#39;!&#39;</span><span class="o">){</span>
 </span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="o">(</span><span class="n">uf</span><span class="o">[</span><span class="n">find</span><span class="o">(</span><span class="n">s</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">0</span><span class="o">)</span> <span class="o">-</span> <span class="sc">&#39;a&#39;</span><span class="o">)]</span> <span class="o">==</span> <span class="n">uf</span><span class="o">[</span><span class="n">find</span><span class="o">(</span><span class="n">s</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">3</span><span class="o">)</span> <span class="o">-</span> <span class="sc">&#39;a&#39;</span><span class="o">)])</span>
