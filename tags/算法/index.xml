@@ -7,22 +7,25 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <lastBuildDate>Mon, 14 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://www.jansonblog.com/tags/%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>并查集（Union-find）</title>
+        <title>并查集（Union-find）[Java]</title>
         <link>http://www.jansonblog.com/p/union/</link>
         <pubDate>Mon, 14 Nov 2022 00:00:00 +0000</pubDate>
         
         <guid>http://www.jansonblog.com/p/union/</guid>
-        <description>&lt;img src="http://www.jansonblog.com/1.png" alt="Featured image of post 并查集（Union-find）" /&gt;&lt;h2 id=&#34;什么是并查集&#34;&gt;什么是并查集？&lt;/h2&gt;
+        <description>&lt;img src="http://www.jansonblog.com/p/union/1.jpg" alt="Featured image of post 并查集（Union-find）[Java]" /&gt;&lt;h2 id=&#34;什么是并查集&#34;&gt;什么是并查集？&lt;/h2&gt;
 &lt;blockquote&gt;
-&lt;p&gt;  并查集(Disjoint-set data structure)是一种数据结构，用于解决不交集问题的合并及查询问题。它还有几个英文名叫：Union-find data structure / merge–find set(中文就是：合并-查找数据结构)。&lt;/p&gt;
+&lt;p&gt;  并查集(Disjoint-set data structure)是一种数据结构，用于解决&lt;strong&gt;不交集&lt;/strong&gt;问题的合并及查询问题。它还有几个英文名叫：Union-find data structure / merge–find set(中文就是：合并-查找数据结构)。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;  为什么叫[合并-查询数据结构]？因为并查集有三个功能：&lt;br&gt;
-  1. &lt;strong&gt;添加&lt;/strong&gt;&lt;br&gt;
-  2. &lt;strong&gt;合并&lt;/strong&gt;&lt;br&gt;
-  3. &lt;strong&gt;查询&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;  举个例子来说:&lt;/p&gt;
+&lt;p&gt;  为什么叫&lt;strong&gt;合并-查询数据结构&lt;/strong&gt;？因为并查集有三个功能：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;添加&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;合并&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;查询&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;  以维基百科的例子为例:&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;&lt;img src=&#34;http://www.jansonblog.com/p/union/2-1.jpg&#34;
+&lt;p&gt;现在有数字1-8共八个元素，每个元素是一个集合：
+&lt;img src=&#34;http://www.jansonblog.com/p/union/2-1.jpg&#34;
 	width=&#34;1920&#34;
 	height=&#34;175&#34;
 	srcset=&#34;http://www.jansonblog.com/p/union/2-1_hu0390ad45915cc0ffa945616a4e9ba95a_43182_480x0_resize_q75_box.jpg 480w, http://www.jansonblog.com/p/union/2-1_hu0390ad45915cc0ffa945616a4e9ba95a_43182_1024x0_resize_q75_box.jpg 1024w&#34;
@@ -35,7 +38,8 @@
 		data-flex-grow=&#34;1097&#34;
 		data-flex-basis=&#34;2633px&#34;
 	
-&gt;
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;合并&lt;/strong&gt;操作几次后，一些集合合并到了一起：
 &lt;img src=&#34;http://www.jansonblog.com/p/union/2-2.jpg&#34;
 	width=&#34;1920&#34;
 	height=&#34;175&#34;
@@ -51,43 +55,107 @@
 	
 &gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2 id=&#34;heading&#34;&gt;&lt;/h2&gt;
-&lt;p&gt; 
-为例说明查找过程：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;S: &lt;strong&gt;ABC&lt;/strong&gt; ABCDAB ABCDABCDABDE&lt;br&gt;
-W: &lt;strong&gt;ABC&lt;/strong&gt;DABD&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;S[3]（=&amp;rsquo; &amp;rsquo;)与W[3]（=&amp;lsquo;D&amp;rsquo;）不匹配，所以跳过；从S[4]开始，与W[0]进行比较。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;S:ABC &lt;strong&gt;ABCDAB&lt;/strong&gt; ABCDABCDABDE&lt;br&gt;
-W:&lt;strong&gt;ABCDAB&lt;/strong&gt;D&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;从S[4]开始比较，当位于S[10]（=&amp;rsquo; &amp;rsquo;）时，与W对应的字符不匹配；但是此时可以注意到，&amp;quot;&lt;strong&gt;AB&lt;/strong&gt;&amp;ldquo;在“ABCD&lt;strong&gt;AB&lt;/strong&gt;&amp;ldquo;的头尾处均有出现——这意味着，尾部的“AB”可以作为下一次比较的起点。&lt;/li&gt;
-&lt;li&gt;所以下次从index = 8的位置：&lt;/li&gt;
-&lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;S:ABC ABCD&lt;strong&gt;A&lt;/strong&gt;B ABCDABCDABDE&lt;br&gt;
-W:ABCD&lt;strong&gt;A&lt;/strong&gt;BD&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;即&lt;strong&gt;A&lt;/strong&gt;开始进行匹配。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;应用题目实战&#34;&gt;应用题目实战:&lt;/h2&gt;
-&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/&#34;  title=&#34;LeetCode 28. Find the Index of the First Occurrence in a String&#34;
+&lt;p&gt;  这就是并查集，其实很简单。其主要的作用就是&lt;strong&gt;合并&lt;/strong&gt;和&lt;strong&gt;查找&lt;/strong&gt;。&lt;br&gt;
+  其最常见的实现是不交集森林。但是为了方便解释，接下来用一个数组实现的力扣题目来说明。&lt;/p&gt;
+&lt;h2 id=&#34;力扣990题httpsleetcodecnproblemssatisfiability-of-equality-equations-力扣990等式方程的可满足性&#34;&gt;&lt;a class=&#34;link&#34; href=&#34;https://leetcode.cn/problems/satisfiability-of-equality-equations/&#34;  title=&#34;力扣990.等式方程的可满足性&#34;
      target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;LeetCode 28. Find the Index of the First Occurrence in a String&lt;/a&gt;&lt;/p&gt;
+    &gt;力扣990题&lt;/a&gt;&lt;/h2&gt;
 &lt;blockquote&gt;
-&lt;p&gt;题目实战日后补充说明&lt;/p&gt;
+&lt;p&gt;题目：&lt;strong&gt;等式方程的可满足性&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt; 给定一个由表示变量之间关系的字符串方程组成的数组，每个字符串方程 equations[i] 的长度为 4，并采用两种不同的形式之一：&amp;ldquo;a==b&amp;rdquo; 或 &amp;ldquo;a!=b&amp;rdquo;。在这里，a 和 b 是小写字母（不一定不同），表示单字母变量名。&lt;br&gt;
+ 只有当可以将整数分配给变量名，以便满足所有给定的方程时才返回 true，否则返回 false。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;同时推荐一个算法可视化工具：&lt;br&gt;
-&lt;a class=&#34;link&#34; href=&#34;https://algorithm-visualizer.org/dynamic-programming/knuth-morris-pratts-string-search&#34;  title=&#34;algorithm-visualizer_KMP&#34;
-     target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;algorithm-visualizer_KMP&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;示例1：&lt;/p&gt;
 &lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;输入：&lt;/strong&gt; [&amp;ldquo;a==b&amp;rdquo;,&amp;ldquo;b!=a&amp;rdquo;]&lt;br&gt;
+&lt;strong&gt;输出：&lt;/strong&gt; false&lt;br&gt;
+&lt;strong&gt;解释：&lt;/strong&gt; 如果我们指定，a = 1 且 b = 1，那么可以满足第一个方程，但无法满足第二个方程。没有办法分配变量同时满足这两个方程。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;示例2：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;输入：&lt;/strong&gt; [&amp;ldquo;b==a&amp;rdquo;,&amp;ldquo;a==b&amp;rdquo;]&lt;br&gt;
+&lt;strong&gt;输出：&lt;/strong&gt; true&lt;br&gt;
+&lt;strong&gt;解释：&lt;/strong&gt; 我们可以指定 a = 1 且 b = 1 以满足满足这两个方程。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;题解java-感谢lee215大佬提供的题解&#34;&gt;题解[Java] (感谢Lee215大佬提供的题解)：&lt;/h2&gt;
+&lt;p&gt; 990这道题由于最大只有26个小写字母，所以可以使用数组来实现&lt;strong&gt;并查集&lt;/strong&gt;。&lt;br&gt;
+ 具体思路（并查集的三个功能）：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;添加：&lt;/strong&gt; 建立大小为26的int数组,名为uf；得到大小为26的数组，并让每个位置对应一个英文字母，即：&lt;br&gt;
+ 从&lt;code&gt;&#39;a&#39;-&#39;z&#39;&lt;/code&gt;对应&lt;code&gt;uf[0] - uf[25]&lt;/code&gt;，即：&lt;code&gt;uf[0] = 0&lt;/code&gt;，&lt;code&gt;uf[1] = 1&lt;/code&gt;……&lt;code&gt;uf[25]=25&lt;/code&gt;分别代表26个字母，也得到了26个集合。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;合并：&lt;/strong&gt; 将符合 &lt;code&gt;==&lt;/code&gt;关系的合并到一个集合中，实现：&lt;br&gt;
+  例如，我们想将&lt;code&gt;&#39;a&#39;&lt;/code&gt;对应的集合&lt;code&gt;uf[0]&lt;/code&gt;与&lt;code&gt;&#39;b&#39;&lt;/code&gt;对应的集合&lt;code&gt;uf[1]&lt;/code&gt;合并，只需让：&lt;code&gt;uf[0] = 1&lt;/code&gt;&lt;br&gt;
+  这样当我们查看&lt;code&gt;&#39;a&#39;&lt;/code&gt;对应的&lt;code&gt;uf[0]&lt;/code&gt;的值时，即可发现集合&lt;code&gt;&#39;a&#39;&lt;/code&gt;与集合&lt;code&gt;&#39;b&#39;&lt;/code&gt;是合并的。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;查找：&lt;/strong&gt; 查找只需要从数组uf的一个位置开始，便可以知道该位置对应的字母与哪些字母合并过。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt; 在建立并查集后，本题只需要查看所有&lt;code&gt;!=&lt;/code&gt;关系中的字母，是否在并查集中被合并到了一个集合。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;Solution&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;[]&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;uf&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;26&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;];&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;boolean&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;equationsPossible&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;[]&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;equations&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;//添加并查集；uf[0]到uf[25]分别对应从&amp;#39;a&amp;#39;到&amp;#39;z&amp;#39;的26个小写字母
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;        &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;26&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;++){&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;n&#34;&gt;uf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;//合并；合并“==”关系的字母：使用find()方法查询到集合的最后一个字母，将其合并
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;        &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;s&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;equations&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;){&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;s&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;charAt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;sc&#34;&gt;&amp;#39;=&amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;){&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;n&#34;&gt;uf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;find&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;s&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;charAt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;sc&#34;&gt;&amp;#39;a&amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;find&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;s&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;charAt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;sc&#34;&gt;&amp;#39;a&amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;//遍历并查集，使用find()方法找到每个集合最尾端的字母，判断最尾端字母是否相同来判断“!=”两边的字母是否位于一个集合内
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;        &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;s&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;equations&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;){&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;s&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;charAt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;sc&#34;&gt;&amp;#39;!&amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;){&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;uf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;find&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;s&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;charAt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;sc&#34;&gt;&amp;#39;a&amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;uf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;find&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;s&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;charAt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;sc&#34;&gt;&amp;#39;a&amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)])&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;false&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;//查找；寻找属于同一集合的最尾端的字母，将其返回
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;kd&#34;&gt;private&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;find&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;idx&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;){&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;uf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;idx&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;!=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;idx&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;){&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;n&#34;&gt;uf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;idx&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;find&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;uf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;idx&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;uf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;idx&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;];&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;blockquote&gt;
 &lt;p&gt;如有遗漏或错误，欢迎补充纠正&lt;/p&gt;
 &lt;/blockquote&gt;
 </description>
