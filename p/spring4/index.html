@@ -315,7 +315,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 2 分钟
+                    阅读时长: 5 分钟
                 </time>
             </div>
         
@@ -403,6 +403,232 @@
  禁用内置CSRF支持：</p>
 <ul>
 <li><code>.and().csrf().disable()</code></li>
+</ul>
+<h2 id="方法级安全控制">方法级安全控制</h2>
+<h3 id="1-preauthorize注解">1. <code>@PreAuthorize</code>注解：</h3>
+<ol>
+<li>
+<h4 id="作用">作用：</h4>
+ <code>@PreAuthorize</code>注解根据SpEL表达式进行判断，如果表达式值为<code>false</code>，则不会调用方法： <br>
+ <code>@PreAuthorize</code>如果阻止了调用，SpringSecurity抛出<strong>AccessDeniedException</strong>未检查的异常，不需要进行捕捉。除非想对其进行自定义处理。如果不进行捕获:
+<ul>
+<li> 异常会被SpringSecurity的过滤器捕捉，要么显示<strong>HTTP403</strong>错误；</li>
+<li> 要么如果用户没登录的话，被重定向到登录界面；</li>
+</ul>
+</li>
+<li>
+<h4 id="用法">用法：</h4>
+</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl">    <span class="nd">@PreAuthorize</span><span class="o">(</span><span class="s">&#34;hasRole(&#39;ADMIN&#39;)&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">deleteAllOrders</span><span class="o">(){</span>
+</span></span><span class="line"><span class="cl">        <span class="n">orderRepository</span><span class="o">.</span><span class="na">deleteAll</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li>
+<h4 id="注意"><strong>注意：</strong></h4>
+</li>
+</ol>
+<p> <del>在以前的用法中，使用<code>@EnableGlobalMethodSecurity</code>注解，并扩展<code>WebSecurityConfigurerAdapter</code>类并且覆盖配置<code>HttpSecurity</code>和<code>WebSecurity</code>的方法；</del><br>
+ <strong>现在，<code>WebSecurityConfigurerAdapter</code>在SpringSecurity5.7.1以上或SpringBoot2.7.0以上会出现已被弃用的警告!</strong>**
+ 在新的用法中，我们得分别声明类型为<code>SecurityFilterChain</code>和<code>WebSecurityCustomizer</code>的bean，例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl">    <span class="nd">@Bean</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">SecurityFilterChain</span> <span class="nf">filterChain</span><span class="o">(</span><span class="n">HttpSecurityhttp</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span><span class="o">{</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nd">@Bean</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">WebSecurityCustomizer</span> <span class="nf">webSecurityCustomizer</span><span class="o">(){</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="2-postauthorize注解">2. <code>@PostAuthorize</code>注解：</h3>
+<ol>
+<li>
+<h4 id="作用-1">作用：</h4>
+</li>
+</ol>
+<p> <code>@PostAuthorize</code>注解的工作方式几乎与<code>@PreAuthorize</code>注解相同，只是它的表达式在<strong>调用目标方法并返回之前</strong>不会被计算。表达式可以根据方法的返回值来决定是否允许调用方法。<br>
+ 抛出异常与<code>@PreAuthorize</code>注解相同，为<strong>AccessDeniedException</strong>未检查的异常。</p>
+<ol start="2">
+<li>
+<h4 id="用法-1">用法：</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@PostAuthorize</span><span class="o">(</span><span class="s">&#34;hasRole(&#39;ADMIN&#39;) || &#34;</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">            <span class="s">&#34;returnObject.user.username == authentication.name&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="n">TacoOrder</span> <span class="nf">getOrder</span><span class="o">(</span><span class="kt">long</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+<h2 id="spring-security判断经过身份验证用户的方法">Spring Security判断经过身份验证用户的方法：</h2>
+<h3 id="1">1.</h3>
+<ul>
+<li>在控制器方法中添加<strong>java.security.Principal</strong>对象：
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@PostMapping</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="n">String</span> <span class="nf">processOrder</span><span class="o">(</span><span class="nd">@Valid</span> <span class="n">TacoOrder</span> <span class="n">order</span><span class="o">,</span> <span class="n">Errors</span> <span class="n">errors</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">SessionStatus</span> <span class="n">sessionStatus</span><span class="o">,</span> <span class="n">Principal</span> <span class="n">principal</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="o">...</span>
+</span></span><span class="line"><span class="cl">    <span class="n">User</span> <span class="n">user</span> <span class="o">=</span> <span class="n">userRepository</span><span class="o">.</span><span class="na">findByUsername</span><span class="o">(</span><span class="n">principal</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>	    
+</span></span><span class="line"><span class="cl">    <span class="n">order</span><span class="o">.</span><span class="na">setUser</span><span class="o">(</span><span class="n">user</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h3 id="2">2.</h3>
+<ul>
+<li>在控制器方法中添加<strong>org.springframework.security.core.Authentication</strong>对象
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">* 调用getPrincipal()方法得到主要对象（例子为User）
+</span></span></span><span class="line"><span class="cl"><span class="cm">* getPrincipal()方法返回java.util.Object，所以将其转换为User
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span>
+</span></span><span class="line"><span class="cl"><span class="nd">@PostMapping</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="n">String</span> <span class="nf">processOrder</span><span class="o">(</span><span class="nd">@Valid</span> <span class="n">TacoOrder</span> <span class="n">order</span><span class="o">,</span> <span class="n">Errors</span> <span class="n">errors</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">SessionStatus</span> <span class="n">sessionStatus</span><span class="o">,</span> <span class="n">Authentication</span> <span class="n">authentication</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="o">...</span>
+</span></span><span class="line"><span class="cl">    <span class="n">User</span> <span class="n">user</span> <span class="o">=</span> <span class="o">(</span><span class="n">User</span><span class="o">)</span> <span class="n">authentication</span><span class="o">.</span><span class="na">getPrincipal</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">order</span><span class="o">.</span><span class="na">setUser</span><span class="o">(</span><span class="n">user</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h3 id="3">3.</h3>
+<ul>
+<li>注入一个带<code>@AuthenticationPrincipal</code>注解的方法参数。（该注解来自Spring Security的<strong>org.springframework.security.core.annotation</strong>包）
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@PostMapping</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="n">String</span> <span class="nf">processOrder</span><span class="o">(</span><span class="nd">@Valid</span> <span class="n">TacoOrder</span> <span class="n">order</span><span class="o">,</span> <span class="n">Errors</span> <span class="n">errors</span><span class="o">,</span> 
+</span></span><span class="line"><span class="cl">    <span class="n">SessionStatus</span> <span class="n">sessionStatus</span><span class="o">,</span>  <span class="nd">@AuthenticationPrincipal</span> <span class="n">User</span> <span class="n">user</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">(</span><span class="n">errors</span><span class="o">.</span><span class="na">hasErrors</span><span class="o">())</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="s">&#34;orderForm&#34;</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">order</span><span class="o">.</span><span class="na">setUser</span><span class="o">(</span><span class="n">user</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">orderRepo</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">order</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sessionStatus</span><span class="o">.</span><span class="na">setComplete</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="s">&#34;redirect:/&#34;</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>优点：
+<ul>
+<li>不需要对对象进行映射</li>
+<li>它将特定于安全性的代码限制为注释本身</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-第四种方法">4. 第四种方法</h3>
+<ul>
+<li>还有另一种方法可以识别经过身份验证的用户是谁，虽然有点混乱，因为它使用了大量特定于安全的代码。可以从安全上下文中获取一个身份验证对象，然后像这样请求它的主体:
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Authentication</span> <span class="n">authentication</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">    <span class="n">SecurityContextHolder</span><span class="o">.</span><span class="na">getContext</span><span class="o">().</span><span class="na">getAuthentication</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="n">User</span> <span class="n">user</span> <span class="o">=</span> <span class="o">(</span><span class="n">User</span><span class="o">)</span> <span class="n">authentication</span><span class="o">.</span><span class="na">getPrincipal</span><span class="o">();</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>缺点：
+<ul>
+<li>有大量安全相关的代码</li>
+</ul>
+</li>
+<li>优点：
+<ul>
+<li>可以在应用程序中的任何地方使用，而不仅仅是在控制器的处理程序方法中。（这使得它适合在较低级别的代码中使用）</li>
+</ul>
+</li>
 </ul>
 <blockquote>
 <p>如有遗漏或错误，欢迎补充纠正</p>
@@ -733,6 +959,31 @@
   <ol>
     <li><a href="#对oauth20的支持">对OAuth2.0的支持</a></li>
     <li><a href="#阻止跨站请求伪造-csrfcross-site-request-forgery">阻止跨站请求伪造 (CSRF:Cross-site request forgery)：</a></li>
+    <li><a href="#方法级安全控制">方法级安全控制</a>
+      <ol>
+        <li><a href="#1-preauthorize注解">1. <code>@PreAuthorize</code>注解：</a>
+          <ol>
+            <li><a href="#作用">作用：</a></li>
+            <li><a href="#用法">用法：</a></li>
+            <li><a href="#注意"><strong>注意：</strong></a></li>
+          </ol>
+        </li>
+        <li><a href="#2-postauthorize注解">2. <code>@PostAuthorize</code>注解：</a>
+          <ol>
+            <li><a href="#作用-1">作用：</a></li>
+            <li><a href="#用法-1">用法：</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#spring-security判断经过身份验证用户的方法">Spring Security判断经过身份验证用户的方法：</a>
+      <ol>
+        <li><a href="#1">1.</a></li>
+        <li><a href="#2">2.</a></li>
+        <li><a href="#3">3.</a></li>
+        <li><a href="#4-第四种方法">4. 第四种方法</a></li>
+      </ol>
+    </li>
   </ol>
 </nav>
         </div>
