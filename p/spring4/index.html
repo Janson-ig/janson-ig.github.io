@@ -405,7 +405,7 @@
 <li><code>.and().csrf().disable()</code></li>
 </ul>
 <h2 id="方法级安全控制">方法级安全控制</h2>
-<h3 id="1-preauthorize注解">1. <code>@PreAuthorize</code>注解</h3>
+<h3 id="preauthorize注解"><code>@PreAuthorize</code>注解</h3>
 <ol>
 <li>
 <h4 id="作用">作用</h4>
@@ -464,7 +464,7 @@
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="2-postauthorize注解">2. <code>@PostAuthorize</code>注解</h3>
+</div><h3 id="postauthorize注解"><code>@PostAuthorize</code>注解</h3>
 <ol>
 <li>
 <h4 id="作用-1">作用</h4>
@@ -494,7 +494,7 @@
 </div></li>
 </ol>
 <h2 id="spring-security判断经过身份验证用户的方法">Spring Security判断经过身份验证用户的方法：</h2>
-<h3 id="1">1.</h3>
+<h3 id="方法一">方法一</h3>
 <ul>
 <li>在控制器方法中添加<strong>java.security.Principal</strong>对象：
 <div class="highlight"><div class="chroma">
@@ -521,7 +521,7 @@
 </div>
 </div></li>
 </ul>
-<h3 id="2">2.</h3>
+<h3 id="方法二">方法二</h3>
 <ul>
 <li>在控制器方法中添加<strong>org.springframework.security.core.Authentication</strong>对象：
 <div class="highlight"><div class="chroma">
@@ -556,7 +556,7 @@
 </div>
 </div></li>
 </ul>
-<h3 id="3">3.</h3>
+<h3 id="方法三">方法三</h3>
 <ul>
 <li>注入一个带<code>@AuthenticationPrincipal</code>注解的方法参数。（该注解来自Spring Security的<strong>org.springframework.security.core.annotation</strong>包）：
 <div class="highlight"><div class="chroma">
@@ -603,7 +603,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="4-第四种方法">4. 第四种方法</h3>
+<h3 id="方法四">方法四</h3>
 <ul>
 <li>还有另一种方法可以识别经过身份验证的用户是谁，虽然有点混乱，因为它使用了大量特定于安全的代码。可以从安全上下文中获取一个身份验证对象，然后像这样请求它的主体：
 <div class="highlight"><div class="chroma">
@@ -961,14 +961,14 @@
     <li><a href="#阻止跨站请求伪造-csrfcross-site-request-forgery">阻止跨站请求伪造 (CSRF:Cross-site request forgery)：</a></li>
     <li><a href="#方法级安全控制">方法级安全控制</a>
       <ol>
-        <li><a href="#1-preauthorize注解">1. <code>@PreAuthorize</code>注解</a>
+        <li><a href="#preauthorize注解"><code>@PreAuthorize</code>注解</a>
           <ol>
             <li><a href="#作用">作用</a></li>
             <li><a href="#用法">用法</a></li>
             <li><a href="#注意"><strong>注意</strong></a></li>
           </ol>
         </li>
-        <li><a href="#2-postauthorize注解">2. <code>@PostAuthorize</code>注解</a>
+        <li><a href="#postauthorize注解"><code>@PostAuthorize</code>注解</a>
           <ol>
             <li><a href="#作用-1">作用</a></li>
             <li><a href="#用法-1">用法</a></li>
@@ -978,10 +978,10 @@
     </li>
     <li><a href="#spring-security判断经过身份验证用户的方法">Spring Security判断经过身份验证用户的方法：</a>
       <ol>
-        <li><a href="#1">1.</a></li>
-        <li><a href="#2">2.</a></li>
-        <li><a href="#3">3.</a></li>
-        <li><a href="#4-第四种方法">4. 第四种方法</a></li>
+        <li><a href="#方法一">方法一</a></li>
+        <li><a href="#方法二">方法二</a></li>
+        <li><a href="#方法三">方法三</a></li>
+        <li><a href="#方法四">方法四</a></li>
       </ol>
     </li>
   </ol>

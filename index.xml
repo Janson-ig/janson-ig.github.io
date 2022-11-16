@@ -88,7 +88,7 @@
 &lt;li&gt;&lt;code&gt;.and().csrf().disable()&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;方法级安全控制&#34;&gt;方法级安全控制&lt;/h2&gt;
-&lt;h3 id=&#34;1-preauthorize注解&#34;&gt;1. &lt;code&gt;@PreAuthorize&lt;/code&gt;注解&lt;/h3&gt;
+&lt;h3 id=&#34;preauthorize注解&#34;&gt;&lt;code&gt;@PreAuthorize&lt;/code&gt;注解&lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;
 &lt;h4 id=&#34;作用&#34;&gt;作用&lt;/h4&gt;
@@ -147,7 +147,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id=&#34;2-postauthorize注解&#34;&gt;2. &lt;code&gt;@PostAuthorize&lt;/code&gt;注解&lt;/h3&gt;
+&lt;/div&gt;&lt;h3 id=&#34;postauthorize注解&#34;&gt;&lt;code&gt;@PostAuthorize&lt;/code&gt;注解&lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;
 &lt;h4 id=&#34;作用-1&#34;&gt;作用&lt;/h4&gt;
@@ -177,7 +177,7 @@
 &lt;/div&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2 id=&#34;spring-security判断经过身份验证用户的方法&#34;&gt;Spring Security判断经过身份验证用户的方法：&lt;/h2&gt;
-&lt;h3 id=&#34;1&#34;&gt;1.&lt;/h3&gt;
+&lt;h3 id=&#34;方法一&#34;&gt;方法一&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;在控制器方法中添加&lt;strong&gt;java.security.Principal&lt;/strong&gt;对象：
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -204,7 +204,7 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;2&#34;&gt;2.&lt;/h3&gt;
+&lt;h3 id=&#34;方法二&#34;&gt;方法二&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;在控制器方法中添加&lt;strong&gt;org.springframework.security.core.Authentication&lt;/strong&gt;对象：
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -239,7 +239,7 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;3&#34;&gt;3.&lt;/h3&gt;
+&lt;h3 id=&#34;方法三&#34;&gt;方法三&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;注入一个带&lt;code&gt;@AuthenticationPrincipal&lt;/code&gt;注解的方法参数。（该注解来自Spring Security的&lt;strong&gt;org.springframework.security.core.annotation&lt;/strong&gt;包）：
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -286,7 +286,7 @@
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;4-第四种方法&#34;&gt;4. 第四种方法&lt;/h3&gt;
+&lt;h3 id=&#34;方法四&#34;&gt;方法四&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;还有另一种方法可以识别经过身份验证的用户是谁，虽然有点混乱，因为它使用了大量特定于安全的代码。可以从安全上下文中获取一个身份验证对象，然后像这样请求它的主体：
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
