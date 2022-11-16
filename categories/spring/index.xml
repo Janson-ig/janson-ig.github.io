@@ -6,7 +6,93 @@
         <description>Recent content in Spring on Janson&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Wed, 02 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://www.jansonblog.com/categories/spring/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 16 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://www.jansonblog.com/categories/spring/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Spring学习之路（四）</title>
+        <link>http://www.jansonblog.com/p/spring4/</link>
+        <pubDate>Wed, 16 Nov 2022 00:00:00 +0000</pubDate>
+        
+        <guid>http://www.jansonblog.com/p/spring4/</guid>
+        <description>&lt;img src="http://www.jansonblog.com/p/spring4/1.jpg" alt="Featured image of post Spring学习之路（四）" /&gt;&lt;p&gt; 本文是Spring Security系列最后一篇总结。&lt;/p&gt;
+&lt;h2 id=&#34;对oauth20的支持&#34;&gt;对OAuth2.0的支持&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;OAuth2.0是什么？&lt;/strong&gt;&lt;br&gt;
+ 举个例子，就是网站中常见的第三方登录，登录某个网站支持使用Facebook，Google账号登录。微信网页授权也是基于OAuth2.0。同时1.0版本也已经被2.0完全取代了。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Spring Security支持Fackbook,Google,GitHub,Okta第三方登录&lt;/li&gt;
+&lt;li&gt;书中没有详细的配置教学：“ 通过OAuth2/OpenID连接客户端，你需要设置以下属性:”&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;9
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;spring:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    security:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        oauth2:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            client:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                registration:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		        &amp;lt;oauth2 or openid provider name&amp;gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		        clientId: &amp;lt;client id&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		        clientSecret: &amp;lt;client secret&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                scope: &amp;lt;comma-separated list of requested scopes&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt; 如果要启用OAuth2.0登录，需要在&lt;em&gt;&lt;strong&gt;Spring Security配置类&lt;/strong&gt;&lt;/em&gt;中添加&lt;code&gt;.and().oauth2Login()&lt;/code&gt;方法。&lt;br&gt;
+ 同时提供传统用户名-密码登录方式和第三方登录：&lt;code&gt;.and().oauth2Login().loginPage(&amp;quot;/login&amp;quot;)&lt;/code&gt;
+ 启用logout登出功能：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;cm&#34;&gt;/**
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt; * 启用logout登出:点击logout时，session被清空，同时登出
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt; * logoutSuccessUrl()方法：登出后，重定向到指定路径页面
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt; */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;and&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;logout&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;logoutSuccessUrl&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;/&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;阻止跨站请求伪造-csrfcross-site-request-forgery&#34;&gt;阻止跨站请求伪造 (CSRF:Cross-site request forgery)：&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Spring Security含有&lt;strong&gt;内置的CSRF保护&lt;/strong&gt;，而且是&lt;strong&gt;默认启用&lt;/strong&gt;的，所以只需确保应用程序提交的任何表单都包含一个名为&lt;code&gt;_csrf&lt;/code&gt;的字段，该字段包含CSRF令牌。&lt;/li&gt;
+&lt;li&gt;Spring Security通过将CSRF令牌放在名为&lt;code&gt;_csrf&lt;/code&gt;的请求属性中来简化这一点。因此，在一个&lt;strong&gt;Thymeleaf模板&lt;/strong&gt;中，可以用下面的代码在一个隐藏字段中呈现CSRF令牌:&lt;br&gt;
+ &lt;code&gt;&amp;lt;input type=&amp;quot;hidden&amp;quot; name=&amp;quot;_csrf&amp;quot; th:value=&amp;quot;${_csrf.token}&amp;quot;/&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;如果使用Spring MVC表单标签库（Spring MVC’s JSP tag library）或spring security安全方言，内置CSRF令牌的隐藏字段会&lt;strong&gt;自动显示&lt;/strong&gt;。
+&lt;ul&gt;
+&lt;li&gt;在静态模板Thymeleaf 中，只需要确保&lt;!-- raw HTML omitted --&gt;元素作为Thymeleaf的前缀，例如：
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;form method=&amp;quot;POST&amp;quot; th:action=&amp;quot;@{/login}&amp;quot; id=&amp;quot;loginForm&amp;quot;&amp;gt;&lt;/code&gt;，&lt;code&gt;th:action&lt;/code&gt; 在Thymeleaf会为开发者渲染隐藏字段。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;作者极其不推荐，但是还是教了这个歪门邪道：&lt;br&gt;
+ 禁用内置CSRF支持：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;.and().csrf().disable()&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;如有遗漏或错误，欢迎补充纠正&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
         <title>Spring学习之路（三）</title>
         <link>http://www.jansonblog.com/p/spring3/</link>
         <pubDate>Wed, 02 Nov 2022 00:00:00 +0000</pubDate>
