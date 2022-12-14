@@ -331,7 +331,7 @@
     
     <p> 第六章内容第五版与第六版几乎相同。本章介绍了自动配置bean；创建自己的配置属性；使用profile进行配置。</p>
 <h1 id="自动配置">自动配置：</h1>
-<h3 id="细粒度的自动配置">细粒度的自动配置</h3>
+<h2 id="细粒度的自动配置">细粒度的自动配置</h2>
 <p><strong>两种不同但相关的配置</strong></p>
 <ol>
 <li>Bean wiring（装配bean）：声明在Spring应⽤上下⽂中创建哪些应⽤组件以及它们应该如何相互注入。</li>
@@ -363,7 +363,7 @@
 </div>
 </div><p><code>addScript()</code> 和 <code>addScripts()</code>方法通过设置String属性来确定数据源——<strong>这是不使用Spring Boot的配置方法。</strong><br>
  如果在运行时类路径中能够找到H2依赖，那么<strong>Spring Boot会自动在Spring应用上下文中创建对应的DataSource bean</strong>。这个bean会运行名为<code>schema.sql</code>和<code>data.sql</code>的脚本。</p>
-<h3 id="spring的环境抽象">Spring的环境抽象</h3>
+<h2 id="spring的环境抽象">Spring的环境抽象</h2>
 <p><strong>Spring的环境抽象</strong><br>
  Spring环境会拉取多个属性源：</p>
 <ul>
@@ -395,7 +395,7 @@
 <li>命令行参数启动时指定端口：$ java -jar tacocloud-0.0.5-SNAPSHOT.jar &ndash;server.port=9090</li>
 <li>操作系统环境变量进行一次配置：$ export SERVER_PORT=9090（Spring能自动挑选环境变量名，将其解析）</li>
 </ol>
-<h3 id="配置数据源">配置数据源</h3>
+<h2 id="配置数据源">配置数据源</h2>
 <p><strong>显示配置自己的datasource</strong>:<br>
 在<code>application.yml</code>配置：</p>
 <div class="highlight"><div class="chroma">
@@ -415,7 +415,7 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p> <strong>尽管我们需要将对应的JDBC驱动添加到构建⽂件中，但是我们不需要指定JDBC驱动类。Spring Boot会根据数据库URL的结构推算出来。</strong></p>
-<h4 id="设置jdbc驱动类">设置JDBC驱动类</h4>
+<h3 id="设置jdbc驱动类">设置JDBC驱动类</h3>
 <p> 然⽽，我们依然可以通过<code>spring.datasource.driver-class-name</code>属性来进⾏设置JDBC驱动类：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -441,7 +441,7 @@
 <li>Apache Commons DBCP 2</li>
 </ul>
 <p>注：旧版默认连接池是Tomcat的JDBC连接池，新版默认连接池已经变成HikariCP，因为它够快，代码量少，稳定。</p>
-<h3 id="配置嵌入式服务器">配置嵌入式服务器</h3>
+<h2 id="配置嵌入式服务器">配置嵌入式服务器</h2>
 <p> 如果在配置servlet容器端口时，将端口设为0，即：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -455,7 +455,7 @@
 </div>
 </div><p>会发生什么？<br>
  虽然显式设为0，但是服务器不会在端口0上启动。而是任选一个可用的端口。这在运行自动化集成测试的时候，非常有用：因为可以保证并发运行的测试不会与硬编码的端口号冲突。</p>
-<h4 id="配置使其处理https请求">配置使其处理HTTPS请求</h4>
+<h3 id="配置使其处理https请求">配置使其处理HTTPS请求</h3>
 <p> 底层服务器配置不仅局限于一个端口，底层容器最常见的一项设置是让它处理HTTPS请求。<br>
  为了实现，需要使用JDK的keytool命令行工具生成keystore：<br>
 <code>$ keytool -keystore mykeys.jks -genkey -alias tomcat -keyalg RSA</code></p>
@@ -489,7 +489,7 @@
 <li><code>server.ssl.key-store-password</code>和<code>server.ssl.key-password</code>属性设置为创建<code>keystore</code>所设置的密码</li>
 </ol>
 <p>属性准备就绪后，应用会监听8443端口的HTTPS请求。</p>
-<h3 id="配置日志">配置日志</h3>
+<h2 id="配置日志">配置日志</h2>
 <p> 默认情况下，Spring Boot通过Logback配置日志，日志以INFO级别写入到控制台<br>
  为了完全控制日志的配置，可以在类路径的根目录下<code>src/main/resources</code>创建<code>logback.xml</code>文件。<br>
 简单样例：</p>
@@ -576,7 +576,7 @@
 </div>
 </div><p> 如果应用具有指定目录的写入权限，日志条目会被写入到指定目录。<br>
  默认情况下，日志文件达到<strong>10MB</strong>就会轮换。</p>
-<h3 id="使用特定的属性值">使用特定的属性值</h3>
+<h2 id="使用特定的属性值">使用特定的属性值</h2>
 <p> 设置属性不局限于将值设置为硬编码的String或数值，可以从其他的<strong>配置属性派生值</strong>：<br>
  假设我们想要设置⼀个名为<code>greeting.welcome</code>的属性，它的值来源于名为<code>spring.application.name</code>的另⼀个属性：
  在设置<code>greeting.welcome</code>的时候，可以使用<code>${}</code>占位符标记：</p>
@@ -930,24 +930,20 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li>
+    <li><a href="#细粒度的自动配置">细粒度的自动配置</a></li>
+    <li><a href="#spring的环境抽象">Spring的环境抽象</a></li>
+    <li><a href="#配置数据源">配置数据源</a>
       <ol>
-        <li><a href="#细粒度的自动配置">细粒度的自动配置</a></li>
-        <li><a href="#spring的环境抽象">Spring的环境抽象</a></li>
-        <li><a href="#配置数据源">配置数据源</a>
-          <ol>
-            <li><a href="#设置jdbc驱动类">设置JDBC驱动类</a></li>
-          </ol>
-        </li>
-        <li><a href="#配置嵌入式服务器">配置嵌入式服务器</a>
-          <ol>
-            <li><a href="#配置使其处理https请求">配置使其处理HTTPS请求</a></li>
-          </ol>
-        </li>
-        <li><a href="#配置日志">配置日志</a></li>
-        <li><a href="#使用特定的属性值">使用特定的属性值</a></li>
+        <li><a href="#设置jdbc驱动类">设置JDBC驱动类</a></li>
       </ol>
     </li>
+    <li><a href="#配置嵌入式服务器">配置嵌入式服务器</a>
+      <ol>
+        <li><a href="#配置使其处理https请求">配置使其处理HTTPS请求</a></li>
+      </ol>
+    </li>
+    <li><a href="#配置日志">配置日志</a></li>
+    <li><a href="#使用特定的属性值">使用特定的属性值</a></li>
   </ol>
 </nav>
         </div>

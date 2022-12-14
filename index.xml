@@ -14,7 +14,7 @@
         <guid>http://www.jansonblog.com/p/spring5/</guid>
         <description>&lt;img src="http://www.jansonblog.com/p/spring5/1.jpg" alt="Featured image of post Spring学习之路（五）" /&gt;&lt;p&gt; 第六章内容第五版与第六版几乎相同。本章介绍了自动配置bean；创建自己的配置属性；使用profile进行配置。&lt;/p&gt;
 &lt;h1 id=&#34;自动配置&#34;&gt;自动配置：&lt;/h1&gt;
-&lt;h3 id=&#34;细粒度的自动配置&#34;&gt;细粒度的自动配置&lt;/h3&gt;
+&lt;h2 id=&#34;细粒度的自动配置&#34;&gt;细粒度的自动配置&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;两种不同但相关的配置&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Bean wiring（装配bean）：声明在Spring应⽤上下⽂中创建哪些应⽤组件以及它们应该如何相互注入。&lt;/li&gt;
@@ -46,7 +46,7 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;&lt;code&gt;addScript()&lt;/code&gt; 和 &lt;code&gt;addScripts()&lt;/code&gt;方法通过设置String属性来确定数据源——&lt;strong&gt;这是不使用Spring Boot的配置方法。&lt;/strong&gt;&lt;br&gt;
  如果在运行时类路径中能够找到H2依赖，那么&lt;strong&gt;Spring Boot会自动在Spring应用上下文中创建对应的DataSource bean&lt;/strong&gt;。这个bean会运行名为&lt;code&gt;schema.sql&lt;/code&gt;和&lt;code&gt;data.sql&lt;/code&gt;的脚本。&lt;/p&gt;
-&lt;h3 id=&#34;spring的环境抽象&#34;&gt;Spring的环境抽象&lt;/h3&gt;
+&lt;h2 id=&#34;spring的环境抽象&#34;&gt;Spring的环境抽象&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;Spring的环境抽象&lt;/strong&gt;&lt;br&gt;
  Spring环境会拉取多个属性源：&lt;/p&gt;
 &lt;ul&gt;
@@ -78,7 +78,7 @@
 &lt;li&gt;命令行参数启动时指定端口：$ java -jar tacocloud-0.0.5-SNAPSHOT.jar &amp;ndash;server.port=9090&lt;/li&gt;
 &lt;li&gt;操作系统环境变量进行一次配置：$ export SERVER_PORT=9090（Spring能自动挑选环境变量名，将其解析）&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h3 id=&#34;配置数据源&#34;&gt;配置数据源&lt;/h3&gt;
+&lt;h2 id=&#34;配置数据源&#34;&gt;配置数据源&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;显示配置自己的datasource&lt;/strong&gt;:&lt;br&gt;
 在&lt;code&gt;application.yml&lt;/code&gt;配置：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -98,7 +98,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt; &lt;strong&gt;尽管我们需要将对应的JDBC驱动添加到构建⽂件中，但是我们不需要指定JDBC驱动类。Spring Boot会根据数据库URL的结构推算出来。&lt;/strong&gt;&lt;/p&gt;
-&lt;h4 id=&#34;设置jdbc驱动类&#34;&gt;设置JDBC驱动类&lt;/h4&gt;
+&lt;h3 id=&#34;设置jdbc驱动类&#34;&gt;设置JDBC驱动类&lt;/h3&gt;
 &lt;p&gt; 然⽽，我们依然可以通过&lt;code&gt;spring.datasource.driver-class-name&lt;/code&gt;属性来进⾏设置JDBC驱动类：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -124,7 +124,7 @@
 &lt;li&gt;Apache Commons DBCP 2&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;注：旧版默认连接池是Tomcat的JDBC连接池，新版默认连接池已经变成HikariCP，因为它够快，代码量少，稳定。&lt;/p&gt;
-&lt;h3 id=&#34;配置嵌入式服务器&#34;&gt;配置嵌入式服务器&lt;/h3&gt;
+&lt;h2 id=&#34;配置嵌入式服务器&#34;&gt;配置嵌入式服务器&lt;/h2&gt;
 &lt;p&gt; 如果在配置servlet容器端口时，将端口设为0，即：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -138,7 +138,7 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;会发生什么？&lt;br&gt;
  虽然显式设为0，但是服务器不会在端口0上启动。而是任选一个可用的端口。这在运行自动化集成测试的时候，非常有用：因为可以保证并发运行的测试不会与硬编码的端口号冲突。&lt;/p&gt;
-&lt;h4 id=&#34;配置使其处理https请求&#34;&gt;配置使其处理HTTPS请求&lt;/h4&gt;
+&lt;h3 id=&#34;配置使其处理https请求&#34;&gt;配置使其处理HTTPS请求&lt;/h3&gt;
 &lt;p&gt; 底层服务器配置不仅局限于一个端口，底层容器最常见的一项设置是让它处理HTTPS请求。&lt;br&gt;
  为了实现，需要使用JDK的keytool命令行工具生成keystore：&lt;br&gt;
 &lt;code&gt;$ keytool -keystore mykeys.jks -genkey -alias tomcat -keyalg RSA&lt;/code&gt;&lt;/p&gt;
@@ -172,7 +172,7 @@
 &lt;li&gt;&lt;code&gt;server.ssl.key-store-password&lt;/code&gt;和&lt;code&gt;server.ssl.key-password&lt;/code&gt;属性设置为创建&lt;code&gt;keystore&lt;/code&gt;所设置的密码&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;属性准备就绪后，应用会监听8443端口的HTTPS请求。&lt;/p&gt;
-&lt;h3 id=&#34;配置日志&#34;&gt;配置日志&lt;/h3&gt;
+&lt;h2 id=&#34;配置日志&#34;&gt;配置日志&lt;/h2&gt;
 &lt;p&gt; 默认情况下，Spring Boot通过Logback配置日志，日志以INFO级别写入到控制台&lt;br&gt;
  为了完全控制日志的配置，可以在类路径的根目录下&lt;code&gt;src/main/resources&lt;/code&gt;创建&lt;code&gt;logback.xml&lt;/code&gt;文件。&lt;br&gt;
 简单样例：&lt;/p&gt;
@@ -259,7 +259,7 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt; 如果应用具有指定目录的写入权限，日志条目会被写入到指定目录。&lt;br&gt;
  默认情况下，日志文件达到&lt;strong&gt;10MB&lt;/strong&gt;就会轮换。&lt;/p&gt;
-&lt;h3 id=&#34;使用特定的属性值&#34;&gt;使用特定的属性值&lt;/h3&gt;
+&lt;h2 id=&#34;使用特定的属性值&#34;&gt;使用特定的属性值&lt;/h2&gt;
 &lt;p&gt; 设置属性不局限于将值设置为硬编码的String或数值，可以从其他的&lt;strong&gt;配置属性派生值&lt;/strong&gt;：&lt;br&gt;
  假设我们想要设置⼀个名为&lt;code&gt;greeting.welcome&lt;/code&gt;的属性，它的值来源于名为&lt;code&gt;spring.application.name&lt;/code&gt;的另⼀个属性：
  在设置&lt;code&gt;greeting.welcome&lt;/code&gt;的时候，可以使用&lt;code&gt;${}&lt;/code&gt;占位符标记：&lt;/p&gt;
