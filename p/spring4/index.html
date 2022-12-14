@@ -254,7 +254,7 @@
                         width="800" 
                         height="374" 
                         loading="lazy"
-                        alt="Featured image of post Spring学习之路（五）" />
+                        alt="Featured image of post Spring学习之路（四）" />
                 
             </a>
         </div>
@@ -329,16 +329,119 @@
     <section class="article-content">
     
     
-    <p> 第六章内容第五版与第六版几乎相同。本章介绍了自动配置bean；创建自己的配置属性；使用profile进行配置。</p>
-<h1 id="自动配置">自动配置：</h1>
-<h3 id="细粒度的自动配置">细粒度的自动配置</h3>
-<p><strong>两种不同但相关的配置</strong></p>
+    <p> 本文是Spring Security系列最后一篇总结。</p>
+<h2 id="对oauth20的支持">对OAuth2.0的支持</h2>
+<p><strong>OAuth2.0是什么？</strong><br>
+ 举个例子，就是网站中常见的第三方登录，登录某个网站支持使用Facebook，Google账号登录。微信网页授权也是基于OAuth2.0。同时1.0版本也已经被2.0完全取代了。</p>
+<ul>
+<li>Spring Security支持Fackbook,Google,GitHub,Okta第三方登录</li>
+<li>书中没有详细的配置教学：“ 通过OAuth2/OpenID连接客户端，你需要设置以下属性:”</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">spring:
+</span></span><span class="line"><span class="cl">    security:
+</span></span><span class="line"><span class="cl">        oauth2:
+</span></span><span class="line"><span class="cl">            client:
+</span></span><span class="line"><span class="cl">                registration:
+</span></span><span class="line"><span class="cl">		        &lt;oauth2 or openid provider name&gt;:
+</span></span><span class="line"><span class="cl">		        clientId: &lt;client id&gt;
+</span></span><span class="line"><span class="cl">		        clientSecret: &lt;client secret&gt;
+</span></span><span class="line"><span class="cl">                scope: &lt;comma-separated list of requested scopes&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p> 如果要启用OAuth2.0登录，需要在<em><strong>Spring Security配置类</strong></em>中添加<code>.and().oauth2Login()</code>方法。<br>
+ 同时提供传统用户名-密码登录方式和第三方登录：<code>.and().oauth2Login().loginPage(&quot;/login&quot;)</code>
+ 启用logout登出功能：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl">    <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * 启用logout登出:点击logout时，session被清空，同时登出
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * logoutSuccessUrl()方法：登出后，重定向到指定路径页面
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl">    <span class="o">.</span><span class="na">and</span><span class="o">()</span>
+</span></span><span class="line"><span class="cl">        <span class="o">.</span><span class="na">logout</span><span class="o">()</span>
+</span></span><span class="line"><span class="cl">            <span class="o">.</span><span class="na">logoutSuccessUrl</span><span class="o">(</span><span class="s">&#34;/&#34;</span><span class="o">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="阻止跨站请求伪造-csrfcross-site-request-forgery">阻止跨站请求伪造 (CSRF:Cross-site request forgery)：</h2>
+<ul>
+<li>Spring Security含有<strong>内置的CSRF保护</strong>，而且是<strong>默认启用</strong>的，所以只需确保应用程序提交的任何表单都包含一个名为<code>_csrf</code>的字段，该字段包含CSRF令牌。</li>
+<li>Spring Security通过将CSRF令牌放在名为<code>_csrf</code>的请求属性中来简化这一点。因此，在一个<strong>Thymeleaf模板</strong>中，可以用下面的代码在一个隐藏字段中呈现CSRF令牌:<br>
+ <code>&lt;input type=&quot;hidden&quot; name=&quot;_csrf&quot; th:value=&quot;${_csrf.token}&quot;/&gt;</code></li>
+<li>如果使用Spring MVC表单标签库（Spring MVC’s JSP tag library）或spring security安全方言，内置CSRF令牌的隐藏字段会<strong>自动显示</strong>。
+<ul>
+<li>在静态模板Thymeleaf 中，只需要确保<!-- raw HTML omitted -->元素作为Thymeleaf的前缀，例如：
+<ul>
+<li><code>&lt;form method=&quot;POST&quot; th:action=&quot;@{/login}&quot; id=&quot;loginForm&quot;&gt;</code>，<code>th:action</code> 在Thymeleaf会为开发者渲染隐藏字段。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>作者极其不推荐，但是还是教了这个歪门邪道：<br>
+ 禁用内置CSRF支持：</p>
+<ul>
+<li><code>.and().csrf().disable()</code></li>
+</ul>
+<h2 id="方法级安全控制">方法级安全控制</h2>
+<h3 id="preauthorize注解"><code>@PreAuthorize</code>注解</h3>
 <ol>
-<li>Bean wiring（装配bean）：声明在Spring应⽤上下⽂中创建哪些应⽤组件以及它们应该如何相互注入。</li>
-<li>Property injection（依赖注入）声明在Spring应⽤上下⽂中创建哪些应⽤组件以及它们应该如何相互注入。</li>
+<li>
+<h4 id="作用">作用</h4>
+ <code>@PreAuthorize</code>注解根据SpEL表达式进行判断，如果表达式值为<code>false</code>，则不会调用方法： <br>
+ <code>@PreAuthorize</code>如果阻止了调用，SpringSecurity抛出<strong>AccessDeniedException</strong>未检查的异常，不需要进行捕捉。除非想对其进行自定义处理。如果不进行捕获:
+<ul>
+<li> 异常会被SpringSecurity的过滤器捕捉，要么显示<strong>HTTP403</strong>错误；</li>
+<li> 要么如果用户没登录的话，被重定向到登录界面；</li>
+</ul>
+</li>
+<li>
+<h4 id="用法">用法</h4>
+</li>
 </ol>
-<p> 在Spring的XML和Java配置中，这两种类型的配置通常在同一个地方<strong>显式声明</strong>。<br>
- 在Java配置中，带@bean注解的方法很可能既实例化一个bean，又给它的属性赋值。举例来说，@Bean方法为H2数据库声明一个数据源：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl">    <span class="nd">@PreAuthorize</span><span class="o">(</span><span class="s">&#34;hasRole(&#39;ADMIN&#39;)&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">deleteAllOrders</span><span class="o">(){</span>
+</span></span><span class="line"><span class="cl">        <span class="n">orderRepository</span><span class="o">.</span><span class="na">deleteAll</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li>
+<h4 id="注意"><strong>注意</strong></h4>
+</li>
+</ol>
+<p> <del>在以前的用法中，使用<code>@EnableGlobalMethodSecurity</code>注解，并扩展<code>WebSecurityConfigurerAdapter</code>类并且覆盖配置<code>HttpSecurity</code>和<code>WebSecurity</code>的方法；</del><br>
+ <strong>现在，<code>WebSecurityConfigurerAdapter</code>在SpringSecurity5.7.1以上或SpringBoot2.7.0以上会出现已被弃用的警告!</strong>**
+ 在新的用法中，我们得分别声明类型为<code>SecurityFilterChain</code>和<code>WebSecurityCustomizer</code>的bean，例如：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -351,53 +454,27 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">@Bean
-</span></span><span class="line"><span class="cl">public DataSource dataSource() {
-</span></span><span class="line"><span class="cl">    return new EmbeddedDatabaseBuilder()
-</span></span><span class="line"><span class="cl">        .setType(H2)
-</span></span><span class="line"><span class="cl">        .addScript(&#34;taco_schema.sql&#34;)
-</span></span><span class="line"><span class="cl">        .addScripts(&#34;user_data.sql&#34;, &#34;ingredient_data.sql&#34;)
-</span></span><span class="line"><span class="cl">        .build();
-</span></span><span class="line"><span class="cl">}
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl">    <span class="nd">@Bean</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">SecurityFilterChain</span> <span class="nf">filterChain</span><span class="o">(</span><span class="n">HttpSecurityhttp</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span><span class="o">{</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nd">@Bean</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">WebSecurityCustomizer</span> <span class="nf">webSecurityCustomizer</span><span class="o">(){</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><code>addScript()</code> 和 <code>addScripts()</code>方法通过设置String属性来确定数据源——<strong>这是不使用Spring Boot的配置方法。</strong><br>
- 如果在运行时类路径中能够找到H2依赖，那么<strong>Spring Boot会自动在Spring应用上下文中创建对应的DataSource bean</strong>。这个bean会运行名为<code>schema.sql</code>和<code>data.sql</code>的脚本。</p>
-<h3 id="spring的环境抽象">Spring的环境抽象</h3>
-<p><strong>Spring的环境抽象</strong><br>
- Spring环境会拉取多个属性源：</p>
-<ul>
-<li>JVM系统属性</li>
-<li>操作系统环境变量</li>
-<li>命令行参数</li>
-<li>应用属性配置文件</li>
-</ul>
-<p> 将这些属性聚合到一个源中，通过这个源可以注入到spring的bean中。如下图所示：
-<img src="/p/spring4/img.png"
-	width="1288"
-	height="767"
-	srcset="/p/spring4/img_huaa5a00b38bb44f7330e8914d073b8302_442784_480x0_resize_box_3.png 480w, /p/spring4/img_huaa5a00b38bb44f7330e8914d073b8302_442784_1024x0_resize_box_3.png 1024w"
-	loading="lazy"
-	
-		alt="img.png"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="167"
-		data-flex-basis="403px"
-	
->
- Spring boot自动配置的bean都可以通过spring环境提取的属性进行配置.<br>
-例如，希望底层Servlet容器使用另一个端口监听，有以下四个不同的方法：</p>
+</div><h3 id="postauthorize注解"><code>@PostAuthorize</code>注解</h3>
 <ol>
-<li>“src/main/resources/application.properties”将server.port设置成一个不同的端口：server.port = 9090</li>
-<li>“src/main/resources/application.yml”中: server : port : 9090</li>
-<li>命令行参数启动时指定端口：$ java -jar tacocloud-0.0.5-SNAPSHOT.jar &ndash;server.port=9090</li>
-<li>操作系统环境变量进行一次配置：$ export SERVER_PORT=9090（Spring能自动挑选环境变量名，将其解析）</li>
+<li>
+<h4 id="作用-1">作用</h4>
+</li>
 </ol>
-<h3 id="配置数据源">配置数据源</h3>
-<p><strong>显示配置自己的datasource</strong>:<br>
-在<code>application.yml</code>配置：</p>
+<p> <code>@PostAuthorize</code>注解的工作方式几乎与<code>@PreAuthorize</code>注解相同，只是它的表达式在<strong>调用目标方法并返回之前</strong>不会被计算。表达式可以根据方法的返回值来决定是否允许调用方法。<br>
+ 抛出异常与<code>@PreAuthorize</code>注解相同，为<strong>AccessDeniedException</strong>未检查的异常。</p>
+<ol start="2">
+<li>
+<h4 id="用法-1">用法</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -407,16 +484,19 @@
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">spring:
-</span></span><span class="line"><span class="cl">    datasource:
-</span></span><span class="line"><span class="cl">        url: jdbc:mysql://localhost/tacocloud
-</span></span><span class="line"><span class="cl">        username: tacodb
-</span></span><span class="line"><span class="cl">        password: tacopassword
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@PostAuthorize</span><span class="o">(</span><span class="s">&#34;hasRole(&#39;ADMIN&#39;) || &#34;</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">            <span class="s">&#34;returnObject.user.username == authentication.name&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="n">TacoOrder</span> <span class="nf">getOrder</span><span class="o">(</span><span class="kt">long</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p> <strong>尽管我们需要将对应的JDBC驱动添加到构建⽂件中，但是我们不需要指定JDBC驱动类。Spring Boot会根据数据库URL的结构推算出来。</strong></p>
-<h4 id="设置jdbc驱动类">设置JDBC驱动类</h4>
-<p> 然⽽，我们依然可以通过<code>spring.datasource.driver-class-name</code>属性来进⾏设置JDBC驱动类：</p>
+</div></li>
+</ol>
+<h2 id="spring-security判断经过身份验证用户的方法">Spring Security判断经过身份验证用户的方法：</h2>
+<h3 id="方法一">方法一</h3>
+<ul>
+<li>在控制器方法中添加<strong>java.security.Principal</strong>对象：
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -425,74 +505,60 @@
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">spring:
-</span></span><span class="line"><span class="cl">    datasource:
-</span></span><span class="line"><span class="cl">        url: jdbc:mysql://localhost/tacocloud
-</span></span><span class="line"><span class="cl">        username: tacodb
-</span></span><span class="line"><span class="cl">        password: tacopassword
-</span></span><span class="line"><span class="cl">        driver-class-name: com.mysql.jdbc.Driver
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@PostMapping</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="n">String</span> <span class="nf">processOrder</span><span class="o">(</span><span class="nd">@Valid</span> <span class="n">TacoOrder</span> <span class="n">order</span><span class="o">,</span> <span class="n">Errors</span> <span class="n">errors</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">SessionStatus</span> <span class="n">sessionStatus</span><span class="o">,</span> <span class="n">Principal</span> <span class="n">principal</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="o">...</span>
+</span></span><span class="line"><span class="cl">    <span class="n">User</span> <span class="n">user</span> <span class="o">=</span> <span class="n">userRepository</span><span class="o">.</span><span class="na">findByUsername</span><span class="o">(</span><span class="n">principal</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>	    
+</span></span><span class="line"><span class="cl">    <span class="n">order</span><span class="o">.</span><span class="na">setUser</span><span class="o">(</span><span class="n">user</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p> Spring boot自动化配置DataSource bean的时候，会使用该连接。如果类路径存在<code>HikariCP</code>的连接池，会使用该连接池。否则在类路径查找并使用以下连接池：</p>
-<ul>
-<li>Tomcat JDBC Connection Pool</li>
-<li>Apache Commons DBCP 2</li>
+</div></li>
 </ul>
-<p>注：旧版默认连接池是Tomcat的JDBC连接池，新版默认连接池已经变成HikariCP，因为它够快，代码量少，稳定。</p>
-<h3 id="配置嵌入式服务器">配置嵌入式服务器</h3>
-<p> 如果在配置servlet容器端口时，将端口设为0，即：</p>
+<h3 id="方法二">方法二</h3>
+<ul>
+<li>在控制器方法中添加<strong>org.springframework.security.core.Authentication</strong>对象：
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">server:
-</span></span><span class="line"><span class="cl">    Port : 0
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">* 调用getPrincipal()方法得到主要对象（例子为User）
+</span></span></span><span class="line"><span class="cl"><span class="cm">* getPrincipal()方法返回java.util.Object，所以将其转换为User
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span>
+</span></span><span class="line"><span class="cl"><span class="nd">@PostMapping</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="n">String</span> <span class="nf">processOrder</span><span class="o">(</span><span class="nd">@Valid</span> <span class="n">TacoOrder</span> <span class="n">order</span><span class="o">,</span> <span class="n">Errors</span> <span class="n">errors</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">SessionStatus</span> <span class="n">sessionStatus</span><span class="o">,</span> <span class="n">Authentication</span> <span class="n">authentication</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="o">...</span>
+</span></span><span class="line"><span class="cl">    <span class="n">User</span> <span class="n">user</span> <span class="o">=</span> <span class="o">(</span><span class="n">User</span><span class="o">)</span> <span class="n">authentication</span><span class="o">.</span><span class="na">getPrincipal</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">order</span><span class="o">.</span><span class="na">setUser</span><span class="o">(</span><span class="n">user</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>会发生什么？<br>
- 虽然显式设为0，但是服务器不会在端口0上启动。而是任选一个可用的端口。这在运行自动化集成测试的时候，非常有用：因为可以保证并发运行的测试不会与硬编码的端口号冲突。</p>
-<h4 id="配置使其处理https请求">配置使其处理HTTPS请求</h4>
-<p> 底层服务器配置不仅局限于一个端口，底层容器最常见的一项设置是让它处理HTTPS请求。<br>
- 为了实现，需要使用JDK的keytool命令行工具生成keystore：<br>
-<code>$ keytool -keystore mykeys.jks -genkey -alias tomcat -keyalg RSA</code></p>
-<p> 接下来，为了在嵌入式服务器中启用HTTPS，需要设置属性：</p>
-<ol>
-<li>可以在命令行中设置，但是不方便</li>
-<li>可以通过<code>application.properties</code>或<code>application.yml</code>文件来声明配置：</li>
-</ol>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">server:
-</span></span><span class="line"><span class="cl">	port: 8443
-</span></span><span class="line"><span class="cl">	ssl:
-</span></span><span class="line"><span class="cl">		key-store: file:/ / /path/to/mykeys.jks
-</span></span><span class="line"><span class="cl">		key-store-password: letmein
-</span></span><span class="line"><span class="cl">		key-password: letmein
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p> 解释：</p>
-<ol>
-<li>端口设为<strong>8443</strong>（开发阶段HTTPS服务器的常用选择）</li>
-<li><code>server.ssl.key-store</code>设置为所创建的<code>keystore</code>路径</li>
-<li><code>server.ssl.key-store-password</code>和<code>server.ssl.key-password</code>属性设置为创建<code>keystore</code>所设置的密码</li>
-</ol>
-<p>属性准备就绪后，应用会监听8443端口的HTTPS请求。</p>
-<h3 id="配置日志">配置日志</h3>
-<p> 默认情况下，Spring Boot通过Logback配置日志，日志以INFO级别写入到控制台<br>
- 为了完全控制日志的配置，可以在类路径的根目录下<code>src/main/resources</code>创建<code>logback.xml</code>文件。<br>
-简单样例：</p>
+</div></li>
+</ul>
+<h3 id="方法三">方法三</h3>
+<ul>
+<li>注入一个带<code>@AuthenticationPrincipal</code>注解的方法参数。（该注解来自Spring Security的<strong>org.springframework.security.core.annotation</strong>包）：
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -508,101 +574,62 @@
 </span><span class="lnt">11
 </span><span class="lnt">12
 </span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;configuration&gt;
-</span></span><span class="line"><span class="cl">    &lt;appender name=&#34;STDOUT&#34; class=&#34;ch.qos.logback.core.ConsoleAppender&#34;&gt;
-</span></span><span class="line"><span class="cl">        &lt;encoder&gt;
-</span></span><span class="line"><span class="cl">		    &lt;pattern&gt;
-</span></span><span class="line"><span class="cl">				%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
-</span></span><span class="line"><span class="cl">			&lt;/pattern&gt;
-</span></span><span class="line"><span class="cl">		&lt;/encoder&gt;
-</span></span><span class="line"><span class="cl">	&lt;/appender&gt;
-</span></span><span class="line"><span class="cl">	&lt;logger name=&#34;root&#34; level=&#34;INFO&#34;/&gt;
-</span></span><span class="line"><span class="cl">	&lt;root level=&#34;INFO&#34;&gt;
-</span></span><span class="line"><span class="cl">		&lt;appender-ref ref=&#34;STDOUT&#34; /&gt;
-</span></span><span class="line"><span class="cl">	&lt;/root&gt;
-</span></span><span class="line"><span class="cl">&lt;/configuration&gt;
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@PostMapping</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="n">String</span> <span class="nf">processOrder</span><span class="o">(</span><span class="nd">@Valid</span> <span class="n">TacoOrder</span> <span class="n">order</span><span class="o">,</span> <span class="n">Errors</span> <span class="n">errors</span><span class="o">,</span> 
+</span></span><span class="line"><span class="cl">    <span class="n">SessionStatus</span> <span class="n">sessionStatus</span><span class="o">,</span>  <span class="nd">@AuthenticationPrincipal</span> <span class="n">User</span> <span class="n">user</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">(</span><span class="n">errors</span><span class="o">.</span><span class="na">hasErrors</span><span class="o">())</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="s">&#34;orderForm&#34;</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">order</span><span class="o">.</span><span class="na">setUser</span><span class="o">(</span><span class="n">user</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">orderRepo</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">order</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sessionStatus</span><span class="o">.</span><span class="na">setComplete</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="s">&#34;redirect:/&#34;</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p> 这个<code>Logback</code>和没有<code>logback.xml</code>文件时的默认行为是几乎完全相同的。但是编辑<code>logback.xml</code>文件，可以完全控制应用的日志文件。</p>
-<p> 日志配置中最常见变更是<strong>修改日志级别</strong>和<strong>指定日志写入到某个文件</strong>，Spring Boot的配置属性功能如何实现？</p>
+</div></li>
+<li>优点：
 <ul>
-<li>设置日志级别：<br>
-在<code>application.yml</code>中添加条目，例如：</li>
+<li>不需要对对象进行映射</li>
+<li>它将特定于安全性的代码限制为注释本身</li>
 </ul>
+</li>
+</ul>
+<h3 id="方法四">方法四</h3>
+<ul>
+<li>还有另一种方法可以识别经过身份验证的用户是谁，虽然有点混乱，因为它使用了大量特定于安全的代码。可以从安全上下文中获取一个身份验证对象，然后像这样请求它的主体：
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
-</span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">logging:
-</span></span><span class="line"><span class="cl">    level:
-</span></span><span class="line"><span class="cl">        root: WARN
-</span></span><span class="line"><span class="cl">        org.springframework.security: DEBUG
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Authentication</span> <span class="n">authentication</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">    <span class="n">SecurityContextHolder</span><span class="o">.</span><span class="na">getContext</span><span class="o">().</span><span class="na">getAuthentication</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="n">User</span> <span class="n">user</span> <span class="o">=</span> <span class="o">(</span><span class="n">User</span><span class="o">)</span> <span class="n">authentication</span><span class="o">.</span><span class="na">getPrincipal</span><span class="o">();</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>以上配置将<code>root logging</code>设置为<strong>WARN</strong>级别，spring security的日志级别设为<strong>DEBUG</strong>。</p>
+</div></li>
+<li>缺点：
 <ul>
-<li>将日志条目写入指定文件：
-如要将日志条目写入到&quot;<code>/var/logs/</code>&ldquo;中的TacoCloud文件中<code>logging.path</code>和<code>logging.file</code>文件可以如下配置：</li>
+<li>有大量安全相关的代码</li>
 </ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">logging:
-</span></span><span class="line"><span class="cl">    file:
-</span></span><span class="line"><span class="cl">        path: /var/logs/
-</span></span><span class="line"><span class="cl">        file: TacoCloud.log
-</span></span><span class="line"><span class="cl">    level:
-</span></span><span class="line"><span class="cl">        root: WARN
-</span></span><span class="line"><span class="cl">        org:
-</span></span><span class="line"><span class="cl">            springframework:
-</span></span><span class="line"><span class="cl">                security: DEBUG
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p> 如果应用具有指定目录的写入权限，日志条目会被写入到指定目录。<br>
- 默认情况下，日志文件达到<strong>10MB</strong>就会轮换。</p>
-<h3 id="使用特定的属性值">使用特定的属性值</h3>
-<p> 设置属性不局限于将值设置为硬编码的String或数值，可以从其他的<strong>配置属性派生值</strong>：<br>
- 假设我们想要设置⼀个名为<code>greeting.welcome</code>的属性，它的值来源于名为<code>spring.application.name</code>的另⼀个属性：
- 在设置<code>greeting.welcome</code>的时候，可以使用<code>${}</code>占位符标记：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">greeting:
-</span></span><span class="line"><span class="cl">welcome: ${spring.application.name}
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p> 甚至可以将<code>${}</code>占位符嵌入到其他文本中：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">greeting:
-</span></span><span class="line"><span class="cl">welcome: You are using ${spring.application.name}.
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p> 在配置Spring⾃⼰的组件时，使⽤配置属性可以很容易地将值注⼊这些组件属性中，并且可以细粒度地调整⾃动配置功能。<br>
- 配置属性并不专属于Spring创建的bean。</p>
+</li>
+<li>优点：
+<ul>
+<li>可以在应用程序中的任何地方使用，而不仅仅是在控制器的处理程序方法中。（这使得它适合在较低级别的代码中使用）</li>
+</ul>
+</li>
+</ul>
 <blockquote>
 <p>如有遗漏或错误，欢迎补充纠正</p>
 </blockquote>
@@ -648,23 +675,23 @@
             
                 
 <article class="has-image">
-    <a href="/p/spring4/">
+    <a href="/p/spring5/">
         
         
             <div class="article-image">
-                <img src="/p/spring4/1.4c54a7f78b9d6dbb7956c2a066ad5346_huc955137a63590f4561b0a715bdaca55f_11288_250x150_fill_q75_box_smart1.jpg" 
+                <img src="/p/spring5/1.4c54a7f78b9d6dbb7956c2a066ad5346_huc955137a63590f4561b0a715bdaca55f_11288_250x150_fill_q75_box_smart1.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
-                        alt="Featured image of post Spring学习之路（四）"
-                        data-key="spring4" 
+                        alt="Featured image of post Spring学习之路（五）"
+                        data-key="spring5" 
                         data-hash="md5-TFSn94udbbt5VsKgZq1TRg==">
                 
             </div>
         
 
         <div class="article-details">
-            <h2 class="article-title">Spring学习之路（四）</h2>
+            <h2 class="article-title">Spring学习之路（五）</h2>
         </div>
     </a>
 </article>
@@ -930,22 +957,31 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li>
+    <li><a href="#对oauth20的支持">对OAuth2.0的支持</a></li>
+    <li><a href="#阻止跨站请求伪造-csrfcross-site-request-forgery">阻止跨站请求伪造 (CSRF:Cross-site request forgery)：</a></li>
+    <li><a href="#方法级安全控制">方法级安全控制</a>
       <ol>
-        <li><a href="#细粒度的自动配置">细粒度的自动配置</a></li>
-        <li><a href="#spring的环境抽象">Spring的环境抽象</a></li>
-        <li><a href="#配置数据源">配置数据源</a>
+        <li><a href="#preauthorize注解"><code>@PreAuthorize</code>注解</a>
           <ol>
-            <li><a href="#设置jdbc驱动类">设置JDBC驱动类</a></li>
+            <li><a href="#作用">作用</a></li>
+            <li><a href="#用法">用法</a></li>
+            <li><a href="#注意"><strong>注意</strong></a></li>
           </ol>
         </li>
-        <li><a href="#配置嵌入式服务器">配置嵌入式服务器</a>
+        <li><a href="#postauthorize注解"><code>@PostAuthorize</code>注解</a>
           <ol>
-            <li><a href="#配置使其处理https请求">配置使其处理HTTPS请求</a></li>
+            <li><a href="#作用-1">作用</a></li>
+            <li><a href="#用法-1">用法</a></li>
           </ol>
         </li>
-        <li><a href="#配置日志">配置日志</a></li>
-        <li><a href="#使用特定的属性值">使用特定的属性值</a></li>
+      </ol>
+    </li>
+    <li><a href="#spring-security判断经过身份验证用户的方法">Spring Security判断经过身份验证用户的方法：</a>
+      <ol>
+        <li><a href="#方法一">方法一</a></li>
+        <li><a href="#方法二">方法二</a></li>
+        <li><a href="#方法三">方法三</a></li>
+        <li><a href="#方法四">方法四</a></li>
       </ol>
     </li>
   </ol>

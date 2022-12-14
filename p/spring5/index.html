@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='Spring项目结构，@SpringBootApplication组合注解，Spring的重点项目汇总'><title>Spring学习之路（一）</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='配置属性(一)：自动配置'><title>Spring学习之路（五）</title>
 
-<link rel='canonical' href='http://www.jansonblog.com/p/spring1/'>
+<link rel='canonical' href='http://www.jansonblog.com/p/spring5/'>
 
-<link rel="stylesheet" href="/scss/style.min.ac77dcf8b111b51da39a92990f431923f210f3876d85798a2125667f96dc33a4.css"><meta property='og:title' content='Spring学习之路（一）'>
-<meta property='og:description' content='Spring项目结构，@SpringBootApplication组合注解，Spring的重点项目汇总'>
-<meta property='og:url' content='http://www.jansonblog.com/p/spring1/'>
+<link rel="stylesheet" href="/scss/style.min.ac77dcf8b111b51da39a92990f431923f210f3876d85798a2125667f96dc33a4.css"><meta property='og:title' content='Spring学习之路（五）'>
+<meta property='og:description' content='配置属性(一)：自动配置'>
+<meta property='og:url' content='http://www.jansonblog.com/p/spring5/'>
 <meta property='og:site_name' content='Janson&#39;s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='框架' /><meta property='article:published_time' content='2022-08-13T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2022-08-13T00:00:00&#43;00:00'/><meta property='og:image' content='http://www.jansonblog.com/p/spring1/1.jpg' />
-<meta name="twitter:title" content="Spring学习之路（一）">
-<meta name="twitter:description" content="Spring项目结构，@SpringBootApplication组合注解，Spring的重点项目汇总"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='http://www.jansonblog.com/p/spring1/1.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='框架' /><meta property='article:published_time' content='2022-12-14T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2022-12-14T00:00:00&#43;00:00'/><meta property='og:image' content='http://www.jansonblog.com/p/spring5/1.jpg' />
+<meta name="twitter:title" content="Spring学习之路（五）">
+<meta name="twitter:description" content="配置属性(一)：自动配置"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='http://www.jansonblog.com/p/spring5/1.jpg' />
     </head>
     <body class="
     article-page
@@ -248,13 +248,13 @@
     <article class="has-image main-article">
     <header class="article-header">
         <div class="article-image">
-            <a href="/p/spring1/">
-                <img src="/p/spring1/1_huc955137a63590f4561b0a715bdaca55f_11288_800x0_resize_q75_box.jpg"
-                        srcset="/p/spring1/1_huc955137a63590f4561b0a715bdaca55f_11288_800x0_resize_q75_box.jpg 800w, /p/spring1/1_huc955137a63590f4561b0a715bdaca55f_11288_1600x0_resize_q75_box.jpg 1600w"
+            <a href="/p/spring5/">
+                <img src="/p/spring5/1_huc955137a63590f4561b0a715bdaca55f_11288_800x0_resize_q75_box.jpg"
+                        srcset="/p/spring5/1_huc955137a63590f4561b0a715bdaca55f_11288_800x0_resize_q75_box.jpg 800w, /p/spring5/1_huc955137a63590f4561b0a715bdaca55f_11288_1600x0_resize_q75_box.jpg 1600w"
                         width="800" 
                         height="374" 
                         loading="lazy"
-                        alt="Featured image of post Spring学习之路（一）" />
+                        alt="Featured image of post Spring学习之路（五）" />
                 
             </a>
         </div>
@@ -277,12 +277,12 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/spring1/">Spring学习之路（一）</a>
+            <a href="/p/spring5/">Spring学习之路（五）</a>
         </h2>
     
         
         <h3 class="article-subtitle">
-            Spring项目结构，@SpringBootApplication组合注解，Spring的重点项目汇总
+            配置属性(一)：自动配置
         </h3>
         
     </div>
@@ -300,7 +300,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">Aug 13, 2022</time>
+                <time class="article-time--published">Dec 14, 2022</time>
             </div>
         
 
@@ -315,7 +315,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 3 分钟
+                    阅读时长: 6 分钟
                 </time>
             </div>
         
@@ -329,40 +329,280 @@
     <section class="article-content">
     
     
-    <h2 id="前言">前言</h2>
-<p> 学习路程是按照<a class="link" href="https://zh.jp1lib.org/book/18238678/2d772e"  title="Spring实战（第五版）"
-     target="_blank" rel="noopener"
-    >Spring实战（第五版）</a>进行，本系列只针对笔者自己进行内容总结，用于加深学习以及日后回顾使用。如感兴趣，推荐阅读参考图书进行学习。</p>
-<p> 书中有较多地方描述比较不清楚，实战时，存在很多问题。<a class="link" href="https://github.com/habuma/spring-in-action-5-samples"  title="spring-in-action-5-samples"
-     target="_blank" rel="noopener"
-    >spring-in-action-5-samples</a>对书中每一章项目进行了汇总，对照此仓库学习更容易理解。</p>
-<h2 id="spring项目结构">Spring项目结构</h2>
+    <p> 第六章内容第五版与第六版几乎相同。本章介绍了自动配置bean；创建自己的配置属性；使用profile进行配置。</p>
+<h1 id="自动配置">自动配置：</h1>
+<h3 id="细粒度的自动配置">细粒度的自动配置</h3>
+<p><strong>两种不同但相关的配置</strong></p>
+<ol>
+<li>Bean wiring（装配bean）：声明在Spring应⽤上下⽂中创建哪些应⽤组件以及它们应该如何相互注入。</li>
+<li>Property injection（依赖注入）声明在Spring应⽤上下⽂中创建哪些应⽤组件以及它们应该如何相互注入。</li>
+</ol>
+<p> 在Spring的XML和Java配置中，这两种类型的配置通常在同一个地方<strong>显式声明</strong>。<br>
+ 在Java配置中，带@bean注解的方法很可能既实例化一个bean，又给它的属性赋值。举例来说，@Bean方法为H2数据库声明一个数据源：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">@Bean
+</span></span><span class="line"><span class="cl">public DataSource dataSource() {
+</span></span><span class="line"><span class="cl">    return new EmbeddedDatabaseBuilder()
+</span></span><span class="line"><span class="cl">        .setType(H2)
+</span></span><span class="line"><span class="cl">        .addScript(&#34;taco_schema.sql&#34;)
+</span></span><span class="line"><span class="cl">        .addScripts(&#34;user_data.sql&#34;, &#34;ingredient_data.sql&#34;)
+</span></span><span class="line"><span class="cl">        .build();
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>addScript()</code> 和 <code>addScripts()</code>方法通过设置String属性来确定数据源——<strong>这是不使用Spring Boot的配置方法。</strong><br>
+ 如果在运行时类路径中能够找到H2依赖，那么<strong>Spring Boot会自动在Spring应用上下文中创建对应的DataSource bean</strong>。这个bean会运行名为<code>schema.sql</code>和<code>data.sql</code>的脚本。</p>
+<h3 id="spring的环境抽象">Spring的环境抽象</h3>
+<p><strong>Spring的环境抽象</strong><br>
+ Spring环境会拉取多个属性源：</p>
 <ul>
-<li>mvnw和mvnw.cmd：这是Maven包装器（wrapper）脚本，借助脚本，即使没有安装Maven也可以构建项目</li>
-<li>pom.xml： Maven构建规范，用于引入依赖等</li>
-<li>Application.java：SpringBoot主类</li>
-<li>application.properties：初始为空，用来指定配置属性</li>
-<li>static：初始为空，用于存放静态内容（图片，样式表，JavaScript等）</li>
-<li>templates：初始为空，用于存放渲染内容到浏览器的模板文件</li>
-<li>ApplicationTests.java：简单的测试类，确保Spring应用上下文成功加载</li>
+<li>JVM系统属性</li>
+<li>操作系统环境变量</li>
+<li>命令行参数</li>
+<li>应用属性配置文件</li>
 </ul>
-<h2 id="springbootapplication组合注解">@SpringBootApplication组合注解</h2>
-<p>@SpringBootApplication是一个组合注解，它组合了3个其他的注释：</p>
+<p> 将这些属性聚合到一个源中，通过这个源可以注入到spring的bean中。如下图所示：
+<img src="/p/spring5/img.png"
+	width="1288"
+	height="767"
+	srcset="/p/spring5/img_huaa5a00b38bb44f7330e8914d073b8302_442784_480x0_resize_box_3.png 480w, /p/spring5/img_huaa5a00b38bb44f7330e8914d073b8302_442784_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="img.png"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="167"
+		data-flex-basis="403px"
+	
+>
+ Spring boot自动配置的bean都可以通过spring环境提取的属性进行配置.<br>
+例如，希望底层Servlet容器使用另一个端口监听，有以下四个不同的方法：</p>
+<ol>
+<li>“src/main/resources/application.properties”将server.port设置成一个不同的端口：server.port = 9090</li>
+<li>“src/main/resources/application.yml”中: server : port : 9090</li>
+<li>命令行参数启动时指定端口：$ java -jar tacocloud-0.0.5-SNAPSHOT.jar &ndash;server.port=9090</li>
+<li>操作系统环境变量进行一次配置：$ export SERVER_PORT=9090（Spring能自动挑选环境变量名，将其解析）</li>
+</ol>
+<h3 id="配置数据源">配置数据源</h3>
+<p><strong>显示配置自己的datasource</strong>:<br>
+在<code>application.yml</code>配置：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">spring:
+</span></span><span class="line"><span class="cl">    datasource:
+</span></span><span class="line"><span class="cl">        url: jdbc:mysql://localhost/tacocloud
+</span></span><span class="line"><span class="cl">        username: tacodb
+</span></span><span class="line"><span class="cl">        password: tacopassword
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p> <strong>尽管我们需要将对应的JDBC驱动添加到构建⽂件中，但是我们不需要指定JDBC驱动类。Spring Boot会根据数据库URL的结构推算出来。</strong></p>
+<h4 id="设置jdbc驱动类">设置JDBC驱动类</h4>
+<p> 然⽽，我们依然可以通过<code>spring.datasource.driver-class-name</code>属性来进⾏设置JDBC驱动类：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">spring:
+</span></span><span class="line"><span class="cl">    datasource:
+</span></span><span class="line"><span class="cl">        url: jdbc:mysql://localhost/tacocloud
+</span></span><span class="line"><span class="cl">        username: tacodb
+</span></span><span class="line"><span class="cl">        password: tacopassword
+</span></span><span class="line"><span class="cl">        driver-class-name: com.mysql.jdbc.Driver
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p> Spring boot自动化配置DataSource bean的时候，会使用该连接。如果类路径存在<code>HikariCP</code>的连接池，会使用该连接池。否则在类路径查找并使用以下连接池：</p>
 <ul>
-<li>@SpringBootConfiguration：将该类声明为配置类。尽管这个类⽬前还没有太多的配置，但是后续我们可以按需添加基于Java的Spring框架配置。这个注解实际上是@Configuration注解的特殊形式。</li>
-<li>@EnableAutoConfiguration：启⽤Spring Boot的⾃动配置。我们随后会介绍⾃动配置的更多功能。就现在来说，我们只需要知道这个注解会告诉Spring Boot⾃动配置它认为我们会⽤到的组件。</li>
-<li>@ComponentScan：启⽤组件扫描。这样我们能够通过像@Component、 @Controller、@Service这样的注解声明其他类，Spring会⾃动发现它们并将它们注册为Spring应⽤上下⽂中的组件</li>
+<li>Tomcat JDBC Connection Pool</li>
+<li>Apache Commons DBCP 2</li>
 </ul>
-<h2 id="spring的一些重点项目">Spring的一些重点项目：</h2>
+<p>注：旧版默认连接池是Tomcat的JDBC连接池，新版默认连接池已经变成HikariCP，因为它够快，代码量少，稳定。</p>
+<h3 id="配置嵌入式服务器">配置嵌入式服务器</h3>
+<p> 如果在配置servlet容器端口时，将端口设为0，即：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">server:
+</span></span><span class="line"><span class="cl">    Port : 0
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>会发生什么？<br>
+ 虽然显式设为0，但是服务器不会在端口0上启动。而是任选一个可用的端口。这在运行自动化集成测试的时候，非常有用：因为可以保证并发运行的测试不会与硬编码的端口号冲突。</p>
+<h4 id="配置使其处理https请求">配置使其处理HTTPS请求</h4>
+<p> 底层服务器配置不仅局限于一个端口，底层容器最常见的一项设置是让它处理HTTPS请求。<br>
+ 为了实现，需要使用JDK的keytool命令行工具生成keystore：<br>
+<code>$ keytool -keystore mykeys.jks -genkey -alias tomcat -keyalg RSA</code></p>
+<p> 接下来，为了在嵌入式服务器中启用HTTPS，需要设置属性：</p>
+<ol>
+<li>可以在命令行中设置，但是不方便</li>
+<li>可以通过<code>application.properties</code>或<code>application.yml</code>文件来声明配置：</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">server:
+</span></span><span class="line"><span class="cl">	port: 8443
+</span></span><span class="line"><span class="cl">	ssl:
+</span></span><span class="line"><span class="cl">		key-store: file:/ / /path/to/mykeys.jks
+</span></span><span class="line"><span class="cl">		key-store-password: letmein
+</span></span><span class="line"><span class="cl">		key-password: letmein
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p> 解释：</p>
+<ol>
+<li>端口设为<strong>8443</strong>（开发阶段HTTPS服务器的常用选择）</li>
+<li><code>server.ssl.key-store</code>设置为所创建的<code>keystore</code>路径</li>
+<li><code>server.ssl.key-store-password</code>和<code>server.ssl.key-password</code>属性设置为创建<code>keystore</code>所设置的密码</li>
+</ol>
+<p>属性准备就绪后，应用会监听8443端口的HTTPS请求。</p>
+<h3 id="配置日志">配置日志</h3>
+<p> 默认情况下，Spring Boot通过Logback配置日志，日志以INFO级别写入到控制台<br>
+ 为了完全控制日志的配置，可以在类路径的根目录下<code>src/main/resources</code>创建<code>logback.xml</code>文件。<br>
+简单样例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;configuration&gt;
+</span></span><span class="line"><span class="cl">    &lt;appender name=&#34;STDOUT&#34; class=&#34;ch.qos.logback.core.ConsoleAppender&#34;&gt;
+</span></span><span class="line"><span class="cl">        &lt;encoder&gt;
+</span></span><span class="line"><span class="cl">		    &lt;pattern&gt;
+</span></span><span class="line"><span class="cl">				%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+</span></span><span class="line"><span class="cl">			&lt;/pattern&gt;
+</span></span><span class="line"><span class="cl">		&lt;/encoder&gt;
+</span></span><span class="line"><span class="cl">	&lt;/appender&gt;
+</span></span><span class="line"><span class="cl">	&lt;logger name=&#34;root&#34; level=&#34;INFO&#34;/&gt;
+</span></span><span class="line"><span class="cl">	&lt;root level=&#34;INFO&#34;&gt;
+</span></span><span class="line"><span class="cl">		&lt;appender-ref ref=&#34;STDOUT&#34; /&gt;
+</span></span><span class="line"><span class="cl">	&lt;/root&gt;
+</span></span><span class="line"><span class="cl">&lt;/configuration&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p> 这个<code>Logback</code>和没有<code>logback.xml</code>文件时的默认行为是几乎完全相同的。但是编辑<code>logback.xml</code>文件，可以完全控制应用的日志文件。</p>
+<p> 日志配置中最常见变更是<strong>修改日志级别</strong>和<strong>指定日志写入到某个文件</strong>，Spring Boot的配置属性功能如何实现？</p>
 <ul>
-<li>Spring MVC——Spring的Web框架：可以边写控制器处理Web请求；创建REST API，生成非HTML的输出</li>
-<li>Spring Boot：starter依赖和自动配置；Actuator能洞察应用运行时的内部工作状况；灵活的环境属性规范；在核心框架的测试辅助功能之上提供了对测试的额外支持</li>
-<li>Spring Data：将应用程序数据repository定义为java接口，定义驱动存储和检索数据的方法时使用一种命名约定即可；能够处理不同类型的数据库，包括关系型数据库（JPA）、文档数据库（Mongo）、图数据库（Neo4j）等</li>
-<li>Spring Security：Spring的安全框架，解决了身份验证、授权和API安全性等安全性需求</li>
-<li>Spring Integration：解决实时集成问题，数据在可用时马上就会得到处理</li>
-<li>Spring Batch：批处理集成问题——数据收集一段时间，直到触发触发器，才进行批处理</li>
-<li>Spring Cloud：使用Spring开发云原生应用程序的项目</li>
+<li>设置日志级别：<br>
+在<code>application.yml</code>中添加条目，例如：</li>
 </ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">logging:
+</span></span><span class="line"><span class="cl">    level:
+</span></span><span class="line"><span class="cl">        root: WARN
+</span></span><span class="line"><span class="cl">        org.springframework.security: DEBUG
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>以上配置将<code>root logging</code>设置为<strong>WARN</strong>级别，spring security的日志级别设为<strong>DEBUG</strong>。</p>
+<ul>
+<li>将日志条目写入指定文件：
+如要将日志条目写入到&quot;<code>/var/logs/</code>&ldquo;中的TacoCloud文件中<code>logging.path</code>和<code>logging.file</code>文件可以如下配置：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">logging:
+</span></span><span class="line"><span class="cl">    file:
+</span></span><span class="line"><span class="cl">        path: /var/logs/
+</span></span><span class="line"><span class="cl">        file: TacoCloud.log
+</span></span><span class="line"><span class="cl">    level:
+</span></span><span class="line"><span class="cl">        root: WARN
+</span></span><span class="line"><span class="cl">        org:
+</span></span><span class="line"><span class="cl">            springframework:
+</span></span><span class="line"><span class="cl">                security: DEBUG
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p> 如果应用具有指定目录的写入权限，日志条目会被写入到指定目录。<br>
+ 默认情况下，日志文件达到<strong>10MB</strong>就会轮换。</p>
+<h3 id="使用特定的属性值">使用特定的属性值</h3>
+<p> 设置属性不局限于将值设置为硬编码的String或数值，可以从其他的<strong>配置属性派生值</strong>：<br>
+ 假设我们想要设置⼀个名为<code>greeting.welcome</code>的属性，它的值来源于名为<code>spring.application.name</code>的另⼀个属性：
+ 在设置<code>greeting.welcome</code>的时候，可以使用<code>${}</code>占位符标记：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">greeting:
+</span></span><span class="line"><span class="cl">welcome: ${spring.application.name}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p> 甚至可以将<code>${}</code>占位符嵌入到其他文本中：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">greeting:
+</span></span><span class="line"><span class="cl">welcome: You are using ${spring.application.name}.
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p> 在配置Spring⾃⼰的组件时，使⽤配置属性可以很容易地将值注⼊这些组件属性中，并且可以细粒度地调整⾃动配置功能。<br>
+ 配置属性并不专属于Spring创建的bean。</p>
 <blockquote>
 <p>如有遗漏或错误，欢迎补充纠正</p>
 </blockquote>
@@ -405,30 +645,6 @@
     <h2 class="section-title">相关文章</h2>
     <div class="related-content">
         <div class="flex article-list--tile">
-            
-                
-<article class="has-image">
-    <a href="/p/spring5/">
-        
-        
-            <div class="article-image">
-                <img src="/p/spring5/1.4c54a7f78b9d6dbb7956c2a066ad5346_huc955137a63590f4561b0a715bdaca55f_11288_250x150_fill_q75_box_smart1.jpg" 
-                        width="250" 
-                        height="150" 
-                        loading="lazy"
-                        alt="Featured image of post Spring学习之路（五）"
-                        data-key="spring5" 
-                        data-hash="md5-TFSn94udbbt5VsKgZq1TRg==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">Spring学习之路（五）</h2>
-        </div>
-    </a>
-</article>
-
             
                 
 <article class="has-image">
@@ -497,6 +713,30 @@
 
         <div class="article-details">
             <h2 class="article-title">Spring学习之路（二）</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/spring1/">
+        
+        
+            <div class="article-image">
+                <img src="/p/spring1/1.4c54a7f78b9d6dbb7956c2a066ad5346_huc955137a63590f4561b0a715bdaca55f_11288_250x150_fill_q75_box_smart1.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Spring学习之路（一）"
+                        data-key="spring1" 
+                        data-hash="md5-TFSn94udbbt5VsKgZq1TRg==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Spring学习之路（一）</h2>
         </div>
     </a>
 </article>
@@ -690,10 +930,24 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#前言">前言</a></li>
-    <li><a href="#spring项目结构">Spring项目结构</a></li>
-    <li><a href="#springbootapplication组合注解">@SpringBootApplication组合注解</a></li>
-    <li><a href="#spring的一些重点项目">Spring的一些重点项目：</a></li>
+    <li>
+      <ol>
+        <li><a href="#细粒度的自动配置">细粒度的自动配置</a></li>
+        <li><a href="#spring的环境抽象">Spring的环境抽象</a></li>
+        <li><a href="#配置数据源">配置数据源</a>
+          <ol>
+            <li><a href="#设置jdbc驱动类">设置JDBC驱动类</a></li>
+          </ol>
+        </li>
+        <li><a href="#配置嵌入式服务器">配置嵌入式服务器</a>
+          <ol>
+            <li><a href="#配置使其处理https请求">配置使其处理HTTPS请求</a></li>
+          </ol>
+        </li>
+        <li><a href="#配置日志">配置日志</a></li>
+        <li><a href="#使用特定的属性值">使用特定的属性值</a></li>
+      </ol>
+    </li>
   </ol>
 </nav>
         </div>

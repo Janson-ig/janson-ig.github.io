@@ -6,7 +6,292 @@
         <description>Recent content in 框架 on Janson&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Wed, 16 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://www.jansonblog.com/tags/%E6%A1%86%E6%9E%B6/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 14 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://www.jansonblog.com/tags/%E6%A1%86%E6%9E%B6/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Spring学习之路（五）</title>
+        <link>http://www.jansonblog.com/p/spring5/</link>
+        <pubDate>Wed, 14 Dec 2022 00:00:00 +0000</pubDate>
+        
+        <guid>http://www.jansonblog.com/p/spring5/</guid>
+        <description>&lt;img src="http://www.jansonblog.com/p/spring5/1.jpg" alt="Featured image of post Spring学习之路（五）" /&gt;&lt;p&gt; 第六章内容第五版与第六版几乎相同。本章介绍了自动配置bean；创建自己的配置属性；使用profile进行配置。&lt;/p&gt;
+&lt;h1 id=&#34;自动配置&#34;&gt;自动配置：&lt;/h1&gt;
+&lt;h3 id=&#34;细粒度的自动配置&#34;&gt;细粒度的自动配置&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;两种不同但相关的配置&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Bean wiring（装配bean）：声明在Spring应⽤上下⽂中创建哪些应⽤组件以及它们应该如何相互注入。&lt;/li&gt;
+&lt;li&gt;Property injection（依赖注入）声明在Spring应⽤上下⽂中创建哪些应⽤组件以及它们应该如何相互注入。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt; 在Spring的XML和Java配置中，这两种类型的配置通常在同一个地方&lt;strong&gt;显式声明&lt;/strong&gt;。&lt;br&gt;
+ 在Java配置中，带@bean注解的方法很可能既实例化一个bean，又给它的属性赋值。举例来说，@Bean方法为H2数据库声明一个数据源：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;@Bean
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;public DataSource dataSource() {
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    return new EmbeddedDatabaseBuilder()
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        .setType(H2)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        .addScript(&amp;#34;taco_schema.sql&amp;#34;)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        .addScripts(&amp;#34;user_data.sql&amp;#34;, &amp;#34;ingredient_data.sql&amp;#34;)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        .build();
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;code&gt;addScript()&lt;/code&gt; 和 &lt;code&gt;addScripts()&lt;/code&gt;方法通过设置String属性来确定数据源——&lt;strong&gt;这是不使用Spring Boot的配置方法。&lt;/strong&gt;&lt;br&gt;
+ 如果在运行时类路径中能够找到H2依赖，那么&lt;strong&gt;Spring Boot会自动在Spring应用上下文中创建对应的DataSource bean&lt;/strong&gt;。这个bean会运行名为&lt;code&gt;schema.sql&lt;/code&gt;和&lt;code&gt;data.sql&lt;/code&gt;的脚本。&lt;/p&gt;
+&lt;h3 id=&#34;spring的环境抽象&#34;&gt;Spring的环境抽象&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Spring的环境抽象&lt;/strong&gt;&lt;br&gt;
+ Spring环境会拉取多个属性源：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;JVM系统属性&lt;/li&gt;
+&lt;li&gt;操作系统环境变量&lt;/li&gt;
+&lt;li&gt;命令行参数&lt;/li&gt;
+&lt;li&gt;应用属性配置文件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt; 将这些属性聚合到一个源中，通过这个源可以注入到spring的bean中。如下图所示：
+&lt;img src=&#34;http://www.jansonblog.com/p/spring5/img.png&#34;
+	width=&#34;1288&#34;
+	height=&#34;767&#34;
+	srcset=&#34;http://www.jansonblog.com/p/spring5/img_huaa5a00b38bb44f7330e8914d073b8302_442784_480x0_resize_box_3.png 480w, http://www.jansonblog.com/p/spring5/img_huaa5a00b38bb44f7330e8914d073b8302_442784_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;img.png&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;167&#34;
+		data-flex-basis=&#34;403px&#34;
+	
+&gt;
+ Spring boot自动配置的bean都可以通过spring环境提取的属性进行配置.&lt;br&gt;
+例如，希望底层Servlet容器使用另一个端口监听，有以下四个不同的方法：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;“src/main/resources/application.properties”将server.port设置成一个不同的端口：server.port = 9090&lt;/li&gt;
+&lt;li&gt;“src/main/resources/application.yml”中: server : port : 9090&lt;/li&gt;
+&lt;li&gt;命令行参数启动时指定端口：$ java -jar tacocloud-0.0.5-SNAPSHOT.jar &amp;ndash;server.port=9090&lt;/li&gt;
+&lt;li&gt;操作系统环境变量进行一次配置：$ export SERVER_PORT=9090（Spring能自动挑选环境变量名，将其解析）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;配置数据源&#34;&gt;配置数据源&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;显示配置自己的datasource&lt;/strong&gt;:&lt;br&gt;
+在&lt;code&gt;application.yml&lt;/code&gt;配置：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;spring:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    datasource:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        url: jdbc:mysql://localhost/tacocloud
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        username: tacodb
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        password: tacopassword
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt; &lt;strong&gt;尽管我们需要将对应的JDBC驱动添加到构建⽂件中，但是我们不需要指定JDBC驱动类。Spring Boot会根据数据库URL的结构推算出来。&lt;/strong&gt;&lt;/p&gt;
+&lt;h4 id=&#34;设置jdbc驱动类&#34;&gt;设置JDBC驱动类&lt;/h4&gt;
+&lt;p&gt; 然⽽，我们依然可以通过&lt;code&gt;spring.datasource.driver-class-name&lt;/code&gt;属性来进⾏设置JDBC驱动类：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;spring:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    datasource:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        url: jdbc:mysql://localhost/tacocloud
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        username: tacodb
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        password: tacopassword
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        driver-class-name: com.mysql.jdbc.Driver
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt; Spring boot自动化配置DataSource bean的时候，会使用该连接。如果类路径存在&lt;code&gt;HikariCP&lt;/code&gt;的连接池，会使用该连接池。否则在类路径查找并使用以下连接池：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Tomcat JDBC Connection Pool&lt;/li&gt;
+&lt;li&gt;Apache Commons DBCP 2&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;注：旧版默认连接池是Tomcat的JDBC连接池，新版默认连接池已经变成HikariCP，因为它够快，代码量少，稳定。&lt;/p&gt;
+&lt;h3 id=&#34;配置嵌入式服务器&#34;&gt;配置嵌入式服务器&lt;/h3&gt;
+&lt;p&gt; 如果在配置servlet容器端口时，将端口设为0，即：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;server:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    Port : 0
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;会发生什么？&lt;br&gt;
+ 虽然显式设为0，但是服务器不会在端口0上启动。而是任选一个可用的端口。这在运行自动化集成测试的时候，非常有用：因为可以保证并发运行的测试不会与硬编码的端口号冲突。&lt;/p&gt;
+&lt;h4 id=&#34;配置使其处理https请求&#34;&gt;配置使其处理HTTPS请求&lt;/h4&gt;
+&lt;p&gt; 底层服务器配置不仅局限于一个端口，底层容器最常见的一项设置是让它处理HTTPS请求。&lt;br&gt;
+ 为了实现，需要使用JDK的keytool命令行工具生成keystore：&lt;br&gt;
+&lt;code&gt;$ keytool -keystore mykeys.jks -genkey -alias tomcat -keyalg RSA&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt; 接下来，为了在嵌入式服务器中启用HTTPS，需要设置属性：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;可以在命令行中设置，但是不方便&lt;/li&gt;
+&lt;li&gt;可以通过&lt;code&gt;application.properties&lt;/code&gt;或&lt;code&gt;application.yml&lt;/code&gt;文件来声明配置：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;server:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	port: 8443
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	ssl:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		key-store: file:/ / /path/to/mykeys.jks
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		key-store-password: letmein
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		key-password: letmein
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt; 解释：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;端口设为&lt;strong&gt;8443&lt;/strong&gt;（开发阶段HTTPS服务器的常用选择）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;server.ssl.key-store&lt;/code&gt;设置为所创建的&lt;code&gt;keystore&lt;/code&gt;路径&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;server.ssl.key-store-password&lt;/code&gt;和&lt;code&gt;server.ssl.key-password&lt;/code&gt;属性设置为创建&lt;code&gt;keystore&lt;/code&gt;所设置的密码&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;属性准备就绪后，应用会监听8443端口的HTTPS请求。&lt;/p&gt;
+&lt;h3 id=&#34;配置日志&#34;&gt;配置日志&lt;/h3&gt;
+&lt;p&gt; 默认情况下，Spring Boot通过Logback配置日志，日志以INFO级别写入到控制台&lt;br&gt;
+ 为了完全控制日志的配置，可以在类路径的根目录下&lt;code&gt;src/main/resources&lt;/code&gt;创建&lt;code&gt;logback.xml&lt;/code&gt;文件。&lt;br&gt;
+简单样例：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;lt;configuration&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &amp;lt;appender name=&amp;#34;STDOUT&amp;#34; class=&amp;#34;ch.qos.logback.core.ConsoleAppender&amp;#34;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &amp;lt;encoder&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		    &amp;lt;pattern&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;				%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;			&amp;lt;/pattern&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		&amp;lt;/encoder&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&amp;lt;/appender&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&amp;lt;logger name=&amp;#34;root&amp;#34; level=&amp;#34;INFO&amp;#34;/&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&amp;lt;root level=&amp;#34;INFO&amp;#34;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		&amp;lt;appender-ref ref=&amp;#34;STDOUT&amp;#34; /&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&amp;lt;/root&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;lt;/configuration&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt; 这个&lt;code&gt;Logback&lt;/code&gt;和没有&lt;code&gt;logback.xml&lt;/code&gt;文件时的默认行为是几乎完全相同的。但是编辑&lt;code&gt;logback.xml&lt;/code&gt;文件，可以完全控制应用的日志文件。&lt;/p&gt;
+&lt;p&gt; 日志配置中最常见变更是&lt;strong&gt;修改日志级别&lt;/strong&gt;和&lt;strong&gt;指定日志写入到某个文件&lt;/strong&gt;，Spring Boot的配置属性功能如何实现？&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;设置日志级别：&lt;br&gt;
+在&lt;code&gt;application.yml&lt;/code&gt;中添加条目，例如：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;logging:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    level:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        root: WARN
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        org.springframework.security: DEBUG
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;以上配置将&lt;code&gt;root logging&lt;/code&gt;设置为&lt;strong&gt;WARN&lt;/strong&gt;级别，spring security的日志级别设为&lt;strong&gt;DEBUG&lt;/strong&gt;。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;将日志条目写入指定文件：
+如要将日志条目写入到&amp;quot;&lt;code&gt;/var/logs/&lt;/code&gt;&amp;ldquo;中的TacoCloud文件中&lt;code&gt;logging.path&lt;/code&gt;和&lt;code&gt;logging.file&lt;/code&gt;文件可以如下配置：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;9
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;logging:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    file:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        path: /var/logs/
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        file: TacoCloud.log
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    level:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        root: WARN
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        org:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            springframework:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                security: DEBUG
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt; 如果应用具有指定目录的写入权限，日志条目会被写入到指定目录。&lt;br&gt;
+ 默认情况下，日志文件达到&lt;strong&gt;10MB&lt;/strong&gt;就会轮换。&lt;/p&gt;
+&lt;h3 id=&#34;使用特定的属性值&#34;&gt;使用特定的属性值&lt;/h3&gt;
+&lt;p&gt; 设置属性不局限于将值设置为硬编码的String或数值，可以从其他的&lt;strong&gt;配置属性派生值&lt;/strong&gt;：&lt;br&gt;
+ 假设我们想要设置⼀个名为&lt;code&gt;greeting.welcome&lt;/code&gt;的属性，它的值来源于名为&lt;code&gt;spring.application.name&lt;/code&gt;的另⼀个属性：
+ 在设置&lt;code&gt;greeting.welcome&lt;/code&gt;的时候，可以使用&lt;code&gt;${}&lt;/code&gt;占位符标记：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;greeting:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;welcome: ${spring.application.name}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt; 甚至可以将&lt;code&gt;${}&lt;/code&gt;占位符嵌入到其他文本中：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;greeting:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;welcome: You are using ${spring.application.name}.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt; 在配置Spring⾃⼰的组件时，使⽤配置属性可以很容易地将值注⼊这些组件属性中，并且可以细粒度地调整⾃动配置功能。&lt;br&gt;
+ 配置属性并不专属于Spring创建的bean。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;如有遗漏或错误，欢迎补充纠正&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
         <title>Spring学习之路（四）</title>
         <link>http://www.jansonblog.com/p/spring4/</link>
         <pubDate>Wed, 16 Nov 2022 00:00:00 +0000</pubDate>
@@ -313,291 +598,6 @@
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;如有遗漏或错误，欢迎补充纠正&lt;/p&gt;
-&lt;/blockquote&gt;
-</description>
-        </item>
-        <item>
-        <title>Spring学习之路（五）</title>
-        <link>http://www.jansonblog.com/p/spring4/</link>
-        <pubDate>Wed, 16 Nov 2022 00:00:00 +0000</pubDate>
-        
-        <guid>http://www.jansonblog.com/p/spring4/</guid>
-        <description>&lt;img src="http://www.jansonblog.com/p/spring4/1.jpg" alt="Featured image of post Spring学习之路（五）" /&gt;&lt;p&gt; 第六章内容第五版与第六版几乎相同。本章介绍了自动配置bean；创建自己的配置属性；使用profile进行配置。&lt;/p&gt;
-&lt;h1 id=&#34;自动配置&#34;&gt;自动配置：&lt;/h1&gt;
-&lt;h3 id=&#34;细粒度的自动配置&#34;&gt;细粒度的自动配置&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;两种不同但相关的配置&lt;/strong&gt;&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Bean wiring（装配bean）：声明在Spring应⽤上下⽂中创建哪些应⽤组件以及它们应该如何相互注入。&lt;/li&gt;
-&lt;li&gt;Property injection（依赖注入）声明在Spring应⽤上下⽂中创建哪些应⽤组件以及它们应该如何相互注入。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt; 在Spring的XML和Java配置中，这两种类型的配置通常在同一个地方&lt;strong&gt;显式声明&lt;/strong&gt;。&lt;br&gt;
- 在Java配置中，带@bean注解的方法很可能既实例化一个bean，又给它的属性赋值。举例来说，@Bean方法为H2数据库声明一个数据源：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;@Bean
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;public DataSource dataSource() {
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    return new EmbeddedDatabaseBuilder()
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        .setType(H2)
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        .addScript(&amp;#34;taco_schema.sql&amp;#34;)
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        .addScripts(&amp;#34;user_data.sql&amp;#34;, &amp;#34;ingredient_data.sql&amp;#34;)
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        .build();
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;code&gt;addScript()&lt;/code&gt; 和 &lt;code&gt;addScripts()&lt;/code&gt;方法通过设置String属性来确定数据源——&lt;strong&gt;这是不使用Spring Boot的配置方法。&lt;/strong&gt;&lt;br&gt;
- 如果在运行时类路径中能够找到H2依赖，那么&lt;strong&gt;Spring Boot会自动在Spring应用上下文中创建对应的DataSource bean&lt;/strong&gt;。这个bean会运行名为&lt;code&gt;schema.sql&lt;/code&gt;和&lt;code&gt;data.sql&lt;/code&gt;的脚本。&lt;/p&gt;
-&lt;h3 id=&#34;spring的环境抽象&#34;&gt;Spring的环境抽象&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;Spring的环境抽象&lt;/strong&gt;&lt;br&gt;
- Spring环境会拉取多个属性源：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;JVM系统属性&lt;/li&gt;
-&lt;li&gt;操作系统环境变量&lt;/li&gt;
-&lt;li&gt;命令行参数&lt;/li&gt;
-&lt;li&gt;应用属性配置文件&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt; 将这些属性聚合到一个源中，通过这个源可以注入到spring的bean中。如下图所示：
-&lt;img src=&#34;http://www.jansonblog.com/p/spring4/img.png&#34;
-	width=&#34;1288&#34;
-	height=&#34;767&#34;
-	srcset=&#34;http://www.jansonblog.com/p/spring4/img_huaa5a00b38bb44f7330e8914d073b8302_442784_480x0_resize_box_3.png 480w, http://www.jansonblog.com/p/spring4/img_huaa5a00b38bb44f7330e8914d073b8302_442784_1024x0_resize_box_3.png 1024w&#34;
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;img.png&#34;
-	
-	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;167&#34;
-		data-flex-basis=&#34;403px&#34;
-	
-&gt;
- Spring boot自动配置的bean都可以通过spring环境提取的属性进行配置.&lt;br&gt;
-例如，希望底层Servlet容器使用另一个端口监听，有以下四个不同的方法：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;“src/main/resources/application.properties”将server.port设置成一个不同的端口：server.port = 9090&lt;/li&gt;
-&lt;li&gt;“src/main/resources/application.yml”中: server : port : 9090&lt;/li&gt;
-&lt;li&gt;命令行参数启动时指定端口：$ java -jar tacocloud-0.0.5-SNAPSHOT.jar &amp;ndash;server.port=9090&lt;/li&gt;
-&lt;li&gt;操作系统环境变量进行一次配置：$ export SERVER_PORT=9090（Spring能自动挑选环境变量名，将其解析）&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&#34;配置数据源&#34;&gt;配置数据源&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;显示配置自己的datasource&lt;/strong&gt;:&lt;br&gt;
-在&lt;code&gt;application.yml&lt;/code&gt;配置：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;spring:
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    datasource:
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        url: jdbc:mysql://localhost/tacocloud
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        username: tacodb
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        password: tacopassword
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt; &lt;strong&gt;尽管我们需要将对应的JDBC驱动添加到构建⽂件中，但是我们不需要指定JDBC驱动类。Spring Boot会根据数据库URL的结构推算出来。&lt;/strong&gt;&lt;/p&gt;
-&lt;h4 id=&#34;设置jdbc驱动类&#34;&gt;设置JDBC驱动类&lt;/h4&gt;
-&lt;p&gt; 然⽽，我们依然可以通过&lt;code&gt;spring.datasource.driver-class-name&lt;/code&gt;属性来进⾏设置JDBC驱动类：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;spring:
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    datasource:
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        url: jdbc:mysql://localhost/tacocloud
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        username: tacodb
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        password: tacopassword
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        driver-class-name: com.mysql.jdbc.Driver
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt; Spring boot自动化配置DataSource bean的时候，会使用该连接。如果类路径存在&lt;code&gt;HikariCP&lt;/code&gt;的连接池，会使用该连接池。否则在类路径查找并使用以下连接池：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Tomcat JDBC Connection Pool&lt;/li&gt;
-&lt;li&gt;Apache Commons DBCP 2&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;注：旧版默认连接池是Tomcat的JDBC连接池，新版默认连接池已经变成HikariCP，因为它够快，代码量少，稳定。&lt;/p&gt;
-&lt;h3 id=&#34;配置嵌入式服务器&#34;&gt;配置嵌入式服务器&lt;/h3&gt;
-&lt;p&gt; 如果在配置servlet容器端口时，将端口设为0，即：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;server:
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    Port : 0
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;会发生什么？&lt;br&gt;
- 虽然显式设为0，但是服务器不会在端口0上启动。而是任选一个可用的端口。这在运行自动化集成测试的时候，非常有用：因为可以保证并发运行的测试不会与硬编码的端口号冲突。&lt;/p&gt;
-&lt;h4 id=&#34;配置使其处理https请求&#34;&gt;配置使其处理HTTPS请求&lt;/h4&gt;
-&lt;p&gt; 底层服务器配置不仅局限于一个端口，底层容器最常见的一项设置是让它处理HTTPS请求。&lt;br&gt;
- 为了实现，需要使用JDK的keytool命令行工具生成keystore：&lt;br&gt;
-&lt;code&gt;$ keytool -keystore mykeys.jks -genkey -alias tomcat -keyalg RSA&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt; 接下来，为了在嵌入式服务器中启用HTTPS，需要设置属性：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;可以在命令行中设置，但是不方便&lt;/li&gt;
-&lt;li&gt;可以通过&lt;code&gt;application.properties&lt;/code&gt;或&lt;code&gt;application.yml&lt;/code&gt;文件来声明配置：&lt;/li&gt;
-&lt;/ol&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;server:
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	port: 8443
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	ssl:
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		key-store: file:/ / /path/to/mykeys.jks
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		key-store-password: letmein
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		key-password: letmein
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt; 解释：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;端口设为&lt;strong&gt;8443&lt;/strong&gt;（开发阶段HTTPS服务器的常用选择）&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;server.ssl.key-store&lt;/code&gt;设置为所创建的&lt;code&gt;keystore&lt;/code&gt;路径&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;server.ssl.key-store-password&lt;/code&gt;和&lt;code&gt;server.ssl.key-password&lt;/code&gt;属性设置为创建&lt;code&gt;keystore&lt;/code&gt;所设置的密码&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;属性准备就绪后，应用会监听8443端口的HTTPS请求。&lt;/p&gt;
-&lt;h3 id=&#34;配置日志&#34;&gt;配置日志&lt;/h3&gt;
-&lt;p&gt; 默认情况下，Spring Boot通过Logback配置日志，日志以INFO级别写入到控制台&lt;br&gt;
- 为了完全控制日志的配置，可以在类路径的根目录下&lt;code&gt;src/main/resources&lt;/code&gt;创建&lt;code&gt;logback.xml&lt;/code&gt;文件。&lt;br&gt;
-简单样例：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;lt;configuration&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &amp;lt;appender name=&amp;#34;STDOUT&amp;#34; class=&amp;#34;ch.qos.logback.core.ConsoleAppender&amp;#34;&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &amp;lt;encoder&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		    &amp;lt;pattern&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;				%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;			&amp;lt;/pattern&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		&amp;lt;/encoder&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&amp;lt;/appender&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&amp;lt;logger name=&amp;#34;root&amp;#34; level=&amp;#34;INFO&amp;#34;/&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&amp;lt;root level=&amp;#34;INFO&amp;#34;&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		&amp;lt;appender-ref ref=&amp;#34;STDOUT&amp;#34; /&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&amp;lt;/root&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;lt;/configuration&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt; 这个&lt;code&gt;Logback&lt;/code&gt;和没有&lt;code&gt;logback.xml&lt;/code&gt;文件时的默认行为是几乎完全相同的。但是编辑&lt;code&gt;logback.xml&lt;/code&gt;文件，可以完全控制应用的日志文件。&lt;/p&gt;
-&lt;p&gt; 日志配置中最常见变更是&lt;strong&gt;修改日志级别&lt;/strong&gt;和&lt;strong&gt;指定日志写入到某个文件&lt;/strong&gt;，Spring Boot的配置属性功能如何实现？&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;设置日志级别：&lt;br&gt;
-在&lt;code&gt;application.yml&lt;/code&gt;中添加条目，例如：&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;logging:
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    level:
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        root: WARN
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        org.springframework.security: DEBUG
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;以上配置将&lt;code&gt;root logging&lt;/code&gt;设置为&lt;strong&gt;WARN&lt;/strong&gt;级别，spring security的日志级别设为&lt;strong&gt;DEBUG&lt;/strong&gt;。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;将日志条目写入指定文件：
-如要将日志条目写入到&amp;quot;&lt;code&gt;/var/logs/&lt;/code&gt;&amp;ldquo;中的TacoCloud文件中&lt;code&gt;logging.path&lt;/code&gt;和&lt;code&gt;logging.file&lt;/code&gt;文件可以如下配置：&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;9
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;logging:
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    file:
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        path: /var/logs/
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        file: TacoCloud.log
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    level:
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        root: WARN
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        org:
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            springframework:
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                security: DEBUG
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt; 如果应用具有指定目录的写入权限，日志条目会被写入到指定目录。&lt;br&gt;
- 默认情况下，日志文件达到&lt;strong&gt;10MB&lt;/strong&gt;就会轮换。&lt;/p&gt;
-&lt;h3 id=&#34;使用特定的属性值&#34;&gt;使用特定的属性值&lt;/h3&gt;
-&lt;p&gt; 设置属性不局限于将值设置为硬编码的String或数值，可以从其他的&lt;strong&gt;配置属性派生值&lt;/strong&gt;：&lt;br&gt;
- 假设我们想要设置⼀个名为&lt;code&gt;greeting.welcome&lt;/code&gt;的属性，它的值来源于名为&lt;code&gt;spring.application.name&lt;/code&gt;的另⼀个属性：
- 在设置&lt;code&gt;greeting.welcome&lt;/code&gt;的时候，可以使用&lt;code&gt;${}&lt;/code&gt;占位符标记：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;greeting:
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;welcome: ${spring.application.name}
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt; 甚至可以将&lt;code&gt;${}&lt;/code&gt;占位符嵌入到其他文本中：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;greeting:
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;welcome: You are using ${spring.application.name}.
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt; 在配置Spring⾃⼰的组件时，使⽤配置属性可以很容易地将值注⼊这些组件属性中，并且可以细粒度地调整⾃动配置功能。&lt;br&gt;
- 配置属性并不专属于Spring创建的bean。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;如有遗漏或错误，欢迎补充纠正&lt;/p&gt;
 &lt;/blockquote&gt;
