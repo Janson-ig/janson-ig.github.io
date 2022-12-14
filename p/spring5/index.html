@@ -351,14 +351,14 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">@Bean
-</span></span><span class="line"><span class="cl">public DataSource dataSource() {
-</span></span><span class="line"><span class="cl">    return new EmbeddedDatabaseBuilder()
-</span></span><span class="line"><span class="cl">        .setType(H2)
-</span></span><span class="line"><span class="cl">        .addScript(&#34;taco_schema.sql&#34;)
-</span></span><span class="line"><span class="cl">        .addScripts(&#34;user_data.sql&#34;, &#34;ingredient_data.sql&#34;)
-</span></span><span class="line"><span class="cl">        .build();
-</span></span><span class="line"><span class="cl">}
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Bean</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="n">DataSource</span> <span class="nf">dataSource</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">new</span> <span class="n">EmbeddedDatabaseBuilder</span><span class="o">()</span>
+</span></span><span class="line"><span class="cl">        <span class="o">.</span><span class="na">setType</span><span class="o">(</span><span class="n">H2</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="o">.</span><span class="na">addScript</span><span class="o">(</span><span class="s">&#34;taco_schema.sql&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="o">.</span><span class="na">addScripts</span><span class="o">(</span><span class="s">&#34;user_data.sql&#34;</span><span class="o">,</span> <span class="s">&#34;ingredient_data.sql&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p><code>addScript()</code> 和 <code>addScripts()</code>方法通过设置String属性来确定数据源——<strong>这是不使用Spring Boot的配置方法。</strong><br>
@@ -407,12 +407,12 @@
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">spring:
-</span></span><span class="line"><span class="cl">    datasource:
-</span></span><span class="line"><span class="cl">        url: jdbc:mysql://localhost/tacocloud
-</span></span><span class="line"><span class="cl">        username: tacodb
-</span></span><span class="line"><span class="cl">        password: tacopassword
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">spring</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">datasource</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l">jdbc:mysql://localhost/tacocloud</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l">tacodb</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l">tacopassword</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p> <strong>尽管我们需要将对应的JDBC驱动添加到构建⽂件中，但是我们不需要指定JDBC驱动类。Spring Boot会根据数据库URL的结构推算出来。</strong></p>
 <h3 id="设置jdbc驱动类">设置JDBC驱动类</h3>
@@ -427,13 +427,13 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">spring:
-</span></span><span class="line"><span class="cl">    datasource:
-</span></span><span class="line"><span class="cl">        url: jdbc:mysql://localhost/tacocloud
-</span></span><span class="line"><span class="cl">        username: tacodb
-</span></span><span class="line"><span class="cl">        password: tacopassword
-</span></span><span class="line"><span class="cl">        driver-class-name: com.mysql.jdbc.Driver
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">spring</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">datasource</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l">jdbc:mysql://localhost/tacocloud</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l">tacodb</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l">tacopassword</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">driver-class-name</span><span class="p">:</span><span class="w"> </span><span class="l">com.mysql.jdbc.Driver</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p> Spring boot自动化配置DataSource bean的时候，会使用该连接。如果类路径存在<code>HikariCP</code>的连接池，会使用该连接池。否则在类路径查找并使用以下连接池：</p>
 <ul>
@@ -474,13 +474,13 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">server:
-</span></span><span class="line"><span class="cl">	port: 8443
-</span></span><span class="line"><span class="cl">	ssl:
-</span></span><span class="line"><span class="cl">		key-store: file:/ / /path/to/mykeys.jks
-</span></span><span class="line"><span class="cl">		key-store-password: letmein
-</span></span><span class="line"><span class="cl">		key-password: letmein
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">server</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">8443</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nt">ssl</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="nt">key-store</span><span class="p">:</span><span class="w"> </span><span class="l">file:/ / /path/to/mykeys.jks</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="nt">key-store-password</span><span class="p">:</span><span class="w"> </span><span class="l">letmein</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="nt">key-password</span><span class="p">:</span><span class="w"> </span><span class="l">letmein</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p> 解释：</p>
 <ol>
@@ -510,19 +510,19 @@
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;configuration&gt;
-</span></span><span class="line"><span class="cl">    &lt;appender name=&#34;STDOUT&#34; class=&#34;ch.qos.logback.core.ConsoleAppender&#34;&gt;
-</span></span><span class="line"><span class="cl">        &lt;encoder&gt;
-</span></span><span class="line"><span class="cl">		    &lt;pattern&gt;
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;configuration&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;appender</span> <span class="na">name=</span><span class="s">&#34;STDOUT&#34;</span> <span class="na">class=</span><span class="s">&#34;ch.qos.logback.core.ConsoleAppender&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;encoder&gt;</span>
+</span></span><span class="line"><span class="cl">		    <span class="nt">&lt;pattern&gt;</span>
 </span></span><span class="line"><span class="cl">				%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
-</span></span><span class="line"><span class="cl">			&lt;/pattern&gt;
-</span></span><span class="line"><span class="cl">		&lt;/encoder&gt;
-</span></span><span class="line"><span class="cl">	&lt;/appender&gt;
-</span></span><span class="line"><span class="cl">	&lt;logger name=&#34;root&#34; level=&#34;INFO&#34;/&gt;
-</span></span><span class="line"><span class="cl">	&lt;root level=&#34;INFO&#34;&gt;
-</span></span><span class="line"><span class="cl">		&lt;appender-ref ref=&#34;STDOUT&#34; /&gt;
-</span></span><span class="line"><span class="cl">	&lt;/root&gt;
-</span></span><span class="line"><span class="cl">&lt;/configuration&gt;
+</span></span><span class="line"><span class="cl">			<span class="nt">&lt;/pattern&gt;</span>
+</span></span><span class="line"><span class="cl">		<span class="nt">&lt;/encoder&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;/appender&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;logger</span> <span class="na">name=</span><span class="s">&#34;root&#34;</span> <span class="na">level=</span><span class="s">&#34;INFO&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;root</span> <span class="na">level=</span><span class="s">&#34;INFO&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">		<span class="nt">&lt;appender-ref</span> <span class="na">ref=</span><span class="s">&#34;STDOUT&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;/root&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/configuration&gt;</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p> 这个<code>Logback</code>和没有<code>logback.xml</code>文件时的默认行为是几乎完全相同的。但是编辑<code>logback.xml</code>文件，可以完全控制应用的日志文件。</p>
@@ -539,11 +539,11 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">logging:
-</span></span><span class="line"><span class="cl">    level:
-</span></span><span class="line"><span class="cl">        root: WARN
-</span></span><span class="line"><span class="cl">        org.springframework.security: DEBUG
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">logging</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">level</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">root</span><span class="p">:</span><span class="w"> </span><span class="l">WARN</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">org.springframework.security</span><span class="p">:</span><span class="w"> </span><span class="l">DEBUG</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>以上配置将<code>root logging</code>设置为<strong>WARN</strong>级别，spring security的日志级别设为<strong>DEBUG</strong>。</p>
 <ul>
@@ -563,16 +563,16 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">logging:
-</span></span><span class="line"><span class="cl">    file:
-</span></span><span class="line"><span class="cl">        path: /var/logs/
-</span></span><span class="line"><span class="cl">        file: TacoCloud.log
-</span></span><span class="line"><span class="cl">    level:
-</span></span><span class="line"><span class="cl">        root: WARN
-</span></span><span class="line"><span class="cl">        org:
-</span></span><span class="line"><span class="cl">            springframework:
-</span></span><span class="line"><span class="cl">                security: DEBUG
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">logging</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">file</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/var/logs/</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">file</span><span class="p">:</span><span class="w"> </span><span class="l">TacoCloud.log</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">level</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">root</span><span class="p">:</span><span class="w"> </span><span class="l">WARN</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">org</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">springframework</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="nt">security</span><span class="p">:</span><span class="w"> </span><span class="l">DEBUG</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p> 如果应用具有指定目录的写入权限，日志条目会被写入到指定目录。<br>
  默认情况下，日志文件达到<strong>10MB</strong>就会轮换。</p>
@@ -586,9 +586,9 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">greeting:
-</span></span><span class="line"><span class="cl">welcome: ${spring.application.name}
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">greeting</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">welcome</span><span class="p">:</span><span class="w"> </span><span class="l">${spring.application.name}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p> 甚至可以将<code>${}</code>占位符嵌入到其他文本中：</p>
 <div class="highlight"><div class="chroma">
@@ -597,9 +597,9 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">greeting:
-</span></span><span class="line"><span class="cl">welcome: You are using ${spring.application.name}.
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">greeting</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">welcome</span><span class="p">:</span><span class="w"> </span><span class="l">You are using ${spring.application.name}.</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p> 在配置Spring⾃⼰的组件时，使⽤配置属性可以很容易地将值注⼊这些组件属性中，并且可以细粒度地调整⾃动配置功能。<br>
  配置属性并不专属于Spring创建的bean。</p>
