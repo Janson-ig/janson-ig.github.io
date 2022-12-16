@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='Spring项目结构，@SpringBootApplication组合注解，Spring的重点项目汇总'><title>Spring学习之路（一）</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='配置属性(一)：创建自己的配置属性&amp;profile搭建特定环境的配置'><title>Spring学习之路（六）</title>
 
-<link rel='canonical' href='http://www.jansonblog.com/p/spring1/'>
+<link rel='canonical' href='http://www.jansonblog.com/p/spring6/'>
 
-<link rel="stylesheet" href="/scss/style.min.ac77dcf8b111b51da39a92990f431923f210f3876d85798a2125667f96dc33a4.css"><meta property='og:title' content='Spring学习之路（一）'>
-<meta property='og:description' content='Spring项目结构，@SpringBootApplication组合注解，Spring的重点项目汇总'>
-<meta property='og:url' content='http://www.jansonblog.com/p/spring1/'>
+<link rel="stylesheet" href="/scss/style.min.ac77dcf8b111b51da39a92990f431923f210f3876d85798a2125667f96dc33a4.css"><meta property='og:title' content='Spring学习之路（六）'>
+<meta property='og:description' content='配置属性(一)：创建自己的配置属性&amp;profile搭建特定环境的配置'>
+<meta property='og:url' content='http://www.jansonblog.com/p/spring6/'>
 <meta property='og:site_name' content='Janson&#39;s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='框架' /><meta property='article:published_time' content='2022-08-13T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2022-08-13T00:00:00&#43;00:00'/><meta property='og:image' content='http://www.jansonblog.com/p/spring1/1.jpg' />
-<meta name="twitter:title" content="Spring学习之路（一）">
-<meta name="twitter:description" content="Spring项目结构，@SpringBootApplication组合注解，Spring的重点项目汇总"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='http://www.jansonblog.com/p/spring1/1.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='框架' /><meta property='article:published_time' content='2022-12-16T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2022-12-16T00:00:00&#43;00:00'/><meta property='og:image' content='http://www.jansonblog.com/p/spring6/1.jpg' />
+<meta name="twitter:title" content="Spring学习之路（六）">
+<meta name="twitter:description" content="配置属性(一)：创建自己的配置属性&amp;profile搭建特定环境的配置"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='http://www.jansonblog.com/p/spring6/1.jpg' />
     </head>
     <body class="
     article-page
@@ -248,13 +248,13 @@
     <article class="has-image main-article">
     <header class="article-header">
         <div class="article-image">
-            <a href="/p/spring1/">
-                <img src="/p/spring1/1_huc955137a63590f4561b0a715bdaca55f_11288_800x0_resize_q75_box.jpg"
-                        srcset="/p/spring1/1_huc955137a63590f4561b0a715bdaca55f_11288_800x0_resize_q75_box.jpg 800w, /p/spring1/1_huc955137a63590f4561b0a715bdaca55f_11288_1600x0_resize_q75_box.jpg 1600w"
+            <a href="/p/spring6/">
+                <img src="/p/spring6/1_huc955137a63590f4561b0a715bdaca55f_11288_800x0_resize_q75_box.jpg"
+                        srcset="/p/spring6/1_huc955137a63590f4561b0a715bdaca55f_11288_800x0_resize_q75_box.jpg 800w, /p/spring6/1_huc955137a63590f4561b0a715bdaca55f_11288_1600x0_resize_q75_box.jpg 1600w"
                         width="800" 
                         height="374" 
                         loading="lazy"
-                        alt="Featured image of post Spring学习之路（一）" />
+                        alt="Featured image of post Spring学习之路（六）" />
                 
             </a>
         </div>
@@ -277,12 +277,12 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/spring1/">Spring学习之路（一）</a>
+            <a href="/p/spring6/">Spring学习之路（六）</a>
         </h2>
     
         
         <h3 class="article-subtitle">
-            Spring项目结构，@SpringBootApplication组合注解，Spring的重点项目汇总
+            配置属性(一)：创建自己的配置属性&amp;profile搭建特定环境的配置
         </h3>
         
     </div>
@@ -300,7 +300,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">Aug 13, 2022</time>
+                <time class="article-time--published">Dec 16, 2022</time>
             </div>
         
 
@@ -315,7 +315,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 3 分钟
+                    阅读时长: 4 分钟
                 </time>
             </div>
         
@@ -329,42 +329,200 @@
     <section class="article-content">
     
     
-    <h2 id="前言">前言</h2>
-<p> 学习路程是按照<a class="link" href="https://zh.jp1lib.org/book/18238678/2d772e"  title="Spring实战（第五版）"
-     target="_blank" rel="noopener"
-    >Spring实战（第五版）</a>进行，本系列只针对笔者自己进行内容总结，用于加深学习以及日后回顾使用。如感兴趣，推荐阅读参考图书进行学习。</p>
-<p> 书中有较多地方描述比较不清楚，实战时，存在很多问题。<a class="link" href="https://github.com/habuma/spring-in-action-5-samples"  title="spring-in-action-5-samples"
-     target="_blank" rel="noopener"
-    >spring-in-action-5-samples</a>对书中每一章项目进行了汇总，对照此仓库学习更容易理解。</p>
-<h2 id="spring项目结构">Spring项目结构</h2>
+    <p> </p>
+<h2 id="创建自己的配置属性">创建自己的配置属性</h2>
+<p> 这章讲的有点啰嗦，主要就讲了一个注解：</p>
 <ul>
-<li>mvnw和mvnw.cmd：这是Maven包装器（wrapper）脚本，借助脚本，即使没有安装Maven也可以构建项目</li>
-<li>pom.xml： Maven构建规范，用于引入依赖等</li>
-<li>Application.java：SpringBoot主类</li>
-<li>application.properties：初始为空，用来指定配置属性</li>
-<li>static：初始为空，用于存放静态内容（图片，样式表，JavaScript等）</li>
-<li>templates：初始为空，用于存放渲染内容到浏览器的模板文件</li>
-<li>ApplicationTests.java：简单的测试类，确保Spring应用上下文成功加载</li>
+<li>
+<p><code>@ConfigurationProperties</code>：<br>
+Spring Boot提供的支持配置属性的注入注释。放到Spring bean上后，它会为该bean中那些能够根据Spring环境注入值的属性赋值。<br>
+ <code>@ConfigurationProperties</code>实际上通常会放到⼀种特定类型的bean中，这种bean的⽬的就是持有配置数据。这样的话，特定的配置细节就能从控制器和其他应⽤程序类中抽离出来，多个bean也能更容易地共享⼀些通⽤的配置。</p>
+</li>
+<li>
+<p>注：Pageable是Spring Data根据页号和每页数量选取结果的子集的一种方法。</p>
+</li>
 </ul>
-<h2 id="springbootapplication组合注解">@SpringBootApplication组合注解</h2>
-<p>@SpringBootApplication是一个组合注解，它组合了3个其他的注释：</p>
+<h2 id="spring-profile搭建特定环境的配置">Spring profile搭建特定环境的配置</h2>
+<p> profile是⼀种条件化的配置，在运⾏时，根据哪些profile处于激活状态，可以使⽤或忽略不同的bean、配置类和配置属性</p>
+<h3 id="定义特定profile">定义特定profile</h3>
+<p> 定义特定profile相关的属性的⼀种⽅式就是创建另外⼀个YAML或属性⽂件，其中只包含⽤于⽣产环境的属性。<br>
+ ⽂件的名称要遵守如下的约定：<code>application-{profile名}.yml</code>或 <code>application-{profile名}.properties</code>。</p>
+<ol>
+<li>方法1<br>
+新建名为application-prod.yml的文件，包含以下属性：</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">spring</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">datasource</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l">jdbc:mysql://localhost/tacocloud</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l">tacouser</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l">tacopassword</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">logging</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">level</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">tacos</span><span class="p">:</span><span class="w"> </span><span class="l">WARN</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>方法2<br>
+将特定的profile和非特定profile的属性都放到application.yml中，二者之间使用三个中线【&mdash;】进行分隔，并且使用spring.profiles属性来命名profile。application.yml如下所示：</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">logging</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">level</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">tacos</span><span class="p">:</span><span class="w"> </span><span class="l">DEBUG</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nn">---</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spring</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">profiles</span><span class="p">:</span><span class="w"> </span><span class="l">prod</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">datasource</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   	</span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l">jdbc:mysql://localhost/tacocloud</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   	</span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l">tacouser</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   	</span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l">tacopassword</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">logging</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">level</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">tacos</span><span class="p">:</span><span class="w"> </span><span class="l">WARN</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p> 该文件通过中划线(&mdash;)分成两部分。第二部分制定了spring.profiles值，代表<strong>后面的属性适用于prod profile</strong>。<br>
+ 第一部分没有指定<strong>spring.profiles</strong>，所以是<strong>所有profiles通用</strong>的，如果当前激活的profiles没有设置这些属性，它们会作为默认值。</p>
 <ul>
-<li>@SpringBootConfiguration：将该类声明为配置类。尽管这个类⽬前还没有太多的配置，但是后续我们可以按需添加基于Java的Spring框架配置。这个注解实际上是@Configuration注解的特殊形式。</li>
-<li>@EnableAutoConfiguration：启⽤Spring Boot的⾃动配置。我们随后会介绍⾃动配置的更多功能。就现在来说，我们只需要知道这个注解会告诉Spring Boot⾃动配置它认为我们会⽤到的组件。</li>
-<li>@ComponentScan：启⽤组件扫描。这样我们能够通过像@Component、 @Controller、@Service这样的注解声明其他类，Spring会⾃动发现它们并将它们注册为Spring应⽤上下⽂中的组件</li>
+<li>解释：<br>
+ 在上述例子，不管程序运行的时候哪个profile处于激活状态，根据<strong>默认profile</strong>，包的日志级别都会设为DEBUG。<br>
+ 但是如果名为prod的profile激活，<code>logging.level.tacos</code>属性会被重写为<strong>WARN</strong>。同理，如果prod profile处于激活状态，数据源相关属性会被设置为使用外部的MySQL数据库。</li>
 </ul>
-<h2 id="spring的一些重点项目">Spring的一些重点项目：</h2>
-<ul>
-<li>Spring MVC——Spring的Web框架：可以边写控制器处理Web请求；创建REST API，生成非HTML的输出</li>
-<li>Spring Boot：starter依赖和自动配置；Actuator能洞察应用运行时的内部工作状况；灵活的环境属性规范；在核心框架的测试辅助功能之上提供了对测试的额外支持</li>
-<li>Spring Data：将应用程序数据repository定义为java接口，定义驱动存储和检索数据的方法时使用一种命名约定即可；能够处理不同类型的数据库，包括关系型数据库（JPA）、文档数据库（Mongo）、图数据库（Neo4j）等</li>
-<li>Spring Security：Spring的安全框架，解决了身份验证、授权和API安全性等安全性需求</li>
-<li>Spring Integration：解决实时集成问题，数据在可用时马上就会得到处理</li>
-<li>Spring Batch：批处理集成问题——数据收集一段时间，直到触发触发器，才进行批处理</li>
-<li>Spring Cloud：使用Spring开发云原生应用程序的项目</li>
-</ul>
+<h3 id="激活profile三个方法">激活profile（三个方法）</h3>
+<ol>
+<li>需要将profile名称的列表赋值给<code>spring.profiles.active</code>属性。例如，在<code>application.yml</code>文件中：</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">spring</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">profiles</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">active</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">prod</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p> 如果这么激活，这个profile就会成为<strong>默认profile</strong>。体验不到使用profile将生产环境和开发环境属性分开的好处。
+2. <code>% export SPRING_PROFILES_ACTIVE=prod</code>
+3. 以JAR文件形式运行，可以以<strong>命令行参数</strong>的形式设置要激活的profile：<br>
+<code>% java -jar taco-cloud.jar --spring.profiles.active=prod</code></p>
+<h4 id="设置多个profile两个方法">设置多个profile(两个方法)</h4>
+<ol>
+<li>YAML中：</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">spring</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">profiles</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">active</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">prod</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">audit</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">ha</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li><code>% export SPRING_PROFILES_ACTIVE=prod,audit,ha</code></li>
+</ol>
+<h4 id="如果使用cloud-foundry">如果使用Cloud Foundry</h4>
+<p> Spring应用部署在Cloud Foundry，会自动激活名为<strong>cloud</strong>的profile，只需将生产环境相关的配置放到cloud profile下。</p>
+<h2 id="使用profile条件化地创建bean">使用profile条件化地创建bean</h2>
+<p><code>@Profile</code>注解可以将某些bean设置为仅适用于给定的profile，例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Bean</span>
+</span></span><span class="line"><span class="cl"><span class="nd">@Profile</span><span class="o">(</span><span class="s">&#34;dev&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="n">CommandLineRunner</span> <span class="nf">dataLoader</span><span class="o">(</span><span class="n">IngredientRepository</span> <span class="n">repo</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">UserRepository</span> <span class="n">userRepo</span><span class="o">,</span> <span class="n">PasswordEncoder</span> <span class="n">encoder</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>用法</strong>：</p>
+<ol>
+<li><code>@Profile(&quot;dev&quot;)</code>:在dev profile激活时创建该bean</li>
+<li><code>@Profile({&quot;dev&quot;, &quot;qa&quot;})</code>：dev<strong>或</strong>qa profile激活的时候创建该bean</li>
+<li><code>@Profile(&quot;!prod&quot;)</code>：prod profile不激活就创建该bean</li>
+<li>与<code>@Configuration</code>注解一起使用：<br>
+将 <code>CommandLineRunner</code>抽取到一个名为<code>DevelopmentConfig</code>的配置类中：</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Profile</span><span class="o">({</span><span class="s">&#34;!prod&#34;</span><span class="o">,</span> <span class="s">&#34;!qa&#34;</span><span class="o">})</span>
+</span></span><span class="line"><span class="cl"><span class="nd">@Configuration</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">DevelopmentConfig</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nd">@Bean</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">CommandLineRunner</span> <span class="nf">dataLoader</span><span class="o">(</span><span class="n">IngredientRepository</span> <span class="n">repo</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">UserRepository</span> <span class="n">userRepo</span><span class="o">,</span> <span class="n">PasswordEncoder</span> <span class="n">encoder</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="o">...</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>只有prod和qa<strong>均</strong>没有激活的情况下才创建该bean。</p>
 <blockquote>
-<p>如有遗漏或错误，欢迎补充纠正</p>
+<p>本章完。<br>
+如有遗漏或错误，欢迎补充纠正</p>
 </blockquote>
 
 </section>
@@ -405,30 +563,6 @@
     <h2 class="section-title">相关文章</h2>
     <div class="related-content">
         <div class="flex article-list--tile">
-            
-                
-<article class="has-image">
-    <a href="/p/spring6/">
-        
-        
-            <div class="article-image">
-                <img src="/p/spring6/1.4c54a7f78b9d6dbb7956c2a066ad5346_huc955137a63590f4561b0a715bdaca55f_11288_250x150_fill_q75_box_smart1.jpg" 
-                        width="250" 
-                        height="150" 
-                        loading="lazy"
-                        alt="Featured image of post Spring学习之路（六）"
-                        data-key="spring6" 
-                        data-hash="md5-TFSn94udbbt5VsKgZq1TRg==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">Spring学习之路（六）</h2>
-        </div>
-    </a>
-</article>
-
             
                 
 <article class="has-image">
@@ -521,6 +655,30 @@
 
         <div class="article-details">
             <h2 class="article-title">Spring学习之路（二）</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/spring1/">
+        
+        
+            <div class="article-image">
+                <img src="/p/spring1/1.4c54a7f78b9d6dbb7956c2a066ad5346_huc955137a63590f4561b0a715bdaca55f_11288_250x150_fill_q75_box_smart1.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Spring学习之路（一）"
+                        data-key="spring1" 
+                        data-hash="md5-TFSn94udbbt5VsKgZq1TRg==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Spring学习之路（一）</h2>
         </div>
     </a>
 </article>
@@ -690,10 +848,19 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#前言">前言</a></li>
-    <li><a href="#spring项目结构">Spring项目结构</a></li>
-    <li><a href="#springbootapplication组合注解">@SpringBootApplication组合注解</a></li>
-    <li><a href="#spring的一些重点项目">Spring的一些重点项目：</a></li>
+    <li><a href="#创建自己的配置属性">创建自己的配置属性</a></li>
+    <li><a href="#spring-profile搭建特定环境的配置">Spring profile搭建特定环境的配置</a>
+      <ol>
+        <li><a href="#定义特定profile">定义特定profile</a></li>
+        <li><a href="#激活profile三个方法">激活profile（三个方法）</a>
+          <ol>
+            <li><a href="#设置多个profile两个方法">设置多个profile(两个方法)</a></li>
+            <li><a href="#如果使用cloud-foundry">如果使用Cloud Foundry</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#使用profile条件化地创建bean">使用profile条件化地创建bean</a></li>
   </ol>
 </nav>
         </div>
