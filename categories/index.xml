@@ -54,6 +54,22 @@
         <guid>http://www.jansonblog.com/categories/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/</guid>
         <description>&lt;img src="http://www.jansonblog.com/categories/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/1.jpg" alt="Featured image of post 常用工具" /&gt;</description>
         </item>
+        <item>
+        <title>就职</title>
+        <link>http://www.jansonblog.com/categories/%E5%B0%B1%E8%81%8C/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>http://www.jansonblog.com/categories/%E5%B0%B1%E8%81%8C/</guid>
+        <description>&lt;img src="http://www.jansonblog.com/categories/%E5%B0%B1%E8%81%8C/1.jpg" alt="Featured image of post 就职" /&gt;</description>
+        </item>
+        <item>
+        <title>日本</title>
+        <link>http://www.jansonblog.com/categories/%E6%97%A5%E6%9C%AC/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>http://www.jansonblog.com/categories/%E6%97%A5%E6%9C%AC/</guid>
+        <description>&lt;img src="http://www.jansonblog.com/categories/%E6%97%A5%E6%9C%AC/jp.jpg" alt="Featured image of post 日本" /&gt;</description>
+        </item>
         
     </channel>
 </rss>
