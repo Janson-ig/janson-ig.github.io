@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
-    <head>
-	<meta name="generator" content="Hugo 0.110.0"><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='You forget a thousand things every day, How about you make sure this is one of them …'><title>Janson&#39;s Blog</title>
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='格雷码（循环二进制单位距离碼）是任意两个相邻数的代码只有一位二进制数不同的编码，它与奇偶校验码同属可靠性编码。'><title>格雷码（Gray code）</title>
 
-<link rel='canonical' href='http://www.jansonblog.com/'>
+<link rel='canonical' href='http://www.jansonblog.com/p/graycode/'>
 
-<link rel="stylesheet" href="/scss/style.min.ac77dcf8b111b51da39a92990f431923f210f3876d85798a2125667f96dc33a4.css"><meta property='og:title' content='Janson&#39;s Blog'>
-<meta property='og:description' content='You forget a thousand things every day, How about you make sure this is one of them …'>
-<meta property='og:url' content='http://www.jansonblog.com/'>
+<link rel="stylesheet" href="/scss/style.min.ac77dcf8b111b51da39a92990f431923f210f3876d85798a2125667f96dc33a4.css"><meta property='og:title' content='格雷码（Gray code）'>
+<meta property='og:description' content='格雷码（循环二进制单位距离碼）是任意两个相邻数的代码只有一位二进制数不同的编码，它与奇偶校验码同属可靠性编码。'>
+<meta property='og:url' content='http://www.jansonblog.com/p/graycode/'>
 <meta property='og:site_name' content='Janson&#39;s Blog'>
-<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2023-02-23T00:00:00&#43;00:00 '/>
-<meta name="twitter:title" content="Janson&#39;s Blog">
-<meta name="twitter:description" content="You forget a thousand things every day, How about you make sure this is one of them …"><link rel="alternate" type="application/rss&#43;xml" href="http://www.jansonblog.com/index.xml">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='算法' /><meta property='article:published_time' content='2023-02-23T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2023-02-23T00:00:00&#43;00:00'/><meta property='og:image' content='http://www.jansonblog.com/p/graycode/1.jpg' />
+<meta name="twitter:title" content="格雷码（Gray code）">
+<meta name="twitter:description" content="格雷码（循环二进制单位距离碼）是任意两个相邻数的代码只有一位二进制数不同的编码，它与奇偶校验码同属可靠性编码。"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='http://www.jansonblog.com/p/graycode/1.jpg' />
     </head>
-    <body class="">
+    <body class="
+    article-page
+    ">
     <script>
         (function() {
             const colorSchemeKey = 'StackColorScheme';
@@ -135,7 +137,7 @@
         
         
 
-        <li  class='current' >
+        <li >
             <a href='/' >
                 
                 
@@ -243,15 +245,7 @@
     </ol>
 </aside>
 <main class="main full-width">
-    
-    
-    
-    
-
-    <section class="article-list">
-        
-            
-<article class="has-image">
+    <article class="has-image main-article">
     <header class="article-header">
         <div class="article-image">
             <a href="/p/graycode/">
@@ -331,360 +325,251 @@
     
 </div>
 </header>
-</article>
-        
-            
-<article class="has-image">
-    <header class="article-header">
-        <div class="article-image">
-            <a href="/p/gcd/">
-                <img src="/p/gcd/1_hubb1b87230971d48f9f5d3a3cee24650f_75137_800x0_resize_q75_box.jpg"
-                        srcset="/p/gcd/1_hubb1b87230971d48f9f5d3a3cee24650f_75137_800x0_resize_q75_box.jpg 800w, /p/gcd/1_hubb1b87230971d48f9f5d3a3cee24650f_75137_1600x0_resize_q75_box.jpg 1600w"
-                        width="800" 
-                        height="465" 
-                        loading="lazy"
-                        alt="Featured image of post GCD算法（最大公因数算法）" />
-                
-            </a>
-        </div>
+
+    <section class="article-content">
     
-
-    <div class="article-details">
     
-    <header class="article-category">
-        
-            <a href="/categories/%E7%AE%97%E6%B3%95/" style="background-color: #2a9d8f; color: #fff;">
-                算法
-            </a>
-        
-            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="background-color: #2a9d8f; color: #fff;">
-                学习笔记
-            </a>
-        
-    </header>
-    
-
-    <div class="article-title-wrapper">
-        <h2 class="article-title">
-            <a href="/p/gcd/">GCD算法（最大公因数算法）</a>
-        </h2>
-    
-        
-        <h3 class="article-subtitle">
-            代码
-        </h3>
-        
-    </div>
-
-    
-    <footer class="article-time">
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
-  <circle cx="18" cy="18" r="4" />
-  <path d="M15 3v4" />
-  <path d="M7 3v4" />
-  <path d="M3 11h16" />
-  <path d="M18 16.496v1.504l1 1" />
-</svg>
-                <time class="article-time--published">Feb 01, 2023</time>
-            </div>
-        
-
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="12" r="9" />
-  <polyline points="12 7 12 12 15 15" />
-</svg>
-
-
-
-                <time class="article-time--reading">
-                    阅读时长: 1 分钟
-                </time>
-            </div>
-        
-    </footer>
-    
-
-    
+    <h2 id="简介--原理">简介 &amp; 原理</h2>
+<p> 格雷码（Gray code）是由贝尔实验室的Frank Gray在1940年提出，用于在PCM（脉冲编码调变）方法传送讯号时防止出错。<br>
+ 格雷码是一个数列集合，相邻两数间<strong>只有一个位元</strong>改变，为无权数码，且格雷码的顺序不是唯一的。<br>
+ 原理：</p>
+<blockquote>
+<p> 传统的二进位系统，例如数字3的表示法为011，要切换为邻近的数字4，也就是100时，装置中的三个位元都得要转换，因此于未完全转换的过程时装置会经历短暂的，010,001,101,110,111等其中数种状态，也就是代表着2、1、5、6、7，因此此种数字编码方法于邻近数字转换时有比较大的误差可能范围。
+格雷码的发明即是用来将误差之可能性缩减至最小，编码的方式定义为每个邻近数字都只相差一个位元，因此也称为最小差异码，可以使装置做数字步进时只更动最少的位元数以提高稳定性。</p>
+</blockquote>
+<h2 id="代码实现">代码实现</h2>
+<p> 用<code>G</code>代表格雷码：<br>
+ 例如3位数的格雷码序列为：<code>000</code>,<code>001</code>,<code>011</code>,<code>010</code>,<code>110</code>,<code>111</code>,<code>101</code>,<code>100</code>。<code>111</code>可以用<code>G(4) = 6</code>来表示。</p>
+<p> <em><strong>公式：</strong></em><code>G(n) = n ^ (n &gt;&gt; 1)</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">int g (int n) {
+</span></span><span class="line"><span class="cl">    return n ^ (n &gt;&gt; 1);
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
 </div>
-</header>
-</article>
-        
-            
-<article class="has-image">
-    <header class="article-header">
-        <div class="article-image">
-            <a href="/p/spring6/">
-                <img src="/p/spring6/1_huc955137a63590f4561b0a715bdaca55f_11288_800x0_resize_q75_box.jpg"
-                        srcset="/p/spring6/1_huc955137a63590f4561b0a715bdaca55f_11288_800x0_resize_q75_box.jpg 800w, /p/spring6/1_huc955137a63590f4561b0a715bdaca55f_11288_1600x0_resize_q75_box.jpg 1600w"
-                        width="800" 
-                        height="374" 
-                        loading="lazy"
-                        alt="Featured image of post Spring学习之路（六）" />
-                
-            </a>
-        </div>
+</div><h3 id="例题">例题</h3>
+<p><a class="link" href="https://leetcode.com/problems/circular-permutation-in-binary-representation/description/"  title="1238. Circular Permutation in Binary Representation"
+     target="_blank" rel="noopener"
+    >[medium]1238. Circular Permutation in Binary Representation</a></p>
+<blockquote>
+<p>如有遗漏或错误，欢迎补充纠正</p>
+</blockquote>
+
+</section>
+
+
+    <footer class="article-footer">
     
-
-    <div class="article-details">
-    
-    <header class="article-category">
+    <section class="article-tags">
         
-            <a href="/categories/spring/" style="background-color: #2a9d8f; color: #fff;">
-                Spring
-            </a>
-        
-            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="background-color: #2a9d8f; color: #fff;">
-                学习笔记
-            </a>
-        
-    </header>
-    
-
-    <div class="article-title-wrapper">
-        <h2 class="article-title">
-            <a href="/p/spring6/">Spring学习之路（六）</a>
-        </h2>
-    
-        
-        <h3 class="article-subtitle">
-            配置属性(一)：创建自己的配置属性&amp;profile搭建特定环境的配置
-        </h3>
-        
-    </div>
-
-    
-    <footer class="article-time">
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
-  <circle cx="18" cy="18" r="4" />
-  <path d="M15 3v4" />
-  <path d="M7 3v4" />
-  <path d="M3 11h16" />
-  <path d="M18 16.496v1.504l1 1" />
-</svg>
-                <time class="article-time--published">Dec 16, 2022</time>
-            </div>
-        
-
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="12" r="9" />
-  <polyline points="12 7 12 12 15 15" />
-</svg>
-
-
-
-                <time class="article-time--reading">
-                    阅读时长: 4 分钟
-                </time>
-            </div>
-        
-    </footer>
-    
-
-    
-</div>
-</header>
-</article>
-        
-            
-<article class="has-image">
-    <header class="article-header">
-        <div class="article-image">
-            <a href="/p/tips-1/">
-                <img src="/p/tips-1/1_hu7357642a87d7027432b9666abef35d92_2163_800x0_resize_box_3.png"
-                        srcset="/p/tips-1/1_hu7357642a87d7027432b9666abef35d92_2163_800x0_resize_box_3.png 800w, /p/tips-1/1_hu7357642a87d7027432b9666abef35d92_2163_1600x0_resize_box_3.png 1600w"
-                        width="800" 
-                        height="448" 
-                        loading="lazy"
-                        alt="Featured image of post vscode中ctrl&#43;左键不跳转" />
-                
-            </a>
-        </div>
-    
-
-    <div class="article-details">
-    
-    <header class="article-category">
-        
-            <a href="/categories/%E8%B8%A9%E5%9D%91%E6%97%A5%E5%BF%97/" style="background-color: #2a9d8f; color: #fff;">
-                踩坑日志
-            </a>
-        
-    </header>
-    
-
-    <div class="article-title-wrapper">
-        <h2 class="article-title">
-            <a href="/p/tips-1/">vscode中ctrl&#43;左键不跳转</a>
-        </h2>
-    
-        
-    </div>
-
-    
-    <footer class="article-time">
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
-  <circle cx="18" cy="18" r="4" />
-  <path d="M15 3v4" />
-  <path d="M7 3v4" />
-  <path d="M3 11h16" />
-  <path d="M18 16.496v1.504l1 1" />
-</svg>
-                <time class="article-time--published">Dec 15, 2022</time>
-            </div>
-        
-
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="12" r="9" />
-  <polyline points="12 7 12 12 15 15" />
-</svg>
-
-
-
-                <time class="article-time--reading">
-                    阅读时长: 1 分钟
-                </time>
-            </div>
-        
-    </footer>
-    
-
-    
-</div>
-</header>
-</article>
-        
-            
-<article class="has-image">
-    <header class="article-header">
-        <div class="article-image">
-            <a href="/p/spring5/">
-                <img src="/p/spring5/1_huc955137a63590f4561b0a715bdaca55f_11288_800x0_resize_q75_box.jpg"
-                        srcset="/p/spring5/1_huc955137a63590f4561b0a715bdaca55f_11288_800x0_resize_q75_box.jpg 800w, /p/spring5/1_huc955137a63590f4561b0a715bdaca55f_11288_1600x0_resize_q75_box.jpg 1600w"
-                        width="800" 
-                        height="374" 
-                        loading="lazy"
-                        alt="Featured image of post Spring学习之路（五）" />
-                
-            </a>
-        </div>
-    
-
-    <div class="article-details">
-    
-    <header class="article-category">
-        
-            <a href="/categories/spring/" style="background-color: #2a9d8f; color: #fff;">
-                Spring
-            </a>
-        
-            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="background-color: #2a9d8f; color: #fff;">
-                学习笔记
-            </a>
-        
-    </header>
-    
-
-    <div class="article-title-wrapper">
-        <h2 class="article-title">
-            <a href="/p/spring5/">Spring学习之路（五）</a>
-        </h2>
-    
-        
-        <h3 class="article-subtitle">
-            配置属性(一)：自动配置
-        </h3>
-        
-    </div>
-
-    
-    <footer class="article-time">
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
-  <circle cx="18" cy="18" r="4" />
-  <path d="M15 3v4" />
-  <path d="M7 3v4" />
-  <path d="M3 11h16" />
-  <path d="M18 16.496v1.504l1 1" />
-</svg>
-                <time class="article-time--published">Dec 14, 2022</time>
-            </div>
-        
-
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="12" r="9" />
-  <polyline points="12 7 12 12 15 15" />
-</svg>
-
-
-
-                <time class="article-time--reading">
-                    阅读时长: 6 分钟
-                </time>
-            </div>
-        
-    </footer>
-    
-
-    
-</div>
-</header>
-</article>
+            <a href="/tags/%E7%AE%97%E6%B3%95/">算法</a>
         
     </section>
-    <nav class='pagination'>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/gcd/">
         
+        
+            <div class="article-image">
+                <img src="/p/gcd/1.145455070c8b4e40271c75ccbd14b6f0_hubb1b87230971d48f9f5d3a3cee24650f_75137_250x150_fill_q75_box_smart1.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post GCD算法（最大公因数算法）"
+                        data-key="GCD" 
+                        data-hash="md5-FFRVBwyLTkAnHHXMvRS28A==">
+                
+            </div>
         
 
-        
-            
-                <span class='page-link current'>1</span>
-                
-            
-            
-                    <a class='page-link' href='/page/2/'>2</a>
-                
-            
-            
-                    
-                        
-                        <span class='page-link dots'>&hellip;</span>
-                    
-                
-            
-            
-                    <a class='page-link' href='/page/4/'>4</a>
-                
-            
-    </nav>
+        <div class="article-details">
+            <h2 class="article-title">GCD算法（最大公因数算法）</h2>
+        </div>
+    </a>
+</article>
 
-<footer class="site-footer">
+            
+                
+<article class="has-image">
+    <a href="/p/union-find/">
+        
+        
+            <div class="article-image">
+                <img src="/p/union-find/1.be00ff3e059ce8039c747ab8a04a0ca8_huff7584040f7709fa0959c9cfdffd0492_49343_250x150_fill_q75_box_smart1.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 并查集（Union-find）[Java]"
+                        data-key="Union-find" 
+                        data-hash="md5-vgD/PgWc6AOcdHq4oEoMqA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">并查集（Union-find）[Java]</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/kmp/">
+        
+        
+            <div class="article-image">
+                <img src="/p/kmp/1.8383100951ae42fa4f0b99684a1c020a_hufc32a0c50659798267d43cbe27d64943_54921_250x150_fill_box_smart1_3.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post KMP算法（字符串匹配算法）"
+                        data-key="KMP" 
+                        data-hash="md5-g4MQCVGuQvpPC5loShwCCg==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">KMP算法（字符串匹配算法）</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/dp/">
+        
+        
+            <div class="article-image">
+                <img src="/p/dp/_huc8c4888000c54215c84e1fbac83f0f75_66078_494789b441e84a79f2c8cccd1dcd4c3a.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 动态规划(Dynamic programming)问题解法"
+                        data-key="DP" 
+                        data-hash="md5-0ns3xVT67HqK7xbcbuvehw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">动态规划(Dynamic programming)问题解法</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/spring6/">
+        
+        
+            <div class="article-image">
+                <img src="/p/spring6/1.4c54a7f78b9d6dbb7956c2a066ad5346_huc955137a63590f4561b0a715bdaca55f_11288_250x150_fill_q75_box_smart1.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Spring学习之路（六）"
+                        data-key="spring6" 
+                        data-hash="md5-TFSn94udbbt5VsKgZq1TRg==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Spring学习之路（六）</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="Janson-ig/hugoblogtalks"
+        issue-term="pathname"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
     <section class="copyright">
         &copy; 
         
@@ -699,73 +584,93 @@
     </section>
 </footer>
 
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
             </main>
     <aside class="sidebar right-sidebar sticky">
         
             
-                <form action="/search/" class="search-form widget" >
-        <p>
-            <label>搜索</label>
-            <input name="keyword" required placeholder="输入关键词..." />
-        
-            <button title="搜索">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="10" cy="10" r="7" />
-  <line x1="21" y1="21" x2="15" y2="15" />
-</svg>
-
-
-
-            </button>
-        </p>
-    </form>
-            
-        
-            
-                <section class="widget archives">
+                
+    <section class="widget archives">
         <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-infinity" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M9.828 9.172a4 4 0 1 0 0 5.656 a10 10 0 0 0 2.172 -2.828a10 10 0 0 1 2.172 -2.828 a4 4 0 1 1 0 5.656a10 10 0 0 1 -2.172 -2.828a10 10 0 0 0 -2.172 -2.828" />
-</svg>
-
-
-
-        </div>
-        <h2 class="widget-title section-title">归档</h2>
-
-        
-        
-        
-        
-        
-        <div class="widget-archive--list">
-            <div class="archives-year">
-                    <a href="/archives/#2023">
-                        
-                            <span class="year">2023</span>
-                            <span class="count">2</span>
-                        
-                    </a> 
-                </div>
-            <div class="archives-year">
-                    <a href="/archives/#2022">
-                        
-                            <span class="year">2022</span>
-                            <span class="count">15</span>
-                        
-                    </a> 
-                </div>
-            
-        </div>
-    </section>
-            
-        
-            
-                <section class="widget tagCloud">
-    <div class="widget-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <line x1="5" y1="9" x2="19" y2="9" />
   <line x1="5" y1="15" x2="19" y2="15" />
@@ -775,74 +680,23 @@
 
 
 
-    </div>
-    <h2 class="widget-title section-title">分类</h2>
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#简介--原理">简介 &amp; 原理</a></li>
+    <li><a href="#代码实现">代码实现</a>
+      <ol>
+        <li><a href="#例题">例题</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
 
-    <div class="tagCloud-tags">
-        
-            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="font_size_11">
-                学习笔记
-            </a>
-        
-            <a href="/categories/spring/" class="font_size_6">
-                Spring
-            </a>
-        
-            <a href="/categories/%E7%AE%97%E6%B3%95/" class="font_size_5">
-                算法
-            </a>
-        
-            <a href="/categories/%E7%95%99%E5%AD%A6%E7%94%9F%E6%B4%BB/" class="font_size_4">
-                留学
-            </a>
-        
-            <a href="/categories/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/" class="font_size_1">
-                常用工具
-            </a>
-        
-            <a href="/categories/%E8%B8%A9%E5%9D%91%E6%97%A5%E5%BF%97/" class="font_size_1">
-                踩坑日志
-            </a>
-        
-    </div>
-</section>
-
-            
-        
-            
-                <section class="widget tagCloud">
-    <div class="widget-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-tag" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M11 3L20 12a1.5 1.5 0 0 1 0 2L14 20a1.5 1.5 0 0 1 -2 0L3 11v-4a4 4 0 0 1 4 -4h4" />
-  <circle cx="9" cy="9" r="2" />
-</svg>
-
-
-
-    </div>
-    <h2 class="widget-title section-title">标签云</h2>
-
-    <div class="tagCloud-tags">
-        
-            <a href="/tags/%E6%A1%86%E6%9E%B6/" class="font_size_6">
-                框架
-            </a>
-        
-            <a href="/tags/%E7%AE%97%E6%B3%95/" class="font_size_5">
-                算法
-            </a>
-        
-            <a href="/tags/%E7%95%99%E5%AD%A6%E7%94%9F%E6%B4%BB/" class="font_size_4">
-                留学生活
-            </a>
-        
-            <a href="/tags/git/" class="font_size_2">
-                Git
-            </a>
-        
-    </div>
-</section>
             
         
     </aside>

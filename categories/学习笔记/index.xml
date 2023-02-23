@@ -6,7 +6,46 @@
         <description>Recent content in 学习笔记 on Janson&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Wed, 01 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="http://www.jansonblog.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 23 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="http://www.jansonblog.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>格雷码（Gray code）</title>
+        <link>http://www.jansonblog.com/p/graycode/</link>
+        <pubDate>Thu, 23 Feb 2023 00:00:00 +0000</pubDate>
+        
+        <guid>http://www.jansonblog.com/p/graycode/</guid>
+        <description>&lt;img src="http://www.jansonblog.com/p/graycode/1.jpg" alt="Featured image of post 格雷码（Gray code）" /&gt;&lt;h2 id=&#34;简介--原理&#34;&gt;简介 &amp;amp; 原理&lt;/h2&gt;
+&lt;p&gt; 格雷码（Gray code）是由贝尔实验室的Frank Gray在1940年提出，用于在PCM（脉冲编码调变）方法传送讯号时防止出错。&lt;br&gt;
+ 格雷码是一个数列集合，相邻两数间&lt;strong&gt;只有一个位元&lt;/strong&gt;改变，为无权数码，且格雷码的顺序不是唯一的。&lt;br&gt;
+ 原理：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt; 传统的二进位系统，例如数字3的表示法为011，要切换为邻近的数字4，也就是100时，装置中的三个位元都得要转换，因此于未完全转换的过程时装置会经历短暂的，010,001,101,110,111等其中数种状态，也就是代表着2、1、5、6、7，因此此种数字编码方法于邻近数字转换时有比较大的误差可能范围。
+格雷码的发明即是用来将误差之可能性缩减至最小，编码的方式定义为每个邻近数字都只相差一个位元，因此也称为最小差异码，可以使装置做数字步进时只更动最少的位元数以提高稳定性。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;代码实现&#34;&gt;代码实现&lt;/h2&gt;
+&lt;p&gt; 用&lt;code&gt;G&lt;/code&gt;代表格雷码：&lt;br&gt;
+ 例如3位数的格雷码序列为：&lt;code&gt;000&lt;/code&gt;,&lt;code&gt;001&lt;/code&gt;,&lt;code&gt;011&lt;/code&gt;,&lt;code&gt;010&lt;/code&gt;,&lt;code&gt;110&lt;/code&gt;,&lt;code&gt;111&lt;/code&gt;,&lt;code&gt;101&lt;/code&gt;,&lt;code&gt;100&lt;/code&gt;。&lt;code&gt;111&lt;/code&gt;可以用&lt;code&gt;G(4) = 6&lt;/code&gt;来表示。&lt;/p&gt;
+&lt;p&gt; &lt;em&gt;&lt;strong&gt;公式：&lt;/strong&gt;&lt;/em&gt;&lt;code&gt;G(n) = n ^ (n &amp;gt;&amp;gt; 1)&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;int g (int n) {
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    return n ^ (n &amp;gt;&amp;gt; 1);
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;例题&#34;&gt;例题&lt;/h3&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://leetcode.com/problems/circular-permutation-in-binary-representation/description/&#34;  title=&#34;1238. Circular Permutation in Binary Representation&#34;
+     target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;[medium]1238. Circular Permutation in Binary Representation&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;如有遗漏或错误，欢迎补充纠正&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
         <title>GCD算法（最大公因数算法）</title>
         <link>http://www.jansonblog.com/p/gcd/</link>
         <pubDate>Wed, 01 Feb 2023 00:00:00 +0000</pubDate>
