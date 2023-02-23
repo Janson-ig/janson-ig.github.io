@@ -26,18 +26,6 @@
     <loc>http://www.jansonblog.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
     <lastmod>2023-02-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://www.jansonblog.com/p/mainavi-2024/</loc>
-    <lastmod>2023-01-31T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://www.jansonblog.com/tags/%E7%BB%8F%E9%AA%8C/</loc>
-    <lastmod>2023-01-31T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://www.jansonblog.com/categories/%E5%B0%B1%E8%81%8C/</loc>
-    <lastmod>2023-01-31T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://www.jansonblog.com/categories/%E6%97%A5%E6%9C%AC/</loc>
-    <lastmod>2023-01-31T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>http://www.jansonblog.com/categories/spring/</loc>
     <lastmod>2022-12-16T00:00:00+00:00</lastmod>
   </url><url>
@@ -113,5 +101,9 @@
     <loc>http://www.jansonblog.com/search/</loc>
   </url><url>
     <loc>http://www.jansonblog.com/%E5%85%B3%E4%BA%8E%E6%88%91/</loc>
+  </url><url>
+    <loc>http://www.jansonblog.com/categories/%E5%B0%B1%E8%81%8C/</loc>
+  </url><url>
+    <loc>http://www.jansonblog.com/categories/%E6%97%A5%E6%9C%AC/</loc>
   </url>
 </urlset>
