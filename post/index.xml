@@ -5,7 +5,7 @@
         <link>http://www.jansonblog.com/post/</link>
         <description>Recent content in Posts on Janson&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator>
-        <language>en-us</language>
+        <language>zh-cn</language>
         <lastBuildDate>Thu, 23 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="http://www.jansonblog.com/post/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>格雷码（Gray code）</title>
         <link>http://www.jansonblog.com/p/graycode/</link>
