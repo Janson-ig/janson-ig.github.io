@@ -6,7 +6,65 @@
         <description>Recent content in Posts on Janson&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <lastBuildDate>Thu, 23 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="http://www.jansonblog.com/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 18 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="http://www.jansonblog.com/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>2023年10月18日</title>
+        <link>http://www.jansonblog.com/p/2023-10/</link>
+        <pubDate>Wed, 18 Oct 2023 00:00:00 +0000</pubDate>
+        
+        <guid>http://www.jansonblog.com/p/2023-10/</guid>
+        <description>&lt;img src="http://www.jansonblog.com/p/2023-10/1.jpg" alt="Featured image of post 2023年10月18日" /&gt;&lt;h2 id=&#34;1学业&#34;&gt;1.学业&lt;/h2&gt;
+&lt;p&gt;  半年的折磨，每日每夜跑实验采集数据。自己选的课题，哭着也要做完。&lt;/p&gt;
+&lt;p&gt;  论文老师和博士看完很满意。赶在学会投稿截止日期前，投上了(投完发现有个图注释配反了)。
+&lt;img src=&#34;http://www.jansonblog.com/p/2023-10/1.jpg&#34;
+	width=&#34;4032&#34;
+	height=&#34;3024&#34;
+	srcset=&#34;http://www.jansonblog.com/p/2023-10/1_hue63d7155987ccea8000a02a4e07afe0f_7667328_480x0_resize_q75_box.jpg 480w, http://www.jansonblog.com/p/2023-10/1_hue63d7155987ccea8000a02a4e07afe0f_7667328_1024x0_resize_q75_box.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;IEICE&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;133&#34;
+		data-flex-basis=&#34;320px&#34;
+	
+&gt;
+&lt;img src=&#34;http://www.jansonblog.com/p/2023-10/2.jpg&#34;
+	width=&#34;4032&#34;
+	height=&#34;3024&#34;
+	srcset=&#34;http://www.jansonblog.com/p/2023-10/2_hu04bab518a1bb621c79bad95507d5ef69_8367501_480x0_resize_q75_box.jpg 480w, http://www.jansonblog.com/p/2023-10/2_hu04bab518a1bb621c79bad95507d5ef69_8367501_1024x0_resize_q75_box.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;中部電力MIRAI TOWER&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;133&#34;
+		data-flex-basis=&#34;320px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;2工作&#34;&gt;2.工作&lt;/h2&gt;
+&lt;p&gt;  3月和4月两个月，拿到了3家offer。一家国内银行，一家在日本的中国人公司，一家京都的半导体公司。
+&lt;img src=&#34;http://www.jansonblog.com/p/2023-10/3.jpg&#34;
+	width=&#34;4032&#34;
+	height=&#34;3024&#34;
+	srcset=&#34;http://www.jansonblog.com/p/2023-10/3_hu3b7ffa95495f769ba43b9eb95f139e78_7289899_480x0_resize_q75_box.jpg 480w, http://www.jansonblog.com/p/2023-10/3_hu3b7ffa95495f769ba43b9eb95f139e78_7289899_1024x0_resize_q75_box.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;京都_西本願寺&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;133&#34;
+		data-flex-basis=&#34;320px&#34;
+	
+&gt;
+最后选择了那家半导体公司。&lt;/p&gt;
+&lt;h2 id=&#34;3反省&#34;&gt;3.反省&lt;/h2&gt;
+&lt;p&gt; 自制力比以前好了，但是没半年前阳光了。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>格雷码（Gray code）</title>
         <link>http://www.jansonblog.com/p/graycode/</link>
         <pubDate>Thu, 23 Feb 2023 00:00:00 +0000</pubDate>
@@ -625,24 +683,6 @@ Spring Boot提供的支持配置属性的注入注释。放到Spring bean上后�
 		data-flex-grow=&#34;133&#34;
 		data-flex-basis=&#34;320px&#34;
 	
-&gt;
-  冬天，是充满噩耗的季节，嫌隔离以及一些手续麻烦，疫情以后一直没回国。&lt;br&gt;
-  这个冬天，我妈的姐夫，跟淋巴癌抗争四年后去世了；我爸的嫂子由于脑溢血也变得瘫痪卧床；叔叔由于心血管疾病动了一次大手术（现在恢复的不错）；关系很好的邻居老奶奶去世等等…最无语的是：亲姐姐又被误诊癌症（上一次2016年，医生说无大碍）…&lt;br&gt;
-  这种消息当时几乎每周都会从电话的另一端传来，加上我容易胡思乱想，让我那段时间精神紧绷，很怕某一天自己的父母一声招呼不打的也突然离开。有时候会做噩梦，梦到父母突然离世，哭醒以后看着空无一人的房间，然后想：“大概是太久没回去了吧”&lt;br&gt;
-  好在当时有个每天陪我说话的学长，假期也每天一起去学校。大概四月左右，爸妈体检一切正常，妈妈血糖控制住了，爸爸能吃盐还好血压不高，自己又回到了三年前，那个无忧无虑的21岁。
-&lt;img src=&#34;http://www.jansonblog.com/p/2022/5.jpg&#34;
-	width=&#34;695&#34;
-	height=&#34;1267&#34;
-	srcset=&#34;http://www.jansonblog.com/p/2022/5_hu52d6fcf861da3d676edb62cafb92efb9_826319_480x0_resize_q75_box.jpg 480w, http://www.jansonblog.com/p/2022/5_hu52d6fcf861da3d676edb62cafb92efb9_826319_1024x0_resize_q75_box.jpg 1024w&#34;
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;2019&#34;
-	
-	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;54&#34;
-		data-flex-basis=&#34;131px&#34;
-	
 &gt;&lt;/p&gt;
 &lt;h3 id=&#34;春はる&#34;&gt;春(はる)&lt;/h3&gt;
 &lt;p&gt;&lt;img src=&#34;http://www.jansonblog.com/p/2022/6.jpg&#34;
@@ -658,20 +698,17 @@ Spring Boot提供的支持配置属性的注入注释。放到Spring bean上后�
 		data-flex-grow=&#34;75&#34;
 		data-flex-basis=&#34;180px&#34;
 	
-&gt;
- 　春天，生病了一周：首先怀疑自己是不是中招了，做了核酸发现阴性，才确信自己是肠胃炎又犯了，买了好多药，吃了好几天才好过来。（其中一个药9月被召回，厂家说某成分超标，全日本召回…）&lt;/p&gt;
+&gt;&lt;/p&gt;
 &lt;h4 id=&#34;掘金&#34;&gt;掘金&lt;/h4&gt;
-&lt;p&gt;  4月报名青训营，得知了掘金的存在，后来慢慢就成为我这个自闭怪的摸鱼空间了：
-  我这人有时候自闭怪一个，当时加过一些活动的小群，后来加每个圈子的群。平常水水圈子，参加圈子活动。&lt;/p&gt;
+&lt;p&gt;  4月报名掘金青训营&lt;/p&gt;
 &lt;h5 id=&#34;礼盒周边&#34;&gt;礼盒+周边&lt;/h5&gt;
-&lt;p&gt;  个人觉得最nice的还属中秋礼盒，当时应该有不少掘友抽奖中过（愣着干嘛，梭哈啊）：
-&lt;img src=&#34;http://www.jansonblog.com/p/2022/3.jpg&#34;
+&lt;p&gt;&lt;img src=&#34;http://www.jansonblog.com/p/2022/3.jpg&#34;
 	width=&#34;1276&#34;
 	height=&#34;1702&#34;
 	srcset=&#34;http://www.jansonblog.com/p/2022/3_hu6b78026324735d94ddcc8c721937ed86_224157_480x0_resize_q75_box.jpg 480w, http://www.jansonblog.com/p/2022/3_hu6b78026324735d94ddcc8c721937ed86_224157_1024x0_resize_q75_box.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
-		alt=&#34;中秋礼盒&#34;
+		alt=&#34;掘金礼盒&#34;
 	
 	
 		class=&#34;gallery-image&#34; 
@@ -694,9 +731,9 @@ Spring Boot提供的支持配置属性的注入注释。放到Spring bean上后�
 		data-flex-basis=&#34;320px&#34;
 	
 &gt;
-  夏天，给我特别多指导和建议的一个学长毕业了，同样是山东人，而且是研究室里为数不多的中国人，我们俩特别聊得来。每天在学校要么一起学习，要么一起整活，考试前紧张会安慰我，对未来焦虑时会给我意见。&lt;br&gt;
-  外表冷酷坚强的人，临别那天像个泪人。然后说好到学校车站送他，结果一直陪他坐电车坐了一个多小时，一直送到高铁站。&lt;br&gt;
-  那高铁站离我表弟住的很近，包里带着一个钱包，坐了一个小时车去他家住了一个周，算不上是一次&amp;quot;说走就走的旅行&amp;quot;，但是也不知道怎么就突然离开自己的出租屋这么久。 ——&lt;strong&gt;那几天是2022最快乐的时光&lt;/strong&gt;。
+  夏天，一个学长毕业了，也是山东人。生活和学习都给了我很多帮助。
+  外表冷酷坚强的学长，临别那天像个泪人。然后说好到最近车站送他，结果一直陪他坐电车坐了一个多小时，一直送到大阪站。&lt;br&gt;
+  那天离我表弟很近，包里带着一个钱包，坐了一个小时车去他家住了一个周，算不上是一次&amp;quot;说走就走的旅行&amp;quot;，但是也不知道怎么就突然离开自己的出租屋这么久。
 &lt;img src=&#34;http://www.jansonblog.com/p/2022/11.jpg&#34;
 	width=&#34;960&#34;
 	height=&#34;1280&#34;
@@ -725,14 +762,10 @@ Spring Boot提供的支持配置属性的注入注释。放到Spring bean上后�
 		data-flex-grow=&#34;133&#34;
 		data-flex-basis=&#34;320px&#34;
 	
-&gt;
-  秋天，快乐摸鱼的季节。&lt;/p&gt;
+&gt;&lt;/p&gt;
 &lt;h4 id=&#34;掘友们&#34;&gt;掘友们&lt;/h4&gt;
-&lt;p&gt;  最有收获的属于游戏圈组织的那一次王者荣耀比赛的活动了——我两年没玩王者荣耀，抱着纯纯凑热闹的心理，找了个队混替补，结果发现群里的人全都很nice。&lt;br&gt;
-  现在每天没什么人说话，最快乐的事就是每天水水当时因为比赛组的群，也认识了几个网友：&lt;br&gt;
-  队长：LolitaAnn在掘金（光明正大蹭流量）——山东老乡，我家到她家大概不到60公里，不过是两个市的（我非常恋旧，对感情也是，之前一句话被她骂醒了&lt;br&gt;
-  队员：安余生大大，一条小尾鱼，断桥落雪，Masters：都是三观正靠得住的人，每天一起水群，开玩笑，很有意思。唯一愿望就是希望有一天能面个基。&lt;/p&gt;
-&lt;p&gt;  关于那王者比赛，虽说替补，有一场还真用上我了:我微信区没铭文，没英雄，玩个项羽辅助被揍的，专挑我打。队友也是真大腿，四个带一个，最后还赢了。可惜的是别的队大佬太多了，最后没混上个奖。&lt;br&gt;
+&lt;p&gt;  最有收获的属于游戏圈组织的那一次王者荣耀比赛的活动了——抱着纯纯凑热闹的心理，找了个队混替补，结果发现群里的人全都很nice。&lt;br&gt;
+  队长是山东老乡，大概是当时圈子里唯一剩下的朋友了
 &lt;img src=&#34;http://www.jansonblog.com/p/2022/12.jpg&#34;
 	width=&#34;1280&#34;
 	height=&#34;960&#34;
@@ -746,34 +779,10 @@ Spring Boot提供的支持配置属性的注入注释。放到Spring bean上后�
 		data-flex-grow=&#34;133&#34;
 		data-flex-basis=&#34;320px&#34;
 	
-&gt;&lt;/p&gt;
-&lt;h3 id=&#34;我&#34;&gt;我？&lt;/h3&gt;
-&lt;p&gt;  大学那会是搞IoT的，51单片机，Arduino，树莓派都搞过一会，读研后开始学java。现在实验室用C++，用ns2，ns3搞网络仿真的，java全靠自学。&lt;br&gt;
-  这一年处于还在积累的状态，但是时间不多了…唯一有成就感的事是养成天天做题的习惯：一天两道，偶尔开专项，也算佛系刷法了。&lt;img src=&#34;http://www.jansonblog.com/p/2022/2.png&#34;
-	width=&#34;1029&#34;
-	height=&#34;155&#34;
-	srcset=&#34;http://www.jansonblog.com/p/2022/2_hu0eefc303495b9fb51c30df14d24940e1_42075_480x0_resize_box_3.png 480w, http://www.jansonblog.com/p/2022/2_hu0eefc303495b9fb51c30df14d24940e1_42075_1024x0_resize_box_3.png 1024w&#34;
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;力扣&#34;
-	
-	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;663&#34;
-		data-flex-basis=&#34;1593px&#34;
-	
 &gt;
-  在做的研究不想谈，LoRa仿真，对研究不感兴趣，只想逃。&lt;/p&gt;
-&lt;h3 id=&#34;来年flag&#34;&gt;来年Flag&lt;/h3&gt;
-&lt;h4 id=&#34;offer&#34;&gt;offer&lt;/h4&gt;
-&lt;p&gt;  明年9月就要毕业了，很着急，而且先找着工作才是正事。&lt;/p&gt;
-&lt;h4 id=&#34;回国&#34;&gt;回国&lt;/h4&gt;
-&lt;p&gt;  毕业后时间允许，回国陪陪家人，去找大学的哥们和同学叙叙旧。&lt;/p&gt;
-&lt;h4 id=&#34;面基&#34;&gt;面基&lt;/h4&gt;
-&lt;p&gt;  可遇不可求，有机会一定要跟掘友面基。哦对，还有个五年的网友。&lt;/p&gt;
-&lt;p&gt;  2022年过去了，我很怀念它。&lt;/p&gt;
+ &lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;  “对于过去的一年，还有我们在世上生活的这些年，总要有句结束语：虽然人生在世会有种种不如意，但你仍可以在幸福与不幸中作选择。”&lt;/p&gt;
+&lt;p&gt;  2022年过去了，我很怀念它。&lt;/p&gt;
 &lt;/blockquote&gt;
 </description>
         </item>
@@ -1609,26 +1618,22 @@ W:ABCD&lt;strong&gt;A&lt;/strong&gt;BD&lt;/p&gt;
         
         <guid>http://www.jansonblog.com/p/2022-10/</guid>
         <description>&lt;img src="http://www.jansonblog.com/p/2022-10/1.jpg" alt="Featured image of post 2022年10月20日" /&gt;&lt;h2 id=&#34;近况&#34;&gt;近况&lt;/h2&gt;
-&lt;p&gt;  两个月没有更新博客，因为什么都没有做，把最近的一些事，漫无目的的记录下来。随缘配图，我把这篇作为最近内心的一片幽静之地，在混乱中整理思绪，毕竟这是我的博客，我不要管别人看起来如何。&lt;/p&gt;
+&lt;p&gt;  两个月没有更新博客，把最近的一些事，漫无目的的记录下来。&lt;/p&gt;
 &lt;h2 id=&#34;1力扣&#34;&gt;1.力扣&lt;/h2&gt;
 &lt;p&gt; 力扣依旧在每日刷题，现在基本上看到题可以判断出是什么题型，但是最近对于做题仿佛失去了一些思考。明知道只做出来是不对的，但是还是懒得去思考。或许是因为研究过于不顺，导致自己每天没有余力去探索。&lt;br&gt;
  跟狗人和阿毛一起报名了力扣的一个什么比赛，六道题目，好像一个人四个小时。我和阿毛10分钟不到做完了1，2题，后面知道是dp但是没想出公式，加上那天后背的粉瘤爆炸，下午不得不赶在医院关门前去诊所，最后排名也就只能1000+的样子。&lt;br&gt;
- 好消息在比赛赚了1k积分，终于能换力扣全家桶了。但是，只能等回国再换，而我又什么时候可以回国呢。心中虽然有了回国的计划，但是最近研究的种种不顺，可能只能放弃寒假回国的计划，毕竟学会发表顺利毕业才是现阶段最重要的事。&lt;/p&gt;
+ 好消息：比赛赚了1k积分，能换力扣全家桶了。&lt;/p&gt;
 &lt;h2 id=&#34;2学习&#34;&gt;2.学习&lt;/h2&gt;
 &lt;p&gt; LoRa网关真的很难搞，研究室没有人能帮，只能自己硬着头皮，顶着压力一点一点来。&lt;br&gt;
  今天抱着试试的态度跟一个台湾的公司联络了一下，居然一个小时就收到了回信，虽然很简短，但是给了看起来有用的文档。看了一眼文档，前路漫漫，比想象中的要困难。进度一拖再拖，没有进展。&lt;/p&gt;
 &lt;h2 id=&#34;3掘金&#34;&gt;3.掘金&lt;/h2&gt;
-&lt;p&gt; 最大的收获应该是认识了掘金的小伙伴。安安，小安，小鱼，鑫，master。一群五湖四海的人就因为一场游戏比赛聚到了一起。&lt;br&gt;
+&lt;p&gt; 最大的收获应该是认识了掘金的小伙伴。安安，小安，小鱼，鑫，master。一个很不错的小圈子。&lt;br&gt;
  其中印象最深，聊的最多的是安安。安安是莱州的老乡。安安看着外表搞笑坚强，但是自述有些抑郁。我呢？我应该并不抑郁，不过在日本留学这几年，我内心也是孤独的，我似乎能体会到她和阿毛当时考研时的孤独。她的经历我周围有很多人跟她相似，但是她是一个非常外向的人，内心痛苦会释放。&lt;/p&gt;
 &lt;h2 id=&#34;4独白&#34;&gt;4.独白&lt;/h2&gt;
 &lt;p&gt; 安安是一个让我有时候会羡慕的人，因为她知道自己喜欢什么。而我，像王小波说的那样，原文我并不记得了，大概意思是：20岁是最迷茫的年龄，因为一个人要决定自己以后做什么。&lt;br&gt;
- 我又想做什么呢？自学了Java或许是出于一种喜爱，又或是承诺的履行？因为好像是舅舅跟我说可以学Java，但是我可能又是羡慕大一花旗那个保研清北的学长，因为在他口中Java是那么有趣。或许我确实对Java有自己的喜爱，才能在尝试过那么多语言后选择Java。&lt;br&gt;
- 总之，想起来舅妈说的话：“现在的年轻人迷茫是因为可以选的路太多了，她们那个年代，没有那么多路，大家不知不觉进了一条路就坚持走到了最后”。我也尽量不去想自己的选择，做出了选择就不要后悔。&lt;br&gt;
- 在我内心空虚的时候，都回去看王小波的文章，因为他的经历和三观符合我的内心。&lt;br&gt;
- 牢骚就发到这，因为まなびLAぼ要打卡下班了！&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;无论遇到什么人，我都会一直看守着内心的那块净土，直到遇到你。&lt;/p&gt;
-&lt;/blockquote&gt;
+ 我又想做什么呢？自学了Java或许是出于一种喜爱，又或是承诺的履行？因为好像是有人跟我说可以学Java，但是我可能又是羡慕大一花旗那个保研清北的学长，因为在他口中Java是那么有趣。或许我确实对Java
+有自己的喜爱，才能在尝试过那么多语言后选择Java。&lt;br&gt;
+ 总之，想起来一个亲戚跟我说的话：“现在的年轻人迷茫是因为可以选的路太多了，她们那个年代，没有那么多路，大家不知不觉进了一条路就坚持走到了最后”。所以尽量不去想自己的选择，做出了选择就不要后悔。&lt;/p&gt;
 </description>
         </item>
         <item>
@@ -1637,9 +1642,8 @@ W:ABCD&lt;strong&gt;A&lt;/strong&gt;BD&lt;/p&gt;
         <pubDate>Thu, 25 Aug 2022 00:00:00 +0000</pubDate>
         
         <guid>http://www.jansonblog.com/p/2022-08/</guid>
-        <description>&lt;img src="http://www.jansonblog.com/p/2022-08/title.jpg" alt="Featured image of post 2022年8月生活日记" /&gt;&lt;p&gt; 对于我们来说，八月的主旋律是悲伤，因为答辩在八月，八月是狂欢和离别的夏天&lt;/p&gt;
-&lt;h2 id=&#34;毕业季给学长送行&#34;&gt;毕业季——给学长送行&lt;/h2&gt;
-&lt;p&gt; 曲学长要去LINE福冈工作了，走之前前一夜只睡了2个两小时，看着那状态实在不放心，陪他坐车到了新大阪去换乘新干线（最后还是等错了站台，改了票…）&lt;/p&gt;
+        <description>&lt;img src="http://www.jansonblog.com/p/2022-08/title.jpg" alt="Featured image of post 2022年8月生活日记" /&gt;&lt;h2 id=&#34;毕业季&#34;&gt;毕业季&lt;/h2&gt;
+&lt;p&gt; 学长要去LINE福冈工作了，走之前前一夜只睡了2个两小时，看着那状态实在不放心，陪他坐车到了新大阪去换乘新干线（最后还是等错了站台，改了票…）&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;http://www.jansonblog.com/p/2022-08/2.jpg&#34;
 	width=&#34;1172&#34;
 	height=&#34;1333&#34;
@@ -1654,27 +1658,14 @@ W:ABCD&lt;strong&gt;A&lt;/strong&gt;BD&lt;/p&gt;
 		data-flex-basis=&#34;211px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt; 我跟学长都很喜欢吃咖喱，但是学长基本不喝酒&lt;/p&gt;
+&lt;p&gt; 那会我跟学长都很喜欢吃咖喱&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;http://www.jansonblog.com/p/2022-08/15.jpg&#34;
 	width=&#34;4032&#34;
 	height=&#34;3024&#34;
 	srcset=&#34;http://www.jansonblog.com/p/2022-08/15_hu4c1e72fbca7aa974326b632058a71e0f_8528298_480x0_resize_q75_box.jpg 480w, http://www.jansonblog.com/p/2022-08/15_hu4c1e72fbca7aa974326b632058a71e0f_8528298_1024x0_resize_q75_box.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
-		alt=&#34;在草津车站周围吃了咖喱&#34;
-	
-	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;133&#34;
-		data-flex-basis=&#34;320px&#34;
-	
-&gt;  &lt;img src=&#34;http://www.jansonblog.com/p/2022-08/1.jpg&#34;
-	width=&#34;2050&#34;
-	height=&#34;1537&#34;
-	srcset=&#34;http://www.jansonblog.com/p/2022-08/1_hu4e8706c674acb641e95442a5b23c1ba9_787404_480x0_resize_q75_box.jpg 480w, http://www.jansonblog.com/p/2022-08/1_hu4e8706c674acb641e95442a5b23c1ba9_787404_1024x0_resize_q75_box.jpg 1024w&#34;
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;居酒屋的合照&#34;
+		alt=&#34;经常去的一家印度咖喱店&#34;
 	
 	
 		class=&#34;gallery-image&#34; 
@@ -1684,8 +1675,7 @@ W:ABCD&lt;strong&gt;A&lt;/strong&gt;BD&lt;/p&gt;
 &gt;&lt;/p&gt;
 &lt;h2 id=&#34;flag&#34;&gt;flag！&lt;/h2&gt;
 &lt;p&gt; 跟学长约定，我拿到offer或者回国之前一定会去福冈找他。&lt;br&gt;
- 用了很久的头像，当时是随便找的，偶然发现这个照片居然是在福冈县的神社拍的，所以去福冈也是为了要在那里拍一张属于自己的照片。&lt;br&gt;
- &lt;strong&gt;努力！&lt;/strong&gt;&lt;/p&gt;
+ 用了很久的头像，是福冈县神社的照片&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;http://www.jansonblog.com/p/2022-08/dream.jpg&#34;
 	width=&#34;800&#34;
 	height=&#34;534&#34;
@@ -1714,9 +1704,8 @@ W:ABCD&lt;strong&gt;A&lt;/strong&gt;BD&lt;/p&gt;
 	
 &gt;&lt;/p&gt;
 &lt;h2 id=&#34;大阪万博纪念公园&#34;&gt;大阪万博纪念公园&lt;/h2&gt;
-&lt;p&gt; 在送学长去大阪的路上临时决定要去大阪的表弟家玩几天，表弟刚考完大阪大学修士，也算是说走就走的旅行了。不过包里就只有一把伞和一包湿巾，特意买了一套衣服换洗…所以冲动是有代价的。&lt;br&gt;
- 表弟考的很差，为了不让他伤心，那天尽力的陪他到处逛，看他不开心就鼓励他。毕竟没有什么事是能一遍成功的&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://www.jansonblog.com/p/2022-08/3.jpg&#34;
+&lt;p&gt; 在送学长去大阪的路上临时决定要去大阪的表弟家玩几天，表弟刚考完阪大修士，也算是说走就走的旅行了。
+&lt;img src=&#34;http://www.jansonblog.com/p/2022-08/3.jpg&#34;
 	width=&#34;1280&#34;
 	height=&#34;960&#34;
 	srcset=&#34;http://www.jansonblog.com/p/2022-08/3_hu52b41dd759c481218f70a80532419fd7_128434_480x0_resize_q75_box.jpg 480w, http://www.jansonblog.com/p/2022-08/3_hu52b41dd759c481218f70a80532419fd7_128434_1024x0_resize_q75_box.jpg 1024w&#34;
@@ -1744,8 +1733,7 @@ W:ABCD&lt;strong&gt;A&lt;/strong&gt;BD&lt;/p&gt;
 	
 &gt;&lt;/p&gt;
 &lt;h2 id=&#34;天王寺あべのハルカス&#34;&gt;天王寺——あべのハルカス&lt;/h2&gt;
-&lt;p&gt; 天王寺的「あべのハルカス」是现在关西最高的ビル，入门券1500，里面甚至有餐厅可以烤肉。唯一缺点就是水太贵&lt;br&gt;
- 以后有机会会再上来一次，物超所值。&lt;/p&gt;
+&lt;p&gt; 天王寺的「あべのハルカス」是现在关西最高的ビル，入门券1500。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;http://www.jansonblog.com/p/2022-08/14.jpg&#34;
 	width=&#34;960&#34;
 	height=&#34;1280&#34;
@@ -1773,7 +1761,7 @@ W:ABCD&lt;strong&gt;A&lt;/strong&gt;BD&lt;/p&gt;
 		data-flex-basis=&#34;320px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt; 从下午四点半待到了晚上七点，就为了看日落和夜景，不过确实是值得的。&lt;/p&gt;
+&lt;p&gt; 看了个日落和夜景。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;http://www.jansonblog.com/p/2022-08/7.jpg&#34;
 	width=&#34;1280&#34;
 	height=&#34;960&#34;
@@ -1903,7 +1891,7 @@ W:ABCD&lt;strong&gt;A&lt;/strong&gt;BD&lt;/p&gt;
 		data-flex-basis=&#34;320px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt; 出发的晚，赶在入场截止一小时进了城，两个小时只把这两个城逛完了&lt;/p&gt;
+&lt;p&gt; 姬路城确实比关西其他城堡好玩很多&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;http://www.jansonblog.com/p/2022-08/12.jpg&#34;
 	width=&#34;1280&#34;
 	height=&#34;960&#34;
