@@ -312,15 +312,15 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Bean</span>
-</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="n">DataSource</span> <span class="nf">dataSource</span><span class="o">()</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">new</span> <span class="n">EmbeddedDatabaseBuilder</span><span class="o">()</span>
-</span></span><span class="line"><span class="cl">        <span class="o">.</span><span class="na">setType</span><span class="o">(</span><span class="n">H2</span><span class="o">)</span>
-</span></span><span class="line"><span class="cl">        <span class="o">.</span><span class="na">addScript</span><span class="o">(</span><span class="s">&#34;taco_schema.sql&#34;</span><span class="o">)</span>
-</span></span><span class="line"><span class="cl">        <span class="o">.</span><span class="na">addScripts</span><span class="o">(</span><span class="s">&#34;user_data.sql&#34;</span><span class="o">,</span> <span class="s">&#34;ingredient_data.sql&#34;</span><span class="o">)</span>
-</span></span><span class="line"><span class="cl">        <span class="o">.</span><span class="na">build</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Bean</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="n">DataSource</span><span class="w"> </span><span class="nf">dataSource</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">EmbeddedDatabaseBuilder</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">.</span><span class="na">setType</span><span class="p">(</span><span class="n">H2</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">.</span><span class="na">addScript</span><span class="p">(</span><span class="s">&#34;taco_schema.sql&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">.</span><span class="na">addScripts</span><span class="p">(</span><span class="s">&#34;user_data.sql&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;ingredient_data.sql&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">.</span><span class="na">build</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p><code>addScript()</code> 和 <code>addScripts()</code>方法通过设置String属性来确定数据源——<strong>这是不使用Spring Boot的配置方法。</strong><br>
  如果在运行时类路径中能够找到H2依赖，那么<strong>Spring Boot会自动在Spring应用上下文中创建对应的DataSource bean</strong>。这个bean会运行名为<code>schema.sql</code>和<code>data.sql</code>的脚本。</p>

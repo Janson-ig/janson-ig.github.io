@@ -353,15 +353,15 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">/*
-</span></span><span class="line"><span class="cl">*loadUserByUsername()方法接受用户名并使用它查找UserDetails对象。
-</span></span><span class="line"><span class="cl">*如果找不到给定用户名的用户，则抛出UsernameNotFoundException异常。
-</span></span><span class="line"><span class="cl">*/
-</span></span><span class="line"><span class="cl">public interface UserDetailsService {
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">/*</span>
+</span></span><span class="line"><span class="cl"><span class="o">*</span><span class="n">loadUserByUsername</span><span class="p">()</span><span class="err">方法接受用户名并使用它查找</span><span class="n">UserDetails对象</span><span class="err">。</span>
+</span></span><span class="line"><span class="cl"><span class="o">*</span><span class="err">如果找不到给定用户名的用户，则抛出</span><span class="n">UsernameNotFoundException异常</span><span class="err">。</span>
+</span></span><span class="line"><span class="cl"><span class="o">*/</span>
+</span></span><span class="line"><span class="cl"><span class="n">public</span> <span class="n">interface</span> <span class="n">UserDetailsService</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl"> 
-</span></span><span class="line"><span class="cl">    UserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
+</span></span><span class="line"><span class="cl">    <span class="n">UserDetails</span> <span class="n">loadUserByUsername</span><span class="p">(</span><span class="ne">String</span> <span class="n">username</span><span class="p">)</span> <span class="n">throws</span> <span class="n">UsernameNotFoundException</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"> 
-</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="securing-web-requests">Securing web requests</h2>

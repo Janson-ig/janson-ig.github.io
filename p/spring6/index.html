@@ -440,13 +440,13 @@ Spring Boot提供的支持配置属性的注入注释。放到Spring bean上后�
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Bean</span>
-</span></span><span class="line"><span class="cl"><span class="nd">@Profile</span><span class="o">(</span><span class="s">&#34;dev&#34;</span><span class="o">)</span>
-</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="n">CommandLineRunner</span> <span class="nf">dataLoader</span><span class="o">(</span><span class="n">IngredientRepository</span> <span class="n">repo</span><span class="o">,</span>
-</span></span><span class="line"><span class="cl">    <span class="n">UserRepository</span> <span class="n">userRepo</span><span class="o">,</span> <span class="n">PasswordEncoder</span> <span class="n">encoder</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="o">...</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Bean</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@Profile</span><span class="p">(</span><span class="s">&#34;dev&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="n">CommandLineRunner</span><span class="w"> </span><span class="nf">dataLoader</span><span class="p">(</span><span class="n">IngredientRepository</span><span class="w"> </span><span class="n">repo</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">UserRepository</span><span class="w"> </span><span class="n">userRepo</span><span class="p">,</span><span class="w"> </span><span class="n">PasswordEncoder</span><span class="w"> </span><span class="n">encoder</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">...</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p><strong>用法</strong>：</p>
 <ol>
@@ -469,16 +469,16 @@ Spring Boot提供的支持配置属性的注入注释。放到Spring bean上后�
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Profile</span><span class="o">({</span><span class="s">&#34;!prod&#34;</span><span class="o">,</span> <span class="s">&#34;!qa&#34;</span><span class="o">})</span>
-</span></span><span class="line"><span class="cl"><span class="nd">@Configuration</span>
-</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">DevelopmentConfig</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nd">@Bean</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">CommandLineRunner</span> <span class="nf">dataLoader</span><span class="o">(</span><span class="n">IngredientRepository</span> <span class="n">repo</span><span class="o">,</span>
-</span></span><span class="line"><span class="cl">        <span class="n">UserRepository</span> <span class="n">userRepo</span><span class="o">,</span> <span class="n">PasswordEncoder</span> <span class="n">encoder</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="o">...</span>
-</span></span><span class="line"><span class="cl">    <span class="o">}</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Profile</span><span class="p">({</span><span class="s">&#34;!prod&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;!qa&#34;</span><span class="p">})</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@Configuration</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">DevelopmentConfig</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Bean</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">CommandLineRunner</span><span class="w"> </span><span class="nf">dataLoader</span><span class="p">(</span><span class="n">IngredientRepository</span><span class="w"> </span><span class="n">repo</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">UserRepository</span><span class="w"> </span><span class="n">userRepo</span><span class="p">,</span><span class="w"> </span><span class="n">PasswordEncoder</span><span class="w"> </span><span class="n">encoder</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">...</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>只有prod和qa<strong>均</strong>没有激活的情况下才创建该bean。</p>
 <blockquote>
