@@ -3,18 +3,27 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>http://www.jansonblog.com/</loc>
-    <lastmod>2023-10-18T00:00:00+00:00</lastmod>
+    <lastmod>2024-04-30T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://www.jansonblog.com/p/2023-10/</loc>
-    <lastmod>2023-10-18T00:00:00+00:00</lastmod>
+    <loc>http://www.jansonblog.com/p/goldenweek/</loc>
+    <lastmod>2024-04-30T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://www.jansonblog.com/categories/</loc>
-    <lastmod>2023-10-18T00:00:00+00:00</lastmod>
+    <lastmod>2024-04-30T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://www.jansonblog.com/post/</loc>
-    <lastmod>2023-10-18T00:00:00+00:00</lastmod>
+    <lastmod>2024-04-30T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://www.jansonblog.com/tags/</loc>
+    <lastmod>2024-04-30T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://www.jansonblog.com/tags/%E6%91%84%E5%BD%B1/</loc>
+    <lastmod>2024-04-30T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://www.jansonblog.com/categories/%E6%91%84%E5%BD%B1%E8%AE%B0%E5%BD%95/</loc>
+    <lastmod>2024-04-30T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://www.jansonblog.com/p/2023-10/</loc>
     <lastmod>2023-10-18T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://www.jansonblog.com/categories/%E7%95%99%E5%AD%A6%E7%94%9F%E6%B4%BB/</loc>
@@ -111,7 +120,5 @@
     <loc>http://www.jansonblog.com/categories/%E5%B0%B1%E8%81%8C/</loc>
   </url><url>
     <loc>http://www.jansonblog.com/categories/%E6%97%A5%E6%9C%AC/</loc>
-  </url><url>
-    <loc>http://www.jansonblog.com/categories/%E6%91%84%E5%BD%B1%E8%AE%B0%E5%BD%95/</loc>
   </url>
 </urlset>
