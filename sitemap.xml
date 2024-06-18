@@ -8,9 +8,6 @@
     <loc>http://www.jansonblog.com/p/2023-10/</loc>
     <lastmod>2023-10-18T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://www.jansonblog.com/p/2023-10/</loc>
-    <lastmod>2023-10-18T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>http://www.jansonblog.com/categories/</loc>
     <lastmod>2023-10-18T00:00:00+00:00</lastmod>
   </url><url>
@@ -24,12 +21,6 @@
     <lastmod>2023-10-18T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://www.jansonblog.com/tags/%E7%95%99%E5%AD%A6%E7%94%9F%E6%B4%BB/</loc>
-    <lastmod>2023-10-18T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://www.jansonblog.com/tags/%E6%91%84%E5%BD%B1/</loc>
-    <lastmod>2023-10-18T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://www.jansonblog.com/categories/%E6%91%84%E5%BD%B1%E8%AE%B0%E5%BD%95/</loc>
     <lastmod>2023-10-18T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://www.jansonblog.com/p/graycode/</loc>
@@ -120,5 +111,7 @@
     <loc>http://www.jansonblog.com/categories/%E5%B0%B1%E8%81%8C/</loc>
   </url><url>
     <loc>http://www.jansonblog.com/categories/%E6%97%A5%E6%9C%AC/</loc>
+  </url><url>
+    <loc>http://www.jansonblog.com/categories/%E6%91%84%E5%BD%B1%E8%AE%B0%E5%BD%95/</loc>
   </url>
 </urlset>
