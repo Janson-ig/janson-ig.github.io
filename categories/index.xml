@@ -70,14 +70,6 @@
         <guid>http://www.jansonblog.com/categories/%E6%97%A5%E6%9C%AC/</guid>
         <description>&lt;img src="http://www.jansonblog.com/categories/%E6%97%A5%E6%9C%AC/jp.jpg" alt="Featured image of post 日本" /&gt;</description>
         </item>
-        <item>
-        <title>摄影记录</title>
-        <link>http://www.jansonblog.com/categories/%E6%91%84%E5%BD%B1%E8%AE%B0%E5%BD%95/</link>
-        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-        
-        <guid>http://www.jansonblog.com/categories/%E6%91%84%E5%BD%B1%E8%AE%B0%E5%BD%95/</guid>
-        <description>&lt;img src="http://www.jansonblog.com/categories/%E6%91%84%E5%BD%B1%E8%AE%B0%E5%BD%95/1.jpg" alt="Featured image of post 摄影记录" /&gt;</description>
-        </item>
         
     </channel>
 </rss>
