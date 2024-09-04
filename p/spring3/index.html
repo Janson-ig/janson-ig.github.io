@@ -13,9 +13,6 @@
 <meta name="twitter:title" content="Spring学习之路（三）">
 <meta name="twitter:description" content="Spring Security(一)：密码编译器 & Securing web requests"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='http://www.jansonblog.com/p/spring3/1.jpg' />
-  
-
-
     </head>
     <body class="
     article-page
@@ -318,34 +315,34 @@
 </ul>
 <h2 id="spring-security的密码编译器">Spring Security的密码编译器</h2>
 <div class="table-wrapper"><table>
-<thead>
-<tr>
-<th style="text-align:center">密码编译器</th>
-<th style="text-align:center">加密方法</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">BCryptPasswordEncoder</td>
-<td style="text-align:center">应用 bcrypt 加强哈希加密</td>
-</tr>
-<tr>
-<td style="text-align:center">NoOpPasswordEncoder</td>
-<td style="text-align:center">不应用任何编码<!-- raw HTML omitted -->（对测试有用，不适合生产使用）</td>
-</tr>
-<tr>
-<td style="text-align:center">Pbkdf2PasswordEncoder</td>
-<td style="text-align:center">应用 PBKDF2 加密</td>
-</tr>
-<tr>
-<td style="text-align:center">SCryptPasswordEncoder</td>
-<td style="text-align:center">应用 scrypt 哈希加密</td>
-</tr>
-<tr>
-<td style="text-align:center">StandardPasswordEncoder</td>
-<td style="text-align:center">应用 SHA-256 哈希加密<!-- raw HTML omitted -->（被认为不够安全，已经被弃用）</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th style="text-align: center">密码编译器</th>
+          <th style="text-align: center">加密方法</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">BCryptPasswordEncoder</td>
+          <td style="text-align: center">应用 bcrypt 加强哈希加密</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">NoOpPasswordEncoder</td>
+          <td style="text-align: center">不应用任何编码<!-- raw HTML omitted -->（对测试有用，不适合生产使用）</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">Pbkdf2PasswordEncoder</td>
+          <td style="text-align: center">应用 PBKDF2 加密</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">SCryptPasswordEncoder</td>
+          <td style="text-align: center">应用 scrypt 哈希加密</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">StandardPasswordEncoder</td>
+          <td style="text-align: center">应用 SHA-256 哈希加密<!-- raw HTML omitted -->（被认为不够安全，已经被弃用）</td>
+      </tr>
+  </tbody>
 </table></div>
 <p> 数据库中密码被加密；<br>
  用户在login输入的密码使用相同的算法进行编码，在数据库使用PasswordEncoder的matches()方法进行比较。</p>
@@ -425,66 +422,66 @@
 </div>
 </div><p> Spring web requests的配置方法，以及如何保护路径如下：</p>
 <div class="table-wrapper"><table>
-<thead>
-<tr>
-<th style="text-align:center">方法</th>
-<th style="text-align:center">作用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">access(String)</td>
-<td style="text-align:center">如果给定的Spring Expression Language(SpEL)表达式求值为true，允许访问</td>
-</tr>
-<tr>
-<td style="text-align:center">anonymous()</td>
-<td style="text-align:center">允许匿名用户访问</td>
-</tr>
-<tr>
-<td style="text-align:center">authenticated()</td>
-<td style="text-align:center">允许通过验证的用户访问</td>
-</tr>
-<tr>
-<td style="text-align:center">denyAll()</td>
-<td style="text-align:center">无条件拒绝所有访问</td>
-</tr>
-<tr>
-<td style="text-align:center">fullyAuthenticated()</td>
-<td style="text-align:center">允许通过完全身份验证的用户访问（不推荐）</td>
-</tr>
-<tr>
-<td style="text-align:center">hasAnyAuthority(String&hellip;)</td>
-<td style="text-align:center">如果用户具有任何一个给定的权限，则允许访问（可代替hasAnyRole(String)方法）</td>
-</tr>
-<tr>
-<td style="text-align:center">hasAnyRole(String…)</td>
-<td style="text-align:center">如果用户具有任何给定的角色，则允许访问<!-- raw HTML omitted --> （自动加 ROLE_ 的前缀）</td>
-</tr>
-<tr>
-<td style="text-align:center">hasAuthority(String)</td>
-<td style="text-align:center">如果用户具有指定的权限，则允许访问</td>
-</tr>
-<tr>
-<td style="text-align:center">hasRole(String)</td>
-<td style="text-align:center">如果用户具有指定的角色，则允许访问</td>
-</tr>
-<tr>
-<td style="text-align:center">hasIpAddress(String)</td>
-<td style="text-align:center">如果用户具有指定的IP地址，则允许访问</td>
-</tr>
-<tr>
-<td style="text-align:center">not()</td>
-<td style="text-align:center">否定任何其他认证方法的效果</td>
-</tr>
-<tr>
-<td style="text-align:center">permitAll()</td>
-<td style="text-align:center">无条件允许访问</td>
-</tr>
-<tr>
-<td style="text-align:center">rememberMe()</td>
-<td style="text-align:center">允许通过 remember-me 进行身份验证的用户访问</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th style="text-align: center">方法</th>
+          <th style="text-align: center">作用</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">access(String)</td>
+          <td style="text-align: center">如果给定的Spring Expression Language(SpEL)表达式求值为true，允许访问</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">anonymous()</td>
+          <td style="text-align: center">允许匿名用户访问</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">authenticated()</td>
+          <td style="text-align: center">允许通过验证的用户访问</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">denyAll()</td>
+          <td style="text-align: center">无条件拒绝所有访问</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">fullyAuthenticated()</td>
+          <td style="text-align: center">允许通过完全身份验证的用户访问（不推荐）</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">hasAnyAuthority(String&hellip;)</td>
+          <td style="text-align: center">如果用户具有任何一个给定的权限，则允许访问（可代替hasAnyRole(String)方法）</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">hasAnyRole(String…)</td>
+          <td style="text-align: center">如果用户具有任何给定的角色，则允许访问<!-- raw HTML omitted --> （自动加 ROLE_ 的前缀）</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">hasAuthority(String)</td>
+          <td style="text-align: center">如果用户具有指定的权限，则允许访问</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">hasRole(String)</td>
+          <td style="text-align: center">如果用户具有指定的角色，则允许访问</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">hasIpAddress(String)</td>
+          <td style="text-align: center">如果用户具有指定的IP地址，则允许访问</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">not()</td>
+          <td style="text-align: center">否定任何其他认证方法的效果</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">permitAll()</td>
+          <td style="text-align: center">无条件允许访问</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">rememberMe()</td>
+          <td style="text-align: center">允许通过 remember-me 进行身份验证的用户访问</td>
+      </tr>
+  </tbody>
 </table></div>
 <ul>
 <li>这其中值得注意的事，hasRole()方法可以被hasAuthority()代替：hasRole()方法自动补足 <strong>ROLE_</strong> 的前缀。</li>
@@ -492,70 +489,70 @@
 </ul>
 <h2 id="spring-security对于spel表达式的扩展">Spring Security对于SpEL表达式的扩展</h2>
 <div class="table-wrapper"><table>
-<thead>
-<tr>
-<th style="text-align:center">Security expression</th>
-<th style="text-align:center">SpEL的计算结果</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">authentication</td>
-<td style="text-align:center">用户的认证对象</td>
-</tr>
-<tr>
-<td style="text-align:center">denyAll</td>
-<td style="text-align:center">恒为false</td>
-</tr>
-<tr>
-<td style="text-align:center">hasAnyAuthority(String&hellip;authorities)</td>
-<td style="text-align:center">如果用户被授予所有权限中的某一个，则为true</td>
-</tr>
-<tr>
-<td style="text-align:center">hasAnyRole(String&hellip;roles)</td>
-<td style="text-align:center">如果用户有给定的roles中的某一个，则为true</td>
-</tr>
-<tr>
-<td style="text-align:center">hasAnyAuthority(String authority)</td>
-<td style="text-align:center">如果用户被授予指定的权限，则为true</td>
-</tr>
-<tr>
-<td style="text-align:center">hasPermission(Object target, Object permission)</td>
-<td style="text-align:center">如果用户能以给定的权限访问指定的目标对象，则为true</td>
-</tr>
-<tr>
-<td style="text-align:center">hasRole(String role)</td>
-<td style="text-align:center">如果用户有给定的role，则为true</td>
-</tr>
-<tr>
-<td style="text-align:center">hasIpAddress(String ipAddress)</td>
-<td style="text-align:center">如果请求来自指定ip，则为true</td>
-</tr>
-<tr>
-<td style="text-align:center">isAnnoymous()</td>
-<td style="text-align:center">如果用户是匿名的，则为true</td>
-</tr>
-<tr>
-<td style="text-align:center">isAuthenticated()</td>
-<td style="text-align:center">如果用户已认证，则为true</td>
-</tr>
-<tr>
-<td style="text-align:center">isFullyAuthenticated()</td>
-<td style="text-align:center">如果用户经过完全身份验证(没有使用remember-me进行身份验证)，则为true</td>
-</tr>
-<tr>
-<td style="text-align:center">isRememberMe()</td>
-<td style="text-align:center">如果用户使用remeber-me进行身份验证，则为true</td>
-</tr>
-<tr>
-<td style="text-align:center">permitAll()</td>
-<td style="text-align:center">恒为true</td>
-</tr>
-<tr>
-<td style="text-align:center">principal</td>
-<td style="text-align:center">用户的主要对象</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th style="text-align: center">Security expression</th>
+          <th style="text-align: center">SpEL的计算结果</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">authentication</td>
+          <td style="text-align: center">用户的认证对象</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">denyAll</td>
+          <td style="text-align: center">恒为false</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">hasAnyAuthority(String&hellip;authorities)</td>
+          <td style="text-align: center">如果用户被授予所有权限中的某一个，则为true</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">hasAnyRole(String&hellip;roles)</td>
+          <td style="text-align: center">如果用户有给定的roles中的某一个，则为true</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">hasAnyAuthority(String authority)</td>
+          <td style="text-align: center">如果用户被授予指定的权限，则为true</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">hasPermission(Object target, Object permission)</td>
+          <td style="text-align: center">如果用户能以给定的权限访问指定的目标对象，则为true</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">hasRole(String role)</td>
+          <td style="text-align: center">如果用户有给定的role，则为true</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">hasIpAddress(String ipAddress)</td>
+          <td style="text-align: center">如果请求来自指定ip，则为true</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">isAnnoymous()</td>
+          <td style="text-align: center">如果用户是匿名的，则为true</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">isAuthenticated()</td>
+          <td style="text-align: center">如果用户已认证，则为true</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">isFullyAuthenticated()</td>
+          <td style="text-align: center">如果用户经过完全身份验证(没有使用remember-me进行身份验证)，则为true</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">isRememberMe()</td>
+          <td style="text-align: center">如果用户使用remeber-me进行身份验证，则为true</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">permitAll()</td>
+          <td style="text-align: center">恒为true</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">principal</td>
+          <td style="text-align: center">用户的主要对象</td>
+      </tr>
+  </tbody>
 </table></div>
 <ul>
 <li>remember-me（记住我）认证，就是常见的记住我：下次登录时，使用cookie导致自动登录发生。</li>

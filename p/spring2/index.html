@@ -13,9 +13,6 @@
 <meta name="twitter:title" content="Spring学习之路（二）">
 <meta name="twitter:description" content="几个模板引擎及模板缓存"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='http://www.jansonblog.com/p/spring2/1.jpg' />
-  
-
-
     </head>
     <body class="
     article-page
@@ -315,34 +312,34 @@
     <h2 id="模板引擎">模板引擎</h2>
 <p>书中总结了以下模板：</p>
 <div class="table-wrapper"><table>
-<thead>
-<tr>
-<th style="text-align:center">模板</th>
-<th style="text-align:center">Spring Boot starter依赖</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">JavaServer Pages(JSP)</td>
-<td style="text-align:center">无(由Tomcat或Jetty提供)</td>
-</tr>
-<tr>
-<td style="text-align:center">FreeMarker</td>
-<td style="text-align:center">spring-boot-starter-freemarker</td>
-</tr>
-<tr>
-<td style="text-align:center">Groovy Templates</td>
-<td style="text-align:center">spring-boot-starter-groovy-templates</td>
-</tr>
-<tr>
-<td style="text-align:center">Mustache</td>
-<td style="text-align:center">spring-boot-starter-mustache</td>
-</tr>
-<tr>
-<td style="text-align:center">Thymeleaf</td>
-<td style="text-align:center">spring-boot-starter-thymeleaf</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th style="text-align: center">模板</th>
+          <th style="text-align: center">Spring Boot starter依赖</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">JavaServer Pages(JSP)</td>
+          <td style="text-align: center">无(由Tomcat或Jetty提供)</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">FreeMarker</td>
+          <td style="text-align: center">spring-boot-starter-freemarker</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">Groovy Templates</td>
+          <td style="text-align: center">spring-boot-starter-groovy-templates</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">Mustache</td>
+          <td style="text-align: center">spring-boot-starter-mustache</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">Thymeleaf</td>
+          <td style="text-align: center">spring-boot-starter-thymeleaf</td>
+      </tr>
+  </tbody>
 </table></div>
 <p>其中，JSP不需要依赖的原因:</p>
 <ul>
@@ -359,30 +356,30 @@
 <code>spring.thymeleaf.cache=false</code></li>
 </ul>
 <div class="table-wrapper"><table>
-<thead>
-<tr>
-<th style="text-align:center">模板</th>
-<th style="text-align:center">启用缓存的属性</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">FreeMarker</td>
-<td style="text-align:center">spring.freemarker.cache</td>
-</tr>
-<tr>
-<td style="text-align:center">Groovy Templates</td>
-<td style="text-align:center">spring.groovy.template.cache</td>
-</tr>
-<tr>
-<td style="text-align:center">Mustache</td>
-<td style="text-align:center">spring.mustache.cache</td>
-</tr>
-<tr>
-<td style="text-align:center">Thymeleaf</td>
-<td style="text-align:center">spring.thymeleaf.cache</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th style="text-align: center">模板</th>
+          <th style="text-align: center">启用缓存的属性</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">FreeMarker</td>
+          <td style="text-align: center">spring.freemarker.cache</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">Groovy Templates</td>
+          <td style="text-align: center">spring.groovy.template.cache</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">Mustache</td>
+          <td style="text-align: center">spring.mustache.cache</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">Thymeleaf</td>
+          <td style="text-align: center">spring.thymeleaf.cache</td>
+      </tr>
+  </tbody>
 </table></div>
 <h2 id="thymeleaf模板">Thymeleaf模板</h2>
 <ul>
