@@ -13,8 +13,8 @@
         
         <guid>http://www.jansonblog.com/p/spring6/</guid>
         <description>&lt;img src="http://www.jansonblog.com/p/spring6/1.jpg" alt="Featured image of post Spring学习之路（六）" /&gt;&lt;p&gt; &lt;/p&gt;
-&lt;h2 id=&#34;创建自己的配置属性&#34;&gt;创建自己的配置属性&lt;/h2&gt;
-&lt;p&gt; 这章讲的有点啰嗦，主要就讲了一个注解：&lt;/p&gt;
+&lt;h2 id=&#34;创建自己的配置属性&#34;&gt;创建自己的配置属性
+&lt;/h2&gt;&lt;p&gt; 这章讲的有点啰嗦，主要就讲了一个注解：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;code&gt;@ConfigurationProperties&lt;/code&gt;：&lt;br&gt;
@@ -25,10 +25,10 @@ Spring Boot提供的支持配置属性的注入注释。放到Spring bean上后�
 &lt;p&gt;注：Pageable是Spring Data根据页号和每页数量选取结果的子集的一种方法。&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;spring-profile搭建特定环境的配置&#34;&gt;Spring profile搭建特定环境的配置&lt;/h2&gt;
-&lt;p&gt; profile是⼀种条件化的配置，在运⾏时，根据哪些profile处于激活状态，可以使⽤或忽略不同的bean、配置类和配置属性&lt;/p&gt;
-&lt;h3 id=&#34;定义特定profile&#34;&gt;定义特定profile&lt;/h3&gt;
-&lt;p&gt; 定义特定profile相关的属性的⼀种⽅式就是创建另外⼀个YAML或属性⽂件，其中只包含⽤于⽣产环境的属性。&lt;br&gt;
+&lt;h2 id=&#34;spring-profile搭建特定环境的配置&#34;&gt;Spring profile搭建特定环境的配置
+&lt;/h2&gt;&lt;p&gt; profile是⼀种条件化的配置，在运⾏时，根据哪些profile处于激活状态，可以使⽤或忽略不同的bean、配置类和配置属性&lt;/p&gt;
+&lt;h3 id=&#34;定义特定profile&#34;&gt;定义特定profile
+&lt;/h3&gt;&lt;p&gt; 定义特定profile相关的属性的⼀种⽅式就是创建另外⼀个YAML或属性⽂件，其中只包含⽤于⽣产环境的属性。&lt;br&gt;
  ⽂件的名称要遵守如下的约定：&lt;code&gt;application-{profile名}.yml&lt;/code&gt;或 &lt;code&gt;application-{profile名}.properties&lt;/code&gt;。&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;方法1&lt;br&gt;
@@ -101,8 +101,8 @@ Spring Boot提供的支持配置属性的注入注释。放到Spring bean上后�
  在上述例子，不管程序运行的时候哪个profile处于激活状态，根据&lt;strong&gt;默认profile&lt;/strong&gt;，包的日志级别都会设为DEBUG。&lt;br&gt;
  但是如果名为prod的profile激活，&lt;code&gt;logging.level.tacos&lt;/code&gt;属性会被重写为&lt;strong&gt;WARN&lt;/strong&gt;。同理，如果prod profile处于激活状态，数据源相关属性会被设置为使用外部的MySQL数据库。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;激活profile三个方法&#34;&gt;激活profile（三个方法）&lt;/h3&gt;
-&lt;ol&gt;
+&lt;h3 id=&#34;激活profile三个方法&#34;&gt;激活profile（三个方法）
+&lt;/h3&gt;&lt;ol&gt;
 &lt;li&gt;需要将profile名称的列表赋值给&lt;code&gt;spring.profiles.active&lt;/code&gt;属性。例如，在&lt;code&gt;application.yml&lt;/code&gt;文件中：&lt;/li&gt;
 &lt;/ol&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -123,8 +123,8 @@ Spring Boot提供的支持配置属性的注入注释。放到Spring bean上后�
 2. &lt;code&gt;% export SPRING_PROFILES_ACTIVE=prod&lt;/code&gt;
 3. 以JAR文件形式运行，可以以&lt;strong&gt;命令行参数&lt;/strong&gt;的形式设置要激活的profile：&lt;br&gt;
 &lt;code&gt;% java -jar taco-cloud.jar --spring.profiles.active=prod&lt;/code&gt;&lt;/p&gt;
-&lt;h4 id=&#34;设置多个profile两个方法&#34;&gt;设置多个profile(两个方法)&lt;/h4&gt;
-&lt;ol&gt;
+&lt;h4 id=&#34;设置多个profile两个方法&#34;&gt;设置多个profile(两个方法)
+&lt;/h4&gt;&lt;ol&gt;
 &lt;li&gt;YAML中：&lt;/li&gt;
 &lt;/ol&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -148,10 +148,10 @@ Spring Boot提供的支持配置属性的注入注释。放到Spring bean上后�
 &lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
 &lt;li&gt;&lt;code&gt;% export SPRING_PROFILES_ACTIVE=prod,audit,ha&lt;/code&gt;&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h4 id=&#34;如果使用cloud-foundry&#34;&gt;如果使用Cloud Foundry&lt;/h4&gt;
-&lt;p&gt; Spring应用部署在Cloud Foundry，会自动激活名为&lt;strong&gt;cloud&lt;/strong&gt;的profile，只需将生产环境相关的配置放到cloud profile下。&lt;/p&gt;
-&lt;h2 id=&#34;使用profile条件化地创建bean&#34;&gt;使用profile条件化地创建bean&lt;/h2&gt;
-&lt;p&gt;&lt;code&gt;@Profile&lt;/code&gt;注解可以将某些bean设置为仅适用于给定的profile，例如：&lt;/p&gt;
+&lt;h4 id=&#34;如果使用cloud-foundry&#34;&gt;如果使用Cloud Foundry
+&lt;/h4&gt;&lt;p&gt; Spring应用部署在Cloud Foundry，会自动激活名为&lt;strong&gt;cloud&lt;/strong&gt;的profile，只需将生产环境相关的配置放到cloud profile下。&lt;/p&gt;
+&lt;h2 id=&#34;使用profile条件化地创建bean&#34;&gt;使用profile条件化地创建bean
+&lt;/h2&gt;&lt;p&gt;&lt;code&gt;@Profile&lt;/code&gt;注解可以将某些bean设置为仅适用于给定的profile，例如：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -216,9 +216,9 @@ Spring Boot提供的支持配置属性的注入注释。放到Spring bean上后�
         
         <guid>http://www.jansonblog.com/p/spring5/</guid>
         <description>&lt;img src="http://www.jansonblog.com/p/spring5/1.jpg" alt="Featured image of post Spring学习之路（五）" /&gt;&lt;p&gt; 第六章内容第五版与第六版几乎相同。本章介绍了自动配置bean；创建自己的配置属性；使用profile进行配置。&lt;/p&gt;
-&lt;h1 id=&#34;自动配置&#34;&gt;自动配置：&lt;/h1&gt;
-&lt;h2 id=&#34;细粒度的自动配置&#34;&gt;细粒度的自动配置&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;两种不同但相关的配置&lt;/strong&gt;&lt;/p&gt;
+&lt;h1 id=&#34;自动配置&#34;&gt;自动配置：
+&lt;/h1&gt;&lt;h2 id=&#34;细粒度的自动配置&#34;&gt;细粒度的自动配置
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;两种不同但相关的配置&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Bean wiring（装配bean）：声明在Spring应⽤上下⽂中创建哪些应⽤组件以及它们应该如何相互注入。&lt;/li&gt;
 &lt;li&gt;Property injection（依赖注入）声明在Spring应⽤上下⽂中创建哪些应⽤组件以及它们应该如何相互注入。&lt;/li&gt;
@@ -249,8 +249,8 @@ Spring Boot提供的支持配置属性的注入注释。放到Spring bean上后�
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;&lt;code&gt;addScript()&lt;/code&gt; 和 &lt;code&gt;addScripts()&lt;/code&gt;方法通过设置String属性来确定数据源——&lt;strong&gt;这是不使用Spring Boot的配置方法。&lt;/strong&gt;&lt;br&gt;
  如果在运行时类路径中能够找到H2依赖，那么&lt;strong&gt;Spring Boot会自动在Spring应用上下文中创建对应的DataSource bean&lt;/strong&gt;。这个bean会运行名为&lt;code&gt;schema.sql&lt;/code&gt;和&lt;code&gt;data.sql&lt;/code&gt;的脚本。&lt;/p&gt;
-&lt;h2 id=&#34;spring的环境抽象&#34;&gt;Spring的环境抽象&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;Spring的环境抽象&lt;/strong&gt;&lt;br&gt;
+&lt;h2 id=&#34;spring的环境抽象&#34;&gt;Spring的环境抽象
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;Spring的环境抽象&lt;/strong&gt;&lt;br&gt;
  Spring环境会拉取多个属性源：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;JVM系统属性&lt;/li&gt;
@@ -281,8 +281,8 @@ Spring Boot提供的支持配置属性的注入注释。放到Spring bean上后�
 &lt;li&gt;命令行参数启动时指定端口：$ java -jar tacocloud-0.0.5-SNAPSHOT.jar &amp;ndash;server.port=9090&lt;/li&gt;
 &lt;li&gt;操作系统环境变量进行一次配置：$ export SERVER_PORT=9090（Spring能自动挑选环境变量名，将其解析）&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2 id=&#34;配置数据源&#34;&gt;配置数据源&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;显示配置自己的datasource&lt;/strong&gt;:&lt;br&gt;
+&lt;h2 id=&#34;配置数据源&#34;&gt;配置数据源
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;显示配置自己的datasource&lt;/strong&gt;:&lt;br&gt;
 在&lt;code&gt;application.yml&lt;/code&gt;配置：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -301,8 +301,8 @@ Spring Boot提供的支持配置属性的注入注释。放到Spring bean上后�
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt; &lt;strong&gt;尽管我们需要将对应的JDBC驱动添加到构建⽂件中，但是我们不需要指定JDBC驱动类。Spring Boot会根据数据库URL的结构推算出来。&lt;/strong&gt;&lt;/p&gt;
-&lt;h3 id=&#34;设置jdbc驱动类&#34;&gt;设置JDBC驱动类&lt;/h3&gt;
-&lt;p&gt; 然⽽，我们依然可以通过&lt;code&gt;spring.datasource.driver-class-name&lt;/code&gt;属性来进⾏设置JDBC驱动类：&lt;/p&gt;
+&lt;h3 id=&#34;设置jdbc驱动类&#34;&gt;设置JDBC驱动类
+&lt;/h3&gt;&lt;p&gt; 然⽽，我们依然可以通过&lt;code&gt;spring.datasource.driver-class-name&lt;/code&gt;属性来进⾏设置JDBC驱动类：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -327,8 +327,8 @@ Spring Boot提供的支持配置属性的注入注释。放到Spring bean上后�
 &lt;li&gt;Apache Commons DBCP 2&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;注：旧版默认连接池是Tomcat的JDBC连接池，新版默认连接池已经变成HikariCP，因为它够快，代码量少，稳定。&lt;/p&gt;
-&lt;h2 id=&#34;配置嵌入式服务器&#34;&gt;配置嵌入式服务器&lt;/h2&gt;
-&lt;p&gt; 如果在配置servlet容器端口时，将端口设为0，即：&lt;/p&gt;
+&lt;h2 id=&#34;配置嵌入式服务器&#34;&gt;配置嵌入式服务器
+&lt;/h2&gt;&lt;p&gt; 如果在配置servlet容器端口时，将端口设为0，即：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -341,8 +341,8 @@ Spring Boot提供的支持配置属性的注入注释。放到Spring bean上后�
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;会发生什么？&lt;br&gt;
  虽然显式设为0，但是服务器不会在端口0上启动。而是任选一个可用的端口。这在运行自动化集成测试的时候，非常有用：因为可以保证并发运行的测试不会与硬编码的端口号冲突。&lt;/p&gt;
-&lt;h3 id=&#34;配置使其处理https请求&#34;&gt;配置使其处理HTTPS请求&lt;/h3&gt;
-&lt;p&gt; 底层服务器配置不仅局限于一个端口，底层容器最常见的一项设置是让它处理HTTPS请求。&lt;br&gt;
+&lt;h3 id=&#34;配置使其处理https请求&#34;&gt;配置使其处理HTTPS请求
+&lt;/h3&gt;&lt;p&gt; 底层服务器配置不仅局限于一个端口，底层容器最常见的一项设置是让它处理HTTPS请求。&lt;br&gt;
  为了实现，需要使用JDK的keytool命令行工具生成keystore：&lt;br&gt;
 &lt;code&gt;$ keytool -keystore mykeys.jks -genkey -alias tomcat -keyalg RSA&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt; 接下来，为了在嵌入式服务器中启用HTTPS，需要设置属性：&lt;/p&gt;
@@ -375,8 +375,8 @@ Spring Boot提供的支持配置属性的注入注释。放到Spring bean上后�
 &lt;li&gt;&lt;code&gt;server.ssl.key-store-password&lt;/code&gt;和&lt;code&gt;server.ssl.key-password&lt;/code&gt;属性设置为创建&lt;code&gt;keystore&lt;/code&gt;所设置的密码&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;属性准备就绪后，应用会监听8443端口的HTTPS请求。&lt;/p&gt;
-&lt;h2 id=&#34;配置日志&#34;&gt;配置日志&lt;/h2&gt;
-&lt;p&gt; 默认情况下，Spring Boot通过Logback配置日志，日志以INFO级别写入到控制台&lt;br&gt;
+&lt;h2 id=&#34;配置日志&#34;&gt;配置日志
+&lt;/h2&gt;&lt;p&gt; 默认情况下，Spring Boot通过Logback配置日志，日志以INFO级别写入到控制台&lt;br&gt;
  为了完全控制日志的配置，可以在类路径的根目录下&lt;code&gt;src/main/resources&lt;/code&gt;创建&lt;code&gt;logback.xml&lt;/code&gt;文件。&lt;br&gt;
 简单样例：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -462,8 +462,8 @@ Spring Boot提供的支持配置属性的注入注释。放到Spring bean上后�
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt; 如果应用具有指定目录的写入权限，日志条目会被写入到指定目录。&lt;br&gt;
  默认情况下，日志文件达到&lt;strong&gt;10MB&lt;/strong&gt;就会轮换。&lt;/p&gt;
-&lt;h2 id=&#34;使用特定的属性值&#34;&gt;使用特定的属性值&lt;/h2&gt;
-&lt;p&gt; 设置属性不局限于将值设置为硬编码的String或数值，可以从其他的&lt;strong&gt;配置属性派生值&lt;/strong&gt;：&lt;br&gt;
+&lt;h2 id=&#34;使用特定的属性值&#34;&gt;使用特定的属性值
+&lt;/h2&gt;&lt;p&gt; 设置属性不局限于将值设置为硬编码的String或数值，可以从其他的&lt;strong&gt;配置属性派生值&lt;/strong&gt;：&lt;br&gt;
  假设我们想要设置⼀个名为&lt;code&gt;greeting.welcome&lt;/code&gt;的属性，它的值来源于名为&lt;code&gt;spring.application.name&lt;/code&gt;的另⼀个属性：
  在设置&lt;code&gt;greeting.welcome&lt;/code&gt;的时候，可以使用&lt;code&gt;${}&lt;/code&gt;占位符标记：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -501,8 +501,8 @@ Spring Boot提供的支持配置属性的注入注释。放到Spring bean上后�
         
         <guid>http://www.jansonblog.com/p/spring4/</guid>
         <description>&lt;img src="http://www.jansonblog.com/p/spring4/1.jpg" alt="Featured image of post Spring学习之路（四）" /&gt;&lt;p&gt; 本文是Spring Security系列最后一篇总结。&lt;/p&gt;
-&lt;h2 id=&#34;对oauth20的支持&#34;&gt;对OAuth2.0的支持&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;OAuth2.0是什么？&lt;/strong&gt;&lt;br&gt;
+&lt;h2 id=&#34;对oauth20的支持&#34;&gt;对OAuth2.0的支持
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;OAuth2.0是什么？&lt;/strong&gt;&lt;br&gt;
  举个例子，就是网站中常见的第三方登录，登录某个网站支持使用Facebook，Google账号登录。微信网页授权也是基于OAuth2.0。同时1.0版本也已经被2.0完全取代了。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Spring Security支持Fackbook,Google,GitHub,Okta第三方登录&lt;/li&gt;
@@ -555,8 +555,8 @@ Spring Boot提供的支持配置属性的注入注释。放到Spring bean上后�
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;            &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;logoutSuccessUrl&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;/&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;阻止跨站请求伪造-csrfcross-site-request-forgery&#34;&gt;阻止跨站请求伪造 (CSRF:Cross-site request forgery)：&lt;/h2&gt;
-&lt;ul&gt;
+&lt;/div&gt;&lt;h2 id=&#34;阻止跨站请求伪造-csrfcross-site-request-forgery&#34;&gt;阻止跨站请求伪造 (CSRF:Cross-site request forgery)：
+&lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;Spring Security含有&lt;strong&gt;内置的CSRF保护&lt;/strong&gt;，而且是&lt;strong&gt;默认启用&lt;/strong&gt;的，所以只需确保应用程序提交的任何表单都包含一个名为&lt;code&gt;_csrf&lt;/code&gt;的字段，该字段包含CSRF令牌。&lt;/li&gt;
 &lt;li&gt;Spring Security通过将CSRF令牌放在名为&lt;code&gt;_csrf&lt;/code&gt;的请求属性中来简化这一点。因此，在一个&lt;strong&gt;Thymeleaf模板&lt;/strong&gt;中，可以用下面的代码在一个隐藏字段中呈现CSRF令牌:&lt;br&gt;
  &lt;code&gt;&amp;lt;input type=&amp;quot;hidden&amp;quot; name=&amp;quot;_csrf&amp;quot; th:value=&amp;quot;${_csrf.token}&amp;quot;/&amp;gt;&lt;/code&gt;&lt;/li&gt;
@@ -575,12 +575,12 @@ Spring Boot提供的支持配置属性的注入注释。放到Spring bean上后�
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;.and().csrf().disable()&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;方法级安全控制&#34;&gt;方法级安全控制&lt;/h2&gt;
-&lt;h3 id=&#34;preauthorize注解&#34;&gt;&lt;code&gt;@PreAuthorize&lt;/code&gt;注解&lt;/h3&gt;
-&lt;ol&gt;
+&lt;h2 id=&#34;方法级安全控制&#34;&gt;方法级安全控制
+&lt;/h2&gt;&lt;h3 id=&#34;preauthorize注解&#34;&gt;&lt;code&gt;@PreAuthorize&lt;/code&gt;注解
+&lt;/h3&gt;&lt;ol&gt;
 &lt;li&gt;
-&lt;h4 id=&#34;作用&#34;&gt;作用&lt;/h4&gt;
- &lt;code&gt;@PreAuthorize&lt;/code&gt;注解根据SpEL表达式进行判断，如果表达式值为&lt;code&gt;false&lt;/code&gt;，则不会调用方法： &lt;br&gt;
+&lt;h4 id=&#34;作用&#34;&gt;作用
+&lt;/h4&gt; &lt;code&gt;@PreAuthorize&lt;/code&gt;注解根据SpEL表达式进行判断，如果表达式值为&lt;code&gt;false&lt;/code&gt;，则不会调用方法： &lt;br&gt;
  &lt;code&gt;@PreAuthorize&lt;/code&gt;如果阻止了调用，SpringSecurity抛出&lt;strong&gt;AccessDeniedException&lt;/strong&gt;未检查的异常，不需要进行捕捉。除非想对其进行自定义处理。如果不进行捕获:
 &lt;ul&gt;
 &lt;li&gt; 异常会被SpringSecurity的过滤器捕捉，要么显示&lt;strong&gt;HTTP403&lt;/strong&gt;错误；&lt;/li&gt;
@@ -588,8 +588,8 @@ Spring Boot提供的支持配置属性的注入注释。放到Spring bean上后�
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;h4 id=&#34;用法&#34;&gt;用法&lt;/h4&gt;
-&lt;/li&gt;
+&lt;h4 id=&#34;用法&#34;&gt;用法
+&lt;/h4&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -607,8 +607,8 @@ Spring Boot提供的支持配置属性的注入注释。放到Spring bean上后�
 &lt;/div&gt;
 &lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;
 &lt;li&gt;
-&lt;h4 id=&#34;注意&#34;&gt;&lt;strong&gt;注意&lt;/strong&gt;&lt;/h4&gt;
-&lt;/li&gt;
+&lt;h4 id=&#34;注意&#34;&gt;&lt;strong&gt;注意&lt;/strong&gt;
+&lt;/h4&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt; &lt;del&gt;在以前的用法中，使用&lt;code&gt;@EnableGlobalMethodSecurity&lt;/code&gt;注解，并扩展&lt;code&gt;WebSecurityConfigurerAdapter&lt;/code&gt;类并且覆盖配置&lt;code&gt;HttpSecurity&lt;/code&gt;和&lt;code&gt;WebSecurity&lt;/code&gt;的方法；&lt;/del&gt;&lt;br&gt;
  &lt;strong&gt;现在，&lt;code&gt;WebSecurityConfigurerAdapter&lt;/code&gt;在SpringSecurity5.7.1以上或SpringBoot2.7.0以上会出现已被弃用的警告!&lt;/strong&gt;**
@@ -635,18 +635,18 @@ Spring Boot提供的支持配置属性的注入注释。放到Spring bean上后�
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id=&#34;postauthorize注解&#34;&gt;&lt;code&gt;@PostAuthorize&lt;/code&gt;注解&lt;/h3&gt;
-&lt;ol&gt;
+&lt;/div&gt;&lt;h3 id=&#34;postauthorize注解&#34;&gt;&lt;code&gt;@PostAuthorize&lt;/code&gt;注解
+&lt;/h3&gt;&lt;ol&gt;
 &lt;li&gt;
-&lt;h4 id=&#34;作用-1&#34;&gt;作用&lt;/h4&gt;
-&lt;/li&gt;
+&lt;h4 id=&#34;作用-1&#34;&gt;作用
+&lt;/h4&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt; &lt;code&gt;@PostAuthorize&lt;/code&gt;注解的工作方式几乎与&lt;code&gt;@PreAuthorize&lt;/code&gt;注解相同，只是它的表达式在&lt;strong&gt;调用目标方法并返回之前&lt;/strong&gt;不会被计算。表达式可以根据方法的返回值来决定是否允许调用方法。&lt;br&gt;
  抛出异常与&lt;code&gt;@PreAuthorize&lt;/code&gt;注解相同，为&lt;strong&gt;AccessDeniedException&lt;/strong&gt;未检查的异常。&lt;/p&gt;
 &lt;ol start=&#34;2&#34;&gt;
 &lt;li&gt;
-&lt;h4 id=&#34;用法-1&#34;&gt;用法&lt;/h4&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;h4 id=&#34;用法-1&#34;&gt;用法
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
@@ -664,9 +664,9 @@ Spring Boot提供的支持配置属性的注入注释。放到Spring bean上后�
 &lt;/div&gt;
 &lt;/div&gt;&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2 id=&#34;spring-security判断经过身份验证用户的方法&#34;&gt;Spring Security判断经过身份验证用户的方法：&lt;/h2&gt;
-&lt;h3 id=&#34;方法一&#34;&gt;方法一&lt;/h3&gt;
-&lt;ul&gt;
+&lt;h2 id=&#34;spring-security判断经过身份验证用户的方法&#34;&gt;Spring Security判断经过身份验证用户的方法：
+&lt;/h2&gt;&lt;h3 id=&#34;方法一&#34;&gt;方法一
+&lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;在控制器方法中添加&lt;strong&gt;java.security.Principal&lt;/strong&gt;对象：
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -692,8 +692,8 @@ Spring Boot提供的支持配置属性的注入注释。放到Spring bean上后�
 &lt;/div&gt;
 &lt;/div&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;方法二&#34;&gt;方法二&lt;/h3&gt;
-&lt;ul&gt;
+&lt;h3 id=&#34;方法二&#34;&gt;方法二
+&lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;在控制器方法中添加&lt;strong&gt;org.springframework.security.core.Authentication&lt;/strong&gt;对象：
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -727,8 +727,8 @@ Spring Boot提供的支持配置属性的注入注释。放到Spring bean上后�
 &lt;/div&gt;
 &lt;/div&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;方法三&#34;&gt;方法三&lt;/h3&gt;
-&lt;ul&gt;
+&lt;h3 id=&#34;方法三&#34;&gt;方法三
+&lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;注入一个带&lt;code&gt;@AuthenticationPrincipal&lt;/code&gt;注解的方法参数。（该注解来自Spring Security的&lt;strong&gt;org.springframework.security.core.annotation&lt;/strong&gt;包）：
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -774,8 +774,8 @@ Spring Boot提供的支持配置属性的注入注释。放到Spring bean上后�
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;方法四&#34;&gt;方法四&lt;/h3&gt;
-&lt;ul&gt;
+&lt;h3 id=&#34;方法四&#34;&gt;方法四
+&lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;还有另一种方法可以识别经过身份验证的用户是谁，虽然有点混乱，因为它使用了大量特定于安全的代码。可以从安全上下文中获取一个身份验证对象，然后像这样请求它的主体：
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -817,8 +817,8 @@ Spring Boot提供的支持配置属性的注入注释。放到Spring bean上后�
 &lt;li&gt;Spring实战第五版中使用的WebSecurityConfigurerAdapter已被弃用 （还没学过就被弃用了&amp;hellip;）&lt;/li&gt;
 &lt;li&gt;第五章开始，使用最新的Spring实战第六版进行学习&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;spring-security的密码编译器&#34;&gt;Spring Security的密码编译器&lt;/h2&gt;
-&lt;table&gt;
+&lt;h2 id=&#34;spring-security的密码编译器&#34;&gt;Spring Security的密码编译器
+&lt;/h2&gt;&lt;table&gt;
   &lt;thead&gt;
       &lt;tr&gt;
           &lt;th style=&#34;text-align: center&#34;&gt;密码编译器&lt;/th&gt;
@@ -856,8 +856,8 @@ Spring Boot提供的支持配置属性的注入注释。放到Spring bean上后�
 而bcrypt算法可以通过参数调节计算速度，计算速度慢，所以大幅提高了暴力破解的门槛，安全性也就高了&lt;br&gt;
 （但是目前SHA-256还未被成功破解过……？&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2 id=&#34;userdetailsservice实现&#34;&gt;UserDetailsService实现：&lt;/h2&gt;
-&lt;p&gt;Spring Security提供了几个开箱即用的UserDetailsService实现：&lt;/p&gt;
+&lt;h2 id=&#34;userdetailsservice实现&#34;&gt;UserDetailsService实现：
+&lt;/h2&gt;&lt;p&gt;Spring Security提供了几个开箱即用的UserDetailsService实现：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;基于内存的用户存储&lt;/li&gt;
 &lt;li&gt;基于JDBC的用户存储&lt;/li&gt;
@@ -887,8 +887,8 @@ Spring Boot提供的支持配置属性的注入注释。放到Spring bean上后�
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;securing-web-requests&#34;&gt;Securing web requests&lt;/h2&gt;
-&lt;p&gt; authorizeRequests()返回(ExpressionUrlAuthorizationConfigurer.ExpressionInterceptUrlRegistry)对象，允许指定URL路径和模式，以及路径对应的安全要求：&lt;br&gt;
+&lt;/div&gt;&lt;h2 id=&#34;securing-web-requests&#34;&gt;Securing web requests
+&lt;/h2&gt;&lt;p&gt; authorizeRequests()返回(ExpressionUrlAuthorizationConfigurer.ExpressionInterceptUrlRegistry)对象，允许指定URL路径和模式，以及路径对应的安全要求：&lt;br&gt;
  书中项目的代码实现如下：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -991,8 +991,8 @@ Spring Boot提供的支持配置属性的注入注释。放到Spring bean上后�
 &lt;li&gt;这其中值得注意的事，hasRole()方法可以被hasAuthority()代替：hasRole()方法自动补足 &lt;strong&gt;ROLE_&lt;/strong&gt; 的前缀。&lt;/li&gt;
 &lt;li&gt;设计上来看，一个是权限，一个是角色，角色是权限的集合体。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;spring-security对于spel表达式的扩展&#34;&gt;Spring Security对于SpEL表达式的扩展&lt;/h2&gt;
-&lt;table&gt;
+&lt;h2 id=&#34;spring-security对于spel表达式的扩展&#34;&gt;Spring Security对于SpEL表达式的扩展
+&lt;/h2&gt;&lt;table&gt;
   &lt;thead&gt;
       &lt;tr&gt;
           &lt;th style=&#34;text-align: center&#34;&gt;Security expression&lt;/th&gt;
@@ -1104,8 +1104,8 @@ Spring Boot提供的支持配置属性的注入注释。放到Spring bean上后�
         <pubDate>Mon, 15 Aug 2022 00:00:00 +0000</pubDate>
         
         <guid>http://www.jansonblog.com/p/spring2/</guid>
-        <description>&lt;img src="http://www.jansonblog.com/p/spring2/1.jpg" alt="Featured image of post Spring学习之路（二）" /&gt;&lt;h2 id=&#34;模板引擎&#34;&gt;模板引擎&lt;/h2&gt;
-&lt;p&gt;书中总结了以下模板：&lt;/p&gt;
+        <description>&lt;img src="http://www.jansonblog.com/p/spring2/1.jpg" alt="Featured image of post Spring学习之路（二）" /&gt;&lt;h2 id=&#34;模板引擎&#34;&gt;模板引擎
+&lt;/h2&gt;&lt;p&gt;书中总结了以下模板：&lt;/p&gt;
 &lt;table&gt;
   &lt;thead&gt;
       &lt;tr&gt;
@@ -1144,8 +1144,8 @@ Spring Boot提供的支持配置属性的注入注释。放到Spring bean上后�
 &lt;ul&gt;
 &lt;li&gt;Java Servlet容器包括嵌入式的Tomcat和Jetty容器，通常会在“/WEB-INF”目录下寻找JSP。如果将应用构建成一个可执行的JAR文件，就无法满足这种需求；&lt;strong&gt;只有在将应用构建成WAR文件并部署到Servlet容器中时&lt;/strong&gt;，才能选择JSP方案。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;模板缓存&#34;&gt;模板缓存&lt;/h2&gt;
-&lt;ul&gt;
+&lt;h2 id=&#34;模板缓存&#34;&gt;模板缓存
+&lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;默认情况下，模板只有在&lt;strong&gt;第⼀次使用的时候解析⼀次&lt;/strong&gt;，解析的结果会被后续的请求所使⽤。开发期缓存存在时，想要看到变更效果，必须重新启动应用，非常不方便&lt;/li&gt;
 &lt;li&gt;禁用模板缓存：将相关缓存属性设成false:在application.properties中添加：
 &lt;code&gt;spring.thymeleaf.cache=false&lt;/code&gt;&lt;/li&gt;
@@ -1176,8 +1176,8 @@ Spring Boot提供的支持配置属性的注入注释。放到Spring bean上后�
       &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h2 id=&#34;thymeleaf模板&#34;&gt;Thymeleaf模板&lt;/h2&gt;
-&lt;ul&gt;
+&lt;h2 id=&#34;thymeleaf模板&#34;&gt;Thymeleaf模板
+&lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;Thymeleaf 模板只是 HTML 与一些额外的元素属性，指导模板在渲染请求数据。&lt;/p&gt;
 &lt;p&gt; &lt;em&gt;例如，如果有一个请求属性，它的键是 “message”，你希望它被Thymeleaf渲染成一个&lt;code&gt;HTML&amp;lt;p&amp;gt;&lt;/code&gt;标签，你可以在你的Thymeleaf模板中写以下内容：&lt;/em&gt;&lt;br&gt;
@@ -1204,15 +1204,15 @@ Spring Boot提供的支持配置属性的注入注释。放到Spring bean上后�
         <pubDate>Sat, 13 Aug 2022 00:00:00 +0000</pubDate>
         
         <guid>http://www.jansonblog.com/p/spring1/</guid>
-        <description>&lt;img src="http://www.jansonblog.com/p/spring1/1.jpg" alt="Featured image of post Spring学习之路（一）" /&gt;&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
-&lt;p&gt; 学习路程是按照&lt;a class=&#34;link&#34; href=&#34;https://zh.jp1lib.org/book/18238678/2d772e&#34;  title=&#34;Spring实战（第五版）&#34;
+        <description>&lt;img src="http://www.jansonblog.com/p/spring1/1.jpg" alt="Featured image of post Spring学习之路（一）" /&gt;&lt;h2 id=&#34;前言&#34;&gt;前言
+&lt;/h2&gt;&lt;p&gt; 学习路程是按照&lt;a class=&#34;link&#34; href=&#34;https://zh.jp1lib.org/book/18238678/2d772e&#34;  title=&#34;Spring实战（第五版）&#34;
      target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Spring实战（第五版）&lt;/a&gt;进行，本系列只针对笔者自己进行内容总结，用于加深学习以及日后回顾使用。如感兴趣，推荐阅读参考图书进行学习。&lt;/p&gt;
 &lt;p&gt; 书中有较多地方描述比较不清楚，实战时，存在很多问题。&lt;a class=&#34;link&#34; href=&#34;https://github.com/habuma/spring-in-action-5-samples&#34;  title=&#34;spring-in-action-5-samples&#34;
      target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;spring-in-action-5-samples&lt;/a&gt;对书中每一章项目进行了汇总，对照此仓库学习更容易理解。&lt;/p&gt;
-&lt;h2 id=&#34;spring项目结构&#34;&gt;Spring项目结构&lt;/h2&gt;
-&lt;ul&gt;
+&lt;h2 id=&#34;spring项目结构&#34;&gt;Spring项目结构
+&lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;mvnw和mvnw.cmd：这是Maven包装器（wrapper）脚本，借助脚本，即使没有安装Maven也可以构建项目&lt;/li&gt;
 &lt;li&gt;pom.xml： Maven构建规范，用于引入依赖等&lt;/li&gt;
 &lt;li&gt;Application.java：SpringBoot主类&lt;/li&gt;
@@ -1221,15 +1221,15 @@ Spring Boot提供的支持配置属性的注入注释。放到Spring bean上后�
 &lt;li&gt;templates：初始为空，用于存放渲染内容到浏览器的模板文件&lt;/li&gt;
 &lt;li&gt;ApplicationTests.java：简单的测试类，确保Spring应用上下文成功加载&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;springbootapplication组合注解&#34;&gt;@SpringBootApplication组合注解&lt;/h2&gt;
-&lt;p&gt;@SpringBootApplication是一个组合注解，它组合了3个其他的注释：&lt;/p&gt;
+&lt;h2 id=&#34;springbootapplication组合注解&#34;&gt;@SpringBootApplication组合注解
+&lt;/h2&gt;&lt;p&gt;@SpringBootApplication是一个组合注解，它组合了3个其他的注释：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;@SpringBootConfiguration：将该类声明为配置类。尽管这个类⽬前还没有太多的配置，但是后续我们可以按需添加基于Java的Spring框架配置。这个注解实际上是@Configuration注解的特殊形式。&lt;/li&gt;
 &lt;li&gt;@EnableAutoConfiguration：启⽤Spring Boot的⾃动配置。我们随后会介绍⾃动配置的更多功能。就现在来说，我们只需要知道这个注解会告诉Spring Boot⾃动配置它认为我们会⽤到的组件。&lt;/li&gt;
 &lt;li&gt;@ComponentScan：启⽤组件扫描。这样我们能够通过像@Component、 @Controller、@Service这样的注解声明其他类，Spring会⾃动发现它们并将它们注册为Spring应⽤上下⽂中的组件&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;spring的一些重点项目&#34;&gt;Spring的一些重点项目：&lt;/h2&gt;
-&lt;ul&gt;
+&lt;h2 id=&#34;spring的一些重点项目&#34;&gt;Spring的一些重点项目：
+&lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;Spring MVC——Spring的Web框架：可以边写控制器处理Web请求；创建REST API，生成非HTML的输出&lt;/li&gt;
 &lt;li&gt;Spring Boot：starter依赖和自动配置；Actuator能洞察应用运行时的内部工作状况；灵活的环境属性规范；在核心框架的测试辅助功能之上提供了对测试的额外支持&lt;/li&gt;
 &lt;li&gt;Spring Data：将应用程序数据repository定义为java接口，定义驱动存储和检索数据的方法时使用一种命名约定即可；能够处理不同类型的数据库，包括关系型数据库（JPA）、文档数据库（Mongo）、图数据库（Neo4j）等&lt;/li&gt;

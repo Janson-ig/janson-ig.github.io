@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='格雷码（循环二进制单位距离碼）是任意两个相邻数的代码只有一位二进制数不同的编码，它与奇偶校验码同属可靠性编码。'><title>格雷码（Gray code）</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="格雷码（循环二进制单位距离碼）是任意两个相邻数的代码只有一位二进制数不同的编码，它与奇偶校验码同属可靠性编码。">
+<title>格雷码（Gray code）</title>
 
 <link rel='canonical' href='http://www.jansonblog.com/p/graycode/'>
 
-<link rel="stylesheet" href="/scss/style.min.ac77dcf8b111b51da39a92990f431923f210f3876d85798a2125667f96dc33a4.css"><meta property='og:title' content='格雷码（Gray code）'>
-<meta property='og:description' content='格雷码（循环二进制单位距离碼）是任意两个相邻数的代码只有一位二进制数不同的编码，它与奇偶校验码同属可靠性编码。'>
+<link rel="stylesheet" href="/scss/style.min.ac77dcf8b111b51da39a92990f431923f210f3876d85798a2125667f96dc33a4.css"><meta property='og:title' content="格雷码（Gray code）">
+<meta property='og:description' content="格雷码（循环二进制单位距离碼）是任意两个相邻数的代码只有一位二进制数不同的编码，它与奇偶校验码同属可靠性编码。">
 <meta property='og:url' content='http://www.jansonblog.com/p/graycode/'>
 <meta property='og:site_name' content='Janson&#39;s Blog'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='算法' /><meta property='article:published_time' content='2023-02-23T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2023-02-23T00:00:00&#43;00:00'/><meta property='og:image' content='http://www.jansonblog.com/p/graycode/1.jpg' />
@@ -72,13 +73,14 @@
             <h1 class="site-name"><a href="/">Janson&#39;s Blog</a></h1>
             <h2 class="site-description">You forget a thousand things every day, How about you make sure this is one of them …</h2>
         </div>
-    </header><ol class="social-menu">
+    </header><ol class="menu-social">
             
                 <li>
                     <a 
                         href='https://github.com/Janson-ig'
                         target="_blank"
                         title="GitHub"
+                        rel="me"
                     >
                         
                         
@@ -97,7 +99,6 @@
         
         
         
-
         <li >
             <a href='/' >
                 
@@ -118,7 +119,6 @@
         </li>
         
         
-
         <li >
             <a href='/%E5%85%B3%E4%BA%8E%E6%88%91/' >
                 
@@ -138,7 +138,6 @@
         </li>
         
         
-
         <li >
             <a href='/archives/' >
                 
@@ -159,7 +158,6 @@
         </li>
         
         
-
         <li >
             <a href='/search/' >
                 
@@ -178,31 +176,12 @@
             </a>
         </li>
         
+        <li class="menu-bottom-section">
+            <ol class="menu">
 
-        <div class="menu-bottom-section">
-                <li id="i18n-switch">  
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-  <path d="M4 5h7" />
-  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
-  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
-  <path d="M12 20l4 -9l4 9" />
-  <path d="M19.1 18h-6.2" />
-</svg>
-
-
-
-                    <select name="language" onchange="window.location.href = this.selectedOptions[0].value">
-                        
-                            <option value="http://www.jansonblog.com/" selected>中文</option>
-                        
-                    </select>
-                </li>
-            
-            
-            
-                <li id="dark-mode-toggle">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <circle cx="8" cy="12" r="2" />
   <rect x="2" y="6" width="20" height="12" rx="6" />
@@ -210,7 +189,7 @@
 
 
 
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <circle cx="16" cy="12" r="2" />
   <rect x="2" y="6" width="20" height="12" rx="6" />
@@ -218,13 +197,53 @@
 
 
 
-                    <span>暗色模式</span>
-                </li>
-            
-        </div>
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
     </ol>
 </aside>
-<main class="main full-width">
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#简介--原理">简介 &amp; 原理</a></li>
+    <li><a href="#代码实现">代码实现</a>
+      <ol>
+        <li><a href="#例题">例题</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
     <article class="has-image main-article">
     <header class="article-header">
         <div class="article-image">
@@ -268,6 +287,9 @@
     </div>
 
     
+    
+    
+    
     <footer class="article-time">
         
             <div>
@@ -304,21 +326,22 @@
 
     
 </div>
+
 </header>
 
     <section class="article-content">
     
     
-    <h2 id="简介--原理">简介 &amp; 原理</h2>
-<p> 格雷码（Gray code）是由贝尔实验室的Frank Gray在1940年提出，用于在PCM（脉冲编码调变）方法传送讯号时防止出错。<br>
+    <h2 id="简介--原理">简介 &amp; 原理
+</h2><p> 格雷码（Gray code）是由贝尔实验室的Frank Gray在1940年提出，用于在PCM（脉冲编码调变）方法传送讯号时防止出错。<br>
  格雷码是一个数列集合，相邻两数间<strong>只有一个位元</strong>改变，为无权数码，且格雷码的顺序不是唯一的。<br>
  原理：</p>
 <blockquote>
 <p> 传统的二进位系统，例如数字3的表示法为011，要切换为邻近的数字4，也就是100时，装置中的三个位元都得要转换，因此于未完全转换的过程时装置会经历短暂的，010,001,101,110,111等其中数种状态，也就是代表着2、1、5、6、7，因此此种数字编码方法于邻近数字转换时有比较大的误差可能范围。
 格雷码的发明即是用来将误差之可能性缩减至最小，编码的方式定义为每个邻近数字都只相差一个位元，因此也称为最小差异码，可以使装置做数字步进时只更动最少的位元数以提高稳定性。</p>
 </blockquote>
-<h2 id="代码实现">代码实现</h2>
-<p> 用<code>G</code>代表格雷码：<br>
+<h2 id="代码实现">代码实现
+</h2><p> 用<code>G</code>代表格雷码：<br>
  例如3位数的格雷码序列为：<code>000</code>,<code>001</code>,<code>011</code>,<code>010</code>,<code>110</code>,<code>111</code>,<code>101</code>,<code>100</code>。<code>111</code>可以用<code>G(4) = 6</code>来表示。</p>
 <p> <em><strong>公式：</strong></em><code>G(n) = n ^ (n &gt;&gt; 1)</code></p>
 <div class="highlight"><div class="chroma">
@@ -333,8 +356,8 @@
 </span></span><span class="line"><span class="cl">}
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="例题">例题</h3>
-<p><a class="link" href="https://leetcode.com/problems/circular-permutation-in-binary-representation/description/"  title="1238. Circular Permutation in Binary Representation"
+</div><h3 id="例题">例题
+</h3><p><a class="link" href="https://leetcode.com/problems/circular-permutation-in-binary-representation/description/"  title="1238. Circular Permutation in Binary Representation"
      target="_blank" rel="noopener"
     >[medium]1238. Circular Permutation in Binary Representation</a></p>
 <blockquote>
@@ -523,6 +546,8 @@
 </style>
 
 <script>
+    let utterancesLoaded = false;
+
     function setUtterancesTheme(theme) {
         let utterances = document.querySelector('.utterances iframe');
         if (utterances) {
@@ -538,10 +563,14 @@
 
     addEventListener('message', event => {
         if (event.origin !== 'https://utteranc.es') return;
+
+        
+        utterancesLoaded = true;
         setUtterancesTheme(document.documentElement.dataset.scheme)
     });
 
     window.addEventListener('onColorSchemeChange', (e) => {
+        if (!utterancesLoaded) return;
         setUtterancesTheme(e.detail)
     })
 </script>
@@ -560,7 +589,7 @@
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.13.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 </footer>
 
@@ -644,50 +673,12 @@
             >
 
             </main>
-    <aside class="sidebar right-sidebar sticky">
-        
-            
-                
-    <section class="widget archives">
-        <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
-        </div>
-        <h2 class="widget-title section-title">目录</h2>
-        
-        <div class="widget--toc">
-            <nav id="TableOfContents">
-  <ol>
-    <li><a href="#简介--原理">简介 &amp; 原理</a></li>
-    <li><a href="#代码实现">代码实现</a>
-      <ol>
-        <li><a href="#例题">例题</a></li>
-      </ol>
-    </li>
-  </ol>
-</nav>
-        </div>
-    </section>
-
-            
-        
-    </aside>
-
-
         </div>
         <script 
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.9b50b7183b4a32f9580543a89407a21e47a8bebc5bdac6e840fa8c910481f55e.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');

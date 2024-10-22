@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='原理&简单实现'><title>KMP算法（字符串匹配算法）</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="原理&简单实现">
+<title>KMP算法（字符串匹配算法）</title>
 
 <link rel='canonical' href='http://www.jansonblog.com/p/kmp/'>
 
-<link rel="stylesheet" href="/scss/style.min.ac77dcf8b111b51da39a92990f431923f210f3876d85798a2125667f96dc33a4.css"><meta property='og:title' content='KMP算法（字符串匹配算法）'>
-<meta property='og:description' content='原理&简单实现'>
+<link rel="stylesheet" href="/scss/style.min.ac77dcf8b111b51da39a92990f431923f210f3876d85798a2125667f96dc33a4.css"><meta property='og:title' content="KMP算法（字符串匹配算法）">
+<meta property='og:description' content="原理&简单实现">
 <meta property='og:url' content='http://www.jansonblog.com/p/kmp/'>
 <meta property='og:site_name' content='Janson&#39;s Blog'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='算法' /><meta property='article:published_time' content='2022-11-03T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2022-11-03T00:00:00&#43;00:00'/><meta property='og:image' content='http://www.jansonblog.com/p/kmp/1.png' />
@@ -72,13 +73,14 @@
             <h1 class="site-name"><a href="/">Janson&#39;s Blog</a></h1>
             <h2 class="site-description">You forget a thousand things every day, How about you make sure this is one of them …</h2>
         </div>
-    </header><ol class="social-menu">
+    </header><ol class="menu-social">
             
                 <li>
                     <a 
                         href='https://github.com/Janson-ig'
                         target="_blank"
                         title="GitHub"
+                        rel="me"
                     >
                         
                         
@@ -97,7 +99,6 @@
         
         
         
-
         <li >
             <a href='/' >
                 
@@ -118,7 +119,6 @@
         </li>
         
         
-
         <li >
             <a href='/%E5%85%B3%E4%BA%8E%E6%88%91/' >
                 
@@ -138,7 +138,6 @@
         </li>
         
         
-
         <li >
             <a href='/archives/' >
                 
@@ -159,7 +158,6 @@
         </li>
         
         
-
         <li >
             <a href='/search/' >
                 
@@ -178,31 +176,12 @@
             </a>
         </li>
         
+        <li class="menu-bottom-section">
+            <ol class="menu">
 
-        <div class="menu-bottom-section">
-                <li id="i18n-switch">  
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-  <path d="M4 5h7" />
-  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
-  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
-  <path d="M12 20l4 -9l4 9" />
-  <path d="M19.1 18h-6.2" />
-</svg>
-
-
-
-                    <select name="language" onchange="window.location.href = this.selectedOptions[0].value">
-                        
-                            <option value="http://www.jansonblog.com/" selected>中文</option>
-                        
-                    </select>
-                </li>
-            
-            
-            
-                <li id="dark-mode-toggle">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <circle cx="8" cy="12" r="2" />
   <rect x="2" y="6" width="20" height="12" rx="6" />
@@ -210,7 +189,7 @@
 
 
 
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <circle cx="16" cy="12" r="2" />
   <rect x="2" y="6" width="20" height="12" rx="6" />
@@ -218,13 +197,50 @@
 
 
 
-                    <span>暗色模式</span>
-                </li>
-            
-        </div>
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
     </ol>
 </aside>
-<main class="main full-width">
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#kmpknuth-morris-pratt算法">KMP(Knuth-Morris-Pratt)算法：</a></li>
+    <li><a href="#算法原理">算法原理：</a></li>
+    <li><a href="#应用题目实战">应用题目实战:</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
     <article class="has-image main-article">
     <header class="article-header">
         <div class="article-image">
@@ -268,6 +284,9 @@
     </div>
 
     
+    
+    
+    
     <footer class="article-time">
         
             <div>
@@ -304,18 +323,19 @@
 
     
 </div>
+
 </header>
 
     <section class="article-content">
     
     
-    <h2 id="kmpknuth-morris-pratt算法">KMP(Knuth-Morris-Pratt)算法：</h2>
-<blockquote>
+    <h2 id="kmpknuth-morris-pratt算法">KMP(Knuth-Morris-Pratt)算法：
+</h2><blockquote>
 <p> 字符串查找算法（简称为KMP算法）可在一个字符串S内查找一个词W的出现位置。一个词在不匹配时本身就包含足够的信息来确定下一个匹配可能的开始位置，此算法利用这一特性以避免重重复查找之前出现的字符。</p>
 </blockquote>
 <p> 我对MKP的认识：其归属于DP问题，核心的思想在于对要查找的字符串进行处理——寻找最长的前缀。然后通过记忆化数组的方式，跳过不可能成功匹配的字符串位置，从下一个可能的位置进行搜索。利用要查找字符串的特性，利用其前缀和后缀的共同部分来简化搜索过程。</p>
-<h2 id="算法原理">算法原理：</h2>
-<p> 简单的暴力搜索无非就是从每个可能的index开始，与要查找的字符串进行比较。
+<h2 id="算法原理">算法原理：
+</h2><p> 简单的暴力搜索无非就是从每个可能的index开始，与要查找的字符串进行比较。
  而KMP则会跳过已经匹配的部分，以维基百科的说明为例，简单概括过程：</p>
 <ul>
 <li>
@@ -352,8 +372,8 @@ W:ABCD<strong>A</strong>BD</p>
 <ul>
 <li>即<strong>A</strong>开始进行匹配。</li>
 </ul>
-<h2 id="应用题目实战">应用题目实战:</h2>
-<p><a class="link" href="https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/"  title="LeetCode 28. Find the Index of the First Occurrence in a String"
+<h2 id="应用题目实战">应用题目实战:
+</h2><p><a class="link" href="https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/"  title="LeetCode 28. Find the Index of the First Occurrence in a String"
      target="_blank" rel="noopener"
     >LeetCode 28. Find the Index of the First Occurrence in a String</a></p>
 <blockquote>
@@ -549,6 +569,8 @@ W:ABCD<strong>A</strong>BD</p>
 </style>
 
 <script>
+    let utterancesLoaded = false;
+
     function setUtterancesTheme(theme) {
         let utterances = document.querySelector('.utterances iframe');
         if (utterances) {
@@ -564,10 +586,14 @@ W:ABCD<strong>A</strong>BD</p>
 
     addEventListener('message', event => {
         if (event.origin !== 'https://utteranc.es') return;
+
+        
+        utterancesLoaded = true;
         setUtterancesTheme(document.documentElement.dataset.scheme)
     });
 
     window.addEventListener('onColorSchemeChange', (e) => {
+        if (!utterancesLoaded) return;
         setUtterancesTheme(e.detail)
     })
 </script>
@@ -586,7 +612,7 @@ W:ABCD<strong>A</strong>BD</p>
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.13.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 </footer>
 
@@ -670,47 +696,12 @@ W:ABCD<strong>A</strong>BD</p>
             >
 
             </main>
-    <aside class="sidebar right-sidebar sticky">
-        
-            
-                
-    <section class="widget archives">
-        <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
-        </div>
-        <h2 class="widget-title section-title">目录</h2>
-        
-        <div class="widget--toc">
-            <nav id="TableOfContents">
-  <ol>
-    <li><a href="#kmpknuth-morris-pratt算法">KMP(Knuth-Morris-Pratt)算法：</a></li>
-    <li><a href="#算法原理">算法原理：</a></li>
-    <li><a href="#应用题目实战">应用题目实战:</a></li>
-  </ol>
-</nav>
-        </div>
-    </section>
-
-            
-        
-    </aside>
-
-
         </div>
         <script 
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.9b50b7183b4a32f9580543a89407a21e47a8bebc5bdac6e840fa8c910481f55e.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');

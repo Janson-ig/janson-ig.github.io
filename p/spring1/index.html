@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='Spring项目结构，@SpringBootApplication组合注解，Spring的重点项目汇总'><title>Spring学习之路（一）</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Spring项目结构，@SpringBootApplication组合注解，Spring的重点项目汇总">
+<title>Spring学习之路（一）</title>
 
 <link rel='canonical' href='http://www.jansonblog.com/p/spring1/'>
 
-<link rel="stylesheet" href="/scss/style.min.ac77dcf8b111b51da39a92990f431923f210f3876d85798a2125667f96dc33a4.css"><meta property='og:title' content='Spring学习之路（一）'>
-<meta property='og:description' content='Spring项目结构，@SpringBootApplication组合注解，Spring的重点项目汇总'>
+<link rel="stylesheet" href="/scss/style.min.ac77dcf8b111b51da39a92990f431923f210f3876d85798a2125667f96dc33a4.css"><meta property='og:title' content="Spring学习之路（一）">
+<meta property='og:description' content="Spring项目结构，@SpringBootApplication组合注解，Spring的重点项目汇总">
 <meta property='og:url' content='http://www.jansonblog.com/p/spring1/'>
 <meta property='og:site_name' content='Janson&#39;s Blog'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='框架' /><meta property='article:published_time' content='2022-08-13T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2022-08-13T00:00:00&#43;00:00'/><meta property='og:image' content='http://www.jansonblog.com/p/spring1/1.jpg' />
@@ -72,13 +73,14 @@
             <h1 class="site-name"><a href="/">Janson&#39;s Blog</a></h1>
             <h2 class="site-description">You forget a thousand things every day, How about you make sure this is one of them …</h2>
         </div>
-    </header><ol class="social-menu">
+    </header><ol class="menu-social">
             
                 <li>
                     <a 
                         href='https://github.com/Janson-ig'
                         target="_blank"
                         title="GitHub"
+                        rel="me"
                     >
                         
                         
@@ -97,7 +99,6 @@
         
         
         
-
         <li >
             <a href='/' >
                 
@@ -118,7 +119,6 @@
         </li>
         
         
-
         <li >
             <a href='/%E5%85%B3%E4%BA%8E%E6%88%91/' >
                 
@@ -138,7 +138,6 @@
         </li>
         
         
-
         <li >
             <a href='/archives/' >
                 
@@ -159,7 +158,6 @@
         </li>
         
         
-
         <li >
             <a href='/search/' >
                 
@@ -178,31 +176,12 @@
             </a>
         </li>
         
+        <li class="menu-bottom-section">
+            <ol class="menu">
 
-        <div class="menu-bottom-section">
-                <li id="i18n-switch">  
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-  <path d="M4 5h7" />
-  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
-  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
-  <path d="M12 20l4 -9l4 9" />
-  <path d="M19.1 18h-6.2" />
-</svg>
-
-
-
-                    <select name="language" onchange="window.location.href = this.selectedOptions[0].value">
-                        
-                            <option value="http://www.jansonblog.com/" selected>中文</option>
-                        
-                    </select>
-                </li>
-            
-            
-            
-                <li id="dark-mode-toggle">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <circle cx="8" cy="12" r="2" />
   <rect x="2" y="6" width="20" height="12" rx="6" />
@@ -210,7 +189,7 @@
 
 
 
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <circle cx="16" cy="12" r="2" />
   <rect x="2" y="6" width="20" height="12" rx="6" />
@@ -218,13 +197,51 @@
 
 
 
-                    <span>暗色模式</span>
-                </li>
-            
-        </div>
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
     </ol>
 </aside>
-<main class="main full-width">
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#前言">前言</a></li>
+    <li><a href="#spring项目结构">Spring项目结构</a></li>
+    <li><a href="#springbootapplication组合注解">@SpringBootApplication组合注解</a></li>
+    <li><a href="#spring的一些重点项目">Spring的一些重点项目：</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
     <article class="has-image main-article">
     <header class="article-header">
         <div class="article-image">
@@ -268,6 +285,9 @@
     </div>
 
     
+    
+    
+    
     <footer class="article-time">
         
             <div>
@@ -304,20 +324,21 @@
 
     
 </div>
+
 </header>
 
     <section class="article-content">
     
     
-    <h2 id="前言">前言</h2>
-<p> 学习路程是按照<a class="link" href="https://zh.jp1lib.org/book/18238678/2d772e"  title="Spring实战（第五版）"
+    <h2 id="前言">前言
+</h2><p> 学习路程是按照<a class="link" href="https://zh.jp1lib.org/book/18238678/2d772e"  title="Spring实战（第五版）"
      target="_blank" rel="noopener"
     >Spring实战（第五版）</a>进行，本系列只针对笔者自己进行内容总结，用于加深学习以及日后回顾使用。如感兴趣，推荐阅读参考图书进行学习。</p>
 <p> 书中有较多地方描述比较不清楚，实战时，存在很多问题。<a class="link" href="https://github.com/habuma/spring-in-action-5-samples"  title="spring-in-action-5-samples"
      target="_blank" rel="noopener"
     >spring-in-action-5-samples</a>对书中每一章项目进行了汇总，对照此仓库学习更容易理解。</p>
-<h2 id="spring项目结构">Spring项目结构</h2>
-<ul>
+<h2 id="spring项目结构">Spring项目结构
+</h2><ul>
 <li>mvnw和mvnw.cmd：这是Maven包装器（wrapper）脚本，借助脚本，即使没有安装Maven也可以构建项目</li>
 <li>pom.xml： Maven构建规范，用于引入依赖等</li>
 <li>Application.java：SpringBoot主类</li>
@@ -326,15 +347,15 @@
 <li>templates：初始为空，用于存放渲染内容到浏览器的模板文件</li>
 <li>ApplicationTests.java：简单的测试类，确保Spring应用上下文成功加载</li>
 </ul>
-<h2 id="springbootapplication组合注解">@SpringBootApplication组合注解</h2>
-<p>@SpringBootApplication是一个组合注解，它组合了3个其他的注释：</p>
+<h2 id="springbootapplication组合注解">@SpringBootApplication组合注解
+</h2><p>@SpringBootApplication是一个组合注解，它组合了3个其他的注释：</p>
 <ul>
 <li>@SpringBootConfiguration：将该类声明为配置类。尽管这个类⽬前还没有太多的配置，但是后续我们可以按需添加基于Java的Spring框架配置。这个注解实际上是@Configuration注解的特殊形式。</li>
 <li>@EnableAutoConfiguration：启⽤Spring Boot的⾃动配置。我们随后会介绍⾃动配置的更多功能。就现在来说，我们只需要知道这个注解会告诉Spring Boot⾃动配置它认为我们会⽤到的组件。</li>
 <li>@ComponentScan：启⽤组件扫描。这样我们能够通过像@Component、 @Controller、@Service这样的注解声明其他类，Spring会⾃动发现它们并将它们注册为Spring应⽤上下⽂中的组件</li>
 </ul>
-<h2 id="spring的一些重点项目">Spring的一些重点项目：</h2>
-<ul>
+<h2 id="spring的一些重点项目">Spring的一些重点项目：
+</h2><ul>
 <li>Spring MVC——Spring的Web框架：可以边写控制器处理Web请求；创建REST API，生成非HTML的输出</li>
 <li>Spring Boot：starter依赖和自动配置；Actuator能洞察应用运行时的内部工作状况；灵活的环境属性规范；在核心框架的测试辅助功能之上提供了对测试的额外支持</li>
 <li>Spring Data：将应用程序数据repository定义为java接口，定义驱动存储和检索数据的方法时使用一种命名约定即可；能够处理不同类型的数据库，包括关系型数据库（JPA）、文档数据库（Mongo）、图数据库（Neo4j）等</li>
@@ -529,6 +550,8 @@
 </style>
 
 <script>
+    let utterancesLoaded = false;
+
     function setUtterancesTheme(theme) {
         let utterances = document.querySelector('.utterances iframe');
         if (utterances) {
@@ -544,10 +567,14 @@
 
     addEventListener('message', event => {
         if (event.origin !== 'https://utteranc.es') return;
+
+        
+        utterancesLoaded = true;
         setUtterancesTheme(document.documentElement.dataset.scheme)
     });
 
     window.addEventListener('onColorSchemeChange', (e) => {
+        if (!utterancesLoaded) return;
         setUtterancesTheme(e.detail)
     })
 </script>
@@ -566,7 +593,7 @@
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.13.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 </footer>
 
@@ -650,48 +677,12 @@
             >
 
             </main>
-    <aside class="sidebar right-sidebar sticky">
-        
-            
-                
-    <section class="widget archives">
-        <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
-        </div>
-        <h2 class="widget-title section-title">目录</h2>
-        
-        <div class="widget--toc">
-            <nav id="TableOfContents">
-  <ol>
-    <li><a href="#前言">前言</a></li>
-    <li><a href="#spring项目结构">Spring项目结构</a></li>
-    <li><a href="#springbootapplication组合注解">@SpringBootApplication组合注解</a></li>
-    <li><a href="#spring的一些重点项目">Spring的一些重点项目：</a></li>
-  </ol>
-</nav>
-        </div>
-    </section>
-
-            
-        
-    </aside>
-
-
         </div>
         <script 
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.9b50b7183b4a32f9580543a89407a21e47a8bebc5bdac6e840fa8c910481f55e.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');

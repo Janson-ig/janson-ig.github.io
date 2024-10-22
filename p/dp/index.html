@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='方法：「自下而上」或「自上而下」'><title>动态规划(Dynamic programming)问题解法</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="方法：「自下而上」或「自上而下」">
+<title>动态规划(Dynamic programming)问题解法</title>
 
 <link rel='canonical' href='http://www.jansonblog.com/p/dp/'>
 
-<link rel="stylesheet" href="/scss/style.min.ac77dcf8b111b51da39a92990f431923f210f3876d85798a2125667f96dc33a4.css"><meta property='og:title' content='动态规划(Dynamic programming)问题解法'>
-<meta property='og:description' content='方法：「自下而上」或「自上而下」'>
+<link rel="stylesheet" href="/scss/style.min.ac77dcf8b111b51da39a92990f431923f210f3876d85798a2125667f96dc33a4.css"><meta property='og:title' content="动态规划(Dynamic programming)问题解法">
+<meta property='og:description' content="方法：「自下而上」或「自上而下」">
 <meta property='og:url' content='http://www.jansonblog.com/p/dp/'>
 <meta property='og:site_name' content='Janson&#39;s Blog'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='算法' /><meta property='article:published_time' content='2022-05-27T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2022-05-27T00:00:00&#43;00:00'/><meta property='og:image' content='http://www.jansonblog.com/p/dp/PascalTriangleFibanacci.jpg' />
@@ -72,13 +73,14 @@
             <h1 class="site-name"><a href="/">Janson&#39;s Blog</a></h1>
             <h2 class="site-description">You forget a thousand things every day, How about you make sure this is one of them …</h2>
         </div>
-    </header><ol class="social-menu">
+    </header><ol class="menu-social">
             
                 <li>
                     <a 
                         href='https://github.com/Janson-ig'
                         target="_blank"
                         title="GitHub"
+                        rel="me"
                     >
                         
                         
@@ -97,7 +99,6 @@
         
         
         
-
         <li >
             <a href='/' >
                 
@@ -118,7 +119,6 @@
         </li>
         
         
-
         <li >
             <a href='/%E5%85%B3%E4%BA%8E%E6%88%91/' >
                 
@@ -138,7 +138,6 @@
         </li>
         
         
-
         <li >
             <a href='/archives/' >
                 
@@ -159,7 +158,6 @@
         </li>
         
         
-
         <li >
             <a href='/search/' >
                 
@@ -178,31 +176,12 @@
             </a>
         </li>
         
+        <li class="menu-bottom-section">
+            <ol class="menu">
 
-        <div class="menu-bottom-section">
-                <li id="i18n-switch">  
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-  <path d="M4 5h7" />
-  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
-  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
-  <path d="M12 20l4 -9l4 9" />
-  <path d="M19.1 18h-6.2" />
-</svg>
-
-
-
-                    <select name="language" onchange="window.location.href = this.selectedOptions[0].value">
-                        
-                            <option value="http://www.jansonblog.com/" selected>中文</option>
-                        
-                    </select>
-                </li>
-            
-            
-            
-                <li id="dark-mode-toggle">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <circle cx="8" cy="12" r="2" />
   <rect x="2" y="6" width="20" height="12" rx="6" />
@@ -210,7 +189,7 @@
 
 
 
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <circle cx="16" cy="12" r="2" />
   <rect x="2" y="6" width="20" height="12" rx="6" />
@@ -218,13 +197,50 @@
 
 
 
-                    <span>暗色模式</span>
-                </li>
-            
-        </div>
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
     </ol>
 </aside>
-<main class="main full-width">
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#自下而上">自下而上</a></li>
+    <li><a href="#自上而下">自上而下</a></li>
+    <li><a href="#总结">总结</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
     <article class="has-image main-article">
     <header class="article-header">
         <div class="article-image">
@@ -268,6 +284,9 @@
     </div>
 
     
+    
+    
+    
     <footer class="article-time">
         
             <div>
@@ -304,6 +323,7 @@
 
     
 </div>
+
 </header>
 
     <section class="article-content">
@@ -314,8 +334,8 @@
 <li>自下而上        (制表)</li>
 <li>自上而下        (记忆化)</li>
 </ol>
-<h2 id="自下而上">自下而上</h2>
-<p>自下而上是通过 <em>迭代</em>  实现的</p>
+<h2 id="自下而上">自下而上
+</h2><p>自下而上是通过 <em>迭代</em>  实现的</p>
 <p>以<strong>斐波那契数列</strong>为例，F(0)=0, F(1)=1。通过F(0)和F(1)计算F(2)，然后使用计算结果计算F(3)…</p>
 <p>以此类推，一直计算F(n)</p>
 <div class="highlight"><div class="chroma">
@@ -338,8 +358,8 @@
 </span></span><span class="line"><span class="cl">    F[i] = F[i - 1] + F[i - 2]
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="自上而下">自上而下</h2>
-<p>自上而下通过 <em>递归</em> 实现，并且通过 <em>记忆化</em> 提高效率(之后解释记忆化概念)</p>
+</div><h2 id="自上而下">自上而下
+</h2><p>自上而下通过 <em>递归</em> 实现，并且通过 <em>记忆化</em> 提高效率(之后解释记忆化概念)</p>
 <p>如果我们想知道斐波那契数列F(n)，需要找到F(n-1)和F(n-2)…通过递归求出F(0)和F(1)</p>
 <p>缺点也很明显，在计算中存在大量的 重复计算 ，导致效率不高</p>
 <p>而解决方法也很简单，用空间换时间，也就是 <em>记忆化</em> ：将函数调用的结果存储在哈希图或数组中，这样当再次进行相同的函数调用时，我们可以简单地返回记忆的结果，而不是重新计算结果。</p>
@@ -367,8 +387,8 @@
 </span></span><span class="line"><span class="cl">    return memo[i]
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="总结">总结</h2>
-<p><strong>所以，这两个算法哪个更好呢？</strong></p>
+</div><h2 id="总结">总结
+</h2><p><strong>所以，这两个算法哪个更好呢？</strong></p>
 <p>DP(动态规划问题)可以用任意一种方法实现</p>
 <p>每个方法都有一个突出的优点:</p>
 <ul>
@@ -568,6 +588,8 @@
 </style>
 
 <script>
+    let utterancesLoaded = false;
+
     function setUtterancesTheme(theme) {
         let utterances = document.querySelector('.utterances iframe');
         if (utterances) {
@@ -583,10 +605,14 @@
 
     addEventListener('message', event => {
         if (event.origin !== 'https://utteranc.es') return;
+
+        
+        utterancesLoaded = true;
         setUtterancesTheme(document.documentElement.dataset.scheme)
     });
 
     window.addEventListener('onColorSchemeChange', (e) => {
+        if (!utterancesLoaded) return;
         setUtterancesTheme(e.detail)
     })
 </script>
@@ -605,7 +631,7 @@
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.13.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 </footer>
 
@@ -689,47 +715,12 @@
             >
 
             </main>
-    <aside class="sidebar right-sidebar sticky">
-        
-            
-                
-    <section class="widget archives">
-        <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
-        </div>
-        <h2 class="widget-title section-title">目录</h2>
-        
-        <div class="widget--toc">
-            <nav id="TableOfContents">
-  <ol>
-    <li><a href="#自下而上">自下而上</a></li>
-    <li><a href="#自上而下">自上而下</a></li>
-    <li><a href="#总结">总结</a></li>
-  </ol>
-</nav>
-        </div>
-    </section>
-
-            
-        
-    </aside>
-
-
         </div>
         <script 
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.9b50b7183b4a32f9580543a89407a21e47a8bebc5bdac6e840fa8c910481f55e.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');

@@ -14,8 +14,8 @@
         <guid>http://www.jansonblog.com/p/tips-1/</guid>
         <description>&lt;img src="http://www.jansonblog.com/p/tips-1/1.png" alt="Featured image of post vscode中ctrl&#43;左键不跳转" /&gt;&lt;p&gt; 我一直是ssh远程操作的，之前ctrl+鼠标左键一直好用，可以跳转到对应函数的位置。&lt;br&gt;
  但是最近突然不好用了，解决方法很简单：&lt;/p&gt;
-&lt;h1 id=&#34;vscode里重装cc拓展&#34;&gt;vscode里重装C/C++拓展&lt;/h1&gt;
-&lt;p&gt; 先是尝试了在本地运行一个简单的.c文件，结果提示&lt;code&gt;找不到类型为“cppdbg”的调试适配器&lt;/code&gt;。&lt;br&gt;
+&lt;h1 id=&#34;vscode里重装cc拓展&#34;&gt;vscode里重装C/C++拓展
+&lt;/h1&gt;&lt;p&gt; 先是尝试了在本地运行一个简单的.c文件，结果提示&lt;code&gt;找不到类型为“cppdbg”的调试适配器&lt;/code&gt;。&lt;br&gt;
 然后&lt;strong&gt;卸载重装远程C/C++拓展&lt;/strong&gt;，问题解决！&lt;/p&gt;
 </description>
         </item>
@@ -25,8 +25,8 @@
         <pubDate>Tue, 09 Aug 2022 00:00:00 +0000</pubDate>
         
         <guid>http://www.jansonblog.com/p/git/</guid>
-        <description>&lt;img src="http://www.jansonblog.com/p/git/git.jpg" alt="Featured image of post 如何使用git" /&gt;&lt;h2 id=&#34;基本操作&#34;&gt;基本操作&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+        <description>&lt;img src="http://www.jansonblog.com/p/git/git.jpg" alt="Featured image of post 如何使用git" /&gt;&lt;h2 id=&#34;基本操作&#34;&gt;基本操作
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
@@ -72,8 +72,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;git diff HEAD // 查看与最新提交的差别，在git commit前执行这条命令是个好习惯
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;分支的操作&#34;&gt;分支的操作&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;/div&gt;&lt;h2 id=&#34;分支的操作&#34;&gt;分支的操作
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
@@ -103,8 +103,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;git log --graph // 以图表形式查看分支
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;更改提交的操作&#34;&gt;更改提交的操作&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;/div&gt;&lt;h2 id=&#34;更改提交的操作&#34;&gt;更改提交的操作
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
@@ -118,8 +118,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;git reset --hard 目标时间点的哈希值 // 恢复到时间点的状态，
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;推送至远程仓库&#34;&gt;推送至远程仓库&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;/div&gt;&lt;h2 id=&#34;推送至远程仓库&#34;&gt;推送至远程仓库
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
@@ -143,8 +143,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;// 运行git pull 命令，本地仓库的这个分支可以直接从origin的master分支获取内容
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;从远程仓库获取&#34;&gt;从远程仓库获取&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;/div&gt;&lt;h2 id=&#34;从远程仓库获取&#34;&gt;从远程仓库获取
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
@@ -158,8 +158,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;git pull // 获取最新的远程仓库分支
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;其他深入理解git的资料&#34;&gt;其他深入理解Git的资料&lt;/h2&gt;
-&lt;ul&gt;
+&lt;/div&gt;&lt;h2 id=&#34;其他深入理解git的资料&#34;&gt;其他深入理解Git的资料
+&lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;Pro Git (零基础的git学习资料)&lt;/li&gt;
 &lt;li&gt;LearnGitBranching (学习git基本操作的网站)&lt;/li&gt;
 &lt;li&gt;tryGit (只有英文版的网站)&lt;/li&gt;
