@@ -1,949 +1,138 @@
-<!DOCTYPE html>
-<html lang="zh-cn" dir="ltr">
-    <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="配置属性(一)：自动配置">
-<title>Spring学习之路（五）</title>
-
-<link rel='canonical' href='http://www.jansonblog.com/p/spring5/'>
-
-<link rel="stylesheet" href="/scss/style.min.ac77dcf8b111b51da39a92990f431923f210f3876d85798a2125667f96dc33a4.css"><meta property='og:title' content="Spring学习之路（五）">
-<meta property='og:description' content="配置属性(一)：自动配置">
-<meta property='og:url' content='http://www.jansonblog.com/p/spring5/'>
-<meta property='og:site_name' content='Janson&#39;s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='框架' /><meta property='article:published_time' content='2022-12-14T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2022-12-14T00:00:00&#43;00:00'/><meta property='og:image' content='http://www.jansonblog.com/p/spring5/1.jpg' />
-<meta name="twitter:title" content="Spring学习之路（五）">
-<meta name="twitter:description" content="配置属性(一)：自动配置"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='http://www.jansonblog.com/p/spring5/1.jpg' />
-    </head>
-    <body class="
-    article-page
-    ">
-    <script>
-        (function() {
-            const colorSchemeKey = 'StackColorScheme';
-            if(!localStorage.getItem(colorSchemeKey)){
-                localStorage.setItem(colorSchemeKey, "auto");
-            }
-        })();
-    </script><script>
-    (function() {
-        const colorSchemeKey = 'StackColorScheme';
-        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
-        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
-
-        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
-            
-
-            document.documentElement.dataset.scheme = 'dark';
-        } else {
-            document.documentElement.dataset.scheme = 'light';
-        }
-    })();
-</script>
-<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
-    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
-        <span class="hamburger-box">
-            <span class="hamburger-inner"></span>
-        </span>
-    </button>
-
-    <header>
-        
-            
-            <figure class="site-avatar">
-                <a href="/">
-                
-                    
-                    
-                    
-                        
-                        <img src="/img/avatar_hu14400398597965577232.png" width="300"
-                            height="300" class="site-logo" loading="lazy" alt="Avatar">
-                    
-                
-                </a>
-                
-                    <span class="emoji">😊</span>
-                
-            </figure>
-            
-        
-        
-        <div class="site-meta">
-            <h1 class="site-name"><a href="/">Janson&#39;s Blog</a></h1>
-            <h2 class="site-description">You forget a thousand things every day, How about you make sure this is one of them …</h2>
-        </div>
-    </header><ol class="menu-social">
-            
-                <li>
-                    <a 
-                        href='https://github.com/Janson-ig'
-                        target="_blank"
-                        title="GitHub"
-                        rel="me"
-                    >
-                        
-                        
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
-</svg>
-
-
-
-                        
-                    </a>
-                </li>
-            
-        </ol><ol class="menu" id="main-menu">
-        
-        
-        
-        <li >
-            <a href='/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <polyline points="5 12 3 12 12 3 21 12 19 12" />
-  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
-  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
-</svg>
-
-
-
-                
-                <span>主页</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/%E5%85%B3%E4%BA%8E%E6%88%91/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="7" r="4" />
-  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-</svg>
-
-
-
-                
-                <span>关于我</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/archives/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <rect x="3" y="4" width="18" height="4" rx="2" />
-  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
-  <line x1="10" y1="12" x2="14" y2="12" />
-</svg>
-
-
-
-                
-                <span>Archives</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/search/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="10" cy="10" r="7" />
-  <line x1="21" y1="21" x2="15" y2="15" />
-</svg>
-
-
-
-                
-                <span>Search</span>
-            </a>
-        </li>
-        
-        <li class="menu-bottom-section">
-            <ol class="menu">
-
-                
-                    <li id="dark-mode-toggle">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="8" cy="12" r="2" />
-  <rect x="2" y="6" width="20" height="12" rx="6" />
-</svg>
-
-
-
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="16" cy="12" r="2" />
-  <rect x="2" y="6" width="20" height="12" rx="6" />
-</svg>
-
-
-
-                        <span>暗色模式</span>
-                    </li>
-                
-            </ol>
-        </li>
-    </ol>
-</aside>
-
-    <aside class="sidebar right-sidebar sticky">
-        
-            
-                
-    <section class="widget archives">
-        <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
-        </div>
-        <h2 class="widget-title section-title">目录</h2>
-        
-        <div class="widget--toc">
-            <nav id="TableOfContents">
-  <ol>
-    <li><a href="#细粒度的自动配置">细粒度的自动配置</a></li>
-    <li><a href="#spring的环境抽象">Spring的环境抽象</a></li>
-    <li><a href="#配置数据源">配置数据源</a>
-      <ol>
-        <li><a href="#设置jdbc驱动类">设置JDBC驱动类</a></li>
-      </ol>
-    </li>
-    <li><a href="#配置嵌入式服务器">配置嵌入式服务器</a>
-      <ol>
-        <li><a href="#配置使其处理https请求">配置使其处理HTTPS请求</a></li>
-      </ol>
-    </li>
-    <li><a href="#配置日志">配置日志</a></li>
-    <li><a href="#使用特定的属性值">使用特定的属性值</a></li>
-  </ol>
-</nav>
-        </div>
-    </section>
-
-            
-        
-    </aside>
-
-
-            <main class="main full-width">
-    <article class="has-image main-article">
-    <header class="article-header">
-        <div class="article-image">
-            <a href="/p/spring5/">
-                <img src="/p/spring5/1_hu5898938782183341123.jpg"
-                        srcset="/p/spring5/1_hu5898938782183341123.jpg 800w, /p/spring5/1_hu15242891916692081434.jpg 1600w"
-                        width="800" 
-                        height="374" 
-                        loading="lazy"
-                        alt="Featured image of post Spring学习之路（五）" />
-                
-            </a>
-        </div>
-    
-
-    <div class="article-details">
-    
-    <header class="article-category">
-        
-            <a href="/categories/spring/" style="background-color: #2a9d8f; color: #fff;">
-                Spring
-            </a>
-        
-            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="background-color: #2a9d8f; color: #fff;">
-                学习笔记
-            </a>
-        
-    </header>
-    
-
-    <div class="article-title-wrapper">
-        <h2 class="article-title">
-            <a href="/p/spring5/">Spring学习之路（五）</a>
-        </h2>
-    
-        
-        <h3 class="article-subtitle">
-            配置属性(一)：自动配置
-        </h3>
-        
-    </div>
-
-    
-    
-    
-    
-    <footer class="article-time">
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
-  <circle cx="18" cy="18" r="4" />
-  <path d="M15 3v4" />
-  <path d="M7 3v4" />
-  <path d="M3 11h16" />
-  <path d="M18 16.496v1.504l1 1" />
-</svg>
-                <time class="article-time--published">Dec 14, 2022</time>
-            </div>
-        
-
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="12" r="9" />
-  <polyline points="12 7 12 12 15 15" />
-</svg>
-
-
-
-                <time class="article-time--reading">
-                    阅读时长: 6 分钟
-                </time>
-            </div>
-        
-    </footer>
-    
-
-    
-</div>
-
-</header>
-
-    <section class="article-content">
-    
-    
-    <p> 第六章内容第五版与第六版几乎相同。本章介绍了自动配置bean；创建自己的配置属性；使用profile进行配置。</p>
-<h1 id="自动配置">自动配置：
-</h1><h2 id="细粒度的自动配置">细粒度的自动配置
-</h2><p><strong>两种不同但相关的配置</strong></p>
-<ol>
-<li>Bean wiring（装配bean）：声明在Spring应⽤上下⽂中创建哪些应⽤组件以及它们应该如何相互注入。</li>
-<li>Property injection（依赖注入）声明在Spring应⽤上下⽂中创建哪些应⽤组件以及它们应该如何相互注入。</li>
-</ol>
-<p> 在Spring的XML和Java配置中，这两种类型的配置通常在同一个地方<strong>显式声明</strong>。<br>
- 在Java配置中，带@bean注解的方法很可能既实例化一个bean，又给它的属性赋值。举例来说，@Bean方法为H2数据库声明一个数据源：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Bean</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="n">DataSource</span><span class="w"> </span><span class="nf">dataSource</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">EmbeddedDatabaseBuilder</span><span class="p">()</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">.</span><span class="na">setType</span><span class="p">(</span><span class="n">H2</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">.</span><span class="na">addScript</span><span class="p">(</span><span class="s">&#34;taco_schema.sql&#34;</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">.</span><span class="na">addScripts</span><span class="p">(</span><span class="s">&#34;user_data.sql&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;ingredient_data.sql&#34;</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">.</span><span class="na">build</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><p><code>addScript()</code> 和 <code>addScripts()</code>方法通过设置String属性来确定数据源——<strong>这是不使用Spring Boot的配置方法。</strong><br>
- 如果在运行时类路径中能够找到H2依赖，那么<strong>Spring Boot会自动在Spring应用上下文中创建对应的DataSource bean</strong>。这个bean会运行名为<code>schema.sql</code>和<code>data.sql</code>的脚本。</p>
-<h2 id="spring的环境抽象">Spring的环境抽象
-</h2><p><strong>Spring的环境抽象</strong><br>
- Spring环境会拉取多个属性源：</p>
-<ul>
-<li>JVM系统属性</li>
-<li>操作系统环境变量</li>
-<li>命令行参数</li>
-<li>应用属性配置文件</li>
-</ul>
-<p> 将这些属性聚合到一个源中，通过这个源可以注入到spring的bean中。如下图所示：
-<img src="/p/spring5/img.png"
-	width="1288"
-	height="767"
-	srcset="/p/spring5/img_hu1047922358994508611.png 480w, /p/spring5/img_hu9605572089152062931.png 1024w"
-	loading="lazy"
-	
-		alt="img.png"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="167"
-		data-flex-basis="403px"
-	
->
- Spring boot自动配置的bean都可以通过spring环境提取的属性进行配置.<br>
-例如，希望底层Servlet容器使用另一个端口监听，有以下四个不同的方法：</p>
-<ol>
-<li>“src/main/resources/application.properties”将server.port设置成一个不同的端口：server.port = 9090</li>
-<li>“src/main/resources/application.yml”中: server : port : 9090</li>
-<li>命令行参数启动时指定端口：$ java -jar tacocloud-0.0.5-SNAPSHOT.jar &ndash;server.port=9090</li>
-<li>操作系统环境变量进行一次配置：$ export SERVER_PORT=9090（Spring能自动挑选环境变量名，将其解析）</li>
-</ol>
-<h2 id="配置数据源">配置数据源
-</h2><p><strong>显示配置自己的datasource</strong>:<br>
-在<code>application.yml</code>配置：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">spring</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">datasource</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l">jdbc:mysql://localhost/tacocloud</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l">tacodb</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l">tacopassword</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><p> <strong>尽管我们需要将对应的JDBC驱动添加到构建⽂件中，但是我们不需要指定JDBC驱动类。Spring Boot会根据数据库URL的结构推算出来。</strong></p>
-<h3 id="设置jdbc驱动类">设置JDBC驱动类
-</h3><p> 然⽽，我们依然可以通过<code>spring.datasource.driver-class-name</code>属性来进⾏设置JDBC驱动类：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">spring</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">datasource</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l">jdbc:mysql://localhost/tacocloud</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l">tacodb</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l">tacopassword</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">driver-class-name</span><span class="p">:</span><span class="w"> </span><span class="l">com.mysql.jdbc.Driver</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><p> Spring boot自动化配置DataSource bean的时候，会使用该连接。如果类路径存在<code>HikariCP</code>的连接池，会使用该连接池。否则在类路径查找并使用以下连接池：</p>
-<ul>
-<li>Tomcat JDBC Connection Pool</li>
-<li>Apache Commons DBCP 2</li>
-</ul>
-<p>注：旧版默认连接池是Tomcat的JDBC连接池，新版默认连接池已经变成HikariCP，因为它够快，代码量少，稳定。</p>
-<h2 id="配置嵌入式服务器">配置嵌入式服务器
-</h2><p> 如果在配置servlet容器端口时，将端口设为0，即：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">server:
-</span></span><span class="line"><span class="cl">    Port : 0
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>会发生什么？<br>
- 虽然显式设为0，但是服务器不会在端口0上启动。而是任选一个可用的端口。这在运行自动化集成测试的时候，非常有用：因为可以保证并发运行的测试不会与硬编码的端口号冲突。</p>
-<h3 id="配置使其处理https请求">配置使其处理HTTPS请求
-</h3><p> 底层服务器配置不仅局限于一个端口，底层容器最常见的一项设置是让它处理HTTPS请求。<br>
- 为了实现，需要使用JDK的keytool命令行工具生成keystore：<br>
-<code>$ keytool -keystore mykeys.jks -genkey -alias tomcat -keyalg RSA</code></p>
-<p> 接下来，为了在嵌入式服务器中启用HTTPS，需要设置属性：</p>
-<ol>
-<li>可以在命令行中设置，但是不方便</li>
-<li>可以通过<code>application.properties</code>或<code>application.yml</code>文件来声明配置：</li>
-</ol>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">server</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">8443</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nt">ssl</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="nt">key-store</span><span class="p">:</span><span class="w"> </span><span class="l">file:/ / /path/to/mykeys.jks</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="nt">key-store-password</span><span class="p">:</span><span class="w"> </span><span class="l">letmein</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="nt">key-password</span><span class="p">:</span><span class="w"> </span><span class="l">letmein</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><p> 解释：</p>
-<ol>
-<li>端口设为<strong>8443</strong>（开发阶段HTTPS服务器的常用选择）</li>
-<li><code>server.ssl.key-store</code>设置为所创建的<code>keystore</code>路径</li>
-<li><code>server.ssl.key-store-password</code>和<code>server.ssl.key-password</code>属性设置为创建<code>keystore</code>所设置的密码</li>
-</ol>
-<p>属性准备就绪后，应用会监听8443端口的HTTPS请求。</p>
-<h2 id="配置日志">配置日志
-</h2><p> 默认情况下，Spring Boot通过Logback配置日志，日志以INFO级别写入到控制台<br>
- 为了完全控制日志的配置，可以在类路径的根目录下<code>src/main/resources</code>创建<code>logback.xml</code>文件。<br>
-简单样例：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;configuration&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&lt;appender</span> <span class="na">name=</span><span class="s">&#34;STDOUT&#34;</span> <span class="na">class=</span><span class="s">&#34;ch.qos.logback.core.ConsoleAppender&#34;</span><span class="nt">&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">&lt;encoder&gt;</span>
-</span></span><span class="line"><span class="cl">		    <span class="nt">&lt;pattern&gt;</span>
-</span></span><span class="line"><span class="cl">				%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
-</span></span><span class="line"><span class="cl">			<span class="nt">&lt;/pattern&gt;</span>
-</span></span><span class="line"><span class="cl">		<span class="nt">&lt;/encoder&gt;</span>
-</span></span><span class="line"><span class="cl">	<span class="nt">&lt;/appender&gt;</span>
-</span></span><span class="line"><span class="cl">	<span class="nt">&lt;logger</span> <span class="na">name=</span><span class="s">&#34;root&#34;</span> <span class="na">level=</span><span class="s">&#34;INFO&#34;</span><span class="nt">/&gt;</span>
-</span></span><span class="line"><span class="cl">	<span class="nt">&lt;root</span> <span class="na">level=</span><span class="s">&#34;INFO&#34;</span><span class="nt">&gt;</span>
-</span></span><span class="line"><span class="cl">		<span class="nt">&lt;appender-ref</span> <span class="na">ref=</span><span class="s">&#34;STDOUT&#34;</span> <span class="nt">/&gt;</span>
-</span></span><span class="line"><span class="cl">	<span class="nt">&lt;/root&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="nt">&lt;/configuration&gt;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p> 这个<code>Logback</code>和没有<code>logback.xml</code>文件时的默认行为是几乎完全相同的。但是编辑<code>logback.xml</code>文件，可以完全控制应用的日志文件。</p>
-<p> 日志配置中最常见变更是<strong>修改日志级别</strong>和<strong>指定日志写入到某个文件</strong>，Spring Boot的配置属性功能如何实现？</p>
-<ul>
-<li>设置日志级别：<br>
-在<code>application.yml</code>中添加条目，例如：</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">logging</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">level</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">root</span><span class="p">:</span><span class="w"> </span><span class="l">WARN</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">org.springframework.security</span><span class="p">:</span><span class="w"> </span><span class="l">DEBUG</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><p>以上配置将<code>root logging</code>设置为<strong>WARN</strong>级别，spring security的日志级别设为<strong>DEBUG</strong>。</p>
-<ul>
-<li>将日志条目写入指定文件：
-如要将日志条目写入到&quot;<code>/var/logs/</code>&ldquo;中的TacoCloud文件中<code>logging.path</code>和<code>logging.file</code>文件可以如下配置：</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">logging</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">file</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/var/logs/</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">file</span><span class="p">:</span><span class="w"> </span><span class="l">TacoCloud.log</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">level</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">root</span><span class="p">:</span><span class="w"> </span><span class="l">WARN</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">org</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">springframework</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="nt">security</span><span class="p">:</span><span class="w"> </span><span class="l">DEBUG</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><p> 如果应用具有指定目录的写入权限，日志条目会被写入到指定目录。<br>
- 默认情况下，日志文件达到<strong>10MB</strong>就会轮换。</p>
-<h2 id="使用特定的属性值">使用特定的属性值
-</h2><p> 设置属性不局限于将值设置为硬编码的String或数值，可以从其他的<strong>配置属性派生值</strong>：<br>
- 假设我们想要设置⼀个名为<code>greeting.welcome</code>的属性，它的值来源于名为<code>spring.application.name</code>的另⼀个属性：
- 在设置<code>greeting.welcome</code>的时候，可以使用<code>${}</code>占位符标记：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">greeting</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">welcome</span><span class="p">:</span><span class="w"> </span><span class="l">${spring.application.name}</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><p> 甚至可以将<code>${}</code>占位符嵌入到其他文本中：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">greeting</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">welcome</span><span class="p">:</span><span class="w"> </span><span class="l">You are using ${spring.application.name}.</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><p> 在配置Spring⾃⼰的组件时，使⽤配置属性可以很容易地将值注⼊这些组件属性中，并且可以细粒度地调整⾃动配置功能。<br>
- 配置属性并不专属于Spring创建的bean。</p>
-<blockquote>
-<p>如有遗漏或错误，欢迎补充纠正</p>
-</blockquote>
-
-</section>
-
-
-    <footer class="article-footer">
-    
-    <section class="article-tags">
-        
-            <a href="/tags/%E6%A1%86%E6%9E%B6/">框架</a>
-        
-    </section>
-
-
-    
-    <section class="article-copyright">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="12" r="9" />
-  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
-</svg>
-
-
-
-        <span>Licensed under CC BY-NC-SA 4.0</span>
-    </section>
-    </footer>
-
-
-    
-</article>
-
-    
-
-    
-
-<aside class="related-content--wrapper">
-    <h2 class="section-title">相关文章</h2>
-    <div class="related-content">
-        <div class="flex article-list--tile">
-            
-                
-<article class="has-image">
-    <a href="/p/spring6/">
-        
-        
-            <div class="article-image">
-                <img src="/p/spring6/1.4c54a7f78b9d6dbb7956c2a066ad5346_hu890127501487296609.jpg" 
-                        width="250" 
-                        height="150" 
-                        loading="lazy"
-                        alt="Featured image of post Spring学习之路（六）"
-                        data-key="spring6" 
-                        data-hash="md5-TFSn94udbbt5VsKgZq1TRg==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">Spring学习之路（六）</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/p/spring4/">
-        
-        
-            <div class="article-image">
-                <img src="/p/spring4/1.4c54a7f78b9d6dbb7956c2a066ad5346_hu890127501487296609.jpg" 
-                        width="250" 
-                        height="150" 
-                        loading="lazy"
-                        alt="Featured image of post Spring学习之路（四）"
-                        data-key="spring4" 
-                        data-hash="md5-TFSn94udbbt5VsKgZq1TRg==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">Spring学习之路（四）</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/p/spring3/">
-        
-        
-            <div class="article-image">
-                <img src="/p/spring3/1.4c54a7f78b9d6dbb7956c2a066ad5346_hu890127501487296609.jpg" 
-                        width="250" 
-                        height="150" 
-                        loading="lazy"
-                        alt="Featured image of post Spring学习之路（三）"
-                        data-key="spring3" 
-                        data-hash="md5-TFSn94udbbt5VsKgZq1TRg==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">Spring学习之路（三）</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/p/spring2/">
-        
-        
-            <div class="article-image">
-                <img src="/p/spring2/1.4c54a7f78b9d6dbb7956c2a066ad5346_hu890127501487296609.jpg" 
-                        width="250" 
-                        height="150" 
-                        loading="lazy"
-                        alt="Featured image of post Spring学习之路（二）"
-                        data-key="spring2" 
-                        data-hash="md5-TFSn94udbbt5VsKgZq1TRg==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">Spring学习之路（二）</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/p/spring1/">
-        
-        
-            <div class="article-image">
-                <img src="/p/spring1/1.4c54a7f78b9d6dbb7956c2a066ad5346_hu890127501487296609.jpg" 
-                        width="250" 
-                        height="150" 
-                        loading="lazy"
-                        alt="Featured image of post Spring学习之路（一）"
-                        data-key="spring1" 
-                        data-hash="md5-TFSn94udbbt5VsKgZq1TRg==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">Spring学习之路（一）</h2>
-        </div>
-    </a>
-</article>
-
-            
-        </div>
-    </div>
-</aside>
-
-     
-    
-        
-    <script src="https://utteranc.es/client.js" 
-        repo="Janson-ig/hugoblogtalks"
-        issue-term="pathname"
-        
-        crossorigin="anonymous"
-        async
-        >
-</script>
-
-<style>
-    .utterances {
-        max-width: unset;
-    }
-</style>
-
-<script>
-    let utterancesLoaded = false;
-
-    function setUtterancesTheme(theme) {
-        let utterances = document.querySelector('.utterances iframe');
-        if (utterances) {
-            utterances.contentWindow.postMessage(
-                {
-                    type: 'set-theme',
-                    theme: `github-${theme}`
-                },
-                'https://utteranc.es'
-            );
-        }
-    }
-
-    addEventListener('message', event => {
-        if (event.origin !== 'https://utteranc.es') return;
-
-        
-        utterancesLoaded = true;
-        setUtterancesTheme(document.documentElement.dataset.scheme)
-    });
-
-    window.addEventListener('onColorSchemeChange', (e) => {
-        if (!utterancesLoaded) return;
-        setUtterancesTheme(e.detail)
-    })
-</script>
-
-
-    
-
-    <footer class="site-footer">
-    <section class="copyright">
-        &copy; 
-        
-            2022 - 
-        
-        2024 Janson&#39;s Blog
-    </section>
-    
-    <section class="powerby">
-        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
-    </section>
-</footer>
-
-
-    
-<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-
-    
-    <div class="pswp__bg"></div>
-
-    
-    <div class="pswp__scroll-wrap">
-
-        
-        <div class="pswp__container">
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-        </div>
-
-        
-        <div class="pswp__ui pswp__ui--hidden">
-
-            <div class="pswp__top-bar">
-
-                
-
-                <div class="pswp__counter"></div>
-
-                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-
-                <button class="pswp__button pswp__button--share" title="Share"></button>
-
-                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-
-                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-
-                
-                
-                <div class="pswp__preloader">
-                    <div class="pswp__preloader__icn">
-                        <div class="pswp__preloader__cut">
-                            <div class="pswp__preloader__donut"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-                <div class="pswp__share-tooltip"></div>
-            </div>
-
-            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-            </button>
-
-            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
-            </button>
-
-            <div class="pswp__caption">
-                <div class="pswp__caption__center"></div>
-            </div>
-
-        </div>
-
-    </div>
-
-</div><script 
-                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
-                defer
-                >
-            </script><script 
-                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
-                defer
-                >
-            </script><link 
-                rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
-            ><link 
-                rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
-            >
-
-            </main>
-        </div>
-        <script 
-                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
-                
-                >
-            </script><script type="text/javascript" src="/ts/main.9b50b7183b4a32f9580543a89407a21e47a8bebc5bdac6e840fa8c910481f55e.js" defer></script>
-<script>
-    (function () {
-        const customFont = document.createElement('link');
-        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
-
-        customFont.type = "text/css";
-        customFont.rel = "stylesheet";
-
-        document.head.appendChild(customFont);
-    }());
-</script>
-
-    </body>
-</html>
+<!doctype html><html lang=zh-cn dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="配置属性(一)：自动配置"><title>Spring学习之路（五）</title><link rel=canonical href=http://www.jansonblog.com/p/spring5/><link rel=stylesheet href=/scss/style.min.7e54386a70f08c359dc67b56ecb1ed61936ec90f83972802164db3639519a07b.css><meta property='og:title' content="Spring学习之路（五）"><meta property='og:description' content="配置属性(一)：自动配置"><meta property='og:url' content='http://www.jansonblog.com/p/spring5/'><meta property='og:site_name' content="Janson's Blog"><meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:tag' content='框架'><meta property='article:published_time' content='2022-12-14T00:00:00+00:00'><meta property='article:modified_time' content='2022-12-14T00:00:00+00:00'><meta property='og:image' content='http://www.jansonblog.com/p/spring5/1.jpg'><meta name=twitter:title content="Spring学习之路（五）"><meta name=twitter:description content="配置属性(一)：自动配置"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content='http://www.jansonblog.com/p/spring5/1.jpg'></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_hu_829c2cd043e218c2.png width=300 height=300 class=site-logo loading=lazy alt=Avatar>
+</a><span class=emoji>😊</span></figure><div class=site-meta><h1 class=site-name><a href=/>Janson's Blog</a></h1><h2 class=site-description>You forget a thousand things every day, How about you make sure this is one of them …</h2></div></header><ol class=menu-social><li><a href=https://github.com/Janson-ig target=_blank title=GitHub rel=me><svg class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><svg class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
+<span>主页</span></a></li><li><a href=/%E5%85%B3%E4%BA%8E%E6%88%91/><svg class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg>
+<span>关于我</span></a></li><li><a href=/archives/><svg class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+<span>Archives</span></a></li><li><a href=/search/><svg class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+<span>Search</span></a></li><li class=menu-bottom-section><ol class=menu><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>暗色模式</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#细粒度的自动配置>细粒度的自动配置</a></li><li><a href=#spring的环境抽象>Spring的环境抽象</a></li><li><a href=#配置数据源>配置数据源</a><ol><li><a href=#设置jdbc驱动类>设置JDBC驱动类</a></li></ol></li><li><a href=#配置嵌入式服务器>配置嵌入式服务器</a><ol><li><a href=#配置使其处理https请求>配置使其处理HTTPS请求</a></li></ol></li><li><a href=#配置日志>配置日志</a></li><li><a href=#使用特定的属性值>使用特定的属性值</a></li></ol></nav></div></section></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-image><a href=/p/spring5/><img src=/p/spring5/1_hu_96a13a48d9c51e2e.jpg srcset="/p/spring5/1_hu_96a13a48d9c51e2e.jpg 800w, /p/spring5/1_hu_49c31c6e2740b62d.jpg 1600w" width=800 height=374 loading=lazy alt="Featured image of post Spring学习之路（五）"></a></div><div class=article-details><header class=article-category><a href=/categories/spring/ style=background-color:#2a9d8f;color:#fff>Spring
+</a><a href=/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/ style=background-color:#2a9d8f;color:#fff>学习笔记</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/p/spring5/>Spring学习之路（五）</a></h2><h3 class=article-subtitle>配置属性(一)：自动配置</h3></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>Dec 14, 2022</time></div><div><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>阅读时长: 6 分钟</time></div></footer></div></header><section class=article-content><p> 第六章内容第五版与第六版几乎相同。本章介绍了自动配置bean；创建自己的配置属性；使用profile进行配置。</p><h1 id=自动配置>自动配置：</h1><h2 id=细粒度的自动配置>细粒度的自动配置</h2><p><strong>两种不同但相关的配置</strong></p><ol><li>Bean wiring（装配bean）：声明在Spring应⽤上下⽂中创建哪些应⽤组件以及它们应该如何相互注入。</li><li>Property injection（依赖注入）声明在Spring应⽤上下⽂中创建哪些应⽤组件以及它们应该如何相互注入。</li></ol><p> 在Spring的XML和Java配置中，这两种类型的配置通常在同一个地方<strong>显式声明</strong>。<br> 在Java配置中，带@bean注解的方法很可能既实例化一个bean，又给它的属性赋值。举例来说，@Bean方法为H2数据库声明一个数据源：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=nd>@Bean</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=kd>public</span><span class=w> </span><span class=n>DataSource</span><span class=w> </span><span class=nf>dataSource</span><span class=p>()</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=k>new</span><span class=w> </span><span class=n>EmbeddedDatabaseBuilder</span><span class=p>()</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=p>.</span><span class=na>setType</span><span class=p>(</span><span class=n>H2</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=p>.</span><span class=na>addScript</span><span class=p>(</span><span class=s>&#34;taco_schema.sql&#34;</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=p>.</span><span class=na>addScripts</span><span class=p>(</span><span class=s>&#34;user_data.sql&#34;</span><span class=p>,</span><span class=w> </span><span class=s>&#34;ingredient_data.sql&#34;</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=p>.</span><span class=na>build</span><span class=p>();</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=p>}</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><p><code>addScript()</code> 和 <code>addScripts()</code>方法通过设置String属性来确定数据源——<strong>这是不使用Spring Boot的配置方法。</strong><br> 如果在运行时类路径中能够找到H2依赖，那么<strong>Spring Boot会自动在Spring应用上下文中创建对应的DataSource bean</strong>。这个bean会运行名为<code>schema.sql</code>和<code>data.sql</code>的脚本。</p><h2 id=spring的环境抽象>Spring的环境抽象</h2><p><strong>Spring的环境抽象</strong><br> Spring环境会拉取多个属性源：</p><ul><li>JVM系统属性</li><li>操作系统环境变量</li><li>命令行参数</li><li>应用属性配置文件</li></ul><p> 将这些属性聚合到一个源中，通过这个源可以注入到spring的bean中。如下图所示：
+<img src=/p/spring5/img.png width=1288 height=767 srcset="/p/spring5/img_hu_6615bd9c75664688.png 480w, /p/spring5/img_hu_12becad1013ac418.png 1024w" loading=lazy alt=img.png class=gallery-image data-flex-grow=167 data-flex-basis=403px>
+ Spring boot自动配置的bean都可以通过spring环境提取的属性进行配置.<br>例如，希望底层Servlet容器使用另一个端口监听，有以下四个不同的方法：</p><ol><li>“src/main/resources/application.properties”将server.port设置成一个不同的端口：server.port = 9090</li><li>“src/main/resources/application.yml”中: server : port : 9090</li><li>命令行参数启动时指定端口：$ java -jar tacocloud-0.0.5-SNAPSHOT.jar &ndash;server.port=9090</li><li>操作系统环境变量进行一次配置：$ export SERVER_PORT=9090（Spring能自动挑选环境变量名，将其解析）</li></ol><h2 id=配置数据源>配置数据源</h2><p><strong>显示配置自己的datasource</strong>:<br>在<code>application.yml</code>配置：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nt>spring</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>datasource</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>url</span><span class=p>:</span><span class=w> </span><span class=l>jdbc:mysql://localhost/tacocloud</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>username</span><span class=p>:</span><span class=w> </span><span class=l>tacodb</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>password</span><span class=p>:</span><span class=w> </span><span class=l>tacopassword</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><p> <strong>尽管我们需要将对应的JDBC驱动添加到构建⽂件中，但是我们不需要指定JDBC驱动类。Spring Boot会根据数据库URL的结构推算出来。</strong></p><h3 id=设置jdbc驱动类>设置JDBC驱动类</h3><p> 然⽽，我们依然可以通过<code>spring.datasource.driver-class-name</code>属性来进⾏设置JDBC驱动类：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nt>spring</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>datasource</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>url</span><span class=p>:</span><span class=w> </span><span class=l>jdbc:mysql://localhost/tacocloud</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>username</span><span class=p>:</span><span class=w> </span><span class=l>tacodb</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>password</span><span class=p>:</span><span class=w> </span><span class=l>tacopassword</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>driver-class-name</span><span class=p>:</span><span class=w> </span><span class=l>com.mysql.jdbc.Driver</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><p> Spring boot自动化配置DataSource bean的时候，会使用该连接。如果类路径存在<code>HikariCP</code>的连接池，会使用该连接池。否则在类路径查找并使用以下连接池：</p><ul><li>Tomcat JDBC Connection Pool</li><li>Apache Commons DBCP 2</li></ul><p>注：旧版默认连接池是Tomcat的JDBC连接池，新版默认连接池已经变成HikariCP，因为它够快，代码量少，稳定。</p><h2 id=配置嵌入式服务器>配置嵌入式服务器</h2><p> 如果在配置servlet容器端口时，将端口设为0，即：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>server:
+</span></span><span class=line><span class=cl>    Port : 0
+</span></span></code></pre></td></tr></table></div></div><p>会发生什么？<br> 虽然显式设为0，但是服务器不会在端口0上启动。而是任选一个可用的端口。这在运行自动化集成测试的时候，非常有用：因为可以保证并发运行的测试不会与硬编码的端口号冲突。</p><h3 id=配置使其处理https请求>配置使其处理HTTPS请求</h3><p> 底层服务器配置不仅局限于一个端口，底层容器最常见的一项设置是让它处理HTTPS请求。<br> 为了实现，需要使用JDK的keytool命令行工具生成keystore：<br><code>$ keytool -keystore mykeys.jks -genkey -alias tomcat -keyalg RSA</code></p><p> 接下来，为了在嵌入式服务器中启用HTTPS，需要设置属性：</p><ol><li>可以在命令行中设置，但是不方便</li><li>可以通过<code>application.properties</code>或<code>application.yml</code>文件来声明配置：</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nt>server</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>	</span><span class=nt>port</span><span class=p>:</span><span class=w> </span><span class=m>8443</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>	</span><span class=nt>ssl</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>		</span><span class=nt>key-store</span><span class=p>:</span><span class=w> </span><span class=l>file:/ / /path/to/mykeys.jks</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>		</span><span class=nt>key-store-password</span><span class=p>:</span><span class=w> </span><span class=l>letmein</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>		</span><span class=nt>key-password</span><span class=p>:</span><span class=w> </span><span class=l>letmein</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><p> 解释：</p><ol><li>端口设为<strong>8443</strong>（开发阶段HTTPS服务器的常用选择）</li><li><code>server.ssl.key-store</code>设置为所创建的<code>keystore</code>路径</li><li><code>server.ssl.key-store-password</code>和<code>server.ssl.key-password</code>属性设置为创建<code>keystore</code>所设置的密码</li></ol><p>属性准备就绪后，应用会监听8443端口的HTTPS请求。</p><h2 id=配置日志>配置日志</h2><p> 默认情况下，Spring Boot通过Logback配置日志，日志以INFO级别写入到控制台<br> 为了完全控制日志的配置，可以在类路径的根目录下<code>src/main/resources</code>创建<code>logback.xml</code>文件。<br>简单样例：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-xml data-lang=xml><span class=line><span class=cl><span class=nt>&lt;configuration&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&lt;appender</span> <span class=na>name=</span><span class=s>&#34;STDOUT&#34;</span> <span class=na>class=</span><span class=s>&#34;ch.qos.logback.core.ConsoleAppender&#34;</span><span class=nt>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;encoder&gt;</span>
+</span></span><span class=line><span class=cl>		    <span class=nt>&lt;pattern&gt;</span>
+</span></span><span class=line><span class=cl>				%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+</span></span><span class=line><span class=cl>			<span class=nt>&lt;/pattern&gt;</span>
+</span></span><span class=line><span class=cl>		<span class=nt>&lt;/encoder&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=nt>&lt;/appender&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=nt>&lt;logger</span> <span class=na>name=</span><span class=s>&#34;root&#34;</span> <span class=na>level=</span><span class=s>&#34;INFO&#34;</span><span class=nt>/&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=nt>&lt;root</span> <span class=na>level=</span><span class=s>&#34;INFO&#34;</span><span class=nt>&gt;</span>
+</span></span><span class=line><span class=cl>		<span class=nt>&lt;appender-ref</span> <span class=na>ref=</span><span class=s>&#34;STDOUT&#34;</span> <span class=nt>/&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=nt>&lt;/root&gt;</span>
+</span></span><span class=line><span class=cl><span class=nt>&lt;/configuration&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><p> 这个<code>Logback</code>和没有<code>logback.xml</code>文件时的默认行为是几乎完全相同的。但是编辑<code>logback.xml</code>文件，可以完全控制应用的日志文件。</p><p> 日志配置中最常见变更是<strong>修改日志级别</strong>和<strong>指定日志写入到某个文件</strong>，Spring Boot的配置属性功能如何实现？</p><ul><li>设置日志级别：<br>在<code>application.yml</code>中添加条目，例如：</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nt>logging</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>level</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>root</span><span class=p>:</span><span class=w> </span><span class=l>WARN</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>org.springframework.security</span><span class=p>:</span><span class=w> </span><span class=l>DEBUG</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><p>以上配置将<code>root logging</code>设置为<strong>WARN</strong>级别，spring security的日志级别设为<strong>DEBUG</strong>。</p><ul><li>将日志条目写入指定文件：
+如要将日志条目写入到"<code>/var/logs/</code>&ldquo;中的TacoCloud文件中<code>logging.path</code>和<code>logging.file</code>文件可以如下配置：</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nt>logging</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>file</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>path</span><span class=p>:</span><span class=w> </span><span class=l>/var/logs/</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>file</span><span class=p>:</span><span class=w> </span><span class=l>TacoCloud.log</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>level</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>root</span><span class=p>:</span><span class=w> </span><span class=l>WARN</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>org</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>springframework</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span><span class=nt>security</span><span class=p>:</span><span class=w> </span><span class=l>DEBUG</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><p> 如果应用具有指定目录的写入权限，日志条目会被写入到指定目录。<br> 默认情况下，日志文件达到<strong>10MB</strong>就会轮换。</p><h2 id=使用特定的属性值>使用特定的属性值</h2><p> 设置属性不局限于将值设置为硬编码的String或数值，可以从其他的<strong>配置属性派生值</strong>：<br> 假设我们想要设置⼀个名为<code>greeting.welcome</code>的属性，它的值来源于名为<code>spring.application.name</code>的另⼀个属性：
+ 在设置<code>greeting.welcome</code>的时候，可以使用<code>${}</code>占位符标记：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nt>greeting</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>welcome</span><span class=p>:</span><span class=w> </span><span class=l>${spring.application.name}</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><p> 甚至可以将<code>${}</code>占位符嵌入到其他文本中：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nt>greeting</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>welcome</span><span class=p>:</span><span class=w> </span><span class=l>You are using ${spring.application.name}.</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><p> 在配置Spring⾃⼰的组件时，使⽤配置属性可以很容易地将值注⼊这些组件属性中，并且可以细粒度地调整⾃动配置功能。<br> 配置属性并不专属于Spring创建的bean。</p><blockquote><p>如有遗漏或错误，欢迎补充纠正</p></blockquote></section><footer class=article-footer><section class=article-tags><a href=/tags/%E6%A1%86%E6%9E%B6/>框架</a></section><section class=article-copyright><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>相关文章</h2><div class=related-content><div class="flex article-list--tile"><article class=has-image><a href=/p/spring6/><div class=article-image><img src=/p/spring6/1.4c54a7f78b9d6dbb7956c2a066ad5346_hu_d9c449740dceab4c.jpg width=250 height=150 loading=lazy alt="Featured image of post Spring学习之路（六）" data-key=spring6 data-hash="md5-TFSn94udbbt5VsKgZq1TRg=="></div><div class=article-details><h2 class=article-title>Spring学习之路（六）</h2></div></a></article><article class=has-image><a href=/p/spring4/><div class=article-image><img src=/p/spring4/1.4c54a7f78b9d6dbb7956c2a066ad5346_hu_d9c449740dceab4c.jpg width=250 height=150 loading=lazy alt="Featured image of post Spring学习之路（四）" data-key=spring4 data-hash="md5-TFSn94udbbt5VsKgZq1TRg=="></div><div class=article-details><h2 class=article-title>Spring学习之路（四）</h2></div></a></article><article class=has-image><a href=/p/spring3/><div class=article-image><img src=/p/spring3/1.4c54a7f78b9d6dbb7956c2a066ad5346_hu_d9c449740dceab4c.jpg width=250 height=150 loading=lazy alt="Featured image of post Spring学习之路（三）" data-key=spring3 data-hash="md5-TFSn94udbbt5VsKgZq1TRg=="></div><div class=article-details><h2 class=article-title>Spring学习之路（三）</h2></div></a></article><article class=has-image><a href=/p/spring2/><div class=article-image><img src=/p/spring2/1.4c54a7f78b9d6dbb7956c2a066ad5346_hu_d9c449740dceab4c.jpg width=250 height=150 loading=lazy alt="Featured image of post Spring学习之路（二）" data-key=spring2 data-hash="md5-TFSn94udbbt5VsKgZq1TRg=="></div><div class=article-details><h2 class=article-title>Spring学习之路（二）</h2></div></a></article><article class=has-image><a href=/p/spring1/><div class=article-image><img src=/p/spring1/1.4c54a7f78b9d6dbb7956c2a066ad5346_hu_d9c449740dceab4c.jpg width=250 height=150 loading=lazy alt="Featured image of post Spring学习之路（一）" data-key=spring1 data-hash="md5-TFSn94udbbt5VsKgZq1TRg=="></div><div class=article-details><h2 class=article-title>Spring学习之路（一）</h2></div></a></article></div></div></aside><script src=https://utteranc.es/client.js repo=Janson-ig/hugoblogtalks issue-term=pathname crossorigin=anonymous async></script><style>.utterances{max-width:unset}</style><script>let utterancesLoaded=!1;function setUtterancesTheme(e){let t=document.querySelector(".utterances iframe");t&&t.contentWindow.postMessage({type:"set-theme",theme:`github-${e}`},"https://utteranc.es")}addEventListener("message",e=>{if(e.origin!=="https://utteranc.es")return;utterancesLoaded=!0,setUtterancesTheme(document.documentElement.dataset.scheme)}),window.addEventListener("onColorSchemeChange",e=>{if(!utterancesLoaded)return;setUtterancesTheme(e.detail)})</script><footer class=site-footer><section class=copyright>&copy;
+2022 -
+2025 Janson's Blog</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.29.0>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.9b50b7183b4a32f9580543a89407a21e47a8bebc5bdac6e840fa8c910481f55e.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

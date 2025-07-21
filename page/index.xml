@@ -1,47 +1,12 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-    <channel>
-        <title>Pages on Janson&#39;s Blog</title>
-        <link>http://www.jansonblog.com/page/</link>
-        <description>Recent content in Pages on Janson&#39;s Blog</description>
-        <generator>Hugo -- gohugo.io</generator>
-        <language>zh-cn</language>
-        <lastBuildDate>Tue, 28 May 2019 00:00:00 +0000</lastBuildDate><atom:link href="http://www.jansonblog.com/page/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>Archives</title>
-        <link>http://www.jansonblog.com/archives/</link>
-        <pubDate>Tue, 28 May 2019 00:00:00 +0000</pubDate>
-        
-        <guid>http://www.jansonblog.com/archives/</guid>
-        <description></description>
-        </item>
-        <item>
-        <title>Search</title>
-        <link>http://www.jansonblog.com/search/</link>
-        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-        
-        <guid>http://www.jansonblog.com/search/</guid>
-        <description></description>
-        </item>
-        <item>
-        <title>关于我</title>
-        <link>http://www.jansonblog.com/%E5%85%B3%E4%BA%8E%E6%88%91/</link>
-        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-        
-        <guid>http://www.jansonblog.com/%E5%85%B3%E4%BA%8E%E6%88%91/</guid>
-        <description>&lt;h2 id=&#34;兴趣爱好&#34;&gt;兴趣爱好
-&lt;/h2&gt;&lt;p&gt;旅游🚲，游戏🎮，美食🍙，篮球🏀，啤酒🍻，战争电影🎫，周杰伦🎵&lt;/p&gt;
-&lt;h2 id=&#34;经历&#34;&gt;经历
-&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;2017 ~ 2021   大连理工大学&lt;/li&gt;
-&lt;li&gt;2019 ~ 2021   立命馆大学&lt;/li&gt;
-&lt;li&gt;2021 ~ 2023   立命馆大学&lt;/li&gt;
-&lt;li&gt;2023 ~        日本某半导体公司&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;关于此博客&#34;&gt;关于此博客
-&lt;/h2&gt;&lt;p&gt;使用hugo及Jimmy Cai大佬的&lt;a class=&#34;link&#34; href=&#34;https://github.com/CaiJimmy/hugo-theme-stack&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;hugo模板&lt;/a&gt;搭建&lt;/p&gt;
-</description>
-        </item>
-        
-    </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pages on Janson's Blog</title><link>http://www.jansonblog.com/page/</link><description>Recent content in Pages on Janson's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Tue, 28 May 2019 00:00:00 +0000</lastBuildDate><atom:link href="http://www.jansonblog.com/page/index.xml" rel="self" type="application/rss+xml"/><item><title>Archives</title><link>http://www.jansonblog.com/archives/</link><pubDate>Tue, 28 May 2019 00:00:00 +0000</pubDate><guid>http://www.jansonblog.com/archives/</guid><description/></item><item><title>Search</title><link>http://www.jansonblog.com/search/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://www.jansonblog.com/search/</guid><description/></item><item><title>关于我</title><link>http://www.jansonblog.com/%E5%85%B3%E4%BA%8E%E6%88%91/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://www.jansonblog.com/%E5%85%B3%E4%BA%8E%E6%88%91/</guid><description>&lt;h2 id="兴趣爱好">兴趣爱好
+&lt;/h2>&lt;p>旅游🚲，游戏🎮，美食🍙，篮球🏀，啤酒🍻，战争电影🎫，周杰伦🎵&lt;/p>
+&lt;h2 id="经历">经历
+&lt;/h2>&lt;ul>
+&lt;li>2017 ~ 2021   大连理工大学&lt;/li>
+&lt;li>2019 ~ 2021   立命馆大学&lt;/li>
+&lt;li>2021 ~ 2023   立命馆大学&lt;/li>
+&lt;li>2023 ~        日本某半导体公司&lt;/li>
+&lt;/ul>
+&lt;h2 id="关于此博客">关于此博客
+&lt;/h2>&lt;p>使用hugo及Jimmy Cai大佬的&lt;a class="link" href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener"
+>hugo模板&lt;/a>搭建&lt;/p></description></item></channel></rss>

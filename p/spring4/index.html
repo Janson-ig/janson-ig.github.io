@@ -1,990 +1,164 @@
-<!DOCTYPE html>
-<html lang="zh-cn" dir="ltr">
-    <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Spring Security(二)：介绍其对OAuth2.0的支持，CSRF防护，方法级安全控制和判断用户方法。">
-<title>Spring学习之路（四）</title>
-
-<link rel='canonical' href='http://www.jansonblog.com/p/spring4/'>
-
-<link rel="stylesheet" href="/scss/style.min.ac77dcf8b111b51da39a92990f431923f210f3876d85798a2125667f96dc33a4.css"><meta property='og:title' content="Spring学习之路（四）">
-<meta property='og:description' content="Spring Security(二)：介绍其对OAuth2.0的支持，CSRF防护，方法级安全控制和判断用户方法。">
-<meta property='og:url' content='http://www.jansonblog.com/p/spring4/'>
-<meta property='og:site_name' content='Janson&#39;s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='框架' /><meta property='article:published_time' content='2022-11-16T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2022-11-16T00:00:00&#43;00:00'/><meta property='og:image' content='http://www.jansonblog.com/p/spring4/1.jpg' />
-<meta name="twitter:title" content="Spring学习之路（四）">
-<meta name="twitter:description" content="Spring Security(二)：介绍其对OAuth2.0的支持，CSRF防护，方法级安全控制和判断用户方法。"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='http://www.jansonblog.com/p/spring4/1.jpg' />
-    </head>
-    <body class="
-    article-page
-    ">
-    <script>
-        (function() {
-            const colorSchemeKey = 'StackColorScheme';
-            if(!localStorage.getItem(colorSchemeKey)){
-                localStorage.setItem(colorSchemeKey, "auto");
-            }
-        })();
-    </script><script>
-    (function() {
-        const colorSchemeKey = 'StackColorScheme';
-        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
-        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
-
-        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
-            
-
-            document.documentElement.dataset.scheme = 'dark';
-        } else {
-            document.documentElement.dataset.scheme = 'light';
-        }
-    })();
-</script>
-<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
-    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
-        <span class="hamburger-box">
-            <span class="hamburger-inner"></span>
-        </span>
-    </button>
-
-    <header>
-        
-            
-            <figure class="site-avatar">
-                <a href="/">
-                
-                    
-                    
-                    
-                        
-                        <img src="/img/avatar_hu14400398597965577232.png" width="300"
-                            height="300" class="site-logo" loading="lazy" alt="Avatar">
-                    
-                
-                </a>
-                
-                    <span class="emoji">😊</span>
-                
-            </figure>
-            
-        
-        
-        <div class="site-meta">
-            <h1 class="site-name"><a href="/">Janson&#39;s Blog</a></h1>
-            <h2 class="site-description">You forget a thousand things every day, How about you make sure this is one of them …</h2>
-        </div>
-    </header><ol class="menu-social">
-            
-                <li>
-                    <a 
-                        href='https://github.com/Janson-ig'
-                        target="_blank"
-                        title="GitHub"
-                        rel="me"
-                    >
-                        
-                        
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
-</svg>
-
-
-
-                        
-                    </a>
-                </li>
-            
-        </ol><ol class="menu" id="main-menu">
-        
-        
-        
-        <li >
-            <a href='/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <polyline points="5 12 3 12 12 3 21 12 19 12" />
-  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
-  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
-</svg>
-
-
-
-                
-                <span>主页</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/%E5%85%B3%E4%BA%8E%E6%88%91/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="7" r="4" />
-  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-</svg>
-
-
-
-                
-                <span>关于我</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/archives/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <rect x="3" y="4" width="18" height="4" rx="2" />
-  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
-  <line x1="10" y1="12" x2="14" y2="12" />
-</svg>
-
-
-
-                
-                <span>Archives</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/search/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="10" cy="10" r="7" />
-  <line x1="21" y1="21" x2="15" y2="15" />
-</svg>
-
-
-
-                
-                <span>Search</span>
-            </a>
-        </li>
-        
-        <li class="menu-bottom-section">
-            <ol class="menu">
-
-                
-                    <li id="dark-mode-toggle">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="8" cy="12" r="2" />
-  <rect x="2" y="6" width="20" height="12" rx="6" />
-</svg>
-
-
-
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="16" cy="12" r="2" />
-  <rect x="2" y="6" width="20" height="12" rx="6" />
-</svg>
-
-
-
-                        <span>暗色模式</span>
-                    </li>
-                
-            </ol>
-        </li>
-    </ol>
-</aside>
-
-    <aside class="sidebar right-sidebar sticky">
-        
-            
-                
-    <section class="widget archives">
-        <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
-        </div>
-        <h2 class="widget-title section-title">目录</h2>
-        
-        <div class="widget--toc">
-            <nav id="TableOfContents">
-  <ol>
-    <li><a href="#对oauth20的支持">对OAuth2.0的支持</a></li>
-    <li><a href="#阻止跨站请求伪造-csrfcross-site-request-forgery">阻止跨站请求伪造 (CSRF:Cross-site request forgery)：</a></li>
-    <li><a href="#方法级安全控制">方法级安全控制</a>
-      <ol>
-        <li><a href="#preauthorize注解"><code>@PreAuthorize</code>注解</a>
-          <ol>
-            <li><a href="#作用">作用</a></li>
-            <li><a href="#用法">用法</a></li>
-            <li><a href="#注意"><strong>注意</strong></a></li>
-          </ol>
-        </li>
-        <li><a href="#postauthorize注解"><code>@PostAuthorize</code>注解</a>
-          <ol>
-            <li><a href="#作用-1">作用</a></li>
-            <li><a href="#用法-1">用法</a></li>
-          </ol>
-        </li>
-      </ol>
-    </li>
-    <li><a href="#spring-security判断经过身份验证用户的方法">Spring Security判断经过身份验证用户的方法：</a>
-      <ol>
-        <li><a href="#方法一">方法一</a></li>
-        <li><a href="#方法二">方法二</a></li>
-        <li><a href="#方法三">方法三</a></li>
-        <li><a href="#方法四">方法四</a></li>
-      </ol>
-    </li>
-  </ol>
-</nav>
-        </div>
-    </section>
-
-            
-        
-    </aside>
-
-
-            <main class="main full-width">
-    <article class="has-image main-article">
-    <header class="article-header">
-        <div class="article-image">
-            <a href="/p/spring4/">
-                <img src="/p/spring4/1_hu5898938782183341123.jpg"
-                        srcset="/p/spring4/1_hu5898938782183341123.jpg 800w, /p/spring4/1_hu15242891916692081434.jpg 1600w"
-                        width="800" 
-                        height="374" 
-                        loading="lazy"
-                        alt="Featured image of post Spring学习之路（四）" />
-                
-            </a>
-        </div>
-    
-
-    <div class="article-details">
-    
-    <header class="article-category">
-        
-            <a href="/categories/spring/" style="background-color: #2a9d8f; color: #fff;">
-                Spring
-            </a>
-        
-            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="background-color: #2a9d8f; color: #fff;">
-                学习笔记
-            </a>
-        
-    </header>
-    
-
-    <div class="article-title-wrapper">
-        <h2 class="article-title">
-            <a href="/p/spring4/">Spring学习之路（四）</a>
-        </h2>
-    
-        
-        <h3 class="article-subtitle">
-            Spring Security(二)：介绍其对OAuth2.0的支持，CSRF防护，方法级安全控制和判断用户方法。
-        </h3>
-        
-    </div>
-
-    
-    
-    
-    
-    <footer class="article-time">
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
-  <circle cx="18" cy="18" r="4" />
-  <path d="M15 3v4" />
-  <path d="M7 3v4" />
-  <path d="M3 11h16" />
-  <path d="M18 16.496v1.504l1 1" />
-</svg>
-                <time class="article-time--published">Nov 16, 2022</time>
-            </div>
-        
-
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="12" r="9" />
-  <polyline points="12 7 12 12 15 15" />
-</svg>
-
-
-
-                <time class="article-time--reading">
-                    阅读时长: 5 分钟
-                </time>
-            </div>
-        
-    </footer>
-    
-
-    
-</div>
-
-</header>
-
-    <section class="article-content">
-    
-    
-    <p> 本文是Spring Security系列最后一篇总结。</p>
-<h2 id="对oauth20的支持">对OAuth2.0的支持
-</h2><p><strong>OAuth2.0是什么？</strong><br>
- 举个例子，就是网站中常见的第三方登录，登录某个网站支持使用Facebook，Google账号登录。微信网页授权也是基于OAuth2.0。同时1.0版本也已经被2.0完全取代了。</p>
-<ul>
-<li>Spring Security支持Fackbook,Google,GitHub,Okta第三方登录</li>
-<li>书中没有详细的配置教学：“ 通过OAuth2/OpenID连接客户端，你需要设置以下属性:”</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">spring:
-</span></span><span class="line"><span class="cl">    security:
-</span></span><span class="line"><span class="cl">        oauth2:
-</span></span><span class="line"><span class="cl">            client:
-</span></span><span class="line"><span class="cl">                registration:
-</span></span><span class="line"><span class="cl">		        &lt;oauth2 or openid provider name&gt;:
-</span></span><span class="line"><span class="cl">		        clientId: &lt;client id&gt;
-</span></span><span class="line"><span class="cl">		        clientSecret: &lt;client secret&gt;
-</span></span><span class="line"><span class="cl">                scope: &lt;comma-separated list of requested scopes&gt;
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p> 如果要启用OAuth2.0登录，需要在<em><strong>Spring Security配置类</strong></em>中添加<code>.and().oauth2Login()</code>方法。<br>
- 同时提供传统用户名-密码登录方式和第三方登录：<code>.and().oauth2Login().loginPage(&quot;/login&quot;)</code>
- 启用logout登出功能：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="w">    </span><span class="cm">/**
-</span></span></span><span class="line"><span class="cl"><span class="cm"> * 启用logout登出:点击logout时，session被清空，同时登出
-</span></span></span><span class="line"><span class="cl"><span class="cm"> * logoutSuccessUrl()方法：登出后，重定向到指定路径页面
-</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">.</span><span class="na">and</span><span class="p">()</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">.</span><span class="na">logout</span><span class="p">()</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">.</span><span class="na">logoutSuccessUrl</span><span class="p">(</span><span class="s">&#34;/&#34;</span><span class="p">)</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="阻止跨站请求伪造-csrfcross-site-request-forgery">阻止跨站请求伪造 (CSRF:Cross-site request forgery)：
-</h2><ul>
-<li>Spring Security含有<strong>内置的CSRF保护</strong>，而且是<strong>默认启用</strong>的，所以只需确保应用程序提交的任何表单都包含一个名为<code>_csrf</code>的字段，该字段包含CSRF令牌。</li>
-<li>Spring Security通过将CSRF令牌放在名为<code>_csrf</code>的请求属性中来简化这一点。因此，在一个<strong>Thymeleaf模板</strong>中，可以用下面的代码在一个隐藏字段中呈现CSRF令牌:<br>
- <code>&lt;input type=&quot;hidden&quot; name=&quot;_csrf&quot; th:value=&quot;${_csrf.token}&quot;/&gt;</code></li>
-<li>如果使用Spring MVC表单标签库（Spring MVC’s JSP tag library）或spring security安全方言，内置CSRF令牌的隐藏字段会<strong>自动显示</strong>。
-<ul>
-<li>在静态模板Thymeleaf 中，只需要确保<!-- raw HTML omitted -->元素作为Thymeleaf的前缀，例如：
-<ul>
-<li><code>&lt;form method=&quot;POST&quot; th:action=&quot;@{/login}&quot; id=&quot;loginForm&quot;&gt;</code>，<code>th:action</code> 在Thymeleaf会为开发者渲染隐藏字段。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>作者极其不推荐，但是还是教了这个歪门邪道：<br>
- 禁用内置CSRF支持：</p>
-<ul>
-<li><code>.and().csrf().disable()</code></li>
-</ul>
-<h2 id="方法级安全控制">方法级安全控制
-</h2><h3 id="preauthorize注解"><code>@PreAuthorize</code>注解
-</h3><ol>
-<li>
-<h4 id="作用">作用
-</h4> <code>@PreAuthorize</code>注解根据SpEL表达式进行判断，如果表达式值为<code>false</code>，则不会调用方法： <br>
- <code>@PreAuthorize</code>如果阻止了调用，SpringSecurity抛出<strong>AccessDeniedException</strong>未检查的异常，不需要进行捕捉。除非想对其进行自定义处理。如果不进行捕获:
-<ul>
-<li> 异常会被SpringSecurity的过滤器捕捉，要么显示<strong>HTTP403</strong>错误；</li>
-<li> 要么如果用户没登录的话，被重定向到登录界面；</li>
-</ul>
-</li>
-<li>
-<h4 id="用法">用法
-</h4></li>
-</ol>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@PreAuthorize</span><span class="p">(</span><span class="s">&#34;hasRole(&#39;ADMIN&#39;)&#34;</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">deleteAllOrders</span><span class="p">(){</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">orderRepository</span><span class="p">.</span><span class="na">deleteAll</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><ol start="3">
-<li>
-<h4 id="注意"><strong>注意</strong>
-</h4></li>
-</ol>
-<p> <del>在以前的用法中，使用<code>@EnableGlobalMethodSecurity</code>注解，并扩展<code>WebSecurityConfigurerAdapter</code>类并且覆盖配置<code>HttpSecurity</code>和<code>WebSecurity</code>的方法；</del><br>
- <strong>现在，<code>WebSecurityConfigurerAdapter</code>在SpringSecurity5.7.1以上或SpringBoot2.7.0以上会出现已被弃用的警告!</strong>**
- 在新的用法中，我们得分别声明类型为<code>SecurityFilterChain</code>和<code>WebSecurityCustomizer</code>的bean，例如：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Bean</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">SecurityFilterChain</span><span class="w"> </span><span class="nf">filterChain</span><span class="p">(</span><span class="n">HttpSecurityhttp</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Bean</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">WebSecurityCustomizer</span><span class="w"> </span><span class="nf">webSecurityCustomizer</span><span class="p">(){</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="postauthorize注解"><code>@PostAuthorize</code>注解
-</h3><ol>
-<li>
-<h4 id="作用-1">作用
-</h4></li>
-</ol>
-<p> <code>@PostAuthorize</code>注解的工作方式几乎与<code>@PreAuthorize</code>注解相同，只是它的表达式在<strong>调用目标方法并返回之前</strong>不会被计算。表达式可以根据方法的返回值来决定是否允许调用方法。<br>
- 抛出异常与<code>@PreAuthorize</code>注解相同，为<strong>AccessDeniedException</strong>未检查的异常。</p>
-<ol start="2">
-<li>
-<h4 id="用法-1">用法
-</h4><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@PostAuthorize</span><span class="p">(</span><span class="s">&#34;hasRole(&#39;ADMIN&#39;) || &#34;</span><span class="w"> </span><span class="o">+</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="s">&#34;returnObject.user.username == authentication.name&#34;</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="n">TacoOrder</span><span class="w"> </span><span class="nf">getOrder</span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">...</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div></li>
-</ol>
-<h2 id="spring-security判断经过身份验证用户的方法">Spring Security判断经过身份验证用户的方法：
-</h2><h3 id="方法一">方法一
-</h3><ul>
-<li>在控制器方法中添加<strong>java.security.Principal</strong>对象：
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@PostMapping</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">processOrder</span><span class="p">(</span><span class="nd">@Valid</span><span class="w"> </span><span class="n">TacoOrder</span><span class="w"> </span><span class="n">order</span><span class="p">,</span><span class="w"> </span><span class="n">Errors</span><span class="w"> </span><span class="n">errors</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">SessionStatus</span><span class="w"> </span><span class="n">sessionStatus</span><span class="p">,</span><span class="w"> </span><span class="n">Principal</span><span class="w"> </span><span class="n">principal</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">...</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">User</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">userRepository</span><span class="p">.</span><span class="na">findByUsername</span><span class="p">(</span><span class="n">principal</span><span class="p">.</span><span class="na">getName</span><span class="p">());</span><span class="w">	    
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">order</span><span class="p">.</span><span class="na">setUser</span><span class="p">(</span><span class="n">user</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">...</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div></li>
-</ul>
-<h3 id="方法二">方法二
-</h3><ul>
-<li>在控制器方法中添加<strong>org.springframework.security.core.Authentication</strong>对象：
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="cm">/**
-</span></span></span><span class="line"><span class="cl"><span class="cm">* 调用getPrincipal()方法得到主要对象（例子为User）
-</span></span></span><span class="line"><span class="cl"><span class="cm">* getPrincipal()方法返回java.util.Object，所以将其转换为User
-</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@PostMapping</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">processOrder</span><span class="p">(</span><span class="nd">@Valid</span><span class="w"> </span><span class="n">TacoOrder</span><span class="w"> </span><span class="n">order</span><span class="p">,</span><span class="w"> </span><span class="n">Errors</span><span class="w"> </span><span class="n">errors</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">SessionStatus</span><span class="w"> </span><span class="n">sessionStatus</span><span class="p">,</span><span class="w"> </span><span class="n">Authentication</span><span class="w"> </span><span class="n">authentication</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">...</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">User</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">User</span><span class="p">)</span><span class="w"> </span><span class="n">authentication</span><span class="p">.</span><span class="na">getPrincipal</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">order</span><span class="p">.</span><span class="na">setUser</span><span class="p">(</span><span class="n">user</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">...</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div></li>
-</ul>
-<h3 id="方法三">方法三
-</h3><ul>
-<li>注入一个带<code>@AuthenticationPrincipal</code>注解的方法参数。（该注解来自Spring Security的<strong>org.springframework.security.core.annotation</strong>包）：
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@PostMapping</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">processOrder</span><span class="p">(</span><span class="nd">@Valid</span><span class="w"> </span><span class="n">TacoOrder</span><span class="w"> </span><span class="n">order</span><span class="p">,</span><span class="w"> </span><span class="n">Errors</span><span class="w"> </span><span class="n">errors</span><span class="p">,</span><span class="w"> 
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">SessionStatus</span><span class="w"> </span><span class="n">sessionStatus</span><span class="p">,</span><span class="w">  </span><span class="nd">@AuthenticationPrincipal</span><span class="w"> </span><span class="n">User</span><span class="w"> </span><span class="n">user</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">errors</span><span class="p">.</span><span class="na">hasErrors</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&#34;orderForm&#34;</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">order</span><span class="p">.</span><span class="na">setUser</span><span class="p">(</span><span class="n">user</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">orderRepo</span><span class="p">.</span><span class="na">save</span><span class="p">(</span><span class="n">order</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">sessionStatus</span><span class="p">.</span><span class="na">setComplete</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="s">&#34;redirect:/&#34;</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div></li>
-<li>优点：
-<ul>
-<li>不需要对对象进行映射</li>
-<li>它将特定于安全性的代码限制为注释本身</li>
-</ul>
-</li>
-</ul>
-<h3 id="方法四">方法四
-</h3><ul>
-<li>还有另一种方法可以识别经过身份验证的用户是谁，虽然有点混乱，因为它使用了大量特定于安全的代码。可以从安全上下文中获取一个身份验证对象，然后像这样请求它的主体：
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Authentication</span><span class="w"> </span><span class="n">authentication</span><span class="w"> </span><span class="o">=</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">SecurityContextHolder</span><span class="p">.</span><span class="na">getContext</span><span class="p">().</span><span class="na">getAuthentication</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">User</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">User</span><span class="p">)</span><span class="w"> </span><span class="n">authentication</span><span class="p">.</span><span class="na">getPrincipal</span><span class="p">();</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div></li>
-<li>缺点：
-<ul>
-<li>有大量安全相关的代码</li>
-</ul>
-</li>
-<li>优点：
-<ul>
-<li>可以在应用程序中的任何地方使用，而不仅仅是在控制器的处理程序方法中。（这使得它适合在较低级别的代码中使用）</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>本章完<br>
-如有遗漏或错误，欢迎补充纠正</p>
-</blockquote>
-
-</section>
-
-
-    <footer class="article-footer">
-    
-    <section class="article-tags">
-        
-            <a href="/tags/%E6%A1%86%E6%9E%B6/">框架</a>
-        
-    </section>
-
-
-    
-    <section class="article-copyright">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="12" r="9" />
-  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
-</svg>
-
-
-
-        <span>Licensed under CC BY-NC-SA 4.0</span>
-    </section>
-    </footer>
-
-
-    
-</article>
-
-    
-
-    
-
-<aside class="related-content--wrapper">
-    <h2 class="section-title">相关文章</h2>
-    <div class="related-content">
-        <div class="flex article-list--tile">
-            
-                
-<article class="has-image">
-    <a href="/p/spring6/">
-        
-        
-            <div class="article-image">
-                <img src="/p/spring6/1.4c54a7f78b9d6dbb7956c2a066ad5346_hu890127501487296609.jpg" 
-                        width="250" 
-                        height="150" 
-                        loading="lazy"
-                        alt="Featured image of post Spring学习之路（六）"
-                        data-key="spring6" 
-                        data-hash="md5-TFSn94udbbt5VsKgZq1TRg==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">Spring学习之路（六）</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/p/spring5/">
-        
-        
-            <div class="article-image">
-                <img src="/p/spring5/1.4c54a7f78b9d6dbb7956c2a066ad5346_hu890127501487296609.jpg" 
-                        width="250" 
-                        height="150" 
-                        loading="lazy"
-                        alt="Featured image of post Spring学习之路（五）"
-                        data-key="spring5" 
-                        data-hash="md5-TFSn94udbbt5VsKgZq1TRg==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">Spring学习之路（五）</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/p/spring3/">
-        
-        
-            <div class="article-image">
-                <img src="/p/spring3/1.4c54a7f78b9d6dbb7956c2a066ad5346_hu890127501487296609.jpg" 
-                        width="250" 
-                        height="150" 
-                        loading="lazy"
-                        alt="Featured image of post Spring学习之路（三）"
-                        data-key="spring3" 
-                        data-hash="md5-TFSn94udbbt5VsKgZq1TRg==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">Spring学习之路（三）</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/p/spring2/">
-        
-        
-            <div class="article-image">
-                <img src="/p/spring2/1.4c54a7f78b9d6dbb7956c2a066ad5346_hu890127501487296609.jpg" 
-                        width="250" 
-                        height="150" 
-                        loading="lazy"
-                        alt="Featured image of post Spring学习之路（二）"
-                        data-key="spring2" 
-                        data-hash="md5-TFSn94udbbt5VsKgZq1TRg==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">Spring学习之路（二）</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/p/spring1/">
-        
-        
-            <div class="article-image">
-                <img src="/p/spring1/1.4c54a7f78b9d6dbb7956c2a066ad5346_hu890127501487296609.jpg" 
-                        width="250" 
-                        height="150" 
-                        loading="lazy"
-                        alt="Featured image of post Spring学习之路（一）"
-                        data-key="spring1" 
-                        data-hash="md5-TFSn94udbbt5VsKgZq1TRg==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">Spring学习之路（一）</h2>
-        </div>
-    </a>
-</article>
-
-            
-        </div>
-    </div>
-</aside>
-
-     
-    
-        
-    <script src="https://utteranc.es/client.js" 
-        repo="Janson-ig/hugoblogtalks"
-        issue-term="pathname"
-        
-        crossorigin="anonymous"
-        async
-        >
-</script>
-
-<style>
-    .utterances {
-        max-width: unset;
-    }
-</style>
-
-<script>
-    let utterancesLoaded = false;
-
-    function setUtterancesTheme(theme) {
-        let utterances = document.querySelector('.utterances iframe');
-        if (utterances) {
-            utterances.contentWindow.postMessage(
-                {
-                    type: 'set-theme',
-                    theme: `github-${theme}`
-                },
-                'https://utteranc.es'
-            );
-        }
-    }
-
-    addEventListener('message', event => {
-        if (event.origin !== 'https://utteranc.es') return;
-
-        
-        utterancesLoaded = true;
-        setUtterancesTheme(document.documentElement.dataset.scheme)
-    });
-
-    window.addEventListener('onColorSchemeChange', (e) => {
-        if (!utterancesLoaded) return;
-        setUtterancesTheme(e.detail)
-    })
-</script>
-
-
-    
-
-    <footer class="site-footer">
-    <section class="copyright">
-        &copy; 
-        
-            2022 - 
-        
-        2024 Janson&#39;s Blog
-    </section>
-    
-    <section class="powerby">
-        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
-    </section>
-</footer>
-
-
-    
-<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-
-    
-    <div class="pswp__bg"></div>
-
-    
-    <div class="pswp__scroll-wrap">
-
-        
-        <div class="pswp__container">
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-        </div>
-
-        
-        <div class="pswp__ui pswp__ui--hidden">
-
-            <div class="pswp__top-bar">
-
-                
-
-                <div class="pswp__counter"></div>
-
-                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-
-                <button class="pswp__button pswp__button--share" title="Share"></button>
-
-                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-
-                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-
-                
-                
-                <div class="pswp__preloader">
-                    <div class="pswp__preloader__icn">
-                        <div class="pswp__preloader__cut">
-                            <div class="pswp__preloader__donut"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-                <div class="pswp__share-tooltip"></div>
-            </div>
-
-            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-            </button>
-
-            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
-            </button>
-
-            <div class="pswp__caption">
-                <div class="pswp__caption__center"></div>
-            </div>
-
-        </div>
-
-    </div>
-
-</div><script 
-                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
-                defer
-                >
-            </script><script 
-                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
-                defer
-                >
-            </script><link 
-                rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
-            ><link 
-                rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
-            >
-
-            </main>
-        </div>
-        <script 
-                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
-                
-                >
-            </script><script type="text/javascript" src="/ts/main.9b50b7183b4a32f9580543a89407a21e47a8bebc5bdac6e840fa8c910481f55e.js" defer></script>
-<script>
-    (function () {
-        const customFont = document.createElement('link');
-        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
-
-        customFont.type = "text/css";
-        customFont.rel = "stylesheet";
-
-        document.head.appendChild(customFont);
-    }());
-</script>
-
-    </body>
-</html>
+<!doctype html><html lang=zh-cn dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="Spring Security(二)：介绍其对OAuth2.0的支持，CSRF防护，方法级安全控制和判断用户方法。"><title>Spring学习之路（四）</title><link rel=canonical href=http://www.jansonblog.com/p/spring4/><link rel=stylesheet href=/scss/style.min.7e54386a70f08c359dc67b56ecb1ed61936ec90f83972802164db3639519a07b.css><meta property='og:title' content="Spring学习之路（四）"><meta property='og:description' content="Spring Security(二)：介绍其对OAuth2.0的支持，CSRF防护，方法级安全控制和判断用户方法。"><meta property='og:url' content='http://www.jansonblog.com/p/spring4/'><meta property='og:site_name' content="Janson's Blog"><meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:tag' content='框架'><meta property='article:published_time' content='2022-11-16T00:00:00+00:00'><meta property='article:modified_time' content='2022-11-16T00:00:00+00:00'><meta property='og:image' content='http://www.jansonblog.com/p/spring4/1.jpg'><meta name=twitter:title content="Spring学习之路（四）"><meta name=twitter:description content="Spring Security(二)：介绍其对OAuth2.0的支持，CSRF防护，方法级安全控制和判断用户方法。"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content='http://www.jansonblog.com/p/spring4/1.jpg'></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_hu_829c2cd043e218c2.png width=300 height=300 class=site-logo loading=lazy alt=Avatar>
+</a><span class=emoji>😊</span></figure><div class=site-meta><h1 class=site-name><a href=/>Janson's Blog</a></h1><h2 class=site-description>You forget a thousand things every day, How about you make sure this is one of them …</h2></div></header><ol class=menu-social><li><a href=https://github.com/Janson-ig target=_blank title=GitHub rel=me><svg class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><svg class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
+<span>主页</span></a></li><li><a href=/%E5%85%B3%E4%BA%8E%E6%88%91/><svg class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg>
+<span>关于我</span></a></li><li><a href=/archives/><svg class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+<span>Archives</span></a></li><li><a href=/search/><svg class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+<span>Search</span></a></li><li class=menu-bottom-section><ol class=menu><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>暗色模式</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#对oauth20的支持>对OAuth2.0的支持</a></li><li><a href=#阻止跨站请求伪造-csrfcross-site-request-forgery>阻止跨站请求伪造 (CSRF:Cross-site request forgery)：</a></li><li><a href=#方法级安全控制>方法级安全控制</a><ol><li><a href=#preauthorize注解><code>@PreAuthorize</code>注解</a><ol><li><a href=#作用>作用</a></li><li><a href=#用法>用法</a></li><li><a href=#注意><strong>注意</strong></a></li></ol></li><li><a href=#postauthorize注解><code>@PostAuthorize</code>注解</a><ol><li><a href=#作用-1>作用</a></li><li><a href=#用法-1>用法</a></li></ol></li></ol></li><li><a href=#spring-security判断经过身份验证用户的方法>Spring Security判断经过身份验证用户的方法：</a><ol><li><a href=#方法一>方法一</a></li><li><a href=#方法二>方法二</a></li><li><a href=#方法三>方法三</a></li><li><a href=#方法四>方法四</a></li></ol></li></ol></nav></div></section></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-image><a href=/p/spring4/><img src=/p/spring4/1_hu_96a13a48d9c51e2e.jpg srcset="/p/spring4/1_hu_96a13a48d9c51e2e.jpg 800w, /p/spring4/1_hu_49c31c6e2740b62d.jpg 1600w" width=800 height=374 loading=lazy alt="Featured image of post Spring学习之路（四）"></a></div><div class=article-details><header class=article-category><a href=/categories/spring/ style=background-color:#2a9d8f;color:#fff>Spring
+</a><a href=/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/ style=background-color:#2a9d8f;color:#fff>学习笔记</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/p/spring4/>Spring学习之路（四）</a></h2><h3 class=article-subtitle>Spring Security(二)：介绍其对OAuth2.0的支持，CSRF防护，方法级安全控制和判断用户方法。</h3></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>Nov 16, 2022</time></div><div><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>阅读时长: 5 分钟</time></div></footer></div></header><section class=article-content><p> 本文是Spring Security系列最后一篇总结。</p><h2 id=对oauth20的支持>对OAuth2.0的支持</h2><p><strong>OAuth2.0是什么？</strong><br> 举个例子，就是网站中常见的第三方登录，登录某个网站支持使用Facebook，Google账号登录。微信网页授权也是基于OAuth2.0。同时1.0版本也已经被2.0完全取代了。</p><ul><li>Spring Security支持Fackbook,Google,GitHub,Okta第三方登录</li><li>书中没有详细的配置教学：“ 通过OAuth2/OpenID连接客户端，你需要设置以下属性:”</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>spring:
+</span></span><span class=line><span class=cl>    security:
+</span></span><span class=line><span class=cl>        oauth2:
+</span></span><span class=line><span class=cl>            client:
+</span></span><span class=line><span class=cl>                registration:
+</span></span><span class=line><span class=cl>		        &lt;oauth2 or openid provider name&gt;:
+</span></span><span class=line><span class=cl>		        clientId: &lt;client id&gt;
+</span></span><span class=line><span class=cl>		        clientSecret: &lt;client secret&gt;
+</span></span><span class=line><span class=cl>                scope: &lt;comma-separated list of requested scopes&gt;
+</span></span></code></pre></td></tr></table></div></div><p> 如果要启用OAuth2.0登录，需要在<em><strong>Spring Security配置类</strong></em>中添加<code>.and().oauth2Login()</code>方法。<br> 同时提供传统用户名-密码登录方式和第三方登录：<code>.and().oauth2Login().loginPage("/login")</code>
+ 启用logout登出功能：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=w>    </span><span class=cm>/**
+</span></span></span><span class=line><span class=cl><span class=cm> * 启用logout登出:点击logout时，session被清空，同时登出
+</span></span></span><span class=line><span class=cl><span class=cm> * logoutSuccessUrl()方法：登出后，重定向到指定路径页面
+</span></span></span><span class=line><span class=cl><span class=cm> */</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>.</span><span class=na>and</span><span class=p>()</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=p>.</span><span class=na>logout</span><span class=p>()</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=p>.</span><span class=na>logoutSuccessUrl</span><span class=p>(</span><span class=s>&#34;/&#34;</span><span class=p>)</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><h2 id=阻止跨站请求伪造-csrfcross-site-request-forgery>阻止跨站请求伪造 (CSRF:Cross-site request forgery)：</h2><ul><li>Spring Security含有<strong>内置的CSRF保护</strong>，而且是<strong>默认启用</strong>的，所以只需确保应用程序提交的任何表单都包含一个名为<code>_csrf</code>的字段，该字段包含CSRF令牌。</li><li>Spring Security通过将CSRF令牌放在名为<code>_csrf</code>的请求属性中来简化这一点。因此，在一个<strong>Thymeleaf模板</strong>中，可以用下面的代码在一个隐藏字段中呈现CSRF令牌:<br> <code>&lt;input type="hidden" name="_csrf" th:value="${_csrf.token}"/></code></li><li>如果使用Spring MVC表单标签库（Spring MVC’s JSP tag library）或spring security安全方言，内置CSRF令牌的隐藏字段会<strong>自动显示</strong>。<ul><li>在静态模板Thymeleaf 中，只需要确保<form>元素作为Thymeleaf的前缀，例如：<ul><li><code>&lt;form method="POST" th:action="@{/login}" id="loginForm"></code>，<code>th:action</code> 在Thymeleaf会为开发者渲染隐藏字段。</li></ul></li></ul></li></ul><p>作者极其不推荐，但是还是教了这个歪门邪道：<br> 禁用内置CSRF支持：</p><ul><li><code>.and().csrf().disable()</code></li></ul><h2 id=方法级安全控制>方法级安全控制</h2><h3 id=preauthorize注解><code>@PreAuthorize</code>注解</h3><ol><li><h4 id=作用>作用</h4> <code>@PreAuthorize</code>注解根据SpEL表达式进行判断，如果表达式值为<code>false</code>，则不会调用方法：<br> <code>@PreAuthorize</code>如果阻止了调用，SpringSecurity抛出<strong>AccessDeniedException</strong>未检查的异常，不需要进行捕捉。除非想对其进行自定义处理。如果不进行捕获:<ul><li> 异常会被SpringSecurity的过滤器捕捉，要么显示<strong>HTTP403</strong>错误；</li><li> 要么如果用户没登录的话，被重定向到登录界面；</li></ul></li><li><h4 id=用法>用法</h4></li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=w>    </span><span class=nd>@PreAuthorize</span><span class=p>(</span><span class=s>&#34;hasRole(&#39;ADMIN&#39;)&#34;</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>public</span><span class=w> </span><span class=kt>void</span><span class=w> </span><span class=nf>deleteAllOrders</span><span class=p>(){</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=n>orderRepository</span><span class=p>.</span><span class=na>deleteAll</span><span class=p>();</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>}</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><ol start=3><li><h4 id=注意><strong>注意</strong></h4></li></ol><p> <del>在以前的用法中，使用<code>@EnableGlobalMethodSecurity</code>注解，并扩展<code>WebSecurityConfigurerAdapter</code>类并且覆盖配置<code>HttpSecurity</code>和<code>WebSecurity</code>的方法；</del><br> <strong>现在，<code>WebSecurityConfigurerAdapter</code>在SpringSecurity5.7.1以上或SpringBoot2.7.0以上会出现已被弃用的警告!</strong>**
+ 在新的用法中，我们得分别声明类型为<code>SecurityFilterChain</code>和<code>WebSecurityCustomizer</code>的bean，例如：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=w>    </span><span class=nd>@Bean</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>public</span><span class=w> </span><span class=n>SecurityFilterChain</span><span class=w> </span><span class=nf>filterChain</span><span class=p>(</span><span class=n>HttpSecurityhttp</span><span class=p>)</span><span class=w> </span><span class=kd>throws</span><span class=w> </span><span class=n>Exception</span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nd>@Bean</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>public</span><span class=w> </span><span class=n>WebSecurityCustomizer</span><span class=w> </span><span class=nf>webSecurityCustomizer</span><span class=p>(){</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>}</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><h3 id=postauthorize注解><code>@PostAuthorize</code>注解</h3><ol><li><h4 id=作用-1>作用</h4></li></ol><p> <code>@PostAuthorize</code>注解的工作方式几乎与<code>@PreAuthorize</code>注解相同，只是它的表达式在<strong>调用目标方法并返回之前</strong>不会被计算。表达式可以根据方法的返回值来决定是否允许调用方法。<br> 抛出异常与<code>@PreAuthorize</code>注解相同，为<strong>AccessDeniedException</strong>未检查的异常。</p><ol start=2><li><h4 id=用法-1>用法</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=nd>@PostAuthorize</span><span class=p>(</span><span class=s>&#34;hasRole(&#39;ADMIN&#39;) || &#34;</span><span class=w> </span><span class=o>+</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=s>&#34;returnObject.user.username == authentication.name&#34;</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=kd>public</span><span class=w> </span><span class=n>TacoOrder</span><span class=w> </span><span class=nf>getOrder</span><span class=p>(</span><span class=kt>long</span><span class=w> </span><span class=n>id</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>...</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=p>}</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div></li></ol><h2 id=spring-security判断经过身份验证用户的方法>Spring Security判断经过身份验证用户的方法：</h2><h3 id=方法一>方法一</h3><ul><li>在控制器方法中添加<strong>java.security.Principal</strong>对象：<div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=nd>@PostMapping</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=kd>public</span><span class=w> </span><span class=n>String</span><span class=w> </span><span class=nf>processOrder</span><span class=p>(</span><span class=nd>@Valid</span><span class=w> </span><span class=n>TacoOrder</span><span class=w> </span><span class=n>order</span><span class=p>,</span><span class=w> </span><span class=n>Errors</span><span class=w> </span><span class=n>errors</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>SessionStatus</span><span class=w> </span><span class=n>sessionStatus</span><span class=p>,</span><span class=w> </span><span class=n>Principal</span><span class=w> </span><span class=n>principal</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>...</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>User</span><span class=w> </span><span class=n>user</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>userRepository</span><span class=p>.</span><span class=na>findByUsername</span><span class=p>(</span><span class=n>principal</span><span class=p>.</span><span class=na>getName</span><span class=p>());</span><span class=w>	    
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>order</span><span class=p>.</span><span class=na>setUser</span><span class=p>(</span><span class=n>user</span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=p>...</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=p>}</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div></li></ul><h3 id=方法二>方法二</h3><ul><li>在控制器方法中添加<strong>org.springframework.security.core.Authentication</strong>对象：<div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=cm>/**
+</span></span></span><span class=line><span class=cl><span class=cm>* 调用getPrincipal()方法得到主要对象（例子为User）
+</span></span></span><span class=line><span class=cl><span class=cm>* getPrincipal()方法返回java.util.Object，所以将其转换为User
+</span></span></span><span class=line><span class=cl><span class=cm>*/</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nd>@PostMapping</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=kd>public</span><span class=w> </span><span class=n>String</span><span class=w> </span><span class=nf>processOrder</span><span class=p>(</span><span class=nd>@Valid</span><span class=w> </span><span class=n>TacoOrder</span><span class=w> </span><span class=n>order</span><span class=p>,</span><span class=w> </span><span class=n>Errors</span><span class=w> </span><span class=n>errors</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>SessionStatus</span><span class=w> </span><span class=n>sessionStatus</span><span class=p>,</span><span class=w> </span><span class=n>Authentication</span><span class=w> </span><span class=n>authentication</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>...</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>User</span><span class=w> </span><span class=n>user</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=p>(</span><span class=n>User</span><span class=p>)</span><span class=w> </span><span class=n>authentication</span><span class=p>.</span><span class=na>getPrincipal</span><span class=p>();</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>order</span><span class=p>.</span><span class=na>setUser</span><span class=p>(</span><span class=n>user</span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>...</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=p>}</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div></li></ul><h3 id=方法三>方法三</h3><ul><li>注入一个带<code>@AuthenticationPrincipal</code>注解的方法参数。（该注解来自Spring Security的<strong>org.springframework.security.core.annotation</strong>包）：<div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=nd>@PostMapping</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=kd>public</span><span class=w> </span><span class=n>String</span><span class=w> </span><span class=nf>processOrder</span><span class=p>(</span><span class=nd>@Valid</span><span class=w> </span><span class=n>TacoOrder</span><span class=w> </span><span class=n>order</span><span class=p>,</span><span class=w> </span><span class=n>Errors</span><span class=w> </span><span class=n>errors</span><span class=p>,</span><span class=w> 
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>SessionStatus</span><span class=w> </span><span class=n>sessionStatus</span><span class=p>,</span><span class=w>  </span><span class=nd>@AuthenticationPrincipal</span><span class=w> </span><span class=n>User</span><span class=w> </span><span class=n>user</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=k>if</span><span class=w> </span><span class=p>(</span><span class=n>errors</span><span class=p>.</span><span class=na>hasErrors</span><span class=p>())</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=k>return</span><span class=w> </span><span class=s>&#34;orderForm&#34;</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>order</span><span class=p>.</span><span class=na>setUser</span><span class=p>(</span><span class=n>user</span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>orderRepo</span><span class=p>.</span><span class=na>save</span><span class=p>(</span><span class=n>order</span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>sessionStatus</span><span class=p>.</span><span class=na>setComplete</span><span class=p>();</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=s>&#34;redirect:/&#34;</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=p>}</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div></li><li>优点：<ul><li>不需要对对象进行映射</li><li>它将特定于安全性的代码限制为注释本身</li></ul></li></ul><h3 id=方法四>方法四</h3><ul><li>还有另一种方法可以识别经过身份验证的用户是谁，虽然有点混乱，因为它使用了大量特定于安全的代码。可以从安全上下文中获取一个身份验证对象，然后像这样请求它的主体：<div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=n>Authentication</span><span class=w> </span><span class=n>authentication</span><span class=w> </span><span class=o>=</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>SecurityContextHolder</span><span class=p>.</span><span class=na>getContext</span><span class=p>().</span><span class=na>getAuthentication</span><span class=p>();</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=n>User</span><span class=w> </span><span class=n>user</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=p>(</span><span class=n>User</span><span class=p>)</span><span class=w> </span><span class=n>authentication</span><span class=p>.</span><span class=na>getPrincipal</span><span class=p>();</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div></li><li>缺点：<ul><li>有大量安全相关的代码</li></ul></li><li>优点：<ul><li>可以在应用程序中的任何地方使用，而不仅仅是在控制器的处理程序方法中。（这使得它适合在较低级别的代码中使用）</li></ul></li></ul><blockquote><p>本章完<br>如有遗漏或错误，欢迎补充纠正</p></blockquote></section><footer class=article-footer><section class=article-tags><a href=/tags/%E6%A1%86%E6%9E%B6/>框架</a></section><section class=article-copyright><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>相关文章</h2><div class=related-content><div class="flex article-list--tile"><article class=has-image><a href=/p/spring6/><div class=article-image><img src=/p/spring6/1.4c54a7f78b9d6dbb7956c2a066ad5346_hu_d9c449740dceab4c.jpg width=250 height=150 loading=lazy alt="Featured image of post Spring学习之路（六）" data-key=spring6 data-hash="md5-TFSn94udbbt5VsKgZq1TRg=="></div><div class=article-details><h2 class=article-title>Spring学习之路（六）</h2></div></a></article><article class=has-image><a href=/p/spring5/><div class=article-image><img src=/p/spring5/1.4c54a7f78b9d6dbb7956c2a066ad5346_hu_d9c449740dceab4c.jpg width=250 height=150 loading=lazy alt="Featured image of post Spring学习之路（五）" data-key=spring5 data-hash="md5-TFSn94udbbt5VsKgZq1TRg=="></div><div class=article-details><h2 class=article-title>Spring学习之路（五）</h2></div></a></article><article class=has-image><a href=/p/spring3/><div class=article-image><img src=/p/spring3/1.4c54a7f78b9d6dbb7956c2a066ad5346_hu_d9c449740dceab4c.jpg width=250 height=150 loading=lazy alt="Featured image of post Spring学习之路（三）" data-key=spring3 data-hash="md5-TFSn94udbbt5VsKgZq1TRg=="></div><div class=article-details><h2 class=article-title>Spring学习之路（三）</h2></div></a></article><article class=has-image><a href=/p/spring2/><div class=article-image><img src=/p/spring2/1.4c54a7f78b9d6dbb7956c2a066ad5346_hu_d9c449740dceab4c.jpg width=250 height=150 loading=lazy alt="Featured image of post Spring学习之路（二）" data-key=spring2 data-hash="md5-TFSn94udbbt5VsKgZq1TRg=="></div><div class=article-details><h2 class=article-title>Spring学习之路（二）</h2></div></a></article><article class=has-image><a href=/p/spring1/><div class=article-image><img src=/p/spring1/1.4c54a7f78b9d6dbb7956c2a066ad5346_hu_d9c449740dceab4c.jpg width=250 height=150 loading=lazy alt="Featured image of post Spring学习之路（一）" data-key=spring1 data-hash="md5-TFSn94udbbt5VsKgZq1TRg=="></div><div class=article-details><h2 class=article-title>Spring学习之路（一）</h2></div></a></article></div></div></aside><script src=https://utteranc.es/client.js repo=Janson-ig/hugoblogtalks issue-term=pathname crossorigin=anonymous async></script><style>.utterances{max-width:unset}</style><script>let utterancesLoaded=!1;function setUtterancesTheme(e){let t=document.querySelector(".utterances iframe");t&&t.contentWindow.postMessage({type:"set-theme",theme:`github-${e}`},"https://utteranc.es")}addEventListener("message",e=>{if(e.origin!=="https://utteranc.es")return;utterancesLoaded=!0,setUtterancesTheme(document.documentElement.dataset.scheme)}),window.addEventListener("onColorSchemeChange",e=>{if(!utterancesLoaded)return;setUtterancesTheme(e.detail)})</script><footer class=site-footer><section class=copyright>&copy;
+2022 -
+2025 Janson's Blog</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.29.0>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.9b50b7183b4a32f9580543a89407a21e47a8bebc5bdac6e840fa8c910481f55e.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>
