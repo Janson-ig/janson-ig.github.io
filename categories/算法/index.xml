@@ -4,7 +4,8 @@
  原理：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt; 传统的二进位系统，例如数字3的表示法为011，要切换为邻近的数字4，也就是100时，装置中的三个位元都得要转换，因此于未完全转换的过程时装置会经历短暂的，010,001,101,110,111等其中数种状态，也就是代表着2、1、5、6、7，因此此种数字编码方法于邻近数字转换时有比较大的误差可能范围。
-格雷码的发明即是用来将误差之可能性缩减至最小，编码的方式定义为每个邻近数字都只相差一个位元，因此也称为最小差异码，可以使装置做数字步进时只更动最少的位元数以提高稳定性。&lt;/p&gt;&lt;/blockquote&gt;
+格雷码的发明即是用来将误差之可能性缩减至最小，编码的方式定义为每个邻近数字都只相差一个位元，因此也称为最小差异码，可以使装置做数字步进时只更动最少的位元数以提高稳定性。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id="代码实现"&gt;代码实现
 &lt;/h2&gt;&lt;p&gt; 用&lt;code&gt;G&lt;/code&gt;代表格雷码：&lt;br&gt;
  例如3位数的格雷码序列为：&lt;code&gt;000&lt;/code&gt;,&lt;code&gt;001&lt;/code&gt;,&lt;code&gt;011&lt;/code&gt;,&lt;code&gt;010&lt;/code&gt;,&lt;code&gt;110&lt;/code&gt;,&lt;code&gt;111&lt;/code&gt;,&lt;code&gt;101&lt;/code&gt;,&lt;code&gt;100&lt;/code&gt;。&lt;code&gt;111&lt;/code&gt;可以用&lt;code&gt;G(4) = 6&lt;/code&gt;来表示。&lt;/p&gt;
@@ -26,7 +27,8 @@
 target="_blank" rel="noopener"
 &gt;[medium]1238. Circular Permutation in Binary Representation&lt;/a&gt;&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;如有遗漏或错误，欢迎补充纠正&lt;/p&gt;&lt;/blockquote&gt;</description></item><item><title>GCD算法（最大公因数算法）</title><link>http://www.jansonblog.com/p/gcd/</link><pubDate>Wed, 01 Feb 2023 00:00:00 +0000</pubDate><guid>http://www.jansonblog.com/p/gcd/</guid><description>&lt;img src="http://www.jansonblog.com/p/gcd/1.jpg" alt="Featured image of post GCD算法（最大公因数算法）" /&gt;&lt;h2 id="欧几里得算法辗转相除法"&gt;欧几里得算法（辗转相除法）
+&lt;p&gt;如有遗漏或错误，欢迎补充纠正&lt;/p&gt;
+&lt;/blockquote&gt;</description></item><item><title>GCD算法（最大公因数算法）</title><link>http://www.jansonblog.com/p/gcd/</link><pubDate>Wed, 01 Feb 2023 00:00:00 +0000</pubDate><guid>http://www.jansonblog.com/p/gcd/</guid><description>&lt;img src="http://www.jansonblog.com/p/gcd/1.jpg" alt="Featured image of post GCD算法（最大公因数算法）" /&gt;&lt;h2 id="欧几里得算法辗转相除法"&gt;欧几里得算法（辗转相除法）
 &lt;/h2&gt;&lt;h3 id="递归实现"&gt;递归实现
 &lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -72,9 +74,11 @@ target="_blank" rel="noopener"
 target="_blank" rel="noopener"
 &gt;[easy]1071. Greatest Common Divisor of Strings&lt;/a&gt;&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;如有遗漏或错误，欢迎补充纠正&lt;/p&gt;&lt;/blockquote&gt;</description></item><item><title>并查集（Union-find）[Java]</title><link>http://www.jansonblog.com/p/union-find/</link><pubDate>Mon, 14 Nov 2022 00:00:00 +0000</pubDate><guid>http://www.jansonblog.com/p/union-find/</guid><description>&lt;img src="http://www.jansonblog.com/p/union-find/1.jpg" alt="Featured image of post 并查集（Union-find）[Java]" /&gt;&lt;h2 id="什么是并查集"&gt;什么是并查集？
+&lt;p&gt;如有遗漏或错误，欢迎补充纠正&lt;/p&gt;
+&lt;/blockquote&gt;</description></item><item><title>并查集（Union-find）[Java]</title><link>http://www.jansonblog.com/p/union-find/</link><pubDate>Mon, 14 Nov 2022 00:00:00 +0000</pubDate><guid>http://www.jansonblog.com/p/union-find/</guid><description>&lt;img src="http://www.jansonblog.com/p/union-find/1.jpg" alt="Featured image of post 并查集（Union-find）[Java]" /&gt;&lt;h2 id="什么是并查集"&gt;什么是并查集？
 &lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;  并查集(Disjoint-set data structure)是一种数据结构，用于解决&lt;strong&gt;不交集&lt;/strong&gt;问题的合并及查询问题。它还有几个英文名叫：Union-find data structure / merge–find set(中文就是：合并-查找数据结构)。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;  并查集(Disjoint-set data structure)是一种数据结构，用于解决&lt;strong&gt;不交集&lt;/strong&gt;问题的合并及查询问题。它还有几个英文名叫：Union-find data structure / merge–find set(中文就是：合并-查找数据结构)。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;  为什么叫&lt;strong&gt;合并-查询数据结构&lt;/strong&gt;？因为并查集有三个功能：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;strong&gt;添加&lt;/strong&gt;&lt;/li&gt;
@@ -104,7 +108,8 @@ alt="2-2"
 class="gallery-image"
 data-flex-grow="1097"
 data-flex-basis="2633px"
-&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;  这就是并查集，其实很简单。其主要的作用就是&lt;strong&gt;合并&lt;/strong&gt;和&lt;strong&gt;查找&lt;/strong&gt;。&lt;br&gt;
   其最常见的实现是不交集森林。但是为了方便解释，接下来用一个数组实现的力扣题目来说明。&lt;/p&gt;
 &lt;h2 id="力扣990题"&gt;&lt;a class="link" href="https://leetcode.cn/problems/satisfiability-of-equality-equations/" title="力扣990.等式方程的可满足性"
@@ -113,17 +118,20 @@ target="_blank" rel="noopener"
 &lt;/h2&gt;&lt;blockquote&gt;
 &lt;p&gt;题目：&lt;strong&gt;等式方程的可满足性&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt; 给定一个由表示变量之间关系的字符串方程组成的数组，每个字符串方程 equations[i] 的长度为 4，并采用两种不同的形式之一：&amp;ldquo;a==b&amp;rdquo; 或 &amp;ldquo;a!=b&amp;rdquo;。在这里，a 和 b 是小写字母（不一定不同），表示单字母变量名。&lt;br&gt;
- 只有当可以将整数分配给变量名，以便满足所有给定的方程时才返回 true，否则返回 false。&lt;/p&gt;&lt;/blockquote&gt;
+ 只有当可以将整数分配给变量名，以便满足所有给定的方程时才返回 true，否则返回 false。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;示例1：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;输入：&lt;/strong&gt; [&amp;ldquo;a==b&amp;rdquo;,&amp;ldquo;b!=a&amp;rdquo;]&lt;br&gt;
 &lt;strong&gt;输出：&lt;/strong&gt; false&lt;br&gt;
-&lt;strong&gt;解释：&lt;/strong&gt; 如果我们指定，a = 1 且 b = 1，那么可以满足第一个方程，但无法满足第二个方程。没有办法分配变量同时满足这两个方程。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;strong&gt;解释：&lt;/strong&gt; 如果我们指定，a = 1 且 b = 1，那么可以满足第一个方程，但无法满足第二个方程。没有办法分配变量同时满足这两个方程。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;示例2：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;输入：&lt;/strong&gt; [&amp;ldquo;b==a&amp;rdquo;,&amp;ldquo;a==b&amp;rdquo;]&lt;br&gt;
 &lt;strong&gt;输出：&lt;/strong&gt; true&lt;br&gt;
-&lt;strong&gt;解释：&lt;/strong&gt; 我们可以指定 a = 1 且 b = 1 以满足满足这两个方程。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;strong&gt;解释：&lt;/strong&gt; 我们可以指定 a = 1 且 b = 1 以满足满足这两个方程。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id="题解java-感谢lee215大佬提供的题解"&gt;题解[Java] (感谢Lee215大佬提供的题解)：
 &lt;/h2&gt;&lt;p&gt; 990这道题由于最大只有26个小写字母，所以可以使用数组来实现&lt;strong&gt;并查集&lt;/strong&gt;。&lt;br&gt;
  具体思路（并查集的三个功能）：&lt;/p&gt;
@@ -205,9 +213,11 @@ target="_blank" rel="noopener"
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;blockquote&gt;
-&lt;p&gt;如有遗漏或错误，欢迎补充纠正&lt;/p&gt;&lt;/blockquote&gt;</description></item><item><title>KMP算法（字符串匹配算法）</title><link>http://www.jansonblog.com/p/kmp/</link><pubDate>Thu, 03 Nov 2022 00:00:00 +0000</pubDate><guid>http://www.jansonblog.com/p/kmp/</guid><description>&lt;img src="http://www.jansonblog.com/p/kmp/1.png" alt="Featured image of post KMP算法（字符串匹配算法）" /&gt;&lt;h2 id="kmpknuth-morris-pratt算法"&gt;KMP(Knuth-Morris-Pratt)算法：
+&lt;p&gt;如有遗漏或错误，欢迎补充纠正&lt;/p&gt;
+&lt;/blockquote&gt;</description></item><item><title>KMP算法（字符串匹配算法）</title><link>http://www.jansonblog.com/p/kmp/</link><pubDate>Thu, 03 Nov 2022 00:00:00 +0000</pubDate><guid>http://www.jansonblog.com/p/kmp/</guid><description>&lt;img src="http://www.jansonblog.com/p/kmp/1.png" alt="Featured image of post KMP算法（字符串匹配算法）" /&gt;&lt;h2 id="kmpknuth-morris-pratt算法"&gt;KMP(Knuth-Morris-Pratt)算法：
 &lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt; 字符串查找算法（简称为KMP算法）可在一个字符串S内查找一个词W的出现位置。一个词在不匹配时本身就包含足够的信息来确定下一个匹配可能的开始位置，此算法利用这一特性以避免重重复查找之前出现的字符。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt; 字符串查找算法（简称为KMP算法）可在一个字符串S内查找一个词W的出现位置。一个词在不匹配时本身就包含足够的信息来确定下一个匹配可能的开始位置，此算法利用这一特性以避免重重复查找之前出现的字符。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt; 我对MKP的认识：其归属于DP问题，核心的思想在于对要查找的字符串进行处理——寻找最长的前缀。然后通过记忆化数组的方式，跳过不可能成功匹配的字符串位置，从下一个可能的位置进行搜索。利用要查找字符串的特性，利用其前缀和后缀的共同部分来简化搜索过程。&lt;/p&gt;
 &lt;h2 id="算法原理"&gt;算法原理：
 &lt;/h2&gt;&lt;p&gt; 简单的暴力搜索无非就是从每个可能的index开始，与要查找的字符串进行比较。
@@ -215,30 +225,35 @@ target="_blank" rel="noopener"
 &lt;ul&gt;
 &lt;li&gt;
 &lt;blockquote&gt;
-&lt;p&gt;要查找的字符串W=&amp;ldquo;ABCDABD&amp;rdquo;，&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;要查找的字符串W=&amp;ldquo;ABCDABD&amp;rdquo;，&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;blockquote&gt;
-&lt;p&gt;给定字符串S=&amp;ldquo;ABC ABCDAB ABCDABCDABDE&amp;rdquo;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;给定字符串S=&amp;ldquo;ABC ABCDAB ABCDABCDABDE&amp;rdquo;&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;为例说明查找过程：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;S: &lt;strong&gt;ABC&lt;/strong&gt; ABCDAB ABCDABCDABDE&lt;br&gt;
-W: &lt;strong&gt;ABC&lt;/strong&gt;DABD&lt;/p&gt;&lt;/blockquote&gt;
+W: &lt;strong&gt;ABC&lt;/strong&gt;DABD&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;ul&gt;
 &lt;li&gt;S[3]（=&amp;rsquo; &amp;rsquo;)与W[3]（=&amp;lsquo;D&amp;rsquo;）不匹配，所以跳过；从S[4]开始，与W[0]进行比较。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;blockquote&gt;
 &lt;p&gt;S:ABC &lt;strong&gt;ABCDAB&lt;/strong&gt; ABCDABCDABDE&lt;br&gt;
-W:&lt;strong&gt;ABCDAB&lt;/strong&gt;D&lt;/p&gt;&lt;/blockquote&gt;
+W:&lt;strong&gt;ABCDAB&lt;/strong&gt;D&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;ul&gt;
 &lt;li&gt;从S[4]开始比较，当位于S[10]（=&amp;rsquo; &amp;rsquo;）时，与W对应的字符不匹配；但是此时可以注意到，&amp;quot;&lt;strong&gt;AB&lt;/strong&gt;&amp;ldquo;在“ABCD&lt;strong&gt;AB&lt;/strong&gt;&amp;ldquo;的头尾处均有出现——这意味着，尾部的“AB”可以作为下一次比较的起点。&lt;/li&gt;
 &lt;li&gt;所以下次从index = 8的位置：&lt;/li&gt;
 &lt;/ul&gt;
 &lt;blockquote&gt;
 &lt;p&gt;S:ABC ABCD&lt;strong&gt;A&lt;/strong&gt;B ABCDABCDABDE&lt;br&gt;
-W:ABCD&lt;strong&gt;A&lt;/strong&gt;BD&lt;/p&gt;&lt;/blockquote&gt;
+W:ABCD&lt;strong&gt;A&lt;/strong&gt;BD&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;ul&gt;
 &lt;li&gt;即&lt;strong&gt;A&lt;/strong&gt;开始进行匹配。&lt;/li&gt;
 &lt;/ul&gt;
@@ -247,13 +262,15 @@ W:ABCD&lt;strong&gt;A&lt;/strong&gt;BD&lt;/p&gt;&lt;/blockquote&gt;
 target="_blank" rel="noopener"
 &gt;LeetCode 28. Find the Index of the First Occurrence in a String&lt;/a&gt;&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;题目实战日后补充说明&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;题目实战日后补充说明&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;同时推荐一个算法可视化工具：&lt;br&gt;
 &lt;a class="link" href="https://algorithm-visualizer.org/dynamic-programming/knuth-morris-pratts-string-search" title="algorithm-visualizer_KMP"
 target="_blank" rel="noopener"
 &gt;algorithm-visualizer_KMP&lt;/a&gt;&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;如有遗漏或错误，欢迎补充纠正&lt;/p&gt;&lt;/blockquote&gt;</description></item><item><title>动态规划(Dynamic programming)问题解法</title><link>http://www.jansonblog.com/p/dp/</link><pubDate>Fri, 27 May 2022 00:00:00 +0000</pubDate><guid>http://www.jansonblog.com/p/dp/</guid><description>&lt;img src="http://www.jansonblog.com/p/dp/PascalTriangleFibanacci.jpg" alt="Featured image of post 动态规划(Dynamic programming)问题解法" /&gt;&lt;p&gt;动态规划实现有两种方法：&lt;/p&gt;
+&lt;p&gt;如有遗漏或错误，欢迎补充纠正&lt;/p&gt;
+&lt;/blockquote&gt;</description></item><item><title>动态规划(Dynamic programming)问题解法</title><link>http://www.jansonblog.com/p/dp/</link><pubDate>Fri, 27 May 2022 00:00:00 +0000</pubDate><guid>http://www.jansonblog.com/p/dp/</guid><description>&lt;img src="http://www.jansonblog.com/p/dp/PascalTriangleFibanacci.jpg" alt="Featured image of post 动态规划(Dynamic programming)问题解法" /&gt;&lt;p&gt;动态规划实现有两种方法：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;自下而上        (制表)&lt;/li&gt;
 &lt;li&gt;自上而下        (记忆化)&lt;/li&gt;
@@ -327,4 +344,5 @@ target="_blank" rel="noopener"
 target="_blank" rel="noopener"
 &gt;Explore - LeetCode&lt;/a&gt;&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;如有遗漏或错误，欢迎补充纠正&lt;/p&gt;&lt;/blockquote&gt;</description></item></channel></rss>
+&lt;p&gt;如有遗漏或错误，欢迎补充纠正&lt;/p&gt;
+&lt;/blockquote&gt;</description></item></channel></rss>
